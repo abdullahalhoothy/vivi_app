@@ -1,0 +1,305 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_product"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorCardBackground"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+
+    <!-- Image and Discount Label -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.app.honey.customviews.CurvedImageView
+            android:id="@+id/ivProductBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_170sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_honey_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProductBackgroundTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/just_for_you_txt"
+            android:textSize="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:textColor="?attr/colorOnSecondary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProductBackgroundDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A good match\nfor your taste"
+            android:textStyle="bold"
+            android:textSize="@dimen/_20ssp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:textColor="?attr/colorOnSecondary"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductBackgroundTitle"
+            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/ivHoneyBottle"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_220sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_honey_bottle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <include
+            layout="@layout/custom_label"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            app:layout_constraintStart_toStartOf="@id/ivHoneyBottle"
+            app:layout_constraintTop_toTopOf="@id/ivHoneyBottle" />
+
+        <TextView
+            android:id="@+id/rating_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.1"
+            android:textSize="@dimen/_30ssp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toStartOf="@+id/rating_bar"
+            app:layout_constraintTop_toTopOf="@+id/rating_bar"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingsCount"/>
+
+        <!-- RatingBar with 5 stars -->
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_15sdp"
+            android:numStars="5"
+            android:stepSize="0.2"
+            android:rating="4.1"
+            android:isIndicator="true"
+            android:progressDrawable="@drawable/doctor_rating_bar_selector"
+            android:progressTint="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>
+        <!--<com.app.honey.customviews.CustomRatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>-->
+
+        <!-- Number of ratings (e.g., 356 ratings) -->
+        <TextView
+            android:id="@+id/ratingsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="356 ratings"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/rating_bar"
+            app:layout_constraintEnd_toEndOf="@+id/rating_bar"/>
+
+        <com.app.honey.customviews.CustomTextView
+            android:id="@+id/tvDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:text="CA$44.99"
+            android:textColor="#ffffff"
+            app:backgroundColor="@color/teal_200"
+            app:cornerRadius="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingsCount" />
+
+
+        <TextView
+            android:id="@+id/tvOrginalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CA$59.99"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/tvDiscount"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscount"
+            app:layout_constraintEnd_toEndOf="@+id/tvDiscount"/>
+
+
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Beaulieu Vineyard (BV)"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrginalPrice"/>
+
+        <TextView
+            android:id="@+id/tvProductDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Napa Valley Cabernet Sauvignon 2020"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvProductName"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductName"/>
+
+        <TextView
+            android:id="@+id/tvProductAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Napa Valley, United States"
+            android:textColor="@color/colorWhite"
+            android:drawablePadding="@dimen/_5sdp"
+            android:drawableStart="@drawable/ic_uk_globe"
+            app:layout_constraintStart_toStartOf="@+id/tvProductDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductDetails"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/colorBackground"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductAddress"/>
+
+
+        <TextView
+            android:id="@+id/tvRatingDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States "
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"/>
+
+        <ImageView
+            android:id="@+id/ivRatingUser"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/ic_male_placeholder"
+            app:layout_constraintStart_toStartOf="@+id/tvRatingDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvRatingDescription"/>
+
+
+        <TextView
+            android:id="@+id/tvRatingUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Michael Miller (328 ratings)"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@+id/ivRatingUser"
+            app:layout_constraintTop_toTopOf="@+id/ivRatingUser"
+            app:layout_constraintBottom_toBottomOf="@+id/ivRatingUser"/>
+
+
+        <View
+            android:id="@+id/viewBelowRatingUser"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/colorBackground"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRatingUser"/>
+
+
+        <ImageView
+            android:id="@+id/ivRecommendation"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/ic_male_placeholder"
+            app:layout_constraintStart_toStartOf="@+id/viewBelowRatingUser"
+            app:layout_constraintTop_toBottomOf="@+id/viewBelowRatingUser"/>
+
+
+        <TextView
+            android:id="@+id/tvRecommendation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Based on your Taste and the magic of deep Honey knowledge"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivRecommendation"
+            app:layout_constraintTop_toTopOf="@+id/ivRecommendation"
+            app:layout_constraintBottom_toBottomOf="@+id/ivRecommendation"/>
+
+
+        <View
+            android:id="@+id/viewBelowRecommendation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/colorBackground"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRecommendation"/>
+
+        <TextView
+            android:id="@+id/tvLikeRecommendation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Like this recommendation"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/viewBelowRatingUser"
+            app:layout_constraintTop_toBottomOf="@+id/viewBelowRecommendation"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <ImageView
+            android:id="@+id/ivLikeRecommendation"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/ic_male_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvLikeRecommendation"
+            app:layout_constraintBottom_toBottomOf="@+id/tvLikeRecommendation"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
