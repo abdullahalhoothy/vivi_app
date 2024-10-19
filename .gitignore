@@ -1,0 +1,100 @@
+
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk location, etc)
+local.properties
+
+# Log and temporary files
+*.log
+*.temp
+*.tmp
+*.swp
+
+# Android Studio project files
+.idea/
+*.iml
+out/
+
+# Gradle caches
+/captures/
+/.externalNativeBuild/
+/.cxx/
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/codeStyles/
+
+# Build output directories
+**/build/
+**/bin/
+**/gen/
+
+# Keystore files (sensitive, don't push)
+*.jks
+*.keystore
+
+# Crashlytics and Firebase files
+crashlytics.properties
+fabric.properties
+
+# Dependency directories
+/.gradle/
+/.idea/
+
+# Android Emulator files
+*.hprof
+
+# Google Service files (important if using Firebase)
+google-services.json
+# Firebase Crashlytics
+fabric.properties
+
+# ProGuard mapping and logs
+proguard/
+proguard-rules.pro
+
+# NDK
+/.cxx/
+
+# Local environment settings
+.env
+
+# Miscellaneous
+*.orig
+.DS_Store
+*.class
+*.log
+*.apk
+*.ap_
+*.dex
+*.jar
+*.zip
+*.7z
+*.war
+*.ear
+*.class
+*.so
+*.dll
+*.exe
+*.o
+*.pyc
+*.app
+
+# Files for the CMake toolchain
+.cmake/
+
+# IntelliJ
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/libraries
+
+# JetBrains Rider
+.idea/**/tasks.xml
+.idea/**/gradle.xml
+.idea/**/gradleSigning.xml
