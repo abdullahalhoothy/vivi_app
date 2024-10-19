@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Bottle Body -->
+    <item>
+        <shape android:shape="rectangle">
+            <size android:width="60dp" android:height="100dp" />
+            <solid android:color="#E0E0E0" />
+            <corners android:bottomLeftRadius="20dp" android:bottomRightRadius="20dp" />
+        </shape>
+    </item>
+
+    <!-- Bottle Neck -->
+    <item android:left="20dp" android:right="20dp" android:top="-20dp">
+        <shape android:shape="rectangle">
+            <size android:width="20dp" android:height="40dp" />
+            <solid android:color="#E0E0E0" />
+            <corners android:topLeftRadius="5dp" android:topRightRadius="5dp" />
+        </shape>
+    </item>
+
+    <!-- Bottle Cap -->
+    <item android:left="25dp" android:right="25dp" android:top="-30dp">
+        <shape android:shape="oval">
+            <size android:width="10dp" android:height="10dp" />
+            <solid android:color="#E0E0E0" />
+        </shape>
+    </item>
+
+</layer-list>

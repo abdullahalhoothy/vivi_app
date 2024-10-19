@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSecondary"
+    android:fillViewport="true"> <!-- Add your image or gif-like background here -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.app.honey.customviews.CustomTextView
+            android:id="@+id/tvShipTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            android:drawableStart="@drawable/ic_uk_globe"
+            android:drawablePadding="@dimen/_5sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="Ship to AB"
+            android:textColor="@color/colorWhite"
+            app:backgroundColor="@color/colorBlack"
+            app:cornerRadius="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- "Picked for you" section -->
+        <TextView
+            android:id="@+id/tvPickedForYou"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:text="@string/picked_for_you_txt"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="@dimen/_25ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShipTo" />
+
+        <!-- Two Static ConstraintLayouts -->
+        <include
+            android:id="@+id/inPickForYou"
+            layout="@layout/product_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPickedForYou" />
+
+        <ImageView
+            android:id="@+id/ivBanner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_honey_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inPickForYou" />
+
+
+        <include
+            android:id="@+id/inJustForYou"
+            layout="@layout/product_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivBanner" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clJustForYou"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inJustForYou">
+
+
+            <com.app.honey.customviews.CurvedBottomView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_220sdp"
+                app:curveBackgroundColor="@color/blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <!--<com.app.honey.customviews.CurvedImageViewDynamic
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_220sdp"
+                android:src="@drawable/ic_honey_background"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>-->
+
+
+
+            <TextView
+                android:id="@+id/tvJustForYou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/just_for_you_txt"
+                android:textSize="@dimen/_15ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="?attr/colorOnSecondary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tvJustForYouDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A good match\nfor your taste"
+                android:textStyle="bold"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="?attr/colorOnSecondary"
+                app:layout_constraintTop_toBottomOf="@+id/tvJustForYou"
+                app:layout_constraintStart_toStartOf="@+id/tvJustForYou"
+                app:layout_constraintEnd_toEndOf="@+id/tvJustForYou" />
+
+
+            <!-- Horizontal RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPickForYou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tvJustForYouDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:itemCount="1"
+                android:visibility="visible"
+                tools:listitem="@layout/honey_product_list_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clFavourite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clJustForYou">
+
+            <com.app.honey.customviews.CurvedBottomView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_220sdp"
+                app:curveBackgroundColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+            <TextView
+                android:id="@+id/tvFavouriteTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Find your new favorite\nhoney"
+                android:textSize="@dimen/_15ssp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="?attr/colorOnSecondary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <!-- Horizontal RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFavourite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@+id/tvFavouriteTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:itemCount="1"
+                android:visibility="visible"
+                tools:listitem="@layout/product_item_favorite" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <include
+            android:id="@+id/inRating"
+            layout="@layout/smiley_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clFavourite" />
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clYouMightInterested"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inRating">
+
+
+            <com.app.honey.customviews.CurvedBottomView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_220sdp"
+                app:curveBackgroundColor="@color/colorBlueDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/tvYouMightInterested"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/just_for_you_txt"
+                android:textSize="@dimen/_15ssp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:textColor="?attr/colorOnSecondary"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tvYouMightInterestedDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A good match\nfor your taste"
+                android:textStyle="bold"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="?attr/colorOnSecondary"
+                app:layout_constraintTop_toBottomOf="@+id/tvYouMightInterested"
+                app:layout_constraintStart_toStartOf="@+id/tvYouMightInterested"
+                app:layout_constraintEnd_toEndOf="@+id/tvYouMightInterested" />
+
+
+            <!-- Horizontal RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvYouMightInterested"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:scrollbars="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tvYouMightInterestedDescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:itemCount="1"
+                android:visibility="visible"
+                tools:listitem="@layout/honey_product_list_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>
