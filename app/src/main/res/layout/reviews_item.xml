@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/tvRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_2sdp"
+        android:text="4.1 Happy Nebbruary Part One! Had the 2018 and liked it, so decided to taste the 2019... and liked it as much"
+        android:textColor="@color/grey"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/ivRaterUser"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:src="@drawable/ic_male_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+
+
+    <TextView
+        android:id="@+id/tvRaterUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:padding="@dimen/_2sdp"
+        android:text="Michael Miller (328 ratings)"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toEndOf="@+id/ivRaterUser"
+        app:layout_constraintBottom_toBottomOf="@+id/ivRaterUser"
+        app:layout_constraintTop_toTopOf="@+id/ivRaterUser" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_2sdp"
+        android:text="8 months ago"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="@+id/tvRaterUsername"
+        app:layout_constraintTop_toBottomOf="@+id/tvRaterUsername" />
+
+    <ImageView
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:src="@drawable/switch_thumb_custom"
+        app:layout_constraintEnd_toStartOf="@+id/tvLike"
+        app:layout_constraintTop_toTopOf="@+id/tvLike"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLike"/>
+
+
+    <TextView
+        android:id="@+id/tvLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_2sdp"
+        android:text="144"
+        android:textColor="@color/grey"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toStartOf="@+id/tvComment"
+        app:layout_constraintTop_toTopOf="@+id/tvComment"
+        app:layout_constraintBottom_toBottomOf="@+id/tvComment" />
+
+    <TextView
+        android:id="@+id/tvComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_uk_globe"
+        android:drawablePadding="@dimen/_3sdp"
+        android:padding="@dimen/_2sdp"
+        android:text="45"
+        android:textColor="@color/grey"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivRaterUser"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTime" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/greyLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

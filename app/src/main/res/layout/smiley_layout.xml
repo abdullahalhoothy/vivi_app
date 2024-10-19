@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_product"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_15sdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Title TextView -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:text="Do you like Honey?"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- First Smiley -->
+        <ImageView
+            android:id="@+id/smiley1"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_not_for_me"
+            app:layout_constraintEnd_toStartOf="@+id/smiley2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <!-- Second Smiley -->
+        <ImageView
+            android:id="@+id/smiley2"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/unsure_smiley"
+            app:layout_constraintEnd_toStartOf="@+id/smiley3"
+            app:layout_constraintStart_toEndOf="@+id/smiley1"
+            app:layout_constraintTop_toTopOf="@id/smiley1" />
+
+        <!-- Third Smiley -->
+        <ImageView
+            android:id="@+id/smiley3"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:src="@drawable/i_like_this_smiley"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/smiley2"
+            app:layout_constraintTop_toTopOf="@id/smiley1" />
+
+        <!-- First Smiley Text -->
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Not for me"
+            app:layout_constraintEnd_toEndOf="@id/smiley1"
+            app:layout_constraintStart_toStartOf="@id/smiley1"
+            app:layout_constraintTop_toBottomOf="@id/smiley1" />
+
+        <!-- Second Smiley Text -->
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Unsure"
+            app:layout_constraintEnd_toEndOf="@id/smiley2"
+            app:layout_constraintStart_toStartOf="@id/smiley2"
+            app:layout_constraintTop_toBottomOf="@id/smiley2" />
+
+        <!-- Third Smiley Text -->
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="I like this"
+            app:layout_constraintEnd_toEndOf="@id/smiley3"
+            app:layout_constraintStart_toStartOf="@id/smiley3"
+            app:layout_constraintTop_toBottomOf="@id/smiley3" />
+
+
+        <com.app.honey.customviews.CustomTextView
+            android:id="@+id/tvBaseOnYourActivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:paddingStart="@dimen/_25sdp"
+            android:paddingEnd="@dimen/_25sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="Based on your Honey activity"
+            android:textColor="#ffffff"
+            app:backgroundColor="@color/colorCheckoutbtn"
+            app:cornerRadius="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text3" />
+
+
+        <!-- Third Smiley Text -->
+        <TextView
+            android:id="@+id/tvGoToProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go_to_your_taste_profile_txt"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_15ssp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tvBaseOnYourActivity"
+            app:layout_constraintStart_toStartOf="@id/tvBaseOnYourActivity"
+            app:layout_constraintTop_toBottomOf="@id/tvBaseOnYourActivity" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
