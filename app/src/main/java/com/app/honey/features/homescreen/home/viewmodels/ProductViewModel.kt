@@ -44,7 +44,7 @@ class ProductViewModel @Inject constructor(
         fetchHoneyList()
         fetchProductList()
         fetchDummySummaryData()
-        fetchDummyReviewData()
+        fetchDummyHelpfulReviewData()
     }
 
     private fun fetchHoneyList() {
@@ -120,13 +120,25 @@ class ProductViewModel @Inject constructor(
             _summaryList.value = summaryData
         }
     }
-    private fun fetchDummyReviewData() {
+    fun fetchDummyHelpfulReviewData() {
         viewModelScope.launch {
             // Simulate fetching product list
             val reviewsData =  listOf(
-                Review("John Doe", "Great product!", 4.5f, "3 months ago"),
+                Review("John Doe", "Our fourth honey of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 honey, I said then I love", 4.5f, "3 months ago"),
                 Review("Jane Smith", "Loved it!", 5f, "5 months ago"),
                 Review("Michael Brown", "Not what I expected.", 3f, "2 months ago")
+            )
+            _reviewsList.value = reviewsData
+        }
+    }
+
+    fun fetchDummyRecentReviewsData() {
+        viewModelScope.launch {
+            // Simulate fetching product list
+            val reviewsData =  listOf(
+                Review("Jane Smith", "Recent: Great product!", 4.5f, "3 months ago"),
+                Review("John Doe", "Recent: Loved it!", 5f, "5 months ago"),
+                Review("Michael Brown", "Recent: Not what I expected.", 3f, "2 months ago")
             )
             _reviewsList.value = reviewsData
         }

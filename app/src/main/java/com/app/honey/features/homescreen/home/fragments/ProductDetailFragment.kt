@@ -71,6 +71,11 @@ class ProductDetailFragment :
             tvHighllights.setOnClickListener { toggleSummaryView(true) }
             tvFacts.setOnClickListener { toggleSummaryView(false) }
         }
+
+        binding.inReviewsLayout.apply {
+            tvHelpful.setOnClickListener { toggleReviewsView(true) }
+            tvRecent.setOnClickListener { toggleReviewsView(false) }
+        }
     }
 
     private fun toggleSummaryView(showSummary: Boolean) {
@@ -81,9 +86,35 @@ class ProductDetailFragment :
         }
     }
 
+    private fun toggleReviewsView(showReviews: Boolean) {
+        binding.inReviewsLayout.apply {
+            if (showReviews) viewModel.fetchDummyHelpfulReviewData()
+            if (!showReviews) viewModel.fetchDummyRecentReviewsData()
+            updateReviewsSelection(if (showReviews) tvHelpful else tvRecent)
+        }
+    }
+
     private fun updateSelection(selectedTextView: CustomTextView) {
         binding.inSummaryLayout.apply {
             listOf(tvHighllights, tvFacts).forEach {
+                it.updateBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.greyLight
+                    )
+                )
+                it.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
+            }
+            selectedTextView.apply {
+                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+            }
+        }
+    }
+
+    private fun updateReviewsSelection(selectedTextView: CustomTextView) {
+        binding.inReviewsLayout.apply {
+            listOf(tvHelpful, tvRecent).forEach {
                 it.updateBackgroundColor(
                     ContextCompat.getColor(
                         requireContext(),

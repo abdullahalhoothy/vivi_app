@@ -7,7 +7,7 @@ object ApiNames {
 
 
 
-    //Patient
+    //api
     const val PATIENT_LIST = "${BASE_URL}patient/patientlist"
 
 }
