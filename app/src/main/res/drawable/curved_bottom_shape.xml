@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="400dp"
+    android:height="200dp"
+    android:viewportWidth="400"
+    android:viewportHeight="200">
+
+    <!-- Define the path for the straight top and curved bottom -->
+    <path
+        android:fillColor="@color/black"
+        android:pathData="M0,0 L400,0 L400,120 Q200,200 0,160 Z"/>
+
+</vector>

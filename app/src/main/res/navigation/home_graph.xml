@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_graph"
+    app:startDestination="@id/latestHomeFragment">
+
+    <fragment
+        android:id="@+id/latestHomeFragment"
+        android:name="com.app.honey.features.homescreen.home.fragments.HomeFragmentLatest"
+        tools:layout="@layout/fragment_home_latest"
+        android:label="LatestHomeFragment">
+        <action
+            android:id="@+id/action_latestHomeFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+        <!--<argument
+            android:name="login_response"
+            android:defaultValue="@null"
+            app:argType="com.app.honey.data.remote.model.response.LoginResponse"
+            app:nullable="true" />-->
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.app.honey.features.homescreen.home.fragments.ProductDetailFragment"
+        tools:layout="@layout/fragment_product"
+        android:label="ProductDetailFragment">
+
+    </fragment>
+
+<!--    <include app:graph="@navigation/patient_menu_graph" />-->
+</navigation>
