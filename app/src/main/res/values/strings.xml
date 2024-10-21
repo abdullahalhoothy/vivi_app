@@ -87,4 +87,5 @@
     <string name="helpful_txt">Helpful</string>
     <string name="recent_txt">Recent</string>
     <string name="average_price_txt">Average price</string>
+    <string name="show_all_reviews_txt">Show all reviews</string>
 </resources>

@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_10sdp">
 
 
         <TextView
@@ -81,9 +82,9 @@
             android:textSize="@dimen/_12ssp"
             app:backgroundColor="@color/greyLight"
             app:cornerRadius="@dimen/_25sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvHelpful"
             app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
-            app:layout_constraintTop_toTopOf="@+id/tvHelpful"
-            app:layout_constraintBottom_toBottomOf="@+id/tvHelpful"/>
+            app:layout_constraintTop_toTopOf="@+id/tvHelpful" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReviews"
@@ -98,5 +99,27 @@
             tools:itemCount="3"
             tools:listitem="@layout/reviews_item" />
 
+
+        <com.app.honey.customviews.CustomTextView
+            android:id="@+id/tvActions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="@string/show_all_reviews_txt"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/_14ssp"
+            app:backgroundColor="@color/colorWhite"
+            app:cornerRadius="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvReviews"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/_1sdp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

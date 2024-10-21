@@ -109,23 +109,52 @@ class ProductViewModel @Inject constructor(
             _productList.value = productData
         }
     }
+
     private fun fetchDummySummaryData() {
         viewModelScope.launch {
             // Simulate fetching product list
-            val summaryData =  listOf(
-                SummaryData("Great value for money, similar honey usually costs about 2 times as much", R.drawable.ic_male_placeholder),
-                SummaryData("Among top 2% of all honey in the world", R.drawable.ic_female_placeholder),
-                SummaryData("You haven't tried this style yet. Try something new!", R.drawable.ic_male_placeholder)
+            val summaryData = listOf(
+                SummaryData(
+                    "Great value for money, similar honey usually costs about 2 times as much",
+                    R.drawable.ic_male_placeholder
+                ),
+                SummaryData(
+                    "Among top 2% of all honey in the world",
+                    R.drawable.ic_female_placeholder
+                ),
+                SummaryData(
+                    "You haven't tried this style yet. Try something new!",
+                    R.drawable.ic_male_placeholder
+                )
             )
             _summaryList.value = summaryData
         }
     }
+
     fun fetchDummyHelpfulReviewData() {
         viewModelScope.launch {
             // Simulate fetching product list
-            val reviewsData =  listOf(
-                Review("John Doe", "Our fourth honey of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 honey, I said then I love", 4.5f, "3 months ago"),
+            val reviewsData = listOf(
+                Review(
+                    "John Doe",
+                    "Our fourth honey of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 honey, I said then I love",
+                    4.5f,
+                    "3 months ago"
+                ),
                 Review("Jane Smith", "Loved it!", 5f, "5 months ago"),
+                Review(
+                    "John Doe",
+                    "Our fourth honey of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 honey, I said then I love",
+                    4.5f,
+                    "3 months ago"
+                ),
+                Review("Michael Brown", "Not what I expected.", 3f, "2 months ago"),
+                Review(
+                    "John Doe",
+                    "Our fourth honey of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 honey, I said then I love",
+                    4.5f,
+                    "3 months ago"
+                ),
                 Review("Michael Brown", "Not what I expected.", 3f, "2 months ago")
             )
             _reviewsList.value = reviewsData
@@ -135,7 +164,7 @@ class ProductViewModel @Inject constructor(
     fun fetchDummyRecentReviewsData() {
         viewModelScope.launch {
             // Simulate fetching product list
-            val reviewsData =  listOf(
+            val reviewsData = listOf(
                 Review("Jane Smith", "Recent: Great product!", 4.5f, "3 months ago"),
                 Review("John Doe", "Recent: Loved it!", 5f, "5 months ago"),
                 Review("Michael Brown", "Recent: Not what I expected.", 3f, "2 months ago")

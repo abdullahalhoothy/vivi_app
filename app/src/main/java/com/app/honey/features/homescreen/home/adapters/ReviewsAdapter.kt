@@ -49,6 +49,12 @@ class ReviewsAdapter :
         holder.bind(getItem(position))
     }
 
+    // Override getItemCount() to limit items displayed to 4
+    override fun getItemCount(): Int {
+        // Return the lesser of 4 or the actual number of items
+        return minOf(super.getItemCount(), 4)
+    }
+
     // DiffUtil callback for calculating the differences between items
     class ReviewDiffCallback : DiffUtil.ItemCallback<Review>() {
         override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
