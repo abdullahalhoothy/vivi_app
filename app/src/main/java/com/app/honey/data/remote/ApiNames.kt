@@ -1,7 +1,6 @@
 package com.app.honey.data.remote
 
 object ApiNames {
-//    const val BASE_URL = "https://meftii.com:8443/eprescription/"
     const val BASE_URL = "https://testing.com:8443/online/"
     const val LOGIN = "${BASE_URL}app/login"
 
