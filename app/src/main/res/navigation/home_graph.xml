@@ -18,11 +18,7 @@
             app:exitAnim="@anim/collapse_out"
             app:popEnterAnim="@anim/expand_in"
             app:popExitAnim="@anim/collapse_out"/>
-        <!--<argument
-            android:name="login_response"
-            android:defaultValue="@null"
-            app:argType="com.app.honey.data.remote.model.response.LoginResponse"
-            app:nullable="true" />-->
+
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"

@@ -1,13 +1,16 @@
 package com.app.honey.features.homescreen.home.viewmodels
 
+import ProductData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.app.honey.R
 import com.app.honey.baseviewmodel.BaseViewModel
+import com.app.honey.data.remote.Resource
 import com.app.honey.data.remote.model.data.productfragment.HoneyData
 import com.app.honey.data.remote.model.data.productfragment.Product
 import com.app.honey.data.remote.model.data.productfragment.Review
 import com.app.honey.data.remote.model.data.productfragment.SummaryData
+import com.app.honey.domain.model.ErrorModel
 import com.app.honey.domain.repo.CacheRepo
 import com.app.honey.domain.repo.ProductRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,6 +41,10 @@ class ProductViewModel @Inject constructor(
     // StateFlow to hold the products list
     private val _reviewsList = MutableStateFlow<List<Review>>(emptyList())
     val reviewsList: StateFlow<List<Review>> = _reviewsList
+
+    // StateFlow to hold the products list
+    private val _recommendedProducts = MutableStateFlow<ProductData?>(null)
+    val recommendedProducts: StateFlow<ProductData?> = _recommendedProducts
 
     init {
         // Simulate loading data
@@ -170,6 +177,25 @@ class ProductViewModel @Inject constructor(
                 Review("Michael Brown", "Recent: Not what I expected.", 3f, "2 months ago")
             )
             _reviewsList.value = reviewsData
+        }
+    }
+
+    fun getRecommendedProducts() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getRecommendedProducts()) {
+                is Resource.Error -> {
+                    showError(ErrorModel(title = "Error", message = call.error))
+                }
+                is Resource.Success -> {
+                    hideLoader()
+                    if (call.data.responseCode == 200) {
+                        _recommendedProducts.value = call.data.data
+                    } else {
+                        showError(ErrorModel("Error", call.data.message.toString()))
+                    }
+                }
+            }
         }
     }
 }

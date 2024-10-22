@@ -1,5 +1,6 @@
 package com.app.honey.features.homescreen.home.fragments
 
+import android.app.Application
 import android.os.Bundle
 import android.text.Html
 import android.view.View
@@ -18,6 +19,7 @@ import com.app.honey.features.homescreen.home.adapters.HoneyAdapter
 import com.app.honey.features.homescreen.home.adapters.ProductAdapter
 import com.app.honey.features.homescreen.home.viewmodels.ProductViewModel
 import com.app.honey.helper.ImageGetter
+import com.app.honey.helper.cutOnText
 import com.app.honey.helper.ratingDescription
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -38,6 +40,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         setupRecyclerViews()
         initListeners()
         addObservers()
+        getRecommendedProducts()
     }
 
     private fun setupRatingDescriptions() {
@@ -93,6 +96,26 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
     private fun addObservers() {
         collectWhenStarted {
+            viewModel.recommendedProducts.collectLatest { product ->
+                product?.bestPick?.let { bestPick ->
+                    binding.inPickForYou.apply {
+                        // Set the text values directly using safe calls and let
+                        ratingText.text = bestPick.averagerating
+                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull() ?: 0f // Safely convert to float, defaulting to 0
+                        ratingsCount.text = bestPick.totalratings
+                        tvDiscount.text = bestPick.discountedprice
+                        tvOrginalPrice.text = cutOnText(requireContext().applicationContext, bestPick.originalprice)
+                        tvProductName.text = bestPick.productname
+                    }
+                } ?: run {
+                    // Handle the case where bestPick is null, if needed
+                    // For example, you can clear the views or set default values
+                    clearViews()
+                }
+            }
+        }
+
+        collectWhenStarted {
             viewModel.honeyList.collectLatest { honeyList ->
                 mPickForYouAdapter.submitList(honeyList)
                 mYouMightInterestedAdapter.submitList(honeyList) // Assuming you want the same list for both
@@ -104,6 +127,22 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 mProductAdapter.submitList(productList)
             }
         }
+    }
+
+    // Function to clear views if bestPick is null (optional)
+    private fun clearViews() {
+        binding.inPickForYou.apply {
+            ratingText.text = ""
+            ratingBar.rating = 0f
+            ratingsCount.text = ""
+            tvDiscount.text = ""
+            tvOrginalPrice.text = ""
+            tvProductName.text = ""
+        }
+    }
+
+    private fun getRecommendedProducts(){
+        viewModel.getRecommendedProducts()
     }
 
     override fun getMyViewModel() = viewModel

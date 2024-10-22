@@ -1,5 +1,6 @@
 package com.app.honey.helper
 
+import android.app.Application
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
@@ -7,10 +8,13 @@ import android.text.Html
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.style.ImageSpan
 import android.text.style.StyleSpan
 import androidx.core.content.ContextCompat
 import com.app.honey.R
+import com.app.honey.extension.cutOnText
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 fun hasValue(givenString: String?): Boolean {
     return try {
@@ -86,4 +90,8 @@ class ImageGetter(val context: Context, val drawableResId: Int? = null) : Html.I
         // Return null or a default drawable if drawableResId is not provided
         return null // Or you can return a default drawable if needed
     }
+}
+
+fun cutOnText(context: Context, text: String?): Spanned{
+    return Html.fromHtml(text.cutOnText(), Html.FROM_HTML_MODE_LEGACY, ImageGetter(context), null)
 }

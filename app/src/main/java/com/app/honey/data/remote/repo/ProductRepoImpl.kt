@@ -1,5 +1,6 @@
 package com.app.honey.data.remote.repo
 
+import RecommendedProductsResponse
 import com.app.honey.data.remote.ApiNames
 import com.app.honey.data.remote.ApiService
 import com.app.honey.data.remote.Resource
@@ -12,6 +13,12 @@ import javax.inject.Inject
 class ProductRepoImpl @Inject constructor(apiService: ApiService, val cacheRepo: CacheRepo) :
     ProductRepo,
     BaseRepo(apiService) {
+
+    override suspend fun getRecommendedProducts(): Resource<RecommendedProductsResponse> {
+        return safeApiCall {
+            apiService.getRecommendedProducts()
+        }
+    }
 
 
 }
