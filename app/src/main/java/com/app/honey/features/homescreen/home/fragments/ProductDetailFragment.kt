@@ -42,6 +42,7 @@ class ProductDetailFragment :
         addObservers()
         handleBackPress()
         handleAppBar()
+        handleOnScrollChangeListener()
         animateImage()
     }
 
@@ -179,7 +180,7 @@ class ProductDetailFragment :
     }
 
     private fun handleAppBar() {
-        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
             val scrollRange = appBarLayout.totalScrollRange
             val percentage = Math.abs(verticalOffset) / scrollRange.toFloat()
 
@@ -187,7 +188,25 @@ class ProductDetailFragment :
                 1f -> updateAppBar("Clover Honey", R.color.colorPrimary)
                 0f -> updateAppBar("", R.color.colorTransparent)
             }
-        })
+        }
+    }
+
+    private fun handleOnScrollChangeListener(){
+        binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            // Get the location of the scrollable Add to Cart button
+            val buttonLocation = IntArray(2)
+//            addToCartButtonScroll.getLocationOnScreen(buttonLocation)
+            binding.tvAddToCart.getLocationOnScreen(buttonLocation)
+
+            // Check if the button has moved out of view
+            if (scrollY > oldScrollY && buttonLocation[1] < 0) {
+                // Button is scrolled out of view, show the fixed button
+                binding.clFixeAddToCart.visibility = View.VISIBLE
+            } else if (scrollY < oldScrollY && buttonLocation[1] > 0) {
+                // Button is still in view, hide the fixed button
+                binding.clFixeAddToCart.visibility = View.GONE
+            }
+        }
     }
 
     private fun updateAppBar(title: String, @ColorRes backgroundColor: Int) {

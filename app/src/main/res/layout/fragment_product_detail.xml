@@ -98,9 +98,9 @@
                     android:id="@+id/tvAveragePrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:text="CA$59.99"
                     android:textColor="@color/grey"
-                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="@+id/tvPreferenceDesc"
                     app:layout_constraintStart_toStartOf="@+id/tvPreferenceDesc"
                     app:layout_constraintTop_toBottomOf="@+id/tvPreferenceDesc" />
@@ -120,26 +120,26 @@
 
             <!-- Toolbar can go here if needed -->
             <!-- Custom Toolbar Layout -->
-<!--            <com.google.android.material.appbar.AppBarLayout-->
-<!--                android:id="@+id/appBarLayout"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-<!--                app:layout_collapseMode="pin">-->
+            <!--            <com.google.android.material.appbar.AppBarLayout-->
+            <!--                android:id="@+id/appBarLayout"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+            <!--                app:layout_collapseMode="pin">-->
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                    app:layout_collapseMode="pin">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:layout_collapseMode="pin">
 
-                    <include
-                        android:id="@+id/inAppBar"
-                        layout="@layout/custom_app_bar_layout" />
+                <include
+                    android:id="@+id/inAppBar"
+                    layout="@layout/custom_app_bar_layout" />
 
-                </androidx.appcompat.widget.Toolbar>
-<!--            </com.google.android.material.appbar.AppBarLayout>-->
+            </androidx.appcompat.widget.Toolbar>
+            <!--            </com.google.android.material.appbar.AppBarLayout>-->
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -147,9 +147,10 @@
 
     <!-- Scrollable content below the image -->
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_50sdp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.cardview.widget.CardView
@@ -288,8 +289,8 @@
                     android:padding="@dimen/_2sdp"
                     android:text="Michael Miller (328 ratings)"
                     android:textColor="@color/grey"
-                    app:layout_constraintStart_toEndOf="@+id/ivRatingUser"
                     app:layout_constraintBottom_toBottomOf="@+id/ivRatingUser"
+                    app:layout_constraintStart_toEndOf="@+id/ivRatingUser"
                     app:layout_constraintTop_toTopOf="@+id/ivRatingUser" />
 
 
@@ -299,10 +300,10 @@
                     android:layout_height="@dimen/_25sdp"
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/ic_arrow_black"
-                    app:tint="@color/grey"
-                    app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintBottom_toBottomOf="@+id/ivRatingUser"
-                    app:layout_constraintTop_toTopOf="@+id/ivRatingUser"  />
+                    app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                    app:layout_constraintTop_toTopOf="@+id/ivRatingUser"
+                    app:tint="@color/grey" />
 
 
                 <View
@@ -319,10 +320,10 @@
                     android:id="@+id/tvOrginalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:text="CA$59.99/bottle"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
-                    android:layout_marginTop="@dimen/_15sdp"
                     app:layout_constraintStart_toEndOf="@+id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@+id/viewBelowRatingUser" />
 
@@ -331,10 +332,10 @@
                     android:id="@+id/tvDiscountedPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:text="CA$59.99/bottle"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
-                    android:layout_marginTop="@dimen/_15sdp"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintTop_toBottomOf="@+id/viewBelowRatingUser" />
 
@@ -343,14 +344,14 @@
                     android:id="@+id/tvAddToCart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:gravity="center"
                     android:padding="@dimen/_5sdp"
                     android:text="@string/add_to_cart_txt"
-                    android:gravity="center"
                     android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_15ssp"
                     app:backgroundColor="@color/colorBlue00845f"
                     app:cornerRadius="@dimen/_25sdp"
-                    android:textSize="@dimen/_15ssp"
-                    android:layout_marginTop="@dimen/_20sdp"
                     app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                     app:layout_constraintStart_toEndOf="@+id/guidelineStart"
                     app:layout_constraintTop_toBottomOf="@+id/tvOrginalPrice" />
@@ -374,9 +375,9 @@
                     android:padding="@dimen/_2sdp"
                     android:text="Michael Miller (328 ratings)"
                     android:textColor="@color/grey"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivEstimatedTime"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintStart_toEndOf="@+id/ivEstimatedTime"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivEstimatedTime"
                     app:layout_constraintTop_toTopOf="@+id/ivEstimatedTime" />
 
 
@@ -408,9 +409,9 @@
                     android:padding="@dimen/_2sdp"
                     android:text="Michael Miller (328 ratings)"
                     android:textColor="@color/grey"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivSoldBy"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintStart_toEndOf="@+id/ivSoldBy"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivSoldBy"
                     app:layout_constraintTop_toTopOf="@+id/ivSoldBy" />
 
 
@@ -422,7 +423,6 @@
                     android:background="@color/colorBackground"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ivSoldBy" />
-
 
 
                 <ImageView
@@ -443,9 +443,9 @@
                     android:padding="@dimen/_2sdp"
                     android:text="Michael Miller (328 ratings)"
                     android:textColor="@color/grey"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivOtherBuyingOptions"
                     app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
                     app:layout_constraintStart_toEndOf="@+id/ivOtherBuyingOptions"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivOtherBuyingOptions"
                     app:layout_constraintTop_toTopOf="@+id/ivOtherBuyingOptions" />
 
 
@@ -477,7 +477,7 @@
                     android:layout_marginTop="@dimen/_30sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivBanner"/>
+                    app:layout_constraintTop_toBottomOf="@+id/ivBanner" />
 
                 <include
                     android:id="@+id/inReviewsLayout"
@@ -487,12 +487,58 @@
                     android:layout_marginTop="@dimen/_30sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inSummaryLayout"/>
+                    app:layout_constraintTop_toBottomOf="@+id/inSummaryLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
 
     </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clFixeAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        android:background="@color/colorWhite">
+
+        <com.app.honey.customviews.CustomTextView
+            android:id="@+id/tvAddToCartFixed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/add_to_cart_txt"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_15ssp"
+            app:backgroundColor="@color/colorBlue00845f"
+            app:cornerRadius="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toStartOf="@+id/ivFavorite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_favorite_outline"
+            android:background="@drawable/rectangle_round_solid_white_stroke_grey"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvAddToCartFixed"
+            app:layout_constraintTop_toTopOf="@+id/tvAddToCartFixed"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAddToCartFixed"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
