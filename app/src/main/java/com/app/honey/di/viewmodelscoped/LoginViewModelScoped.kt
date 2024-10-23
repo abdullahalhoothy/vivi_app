@@ -3,9 +3,11 @@ package com.app.honey.di.viewmodelscoped
 import com.app.honey.domain.repo.LoginRepo
 import com.app.honey.data.remote.repo.LoginRepoImpl
 import com.app.honey.data.remote.repo.ProductRepoImpl
+import com.app.honey.data.remote.repo.SplashRepoImpl
 import com.app.honey.domain.interactors.EmailValidationUseCase
 import com.app.honey.domain.interactors.PasswordValidationUseCase
 import com.app.honey.domain.repo.ProductRepo
+import com.app.honey.domain.repo.SplashRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +29,12 @@ object LoginViewModelScoped {
     fun provideProductRepository(
         productRepo: ProductRepoImpl
     ): ProductRepo = productRepo
+
+    @Provides
+    @ViewModelScoped
+    fun provideSplashRepository(
+        splashRepo: SplashRepoImpl
+    ): SplashRepo = splashRepo
 
     @Provides
     @ViewModelScoped

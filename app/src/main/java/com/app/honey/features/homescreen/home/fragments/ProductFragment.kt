@@ -13,6 +13,7 @@ import com.app.honey.basefragment.BaseFragmentVB
 import com.app.honey.data.remote.model.data.productfragment.HoneyData
 import com.app.honey.data.remote.model.data.productfragment.Product
 import com.app.honey.databinding.FragmentProductBinding
+import com.app.honey.databinding.ProductItemBinding
 import com.app.honey.extension.collectWhenStarted
 import com.app.honey.extension.cutOnText
 import com.app.honey.features.homescreen.home.adapters.HoneyAdapter
@@ -110,7 +111,23 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 } ?: run {
                     // Handle the case where bestPick is null, if needed
                     // For example, you can clear the views or set default values
-                    clearViews()
+                    clearViews(binding.inPickForYou)
+                }
+
+                product?.bestPick?.let { bestPick ->
+                    binding.inJustForYou.apply {
+                        // Set the text values directly using safe calls and let
+                        ratingText.text = bestPick.averagerating
+                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull() ?: 0f // Safely convert to float, defaulting to 0
+                        ratingsCount.text = bestPick.totalratings
+                        tvDiscount.text = bestPick.discountedprice
+                        tvOrginalPrice.text = cutOnText(requireContext().applicationContext, bestPick.originalprice)
+                        tvProductName.text = bestPick.productname
+                    }
+                } ?: run {
+                    // Handle the case where bestPick is null, if needed
+                    // For example, you can clear the views or set default values
+                    clearViews(binding.inJustForYou)
                 }
             }
         }
@@ -130,8 +147,8 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     }
 
     // Function to clear views if bestPick is null (optional)
-    private fun clearViews() {
-        binding.inPickForYou.apply {
+    private fun clearViews(layout: ProductItemBinding) {
+        layout.apply {
             ratingText.text = ""
             ratingBar.rating = 0f
             ratingsCount.text = ""

@@ -30,7 +30,7 @@ interface ApiService {
         @Body body: LoginRequest
     ): Response<LoginResponse>
 
-    @POST(ApiNames.CONFIGURATION)
+    @GET(ApiNames.CONFIGURATION)
     suspend fun configuration(
     ): Response<ConfigurationResponse>
 

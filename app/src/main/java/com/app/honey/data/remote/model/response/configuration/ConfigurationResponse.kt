@@ -3,10 +3,10 @@ package com.app.honey.data.remote.model.response.configuration
 data class ConfigurationResponse(
     val message: String?,
     val responseCode: Int?,
-    val data: Data?
+    val data: ConfigData?
 )
 
-data class Data(
+data class ConfigData(
     val appSettings: AppSettings?,
     val commonText: CommonText?,
     val privacySettings: PrivacySettings?
