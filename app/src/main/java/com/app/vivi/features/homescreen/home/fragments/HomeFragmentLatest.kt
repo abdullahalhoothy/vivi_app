@@ -54,18 +54,6 @@ class HomeFragmentLatest :
         initViewPager()
 
         /*binding.content.apply {
-            rvPatients.layoutManager = LinearLayoutManager(requireContext())
-            rvPatients.adapter = mAdapter
-
-            ivToggleDrawer.setOnClickListener {
-                viewModel.openDrawer()
-            }
-
-            tvAddPatient.setOnClickListener {
-                viewModel.onAddPatientClick()
-            }
-
-            etSearch.doOnTextChanged { text, start, before, count -> viewModel.onSearch(text.toString()) }
         }*/
 
         setFragmentResultListener("refresh") { _, bundle ->

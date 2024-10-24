@@ -29,8 +29,16 @@ class ProductDetailFragment :
     BaseFragmentVB<FragmentProductDetailBinding>(FragmentProductDetailBinding::inflate) {
 
     private val viewModel by viewModels<ProductViewModel>()
-    private lateinit var summaryAdapter: SummaryAdapter
-    private lateinit var reviewsAdapter: ReviewsAdapter
+
+    private val summaryAdapter by lazy {
+        SummaryAdapter {
+            handleItemClick(it)
+        }
+    }
+
+    private val reviewsAdapter by lazy {
+        ReviewsAdapter()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,9 +61,6 @@ class ProductDetailFragment :
     }
 
     private fun setupAdapters() {
-        summaryAdapter = SummaryAdapter { handleItemClick(it) }
-        reviewsAdapter = ReviewsAdapter()
-
         binding.inSummaryLayout.rvSummary.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = summaryAdapter
@@ -155,7 +160,7 @@ class ProductDetailFragment :
                         view.translationX = -view.width.toFloat()
                         view.scaleX = 0.5f
                         view.scaleY = 0.5f
-                        view.animate().translationX(0f).scaleX(1f).scaleY(1f).setDuration(1000)
+                        view.animate().translationX(0f).scaleX(1f).scaleY(1f).setDuration(800)
                             .start()
 
                     }
@@ -190,7 +195,7 @@ class ProductDetailFragment :
         }
     }
 
-    private fun handleOnScrollChangeListener(){
+    private fun handleOnScrollChangeListener() {
         binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             // Get the location of the scrollable Add to Cart button
             val buttonLocation = IntArray(2)
