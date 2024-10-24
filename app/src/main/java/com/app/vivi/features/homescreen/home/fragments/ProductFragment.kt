@@ -33,9 +33,9 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupRatingDescriptions()
+//        setupRatingDescriptions()
         initAdapters()
-        setupRecyclerViews()
+//        setupRecyclerViews()
         initListeners()
         addObservers()
         getRecommendedProducts()
@@ -56,6 +56,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         mPickForYouAdapter = HoneyAdapter()
         mYouMightInterestedAdapter = HoneyAdapter()
         mProductAdapter = ProductAdapter()
+        setupRecyclerViews()
     }
 
     private fun setupRecyclerViews() {
