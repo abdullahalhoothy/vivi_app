@@ -20,7 +20,7 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/doct_bg" />
+            android:src="@drawable/menu" />
 
     </androidx.cardview.widget.CardView>
 
