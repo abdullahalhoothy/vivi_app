@@ -48,7 +48,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvHelpful"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/tvReviewsTitle2" />
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvRecent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             tools:listitem="@layout/reviews_item" />
 
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvActions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

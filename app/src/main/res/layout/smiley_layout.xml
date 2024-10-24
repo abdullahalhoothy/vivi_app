@@ -95,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@id/smiley3" />
 
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvBaseOnYourActivity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

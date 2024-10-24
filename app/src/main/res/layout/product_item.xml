@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.app.honey.customviews.CurvedImageView
+        <com.app.vivi.customviews.CurvedImageView
             android:id="@+id/ivProductBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_170sdp"
@@ -97,7 +97,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
             app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>
-        <!--<com.app.honey.customviews.CustomRatingBar
+        <!--<vivicustomviews.CustomRatingBar
             android:id="@+id/rating_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
             app:layout_constraintTop_toBottomOf="@+id/rating_bar"
             app:layout_constraintEnd_toEndOf="@+id/rating_bar"/>
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvDiscount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

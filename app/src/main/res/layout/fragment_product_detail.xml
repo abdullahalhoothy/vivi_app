@@ -30,7 +30,7 @@
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7">
 
-                <com.app.honey.customviews.CurvedImageView
+                <com.app.vivi.customviews.CurvedImageView
                     android:id="@+id/ivProductBackground"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_170sdp"
@@ -183,7 +183,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
 
-                <com.app.honey.customviews.CustomTextView
+                <com.app.vivi.customviews.CustomTextView
                     android:id="@+id/tvRate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -203,7 +203,7 @@
                     app:strokeColor="@color/black"
                     app:strokeWidth="@dimen/_1sdp" />
 
-                <com.app.honey.customviews.CustomTextView
+                <com.app.vivi.customviews.CustomTextView
                     android:id="@+id/tvActions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/viewBelowRatingUser" />
 
 
-                <com.app.honey.customviews.CustomTextView
+                <com.app.vivi.customviews.CustomTextView
                     android:id="@+id/tvAddToCart"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -504,7 +504,7 @@
         android:visibility="gone"
         android:background="@color/colorWhite">
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvAddToCartFixed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

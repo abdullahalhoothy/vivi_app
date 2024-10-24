@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/latestHomeFragment"
-        android:name="com.app.honey.features.homescreen.home.fragments.HomeFragmentLatest"
+        android:name="com.app.vivi.features.homescreen.home.fragments.HomeFragmentLatest"
         tools:layout="@layout/fragment_home_latest"
         android:label="LatestHomeFragment">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
-        android:name="com.app.honey.features.homescreen.home.fragments.ProductDetailFragment"
+        android:name="com.app.vivi.features.homescreen.home.fragments.ProductDetailFragment"
         tools:layout="@layout/fragment_product"
         android:label="ProductDetailFragment">
 

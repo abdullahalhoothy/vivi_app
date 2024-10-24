@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace 'com.app.honey'
+    namespace 'com.app.vivi'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.app.honey"
+        applicationId "com.app.vivi"
         minSdk 24
         targetSdk 33
         versionCode 1

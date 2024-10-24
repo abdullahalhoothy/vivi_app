@@ -13,7 +13,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".app.App"
+        android:name="com.app.vivi.app.App"
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="tiramisu">
@@ -28,12 +28,12 @@
             </intent-filter>
         </activity>-->
         <activity
-            android:name=".entrypoint.MainActivity"
+            android:name="com.app.vivi.entrypoint.MainActivity"
             android:theme="@style/Theme.App.Starting"
             android:exported="false">
         </activity>
         <activity
-            android:name=".features.splash.SplashActivity"
+            android:name="com.app.vivi.features.splash.SplashActivity"
             android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>

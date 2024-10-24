@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.app.honey.features.login.LoginFragment"
+        android:name="com.app.vivi.features.login.LoginFragment"
         tools:layout="@layout/fragment_login"
         android:label="LoginFragment">
         <!--<action
@@ -18,7 +18,7 @@
     </fragment>
    <!-- <fragment
         android:id="@+id/homeFragment"
-        android:name="com.app.honey.features.homescreen.display.HomeFragment"
+        android:name="vivifeatures.homescreen.display.HomeFragment"
         tools:layout="@layout/fragment_home"
         android:label="HomeFragment">
         <action
@@ -27,7 +27,7 @@
         <argument
             android:name="login_response"
             android:defaultValue="@null"
-            app:argType="com.app.honey.data.remote.model.response.LoginResponse"
+            app:argType="vividata.remote.model.response.LoginResponse"
             app:nullable="true" />
     </fragment>-->
 

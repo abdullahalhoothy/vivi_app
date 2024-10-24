@@ -54,7 +54,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tvRatingText"
                 app:layout_constraintTop_toBottomOf="@+id/tvRatingText" />
 
-            <!--<com.app.honey.customviews.CustomRatingBar
+            <!--<vivicustomviews.CustomRatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_20sdp"
@@ -132,7 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvProductName"/>
 
 
-    <com.app.honey.customviews.CustomTextView
+    <com.app.vivi.customviews.CustomTextView
         android:id="@+id/tvDiscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvRatingDescription"/>
 
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvRatingValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

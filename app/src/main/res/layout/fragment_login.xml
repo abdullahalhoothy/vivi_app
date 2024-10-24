@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/doct_bg"
-    tools:context="com.app.honey.features.login.LoginFragment">
+    tools:context="vivi.features.login.LoginFragment">
 
     <View
         android:layout_width="match_parent"
