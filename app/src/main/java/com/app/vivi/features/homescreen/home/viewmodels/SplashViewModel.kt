@@ -5,12 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.response.configuration.ConfigData
+import com.app.vivi.data.remote.model.response.configuration.ConfigurationResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
 import com.app.vivi.domain.repo.SplashRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,9 +24,8 @@ class SplashViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    // StateFlow to hold the products list
-    private val _configurations = MutableStateFlow<ConfigData?>(null)
-    val configurations: StateFlow<ConfigData?> = _configurations
+    private val _channel = Channel<NavigationEvents>()
+    val channel = _channel.receiveAsFlow()
 
     init {
         // Simulate loading data
@@ -36,15 +38,21 @@ class SplashViewModel @Inject constructor(
                 is Resource.Error -> {
                     showError(ErrorModel(title = "Error", message = call.error))
                 }
+
                 is Resource.Success -> {
                     hideLoader()
                     if (call.data.responseCode == 200) {
-                        _configurations.value = call.data.data
+                        cacheRepo.saveConfigurationData(call.data.data)
+                        _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
                     } else {
                         showError(ErrorModel("Error", call.data.message.toString()))
                     }
                 }
             }
         }
+    }
+
+    sealed class NavigationEvents {
+        data class NavigateToMainScreen(val response: ConfigurationResponse) : NavigationEvents()
     }
 }

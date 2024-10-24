@@ -38,10 +38,14 @@ class SplashActivity : AppCompatActivity() {
 
     private fun addObservers() {
         collectWhenStarted {
-            splashViewModel.configurations.collectLatest { result ->
+            splashViewModel.channel.collectLatest { event ->
                 keepSplashOnScreen = false
-                // Navigate to next screen based on API response
-                navigateToMainActivity()
+                when(event){
+                    is SplashViewModel.NavigationEvents.NavigateToMainScreen ->{
+                        // Navigate to next screen based on API response
+                        navigateToMainActivity()
+                    }
+                }
             }
         }
     }
