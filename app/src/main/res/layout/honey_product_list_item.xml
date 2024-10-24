@@ -206,7 +206,7 @@
             android:layout_height="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            android:src="@drawable/doctor"
+            android:src="@drawable/right_arrow"
             app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/tvRatingDescription"/>
 
