@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Honey"
+rootProject.name = "Vivi"
 include ':app'
 //,':wheelpicker'
 //include ':mylibrary'
