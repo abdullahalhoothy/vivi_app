@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSecondary"
-    android:fillViewport="true"> <!-- Add your image or gif-like background here -->
+    android:fillViewport="true"
+    android:id="@+id/scrollView"> <!-- Add your image or gif-like background here -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

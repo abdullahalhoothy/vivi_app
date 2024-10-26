@@ -8,6 +8,7 @@ object ApiNames {
     //api
     const val CONFIGURATION = "${BASE_URL}configuration"
     const val RECOMMENDED_PRODUCTS = "${BASE_URL}recommended_products"
+    const val PREFERENCE_PRODUCT_DETAIL = "${BASE_URL}preference_product_detail"
 }
 
 object HeadersNames {

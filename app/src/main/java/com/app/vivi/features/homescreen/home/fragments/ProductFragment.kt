@@ -2,6 +2,7 @@ package com.app.vivi.features.homescreen.home.fragments
 
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
@@ -9,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
+import com.app.vivi.data.remote.model.response.Product
 import com.app.vivi.databinding.FragmentProductBinding
 import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.extension.collectWhenStarted
@@ -21,6 +23,7 @@ import com.app.vivi.helper.cutOnText
 import com.app.vivi.helper.ratingDescription
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlin.math.log
 
 @AndroidEntryPoint
 class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBinding::inflate) {
@@ -35,11 +38,57 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
 //        setupRatingDescriptions()
         initAdapters()
-//        setupRecyclerViews()
+        handleOnScrollChangeListener()
         initListeners()
         addObservers()
         getRecommendedProducts()
     }
+
+
+
+    private fun handleOnScrollChangeListener() {
+        var isApiCalled = false
+        binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            val buttonLocation = IntArray(2)
+            binding.rvPickForYou.getLocationOnScreen(buttonLocation)
+
+            // Check if scrolling upwards and button is now visible
+            if (scrollY < oldScrollY && buttonLocation[1] > 0) {
+                Log.d("Scrolling: Visible", " srollY: $scrollY, oldScrollY: $oldScrollY, buttonLocation: ${buttonLocation[1]}")
+
+                // Only call the API once when scrolling up and view becomes visible
+                if (!isApiCalled) {
+                    Log.d("Scrolling: ", " isApiCalled: $isApiCalled")
+                    getPreferenceProductDetail()
+                    isApiCalled = true  // Set flag to prevent further calls
+                }
+            }
+        }
+        /*binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            val buttonLocation = IntArray(2)
+            binding.rvPickForYou.getLocationOnScreen(buttonLocation)
+
+            // Check if we are scrolling down, and the button has moved out of view, then back into view
+            if (scrollY > oldScrollY && buttonLocation[1] < 0) {
+                // Button is scrolled out of view, show the fixed button
+                binding.rvPickForYou.visibility = View.VISIBLE
+                Log.d("Scrolling: Visible", " srollY: $scrollY, oldScrollY: $oldScrollY, buttonLocation: ${buttonLocation[1]}")
+
+                // Only call the API once when the button first becomes visible on scroll down
+                if (!isApiCalled) {
+                    Log.d("Scrolling: ", " isApiCalled: $isApiCalled")
+
+                    getPreferenceProductDetail()
+                    isApiCalled = true  // Set flag to true to prevent further calls
+                }
+            } else if (scrollY < oldScrollY && buttonLocation[1] > 0) {
+                // Button is still in view, hide the fixed button
+                Log.d("Scrolling: Hide", " srollY: $scrollY, oldScrollY: $oldScrollY, buttonLocation: ${buttonLocation[1]}")
+//                binding.rvPickForYou.visibility = View.GONE
+            }
+        }*/
+    }
+
 
     private fun setupRatingDescriptions() {
         val ratingText = ratingDescription("Good solid Napa cab-vanilla quickly dissipates leaving the core of full dark fruit.", "3.5")
@@ -131,9 +180,24 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         }
 
         collectWhenStarted {
+            viewModel.preferenceProductDetail.collectLatest {
+
+                it?.product?.let { product->
+                    val list = listOf(product)
+                    mPickForYouAdapter.submitList(list)
+                    mYouMightInterestedAdapter.submitList(list)
+
+                    product?.userrating?.let {
+
+                    }
+                }
+            }
+        }
+
+        collectWhenStarted {
             viewModel.honeyList.collectLatest { honeyList ->
-                mPickForYouAdapter.submitList(honeyList)
-                mYouMightInterestedAdapter.submitList(honeyList) // Assuming you want the same list for both
+//                mPickForYouAdapter.submitList(honeyList)
+//                mYouMightInterestedAdapter.submitList(honeyList) // Assuming you want the same list for both
             }
         }
 
@@ -158,6 +222,10 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
     private fun getRecommendedProducts(){
         viewModel.getRecommendedProducts()
+    }
+
+    private fun getPreferenceProductDetail(){
+        viewModel.getPreferenceProductDetail()
     }
 
     override fun getMyViewModel() = viewModel

@@ -10,6 +10,7 @@ import com.app.vivi.data.remote.model.data.productfragment.HoneyData
 import com.app.vivi.data.remote.model.data.productfragment.Product
 import com.app.vivi.data.remote.model.data.productfragment.Review
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
+import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
 import com.app.vivi.domain.repo.ProductRepo
@@ -45,6 +46,10 @@ class ProductViewModel @Inject constructor(
     // StateFlow to hold the products list
     private val _recommendedProducts = MutableStateFlow<RecommendedProductsResponse?>(null)
     val recommendedProducts: StateFlow<RecommendedProductsResponse?> = _recommendedProducts
+
+    // StateFlow to hold the products list
+    private val _preferenceProductDetail = MutableStateFlow<PreferenceProductResponse?>(null)
+    val preferenceProductDetail: StateFlow<PreferenceProductResponse?> = _preferenceProductDetail
 
     init {
         // Simulate loading data
@@ -195,6 +200,31 @@ class ProductViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
                     _recommendedProducts.value = call.data
+                    /*if (call.data.responseCode == 200) {
+                        _recommendedProducts.value = call.data.data
+                    } else {
+                        showError(ErrorModel("Error", call.data.message.toString()))
+                    }*/
+                }
+            }
+        }
+    }
+
+    fun getPreferenceProductDetail() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getPreferenceProductDetail()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _preferenceProductDetail.value = call.data
                     /*if (call.data.responseCode == 200) {
                         _recommendedProducts.value = call.data.data
                     } else {
