@@ -71,15 +71,15 @@ dependencies {
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
     // Navigation
-    def nav_version = "2.5.3"
+    def nav_version = "2.8.3"
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation "androidx.fragment:fragment-ktx:1.5.5"
+    implementation "androidx.fragment:fragment-ktx:1.8.4"
 
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
 
     //Retrofit
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
