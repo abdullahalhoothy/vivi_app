@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.app.vivi.R
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
-import com.app.vivi.data.remote.model.data.productfragment.HoneyData
 import com.app.vivi.data.remote.model.data.productfragment.Product
 import com.app.vivi.data.remote.model.data.productfragment.Review
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
@@ -26,10 +25,6 @@ class ProductViewModel @Inject constructor(
     private val cacheRepo: CacheRepo,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
-
-    // StateFlow to hold the vivi data list
-    private val _honeyList = MutableStateFlow<List<HoneyData>>(emptyList())
-    val honeyList: StateFlow<List<HoneyData>> = _honeyList
 
     // StateFlow to hold the products list
     private val _productList = MutableStateFlow<List<Product>>(emptyList())
@@ -53,41 +48,11 @@ class ProductViewModel @Inject constructor(
 
     init {
         // Simulate loading data
-        fetchHoneyList()
         fetchProductList()
         fetchDummySummaryData()
         fetchDummyHelpfulReviewData()
     }
 
-    private fun fetchHoneyList() {
-        viewModelScope.launch {
-            // Simulate fetching vivi list from a repository or API
-            val honeyData = listOf(
-                HoneyData(
-                    "Louis M. Martini",
-                    "Napa Valley Cabernet\nSauvignon 2020", "CA$30", 4.3, 3.1,
-                    "440",
-                    "Clear deep ruby in color with medium intensity and note of black cherry, cranberry, soil, and",
-                    30
-                ),
-                HoneyData(
-                    "Louis M. Martini",
-                    "Napa Valley Cabernet\nSauvignon 2020", "CA$50", 4.3, 3.1,
-                    "440",
-                    "Clear deep ruby in color with medium intensity and note of black cherry, cranberry, soil, and",
-                    30
-                ),
-                HoneyData(
-                    "Louis M. Martini",
-                    "Napa Valley Cabernet\nSauvignon 2020", "CA$70", 4.3, 3.1,
-                    "440",
-                    "Clear deep ruby in color with medium intensity and note of black cherry, cranberry, soil, and",
-                    30
-                )
-            )
-            _honeyList.value = honeyData
-        }
-    }
 
     private fun fetchProductList() {
         viewModelScope.launch {
@@ -225,11 +190,6 @@ class ProductViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
                     _preferenceProductDetail.value = call.data
-                    /*if (call.data.responseCode == 200) {
-                        _recommendedProducts.value = call.data.data
-                    } else {
-                        showError(ErrorModel("Error", call.data.message.toString()))
-                    }*/
                 }
             }
         }

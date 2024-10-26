@@ -143,7 +143,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:itemCount="1"
                 android:visibility="visible"
-                tools:listitem="@layout/honey_product_list_item" />
+                tools:listitem="@layout/preference_product_list_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -274,7 +274,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:itemCount="1"
                 android:visibility="visible"
-                tools:listitem="@layout/honey_product_list_item" />
+                tools:listitem="@layout/preference_product_list_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

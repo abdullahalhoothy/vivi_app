@@ -6,21 +6,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.data.remote.model.response.Product
-import com.app.vivi.databinding.HoneyProductListItemBinding
+import com.app.vivi.databinding.PreferenceProductListItemBinding
 
-class HoneyAdapter :
-    ListAdapter<Product, HoneyAdapter.HoneyViewHolder>(HoneyDiffCallback()) {
+class PreferenceProductAdapter :
+    ListAdapter<Product, PreferenceProductAdapter.PreferenceProductViewHolder>(PreferenceProductDiffCallback()) {
 
-    inner class HoneyViewHolder(val binding: HoneyProductListItemBinding) :
+    inner class PreferenceProductViewHolder(val binding: PreferenceProductListItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HoneyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreferenceProductViewHolder {
         val binding =
-            HoneyProductListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HoneyViewHolder(binding)
+            PreferenceProductListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PreferenceProductViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: HoneyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PreferenceProductViewHolder, position: Int) {
         val data = getItem(position)
 
         with(holder.binding) {
@@ -30,16 +30,10 @@ class HoneyAdapter :
             ratingsCount.text = data.totalratings
             tvRatingDescription.text = data.ratingtext
             tvDiscount.text = "CA$${data.discountedprice}"
-
-            // Load image using Glide with placeholders and error handling
-            /*Glide.with(wineImage.context)
-                .load(honeyData.imageUrl)
-                .apply(RequestOptions().placeholder(R.drawable.placeholder_image).error(R.drawable.error_image))
-                .into(wineImage)*/
         }
     }
 
-    class HoneyDiffCallback : DiffUtil.ItemCallback<Product>() {
+    class PreferenceProductDiffCallback : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
             // Compare the unique ID or some unique property of the item
             return oldItem == newItem

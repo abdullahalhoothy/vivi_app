@@ -10,12 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
-import com.app.vivi.data.remote.model.response.Product
 import com.app.vivi.databinding.FragmentProductBinding
 import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.cutOnText
-import com.app.vivi.features.homescreen.home.adapters.HoneyAdapter
+import com.app.vivi.features.homescreen.home.adapters.PreferenceProductAdapter
 import com.app.vivi.features.homescreen.home.adapters.ProductAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import com.app.vivi.helper.ImageGetter
@@ -23,14 +22,13 @@ import com.app.vivi.helper.cutOnText
 import com.app.vivi.helper.ratingDescription
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlin.math.log
 
 @AndroidEntryPoint
 class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBinding::inflate) {
 
     private val viewModel by viewModels<ProductViewModel>()
-    private lateinit var mPickForYouAdapter: HoneyAdapter
-    private lateinit var mYouMightInterestedAdapter: HoneyAdapter
+    private lateinit var mPickForYouAdapter: PreferenceProductAdapter
+    private lateinit var mYouMightInterestedAdapter: PreferenceProductAdapter
     private lateinit var mProductAdapter: ProductAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -102,8 +100,8 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     }
 
     private fun initAdapters() {
-        mPickForYouAdapter = HoneyAdapter()
-        mYouMightInterestedAdapter = HoneyAdapter()
+        mPickForYouAdapter = PreferenceProductAdapter()
+        mYouMightInterestedAdapter = PreferenceProductAdapter()
         mProductAdapter = ProductAdapter()
         setupRecyclerViews()
     }
@@ -191,13 +189,6 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
                     }
                 }
-            }
-        }
-
-        collectWhenStarted {
-            viewModel.honeyList.collectLatest { honeyList ->
-//                mPickForYouAdapter.submitList(honeyList)
-//                mYouMightInterestedAdapter.submitList(honeyList) // Assuming you want the same list for both
             }
         }
 
