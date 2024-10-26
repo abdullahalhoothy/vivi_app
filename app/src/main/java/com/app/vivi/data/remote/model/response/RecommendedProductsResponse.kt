@@ -1,13 +1,8 @@
 // Main response class
 data class RecommendedProductsResponse(
-    val message: String?,
-    val responseCode: Int?,
-    val data: ProductData?
-)
-
-data class ProductData(
     val justForYou: Product?,
-    val bestPick: Product?
+    val bestPick: Product?,
+    val bannerImageUrl: String?
 )
 
 data class Product(

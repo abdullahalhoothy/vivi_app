@@ -3,7 +3,7 @@ package com.app.vivi.data.remote
 import RecommendedProductsResponse
 import com.app.vivi.data.remote.model.request.LoginRequest
 import com.app.vivi.data.remote.model.response.LoginResponse
-import com.app.vivi.data.remote.model.response.configuration.ConfigurationResponse
+import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
 import retrofit2.http.Body
@@ -30,7 +30,7 @@ interface ApiService {
 
     @GET(ApiNames.CONFIGURATION)
     suspend fun configuration(
-    ): Response<ConfigurationResponse>
+    ): Response<AppConfigResponse>
 
     @GET(ApiNames.RECOMMENDED_PRODUCTS)
     suspend fun getRecommendedProducts(

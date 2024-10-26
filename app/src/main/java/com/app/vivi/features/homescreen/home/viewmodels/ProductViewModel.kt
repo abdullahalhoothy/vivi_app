@@ -1,6 +1,6 @@
 package com.app.vivi.features.homescreen.home.viewmodels
 
-import ProductData
+import RecommendedProductsResponse
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.app.vivi.R
@@ -43,8 +43,8 @@ class ProductViewModel @Inject constructor(
     val reviewsList: StateFlow<List<Review>> = _reviewsList
 
     // StateFlow to hold the products list
-    private val _recommendedProducts = MutableStateFlow<ProductData?>(null)
-    val recommendedProducts: StateFlow<ProductData?> = _recommendedProducts
+    private val _recommendedProducts = MutableStateFlow<RecommendedProductsResponse?>(null)
+    val recommendedProducts: StateFlow<RecommendedProductsResponse?> = _recommendedProducts
 
     init {
         // Simulate loading data
@@ -185,15 +185,21 @@ class ProductViewModel @Inject constructor(
             showLoader()
             when (val call = productRepo.getRecommendedProducts()) {
                 is Resource.Error -> {
-                    showError(ErrorModel(title = "Error", message = call.error))
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
                 }
+
                 is Resource.Success -> {
                     hideLoader()
-                    if (call.data.responseCode == 200) {
+                    _recommendedProducts.value = call.data
+                    /*if (call.data.responseCode == 200) {
                         _recommendedProducts.value = call.data.data
                     } else {
                         showError(ErrorModel("Error", call.data.message.toString()))
-                    }
+                    }*/
                 }
             }
         }

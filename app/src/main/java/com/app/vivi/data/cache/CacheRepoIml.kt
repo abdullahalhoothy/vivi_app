@@ -1,7 +1,7 @@
 package com.app.vivi.data.cache
 
 import com.app.vivi.data.remote.model.response.LoginResponse
-import com.app.vivi.data.remote.model.response.configuration.ConfigData
+import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
 import com.app.vivi.domain.repo.CacheRepo
 import com.app.vivi.extension.fromJson
 import com.app.vivi.extension.toJson
@@ -31,13 +31,13 @@ class CacheRepoIml @Inject constructor(private val dataStoreHelper: DataStoreHel
             }
     }
 
-    override suspend fun saveConfigurationData(response: ConfigData?) {
+    override suspend fun saveConfigurationData(response: AppConfigResponse?) {
         dataStoreHelper.setValue(PrefKeys.CONFIGURATION_DATA, response.toJson())
     }
 
-    override suspend fun getConfigurationData(): Flow<ConfigData?> {
+    override suspend fun getConfigurationData(): Flow<AppConfigResponse?> {
         return dataStoreHelper.getValueOrNull(PrefKeys.CONFIGURATION_DATA)
-            .map { it?.fromJson(ConfigData::class.java) }
+            .map { it?.fromJson(AppConfigResponse::class.java) }
     }
 
     override suspend fun saveDoctorEmail(email: String) {

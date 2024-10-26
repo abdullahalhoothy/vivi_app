@@ -1,8 +1,7 @@
 package com.app.vivi.domain.repo
 
 import com.app.vivi.data.remote.model.response.LoginResponse
-import com.app.vivi.data.remote.model.response.configuration.ConfigData
-import com.app.vivi.data.remote.model.response.configuration.ConfigurationResponse
+import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
 import kotlinx.coroutines.flow.Flow
 
 interface CacheRepo {
@@ -19,7 +18,7 @@ interface CacheRepo {
 
     suspend fun getLoginResponse(): Flow<LoginResponse?>
 
-    suspend fun saveConfigurationData(response: ConfigData?)
+    suspend fun saveConfigurationData(response: AppConfigResponse?)
 
-    suspend fun getConfigurationData(): Flow<ConfigData?>
+    suspend fun getConfigurationData(): Flow<AppConfigResponse?>
 }

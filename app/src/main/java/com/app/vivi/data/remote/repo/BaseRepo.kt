@@ -20,11 +20,11 @@ abstract class BaseRepo(val apiService: ApiService) {
             if (response.isSuccessful && response.body() != null) {
                 Resource.Success(response.body()!!)
             } else {
-                Resource.Error("Error in network Request")
+                Resource.Error("Error","Error in network Request", response.code())
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
-            Resource.Error("Error in network Request")
+            Resource.Error(title = "Error", message = "Error in network Request")
         }
 
     }

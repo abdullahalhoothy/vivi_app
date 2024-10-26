@@ -4,8 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
-import com.app.vivi.data.remote.model.response.configuration.ConfigData
-import com.app.vivi.data.remote.model.response.configuration.ConfigurationResponse
+import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
 import com.app.vivi.domain.repo.SplashRepo
@@ -36,27 +35,26 @@ class SplashViewModel @Inject constructor(
             showLoader()
             when (val call = splashRepo.getConfigurations()) {
                 is Resource.Error -> {
-                    showError(ErrorModel(title = "Error", message = call.error))
+                    showError(ErrorModel(title = call.title, message = call.message, call.code))
                 }
 
                 is Resource.Success -> {
                     hideLoader()
 
-                    cacheRepo.saveConfigurationData(call.data.data)
+                    cacheRepo.saveConfigurationData(call.data)
                     _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
-
-                    if (call.data.responseCode == 200) {
+                    /*if (call.data.responseCode == 200) {
                         cacheRepo.saveConfigurationData(call.data.data)
                         _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
                     } else {
                         showError(ErrorModel("Error", call.data.message.toString()))
-                    }
+                    }*/
                 }
             }
         }
     }
 
     sealed class NavigationEvents {
-        data class NavigateToMainScreen(val response: ConfigurationResponse) : NavigationEvents()
+        data class NavigateToMainScreen(val response: AppConfigResponse) : NavigationEvents()
     }
 }

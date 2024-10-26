@@ -58,8 +58,9 @@ class LoginViewModel @Inject constructor(
             )) {
                 is Resource.Error -> {
                     hideLoader()
-                    showError(ErrorModel(title = "Error", message = call.error))
+                    showError(ErrorModel(title = call.title, message = call.message, call.code))
                 }
+
                 is Resource.Success -> {
                     hideLoader()
                     cacheRepo.setLoggedIn(true)
