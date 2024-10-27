@@ -34,7 +34,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setupRatingDescriptions()
+        initViews()
         initAdapters()
         handleOnScrollChangeListener()
         initListeners()

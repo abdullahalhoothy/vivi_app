@@ -8,4 +8,4 @@
     android:textColor="@drawable/text_selector_white_red"
     android:layout_marginVertical="1dp"
     style="@style/ToggleStyle"
-    android:text="@string/center" />
+    android:text="Center" />

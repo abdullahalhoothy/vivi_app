@@ -19,7 +19,7 @@
         android:layout_marginEnd="@dimen/_24sdp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="@string/profile_txt"/>
+        android:text="profile"/>
 
     <View
         android:layout_width="match_parent"

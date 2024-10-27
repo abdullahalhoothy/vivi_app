@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="vivi.features.homescreen.display.HomeFragment">
+    android:background="@color/white">
 
     <include
         android:id="@+id/content"
-        layout="@layout/home_fragment_content"
+        layout="@layout/fragment_home_latest"
         />
 
     <!-- Navigation drawer view -->
