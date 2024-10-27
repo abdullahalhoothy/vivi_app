@@ -110,7 +110,44 @@ class CustomCircularRatingBar(context: Context, attrs: AttributeSet) : View(cont
     }
 
     // Draw tick marks (small lines) around the circle
+
+
     private fun drawTickMarks(canvas: Canvas, cx: Float, cy: Float, radius: Float) {
+        val tickCount = 60 // Total number of ticks (like a clock)
+        val angleIncrement = 360f / tickCount
+        val shortTickLength = 20f // Length of shorter tick marks
+        val longTickLength = 40f // Length of longer tick marks
+
+        for (i in 0 until tickCount) {
+            val angle = i * angleIncrement
+            if (angle >= -90 + largeGapAngle / 2 && angle <= 270 - largeGapAngle / 2) { // Avoid ticks in the gap
+                val angleRad = Math.toRadians(angle.toDouble())
+
+                // Calculate start and end positions for the tick marks
+                val startX = (cx + (radius - shortTickLength) * cos(angleRad)).toFloat()
+                val startY = (cy + (radius - shortTickLength) * sin(angleRad)).toFloat()
+                val endX = (cx + radius * cos(angleRad)).toFloat()
+                val endY = (cy + radius * sin(angleRad)).toFloat()
+
+                val tickLength = if (i % 5 == 0) longTickLength else shortTickLength // Long tick every 5th tick
+
+                val tickStartX = (cx + (radius - tickLength) * cos(angleRad)).toFloat()
+                val tickStartY = (cy + (radius - tickLength) * sin(angleRad)).toFloat()
+
+                // Draw the tick mark
+                val tickPaint = Paint().apply {
+                    color = Color.DKGRAY
+                    strokeWidth = 4f
+                    isAntiAlias = true
+                }
+
+                canvas.drawLine(tickStartX, tickStartY, endX, endY, tickPaint)
+            }
+        }
+    }
+
+
+ private fun drawTickMarks_old(canvas: Canvas, cx: Float, cy: Float, radius: Float) {
         val tickCount = 60 // Number of tick marks, like a clock
         val angleIncrement = 360f / tickCount
 
@@ -132,6 +169,7 @@ class CustomCircularRatingBar(context: Context, attrs: AttributeSet) : View(cont
             }
         }
     }
+
 
     // Draw four large dots around the circular line
     private fun drawDots(canvas: Canvas, cx: Float, cy: Float, radius: Float) {
@@ -210,6 +248,7 @@ class CustomCircularRatingBar(context: Context, attrs: AttributeSet) : View(cont
         }
         return super.onTouchEvent(event)
     }
+
 
     fun getRating(): Float {
         return progress
