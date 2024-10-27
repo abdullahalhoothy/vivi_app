@@ -43,6 +43,12 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     }
 
 
+    private fun initViews() {
+        binding.apply {
+            inRating.tvBaseOnYourActivity.text =
+                getString(R.string.based_on_your_honey_activity_txt)
+        }
+    }
 
     private fun handleOnScrollChangeListener() {
         var isApiCalled = false
@@ -52,7 +58,10 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
             // Check if scrolling upwards and button is now visible
             if (scrollY < oldScrollY && buttonLocation[1] > 0) {
-                Log.d("Scrolling: Visible", " srollY: $scrollY, oldScrollY: $oldScrollY, buttonLocation: ${buttonLocation[1]}")
+                Log.d(
+                    "Scrolling: Visible",
+                    " srollY: $scrollY, oldScrollY: $oldScrollY, buttonLocation: ${buttonLocation[1]}"
+                )
 
                 // Only call the API once when scrolling up and view becomes visible
                 if (!isApiCalled) {
@@ -89,13 +98,26 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
 
     private fun setupRatingDescriptions() {
-        val ratingText = ratingDescription("Good solid Napa cab-vanilla quickly dissipates leaving the core of full dark fruit.", "3.5")
-        val htmlContent = Html.fromHtml(ratingText, Html.FROM_HTML_MODE_LEGACY, ImageGetter(requireContext(), R.drawable.ic_star), null)
+        val ratingText = ratingDescription(
+            "Good solid Napa cab-vanilla quickly dissipates leaving the core of full dark fruit.",
+            "3.5"
+        )
+        val htmlContent = Html.fromHtml(
+            ratingText,
+            Html.FROM_HTML_MODE_LEGACY,
+            ImageGetter(requireContext(), R.drawable.ic_star),
+            null
+        )
 
         with(binding) {
             inPickForYou.tvRatingDescription.text = htmlContent
             inJustForYou.tvRatingDescription.text = htmlContent
-            inPickForYou.tvOrginalPrice.text = Html.fromHtml("CA$59.99".cutOnText(), Html.FROM_HTML_MODE_LEGACY, ImageGetter(requireContext()), null)
+            inPickForYou.tvOrginalPrice.text = Html.fromHtml(
+                "CA$59.99".cutOnText(),
+                Html.FROM_HTML_MODE_LEGACY,
+                ImageGetter(requireContext()),
+                null
+            )
         }
     }
 
@@ -109,17 +131,20 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     private fun setupRecyclerViews() {
         with(binding) {
             rvPickForYou.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = mPickForYouAdapter
             }
 
             rvYouMightInterested.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = mYouMightInterestedAdapter
             }
 
             rvFavourite.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = mProductAdapter
             }
         }
@@ -128,7 +153,8 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     private fun initListeners() {
         binding.inPickForYou.clProduct.setOnClickListener {
 //            findNavController().navigate(R.id.action_latestHomeFragment_to_productDetailFragment)
-            val action = HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment()
+            val action =
+                HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment()
 
             val navOptions = NavOptions.Builder()
                 .setLaunchSingleTop(true)
@@ -147,10 +173,12 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                     binding.inPickForYou.apply {
                         // Set the text values directly using safe calls and let
                         ratingText.text = bestPick.averagerating
-                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull() ?: 0f // Safely convert to float, defaulting to 0
+                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull()
+                            ?: 0f // Safely convert to float, defaulting to 0
                         ratingsCount.text = bestPick.totalratings
                         tvDiscount.text = bestPick.discountedprice
-                        tvOrginalPrice.text = cutOnText(requireContext().applicationContext, bestPick.originalprice)
+                        tvOrginalPrice.text =
+                            cutOnText(requireContext().applicationContext, bestPick.originalprice)
                         tvProductName.text = bestPick.productname
                     }
                 } ?: run {
@@ -163,10 +191,12 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                     binding.inJustForYou.apply {
                         // Set the text values directly using safe calls and let
                         ratingText.text = bestPick.averagerating
-                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull() ?: 0f // Safely convert to float, defaulting to 0
+                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull()
+                            ?: 0f // Safely convert to float, defaulting to 0
                         ratingsCount.text = bestPick.totalratings
                         tvDiscount.text = bestPick.discountedprice
-                        tvOrginalPrice.text = cutOnText(requireContext().applicationContext, bestPick.originalprice)
+                        tvOrginalPrice.text =
+                            cutOnText(requireContext().applicationContext, bestPick.originalprice)
                         tvProductName.text = bestPick.productname
                     }
                 } ?: run {
@@ -180,7 +210,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         collectWhenStarted {
             viewModel.preferenceProductDetail.collectLatest {
 
-                it?.product?.let { product->
+                it?.product?.let { product ->
                     val list = listOf(product)
                     mPickForYouAdapter.submitList(list)
                     mYouMightInterestedAdapter.submitList(list)
@@ -211,11 +241,11 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         }
     }
 
-    private fun getRecommendedProducts(){
+    private fun getRecommendedProducts() {
         viewModel.getRecommendedProducts()
     }
 
-    private fun getPreferenceProductDetail(){
+    private fun getPreferenceProductDetail() {
         viewModel.getPreferenceProductDetail()
     }
 

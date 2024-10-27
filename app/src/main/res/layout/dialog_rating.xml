@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/closeButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="end"
+        android:contentDescription="Close"
+        android:src="@drawable/ic_close"
+        android:layout_marginStart="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDone"
+        app:layout_constraintTop_toTopOf="@+id/tvDone"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.app.vivi.customviews.CustomTextView
+        android:id="@+id/tvDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:text="@string/done_txt"
+        android:textColor="#ffffff"
+        app:backgroundColor="@color/black"
+        app:cornerRadius="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_400sdp"
+        android:background="@drawable/rounded_top_dialog_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Dark Transparent View at the Top -->
+        <!--    <View-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="100dp"-->
+        <!--        android:background="#80000000" /> &lt;!&ndash; Adjust alpha for transparency &ndash;&gt;-->
+
+        <!-- Close Button -->
+        <!-- Circular Rating Dial -->
+        <com.app.vivi.customviews.CustomCircularRatingBar
+            android:id="@+id/circularRatingView"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_280sdp" />
+
+        <!-- User Prompt -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/edit_your_review_txt"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <!-- Review EditText -->
+        <EditText
+            android:id="@+id/reviewEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border_background_black"
+            android:hint="Add your review"
+            android:padding="12dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

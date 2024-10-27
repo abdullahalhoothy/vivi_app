@@ -17,6 +17,7 @@ import com.app.vivi.customviews.CircleDrawable
 import com.app.vivi.customviews.CustomTextView
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.databinding.FragmentProductDetailBinding
+import com.app.vivi.dialog.rating.RatingDialogHelper
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.features.homescreen.home.adapters.ReviewsAdapter
 import com.app.vivi.features.homescreen.home.adapters.SummaryAdapter
@@ -72,6 +73,11 @@ class ProductDetailFragment :
     }
 
     private fun initListeners() {
+
+        binding.tvRate.setOnClickListener {
+            showRatingDialog()
+        }
+
         binding.inSummaryLayout.apply {
             tvHighllights.setOnClickListener { toggleSummaryView(true) }
             tvFacts.setOnClickListener { toggleSummaryView(false) }
@@ -225,6 +231,18 @@ class ProductDetailFragment :
 
     private fun handleItemClick(item: SummaryData) {
         // Navigate or handle item click
+    }
+
+
+    // Inside an Activity or Fragment
+    private val ratingDialogHelper by lazy {
+        RatingDialogHelper(requireContext()) { rating, review ->
+            // Handle review submission logic here
+        }
+    }
+
+    private fun showRatingDialog() {
+        ratingDialogHelper.showRatingDialog()
     }
 
 

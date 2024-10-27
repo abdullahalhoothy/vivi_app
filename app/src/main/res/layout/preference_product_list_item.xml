@@ -23,9 +23,9 @@
             android:paddingBottom="@dimen/_10sdp"
             android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_20sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivHoneyBottle"
-            app:layout_constraintEnd_toEndOf="@id/ivHoneyBottle"
-            app:layout_constraintStart_toStartOf="@id/ivHoneyBottle">
+            app:layout_constraintBottom_toBottomOf="@+id/ivBottle"
+            app:layout_constraintEnd_toEndOf="@id/ivBottle"
+            app:layout_constraintStart_toStartOf="@id/ivBottle">
 
 
             <TextView
@@ -80,12 +80,12 @@
 
         <!-- Wine Bottle Image -->
         <ImageView
-            android:id="@+id/ivHoneyBottle"
+            android:id="@+id/ivBottle"
             android:layout_width="@dimen/_120sdp"
             android:layout_height="@dimen/_180sdp"
             android:layout_gravity="bottom|start"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_honey_bottle"
+            android:src="@drawable/ic_bottle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/clRating"
             app:layout_constraintTop_toTopOf="parent" />
@@ -97,8 +97,8 @@
             android:layout_gravity="top|start"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_40sdp"
-            app:layout_constraintStart_toStartOf="@id/ivHoneyBottle"
-            app:layout_constraintTop_toTopOf="@id/ivHoneyBottle" />
+            app:layout_constraintStart_toStartOf="@id/ivBottle"
+            app:layout_constraintTop_toTopOf="@id/ivBottle" />
     </FrameLayout>
 
 

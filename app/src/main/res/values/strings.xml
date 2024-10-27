@@ -88,4 +88,6 @@
     <string name="recent_txt">Recent</string>
     <string name="average_price_txt">Average price</string>
     <string name="show_all_reviews_txt">Show all reviews</string>
+    <string name="based_on_your_honey_activity_txt">Based on your Honey activity</string>
+    <string name="edit_your_review_txt">Edit your review</string>
 </resources>

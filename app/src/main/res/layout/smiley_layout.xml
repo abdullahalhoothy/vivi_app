@@ -106,7 +106,7 @@
             android:paddingEnd="@dimen/_25sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:text="Based on your Honey activity"
+            android:text="@string/based_on_your_honey_activity_txt"
             android:textColor="#ffffff"
             app:backgroundColor="@color/colorCheckoutbtn"
             app:cornerRadius="@dimen/_20sdp"

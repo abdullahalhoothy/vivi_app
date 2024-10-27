@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_170sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_honey_background"
+            android:src="@drawable/ic_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:textColor="?attr/colorOnSecondary"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintStart_toEndOf="@+id/ivBottle"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
@@ -47,18 +47,18 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:textColor="?attr/colorOnSecondary"
             app:layout_constraintTop_toBottomOf="@+id/tvProductBackgroundTitle"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintStart_toEndOf="@+id/ivBottle"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
         <ImageView
-            android:id="@+id/ivHoneyBottle"
+            android:id="@+id/ivBottle"
             android:layout_width="@dimen/_130sdp"
             android:layout_height="@dimen/_220sdp"
             android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_50sdp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_honey_bottle"
+            android:src="@drawable/ic_bottle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,8 +69,8 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_40sdp"
-            app:layout_constraintStart_toStartOf="@id/ivHoneyBottle"
-            app:layout_constraintTop_toTopOf="@id/ivHoneyBottle" />
+            app:layout_constraintStart_toStartOf="@id/ivBottle"
+            app:layout_constraintTop_toTopOf="@id/ivBottle" />
 
         <TextView
             android:id="@+id/rating_text"
@@ -95,7 +95,7 @@
             android:progressDrawable="@drawable/doctor_rating_bar_selector"
             android:progressTint="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintStart_toEndOf="@+id/ivBottle"
             app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>
         <!--<vivicustomviews.CustomRatingBar
             android:id="@+id/rating_bar"
