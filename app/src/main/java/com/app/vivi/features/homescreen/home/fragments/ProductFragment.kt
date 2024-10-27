@@ -2,7 +2,6 @@ package com.app.vivi.features.homescreen.home.fragments
 
 import RecommendedProductData
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -14,11 +13,10 @@ import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductBinding
 import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.extension.collectWhenStarted
-import com.app.vivi.extension.cutOnText
+import com.app.vivi.extension.showShortToast
 import com.app.vivi.features.homescreen.home.adapters.PreferenceProductAdapter
 import com.app.vivi.features.homescreen.home.adapters.ProductAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
-import com.app.vivi.helper.ImageGetter
 import com.app.vivi.helper.createRatingDescription
 import com.app.vivi.helper.cutOnText
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,9 +26,23 @@ import kotlinx.coroutines.flow.collectLatest
 class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBinding::inflate) {
 
     private val viewModel by viewModels<ProductViewModel>()
-    private lateinit var mPickForYouAdapter: PreferenceProductAdapter
-    private lateinit var mYouMightInterestedAdapter: PreferenceProductAdapter
     private lateinit var mProductAdapter: ProductAdapter
+
+    private val mPickForYouAdapter by lazy {
+        PreferenceProductAdapter(onItemClick = {
+            navigateToProductDetailFragment()
+        }, onDiscountButtonClick = {
+            "Discount Button Clicked".showShortToast(requireContext())
+        })
+    }
+
+    private val mYouMightInterestedAdapter by lazy {
+        PreferenceProductAdapter(onItemClick = {
+            navigateToProductDetailFragment()
+        }, onDiscountButtonClick = {
+            "Discount Button Clicked".showShortToast(requireContext())
+        })
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -122,34 +134,27 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     ) {
 
         with(item) {
+            tvProductName.text = product?.name
+            tvProductDetails.text = product?.description
+            tvProductAddress.text = product?.city.plus(", ${product?.country}")
             ratingText.text = product?.averagerating
             ratingBar.rating = product?.averagerating?.toFloatOrNull()
                 ?: 0f // Safely convert to float, defaulting to 0
-            ratingsCount.text = product?.totalratings
-            tvDiscount.text = product?.discountedprice
+            ratingsCount.text = product?.totalratings.plus(" ${getString(R.string.rating_txt)}")
+            tvDiscount.text = "CA$${product?.discountedprice}"
             tvOrginalPrice.text =
-                cutOnText(requireContext().applicationContext, product?.originalprice)
-            tvProductName.text = product?.productname
+                cutOnText(requireContext().applicationContext, "CA$${product?.originalprice}")
 
             val htmlContent = createRatingDescription(
                 binding.root.context,
-                product?.userrating?.review, product?.userrating?.rating
+                product?.userrating?.description, product?.userrating?.rating
             )
-
             tvRatingDescription.text = htmlContent
-            tvRatingDescription.text = htmlContent
-            tvOrginalPrice.text = Html.fromHtml(
-                "CA${product?.originalprice}".cutOnText(),
-                Html.FROM_HTML_MODE_LEGACY,
-                ImageGetter(requireContext()),
-                null
-            )
+            tvRatingUser.text = product?.userrating?.userName
         }
     }
 
     private fun initAdapters() {
-        mPickForYouAdapter = PreferenceProductAdapter()
-        mYouMightInterestedAdapter = PreferenceProductAdapter()
         mProductAdapter = ProductAdapter()
         setupRecyclerViews()
     }
@@ -178,18 +183,30 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
     private fun initListeners() {
         binding.inPickForYou.clProduct.setOnClickListener {
-//            findNavController().navigate(R.id.action_latestHomeFragment_to_productDetailFragment)
-            val action =
-                HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment()
-
-            val navOptions = NavOptions.Builder()
-                .setLaunchSingleTop(true)
-                .build()
-
-            findNavController().navigate(action, navOptions)
-
-//            findNavController().navigate(HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment())
+            navigateToProductDetailFragment()
         }
+        binding.inJustForYou.clProduct.setOnClickListener {
+            navigateToProductDetailFragment()
+        }
+
+        binding.inJustForYou.tvDiscount.setOnClickListener {
+            "Add To Cart Dialog".showShortToast(requireContext())
+        }
+
+        binding.inPickForYou.tvDiscount.setOnClickListener {
+            "Add To Cart Dialog".showShortToast(requireContext())
+        }
+    }
+
+    private fun navigateToProductDetailFragment(){
+        val action =
+            HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment()
+
+        val navOptions = NavOptions.Builder()
+            .setLaunchSingleTop(true)
+            .build()
+
+        findNavController().navigate(action, navOptions)
     }
 
     private fun addObservers() {

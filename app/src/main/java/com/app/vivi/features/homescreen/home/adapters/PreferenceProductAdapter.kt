@@ -8,29 +8,50 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.data.remote.model.response.Product
 import com.app.vivi.databinding.PreferenceProductListItemBinding
 
-class PreferenceProductAdapter :
-    ListAdapter<Product, PreferenceProductAdapter.PreferenceProductViewHolder>(PreferenceProductDiffCallback()) {
+class PreferenceProductAdapter(
+    private val onItemClick: (item: Product) -> Unit,
+    private val onDiscountButtonClick: (item: Product) -> Unit
+) :
+    ListAdapter<Product, PreferenceProductAdapter.PreferenceProductViewHolder>(
+        PreferenceProductDiffCallback()
+    ) {
 
     inner class PreferenceProductViewHolder(val binding: PreferenceProductListItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: Product) {
+            with(binding) {
+                tvProductName.text = data.name
+                tvProductDetails.text = data.description
+                tvRatingText.text = data.ratingvalue.toString()
+                ratingsCount.text = data.totalratings
+                tvRatingDescription.text = data.ratingtext
+                tvDiscount.text = "${data.discountedprice}"
+
+
+                tvDiscount.setOnClickListener {
+                    onDiscountButtonClick(data)
+                }
+                // Handle item click
+                root.setOnClickListener { onItemClick(data) }
+
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PreferenceProductViewHolder {
         val binding =
-            PreferenceProductListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            PreferenceProductListItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         return PreferenceProductViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PreferenceProductViewHolder, position: Int) {
-        val data = getItem(position)
+//        val data = getItem(position)
 
-        with(holder.binding) {
-            tvProductName.text = data.name
-            tvProductDetails.text = data.description
-            tvRatingText.text = data.ratingvalue.toString()
-            ratingsCount.text = data.totalratings
-            tvRatingDescription.text = data.ratingtext
-            tvDiscount.text = "CA$${data.discountedprice}"
-        }
+        holder.bind(getItem(position))
     }
 
     class PreferenceProductDiffCallback : DiffUtil.ItemCallback<Product>() {

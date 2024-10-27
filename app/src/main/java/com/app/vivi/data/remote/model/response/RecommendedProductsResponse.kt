@@ -7,8 +7,8 @@ data class RecommendedProductsResponse(
 
 data class RecommendedProductData(
     val id: String?,
-    val productname: String?,
-    val productdescription: String?,
+    val name: String?,
+    val description: String?,
     val tagline: String?,
     val producturl: String?,
     val averagerating: String?,
@@ -26,5 +26,6 @@ data class RecommendedProductsUserRating(
     val rating: String?,
     val review: String?,
     val userName: String?,
+    val description: String?,
     val userProfileImageUrl: String?
 )

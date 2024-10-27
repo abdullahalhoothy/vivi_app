@@ -1,5 +1,8 @@
 package com.app.vivi.extension
 
+import android.content.Context
+import android.widget.Toast
+
 val String.Companion.EMPTY: String
     get() = ""
 
@@ -21,4 +24,8 @@ fun String?.cutOnText(): String {
         </body>
     </html>
 """.trimIndent()
+}
+
+fun String.showShortToast(context: Context) {
+    Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
 }
