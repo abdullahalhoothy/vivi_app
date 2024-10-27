@@ -1,6 +1,6 @@
 
 <resources>
-    <string name="app_name">Vivi</string>
+    <string name="app_name">Coffee</string>
 
     <string name="cancel_txt">CANCEL</string>
     <string name="done_txt">DONE</string>
@@ -31,6 +31,10 @@
     <string name="recent_txt">Recent</string>
     <string name="average_price_txt">Average price</string>
     <string name="show_all_reviews_txt">Show all reviews</string>
-    <string name="based_on_your_honey_activity_txt">Based on your Honey activity</string>
+    <string name="based_on_your_activity_txt">Based on your %1$s activity</string>
     <string name="edit_your_review_txt">Edit your review</string>
+    <string name="find_your_new_favorite_txt">Find your new favorite\n %1$s</string>
+<!--    %1$s is used to replace with custom text in kotlin code-->
+    <string name="do_you_like_txt">Do you like %1$s?</string>
+    <string name="based_on_your_taste_and_the_magic_of_deep_knowledge_txt">Based on your Taste and the magic of deep %1$s knowledge</string>
 </resources>

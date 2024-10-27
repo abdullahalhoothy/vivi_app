@@ -46,7 +46,17 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     private fun initViews() {
         binding.apply {
             inRating.tvBaseOnYourActivity.text =
-                getString(R.string.based_on_your_honey_activity_txt)
+                getString(R.string.based_on_your_activity_txt, getString(R.string.app_name))
+            inRating.tvTitle.text =
+                getString(R.string.do_you_like_txt, getString(R.string.app_name))
+
+            inJustForYou.tvRecommendation.text =
+                getString(R.string.based_on_your_taste_and_the_magic_of_deep_knowledge_txt, getString(R.string.app_name))
+            inPickForYou.tvRecommendation.text =
+                getString(R.string.based_on_your_taste_and_the_magic_of_deep_knowledge_txt, getString(R.string.app_name))
+
+            tvFavouriteTitle.text =
+                getString(R.string.find_your_new_favorite_txt, getString(R.string.app_name))
         }
     }
 

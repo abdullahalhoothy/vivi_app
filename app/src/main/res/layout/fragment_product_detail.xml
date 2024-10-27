@@ -78,7 +78,7 @@
                     android:id="@+id/ivPreference"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
-                    android:src="@drawable/ic_logo_honey"
+                    android:src="@drawable/ic_logo_new"
                     app:layout_constraintEnd_toEndOf="@+id/inRatingLayout"
                     app:layout_constraintStart_toStartOf="@+id/inRatingLayout"
                     app:layout_constraintTop_toBottomOf="@+id/inRatingLayout" />

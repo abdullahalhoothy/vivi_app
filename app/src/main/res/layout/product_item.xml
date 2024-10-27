@@ -97,13 +97,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivBottle"
             app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>
-        <!--<vivicustomviews.CustomRatingBar
-            android:id="@+id/rating_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
-            app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>-->
 
         <!-- Number of ratings (e.g., 356 ratings) -->
         <TextView
@@ -254,7 +247,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/_2sdp"
-            android:text="Based on your Taste and the magic of deep Honey knowledge"
+            android:text="@string/based_on_your_taste_and_the_magic_of_deep_knowledge_txt"
             android:textColor="@color/colorWhite"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"

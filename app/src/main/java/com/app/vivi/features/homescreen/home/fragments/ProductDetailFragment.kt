@@ -195,7 +195,7 @@ class ProductDetailFragment :
             val percentage = Math.abs(verticalOffset) / scrollRange.toFloat()
 
             when (percentage) {
-                1f -> updateAppBar("Clover Honey", R.color.colorPrimary)
+                1f -> updateAppBar("Black Coffee", R.color.colorPrimary)
                 0f -> updateAppBar("", R.color.colorTransparent)
             }
         }
