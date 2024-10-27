@@ -42,7 +42,7 @@ fun ratingDescription(ratingDescription: String, rating: String): String {
     """
     return htmlContent
 }
-fun createRatingDescription(context: Context, ratingDescription: String, rating: String): SpannableStringBuilder {
+fun createRatingDescription(context: Context, ratingDescription: String?, rating: String?): SpannableStringBuilder {
     val starIcon = ContextCompat.getDrawable(context, R.drawable.ic_star)
     // Set bounds for the star icon (optional: you can adjust size here if needed)
     starIcon?.setBounds(0, 0, starIcon.intrinsicWidth, starIcon.intrinsicHeight)
@@ -63,7 +63,10 @@ fun createRatingDescription(context: Context, ratingDescription: String, rating:
 
     // Add the rating text and style it as bold
     val ratingText = SpannableString("$rating ")
-    ratingText.setSpan(StyleSpan(Typeface.BOLD), 0, rating.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    rating?.length?.let {
+        ratingText.setSpan(StyleSpan(Typeface.BOLD), 0,
+            it, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
     spannableStringBuilder.append(ratingText)
 
     // Add the rating description

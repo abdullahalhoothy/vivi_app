@@ -1,11 +1,11 @@
 // Main response class
 data class RecommendedProductsResponse(
-    val justForYou: Product?,
-    val bestPick: Product?,
+    val justForYou: RecommendedProductData?,
+    val bestPick: RecommendedProductData?,
     val bannerImageUrl: String?
 )
 
-data class Product(
+data class RecommendedProductData(
     val id: String?,
     val productname: String?,
     val productdescription: String?,
@@ -19,10 +19,10 @@ data class Product(
     val city: String?,
     val country: String?,
     val countryflagurl: String?,
-    val userrating: UserRating?
+    val userrating: RecommendedProductsUserRating?
 )
 
-data class UserRating(
+data class RecommendedProductsUserRating(
     val rating: String?,
     val review: String?,
     val userName: String?,

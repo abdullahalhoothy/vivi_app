@@ -1,5 +1,6 @@
 package com.app.vivi.features.homescreen.home.fragments
 
+import RecommendedProductData
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -18,8 +19,8 @@ import com.app.vivi.features.homescreen.home.adapters.PreferenceProductAdapter
 import com.app.vivi.features.homescreen.home.adapters.ProductAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import com.app.vivi.helper.ImageGetter
+import com.app.vivi.helper.createRatingDescription
 import com.app.vivi.helper.cutOnText
-import com.app.vivi.helper.ratingDescription
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -51,13 +52,20 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 getString(R.string.do_you_like_txt, getString(R.string.app_name))
 
             inJustForYou.tvRecommendation.text =
-                getString(R.string.based_on_your_taste_and_the_magic_of_deep_knowledge_txt, getString(R.string.app_name))
+                getString(
+                    R.string.based_on_your_taste_and_the_magic_of_deep_knowledge_txt,
+                    getString(R.string.app_name)
+                )
             inPickForYou.tvRecommendation.text =
-                getString(R.string.based_on_your_taste_and_the_magic_of_deep_knowledge_txt, getString(R.string.app_name))
+                getString(
+                    R.string.based_on_your_taste_and_the_magic_of_deep_knowledge_txt,
+                    getString(R.string.app_name)
+                )
 
             tvFavouriteTitle.text =
                 getString(R.string.find_your_new_favorite_txt, getString(R.string.app_name))
         }
+
     }
 
     private fun handleOnScrollChangeListener() {
@@ -81,6 +89,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 }
             }
         }
+
         /*binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             val buttonLocation = IntArray(2)
             binding.rvPickForYou.getLocationOnScreen(buttonLocation)
@@ -107,23 +116,30 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     }
 
 
-    private fun setupRatingDescriptions() {
-        val ratingText = ratingDescription(
-            "Good solid Napa cab-vanilla quickly dissipates leaving the core of full dark fruit.",
-            "3.5"
-        )
-        val htmlContent = Html.fromHtml(
-            ratingText,
-            Html.FROM_HTML_MODE_LEGACY,
-            ImageGetter(requireContext(), R.drawable.ic_star),
-            null
-        )
+    private fun setupProductDetailsView(
+        item: ProductItemBinding,
+        product: RecommendedProductData?
+    ) {
 
-        with(binding) {
-            inPickForYou.tvRatingDescription.text = htmlContent
-            inJustForYou.tvRatingDescription.text = htmlContent
-            inPickForYou.tvOrginalPrice.text = Html.fromHtml(
-                "CA$59.99".cutOnText(),
+        with(item) {
+            ratingText.text = product?.averagerating
+            ratingBar.rating = product?.averagerating?.toFloatOrNull()
+                ?: 0f // Safely convert to float, defaulting to 0
+            ratingsCount.text = product?.totalratings
+            tvDiscount.text = product?.discountedprice
+            tvOrginalPrice.text =
+                cutOnText(requireContext().applicationContext, product?.originalprice)
+            tvProductName.text = product?.productname
+
+            val htmlContent = createRatingDescription(
+                binding.root.context,
+                product?.userrating?.review, product?.userrating?.rating
+            )
+
+            tvRatingDescription.text = htmlContent
+            tvRatingDescription.text = htmlContent
+            tvOrginalPrice.text = Html.fromHtml(
+                "CA${product?.originalprice}".cutOnText(),
                 Html.FROM_HTML_MODE_LEGACY,
                 ImageGetter(requireContext()),
                 null
@@ -182,14 +198,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 product?.bestPick?.let { bestPick ->
                     binding.inPickForYou.apply {
                         // Set the text values directly using safe calls and let
-                        ratingText.text = bestPick.averagerating
-                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull()
-                            ?: 0f // Safely convert to float, defaulting to 0
-                        ratingsCount.text = bestPick.totalratings
-                        tvDiscount.text = bestPick.discountedprice
-                        tvOrginalPrice.text =
-                            cutOnText(requireContext().applicationContext, bestPick.originalprice)
-                        tvProductName.text = bestPick.productname
+                        setupProductDetailsView(this, bestPick)
                     }
                 } ?: run {
                     // Handle the case where bestPick is null, if needed
@@ -197,17 +206,9 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                     clearViews(binding.inPickForYou)
                 }
 
-                product?.bestPick?.let { bestPick ->
+                product?.justForYou?.let { justForYou ->
                     binding.inJustForYou.apply {
-                        // Set the text values directly using safe calls and let
-                        ratingText.text = bestPick.averagerating
-                        ratingBar.rating = bestPick.averagerating?.toFloatOrNull()
-                            ?: 0f // Safely convert to float, defaulting to 0
-                        ratingsCount.text = bestPick.totalratings
-                        tvDiscount.text = bestPick.discountedprice
-                        tvOrginalPrice.text =
-                            cutOnText(requireContext().applicationContext, bestPick.originalprice)
-                        tvProductName.text = bestPick.productname
+                        setupProductDetailsView(this, justForYou)
                     }
                 } ?: run {
                     // Handle the case where bestPick is null, if needed
