@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_product"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
-            android:text="Do you like Honey?"
+            android:text="@string/do_you_like_txt"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@id/smiley3" />
 
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvBaseOnYourActivity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -106,7 +107,7 @@
             android:paddingEnd="@dimen/_25sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:text="Based on your Honey activity"
+            tools:text="@string/based_on_your_activity_txt"
             android:textColor="#ffffff"
             app:backgroundColor="@color/colorCheckoutbtn"
             app:cornerRadius="@dimen/_20sdp"

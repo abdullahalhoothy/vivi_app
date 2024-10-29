@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvRatingText"
         app:layout_constraintTop_toBottomOf="@+id/tvRatingText" />
 
-    <!--<com.app.honey.customviews.CustomRatingBar
+    <!--<vivicustomviews.CustomRatingBar
         android:id="@+id/ratingBar"
         android:layout_width="@dimen/_90sdp"
         android:layout_height="@dimen/_20sdp"

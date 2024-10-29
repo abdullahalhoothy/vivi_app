@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/doct_bg"
-    tools:context="com.app.honey.features.login.LoginFragment">
+    android:background="@drawable/white_background"
+    tools:context="com.app.vivi.features.login.LoginFragment">
 
     <View
         android:layout_width="match_parent"

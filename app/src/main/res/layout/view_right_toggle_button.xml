@@ -7,4 +7,4 @@
     android:textAllCaps="false"
     android:layout_marginVertical="1dp"
     android:textColor="@drawable/text_selector_white_red"
-    android:text="@string/right" />
+    android:text="Right" />

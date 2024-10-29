@@ -45,7 +45,7 @@
             android:paddingEnd="@dimen/_10sdp"
             android:scrollHorizontally="true"
             android:singleLine="false"
-            android:text="@string/nothing_found_please_try_again_txt"
+            android:text="Nothing Found"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/_16ssp" />
 
@@ -64,7 +64,7 @@
             android:paddingEnd="@dimen/_10sdp"
             android:scrollHorizontally="true"
             android:singleLine="false"
-            android:text="@string/please_try_again_txt"
+            android:text="Please try again"
             android:textColor="@color/colorGrayText8080"
             android:textSize="@dimen/_13ssp" />
 

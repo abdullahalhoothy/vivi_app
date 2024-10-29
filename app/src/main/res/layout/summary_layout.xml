@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvHighllights"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/tvSummary" />
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvFacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

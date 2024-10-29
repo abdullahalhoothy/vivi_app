@@ -14,12 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.app.honey.customviews.CurvedImageView
+        <com.app.vivi.customviews.CurvedImageView
             android:id="@+id/ivProductBackground"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_170sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_honey_background"
+            android:src="@drawable/ic_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:textColor="?attr/colorOnSecondary"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintStart_toEndOf="@+id/ivBottle"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
@@ -47,18 +47,18 @@
             android:layout_marginEnd="@dimen/_15sdp"
             android:textColor="?attr/colorOnSecondary"
             app:layout_constraintTop_toBottomOf="@+id/tvProductBackgroundTitle"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintStart_toEndOf="@+id/ivBottle"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
         <ImageView
-            android:id="@+id/ivHoneyBottle"
+            android:id="@+id/ivBottle"
             android:layout_width="@dimen/_130sdp"
             android:layout_height="@dimen/_220sdp"
             android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_50sdp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_honey_bottle"
+            android:src="@drawable/ic_bottle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,11 +69,11 @@
             android:layout_height="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_40sdp"
-            app:layout_constraintStart_toStartOf="@id/ivHoneyBottle"
-            app:layout_constraintTop_toTopOf="@id/ivHoneyBottle" />
+            app:layout_constraintStart_toStartOf="@id/ivBottle"
+            app:layout_constraintTop_toTopOf="@id/ivBottle" />
 
         <TextView
-            android:id="@+id/rating_text"
+            android:id="@+id/ratingText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4.1"
@@ -95,15 +95,8 @@
             android:progressDrawable="@drawable/doctor_rating_bar_selector"
             android:progressTint="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
+            app:layout_constraintStart_toEndOf="@+id/ivBottle"
             app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>
-        <!--<com.app.honey.customviews.CustomRatingBar
-            android:id="@+id/rating_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivHoneyBottle"
-            app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>-->
 
         <!-- Number of ratings (e.g., 356 ratings) -->
         <TextView
@@ -111,12 +104,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="356 ratings"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/colorWhite"
             app:layout_constraintStart_toStartOf="@+id/rating_bar"
             app:layout_constraintTop_toBottomOf="@+id/rating_bar"
             app:layout_constraintEnd_toEndOf="@+id/rating_bar"/>
 
-        <com.app.honey.customviews.CustomTextView
+        <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvDiscount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -254,7 +247,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/_2sdp"
-            android:text="Based on your Taste and the magic of deep Honey knowledge"
+            android:text="@string/based_on_your_taste_and_the_magic_of_deep_knowledge_txt"
             android:textColor="@color/colorWhite"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
