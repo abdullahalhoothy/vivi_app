@@ -38,4 +38,9 @@
 <!--    %1$s is used to replace with custom text in kotlin code-->
     <string name="do_you_like_txt">Do you like %1$s?</string>
     <string name="based_on_your_taste_and_the_magic_of_deep_knowledge_txt">Based on your Taste and the magic of deep %1$s knowledge</string>
+    <string name="continue_with_email_txt">Continue with email</string>
+    <string name="continue_with_google_txt">Continue with Google</string>
+    <string name="continue_with_facebook_txt">Continue with Facebook</string>
+    <string name="buy_the_right_txt">Buy the right %1$s</string>
+    <string name="what_s_your_email_txt">What\'s your email?</string>
 </resources>

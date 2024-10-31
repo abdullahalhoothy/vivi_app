@@ -2,8 +2,10 @@ package com.app.vivi.features.login
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentLoginBinding
 import com.app.vivi.extension.collectWhenStarted
@@ -23,7 +25,7 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
             btnLogin.setOnClickListener {
                 viewModel.onLoginClicked(
                     tieEmail.text.toString(),
-                    tiePassword.text.toString()
+                    "d"
                 )
             }
 
@@ -31,12 +33,19 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
                 viewModel.onEmailTextChanged(text.toString())
             }
 
-            tiePassword.doOnTextChanged { text, start, before, count ->
+            handleBackPress()
+
+            /*tiePassword.doOnTextChanged { text, start, before, count ->
                 viewModel.onPasswordChanged(text.toString())
-            }
+            }*/
         }
 
         addObservers()
+    }
+
+
+    private fun handleBackPress() {
+        binding.ivBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     override fun getMyViewModel() = viewModel
@@ -50,7 +59,7 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
 
         collectWhenStarted {
             viewModel.passwordErrorFlow.collectLatest {
-                binding.tilPassword.error = it
+//                binding.tilPassword.error = it
             }
         }
 
