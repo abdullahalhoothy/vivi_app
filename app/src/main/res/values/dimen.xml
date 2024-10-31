@@ -9,4 +9,5 @@
     <dimen name="button_internal_padding">1dp</dimen>
     <dimen name="button_min_height">7dp</dimen>
     <dimen name="button_text_padding">2dp</dimen>
+    <dimen name="sdp_10">@dimen/_10sdp</dimen>
 </resources>
