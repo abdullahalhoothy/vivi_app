@@ -37,16 +37,16 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
                 getString(R.string.buy_the_right_txt, getString(R.string.app_name))
 
             googleButton.setDrawableWithSize(requireContext(),
-                R.drawable.ic_male_placeholder,
+                R.drawable.ic_google,
                 70, 70,
                 resources.getDimensionPixelSize(R.dimen.sdp_10))
 
             facebookButton.setDrawableWithSize(requireContext(),
-                R.drawable.ic_male_placeholder,
+                R.drawable.ic_facebook,
                 70, 70,
                 resources.getDimensionPixelSize(R.dimen.sdp_10))
 
-            ivBackground.post {
+            /*ivBackground.post {
                 val startY = tvTitle.y // Start position from top of tvTitle
                 val endY = 0f // End position at the top of the screen
 
@@ -57,7 +57,7 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
                 animation.repeatMode = Animation.RESTART
 
                 ivBackground.startAnimation(animation)
-            }
+            }*/
 
 //            val slideUpAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up_animation)
 //            ivBackground.startAnimation(slideUpAnimation)

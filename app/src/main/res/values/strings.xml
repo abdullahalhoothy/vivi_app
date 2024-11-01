@@ -43,4 +43,11 @@
     <string name="continue_with_facebook_txt">Continue with Facebook</string>
     <string name="buy_the_right_txt">Buy the right %1$s</string>
     <string name="what_s_your_email_txt">What\'s your email?</string>
+    <string name="continue_txt">Continue</string>
+    <string name="log_in_txt">Log in</string>
+    <string name="welcome_back_log_in_to_your_account_txt">Welcome back! Log in to\nyour %1$s account</string>
+    <string name="password_txt">Password</string>
+    <string name="email_txt">Email</string>
+    <string name="email_me_a_link_to_login_in_txt">Email me a link to login in</string>
+    <string name="or_txt">or</string>
 </resources>

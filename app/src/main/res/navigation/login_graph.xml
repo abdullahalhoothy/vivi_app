@@ -12,6 +12,19 @@
         android:label="LoginMainFragment">
         <action
             android:id="@+id/action_loginMainFragment_to_loginFragment"
+            app:destination="@id/loginEmailFragment"
+            app:popUpTo="@id/loginEmailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginEmailFragment"
+        android:name="com.app.vivi.features.login.LoginEmailFragment"
+        tools:layout="@layout/fragment_login_email"
+        android:label="LoginEmailFragment">
+
+        <action
+            android:id="@+id/action_loginEmailFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
@@ -22,11 +35,10 @@
         android:name="com.app.vivi.features.login.LoginFragment"
         tools:layout="@layout/fragment_login"
         android:label="LoginFragment">
-        <!--<action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />-->
+        <action
+            android:id="@+id/action_loginFragment_to_home_graph"
+            app:destination="@id/home_graph"
+        app:popUpToInclusive="false" />
     </fragment>
    <!-- <fragment
         android:id="@+id/homeFragment"
