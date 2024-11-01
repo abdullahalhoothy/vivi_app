@@ -6,17 +6,17 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentLoginBinding
+import com.app.vivi.databinding.FragmentLoginEmailBinding
 import com.app.vivi.extension.collectWhenStarted
-import com.app.vivi.extension.setDrawableWithSize
+import com.app.vivi.extension.navigateWithSingleTop
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+class LoginEmailFragment : BaseFragmentVB<FragmentLoginEmailBinding>(FragmentLoginEmailBinding::inflate) {
 
     private val viewModel by viewModels<LoginViewModel>()
 
@@ -24,11 +24,9 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            tvTitle.text = getString(R.string.welcome_back_log_in_to_your_account_txt, getString(R.string.app_name))
-            btnLogin.setOnClickListener {
-                viewModel.onLoginClicked(
-                    tieEmail.text.toString(),
-                    tiePassword.text.toString()
+            btnContinue.setOnClickListener {
+                viewModel.onLoginContinueClicked(
+                    tieEmail.text.toString()
                 )
             }
 
@@ -36,22 +34,11 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
                 viewModel.onEmailTextChanged(text.toString())
             }
 
-
-            tiePassword.doOnTextChanged { text, start, before, count ->
-                viewModel.onPasswordChanged(text.toString())
-            }
-
             handleBackPress()
 
-            googleButton.setDrawableWithSize(requireContext(),
-                R.drawable.ic_google,
-                70, 70,
-                resources.getDimensionPixelSize(R.dimen.sdp_10))
-
-            facebookButton.setDrawableWithSize(requireContext(),
-                R.drawable.ic_facebook,
-                70, 70,
-                resources.getDimensionPixelSize(R.dimen.sdp_10))
+            /*tiePassword.doOnTextChanged { text, start, before, count ->
+                viewModel.onPasswordChanged(text.toString())
+            }*/
         }
 
         addObservers()
@@ -73,17 +60,16 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
 
         collectWhenStarted {
             viewModel.passwordErrorFlow.collectLatest {
-                binding.tilPassword.error = it
+//                binding.tilPassword.error = it
             }
         }
 
         collectWhenStarted {
-            viewModel.channel.collectLatest { event ->
+            viewModel.channelLoginEmail.collectLatest { event ->
                 when (event) {
-                    is LoginViewModel.NavigationEvents.NavigateToMainScreen -> {
-                        findNavController().navigate(
-                            LoginFragmentDirections.actionLoginFragmentToHomeGraph(
-                            )
+                    is LoginViewModel.NavigationLoginEmailEvents.NavigateToLoginScreen -> {
+                        findNavController().navigateWithSingleTop(
+                            LoginEmailFragmentDirections.actionLoginEmailFragmentToLoginFragment()
                         )
                     }
                 }

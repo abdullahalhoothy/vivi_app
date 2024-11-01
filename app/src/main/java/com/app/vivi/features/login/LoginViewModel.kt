@@ -35,6 +35,40 @@ class LoginViewModel @Inject constructor(
     private val _channel = Channel<NavigationEvents>()
     val channel = _channel.receiveAsFlow()
 
+    private val _channelLoginEmail = Channel<NavigationLoginEmailEvents>()
+    val channelLoginEmail = _channelLoginEmail.receiveAsFlow()
+
+    fun onLoginContinueClicked(email: String) {
+        viewModelScope.launch {
+            if (emailValidationUseCase.isValid(email)) {
+                _emailErrorFlow.emit("")
+            } else {
+                _emailErrorFlow.emit("Valid Email is required")
+                return@launch
+            }
+
+            _channelLoginEmail.send(NavigationLoginEmailEvents.NavigateToLoginScreen(""))
+
+            /*showLoader()
+            when (val call = loginRepo.login(
+                email = email,
+                loginRequest = LoginRequest("")
+            )) {
+                is Resource.Error -> {
+                    hideLoader()
+                    showError(ErrorModel(title = call.title, message = call.message, call.code))
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    cacheRepo.setLoggedIn(true)
+                    cacheRepo.saveLoginResponse(call.data)
+                    _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
+                }
+            }*/
+        }
+    }
+
     fun onLoginClicked(email: String, password: String) {
         viewModelScope.launch {
             if (emailValidationUseCase.isValid(email)) {
@@ -50,8 +84,8 @@ class LoginViewModel @Inject constructor(
                 _passwordErrorFlow.emit("Password is required")
                 return@launch
             }
-
-            showLoader()
+            _channel.send(NavigationEvents.NavigateToMainScreen())
+            /*showLoader()
             when (val call = loginRepo.login(
                 email = email,
                 loginRequest = LoginRequest(password)
@@ -67,7 +101,7 @@ class LoginViewModel @Inject constructor(
                     cacheRepo.saveLoginResponse(call.data)
                     _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
                 }
-            }
+            }*/
         }
     }
 
@@ -88,6 +122,9 @@ class LoginViewModel @Inject constructor(
     }
 
     sealed class NavigationEvents {
-        data class NavigateToMainScreen(val loginResponse: LoginResponse) : NavigationEvents()
+        data class NavigateToMainScreen(val loginResponse: LoginResponse? = null) : NavigationEvents()
+    }
+    sealed class NavigationLoginEmailEvents {
+        data class NavigateToLoginScreen(val login: String) : NavigationLoginEmailEvents()
     }
 }

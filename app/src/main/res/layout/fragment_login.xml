@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,86 +18,244 @@
         android:id="@+id/ivBack"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
-        android:src="@drawable/back"
-        app:tint="@color/colorBlack"
-        android:padding="@dimen/_5sdp"
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginTop="@dimen/_24sdp"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorBlack" />
+
+    <TextView
+        android:id="@+id/tvPageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/log_in_txt"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+        app:layout_constraintStart_toEndOf="@+id/ivBack"
+        app:layout_constraintTop_toTopOf="@+id/ivBack" />
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:text="@string/what_s_your_email_txt"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/welcome_back_log_in_to_your_account_txt"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/_25ssp"
-        app:layout_constraintTop_toBottomOf="@+id/ivBack"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBack" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        app:hintTextColor="@color/grey"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:hint="@string/email_txt"
         android:textColorHint="@color/grey"
-        app:boxStrokeColor="@color/red"
-        app:boxStrokeErrorColor="@color/red"
-        app:errorIconDrawable="@drawable/ic_info"
-        app:errorTextColor="@color/red"
-        app:helperTextTextColor="@color/red"
-        app:boxBackgroundMode="outline"
         app:boxBackgroundColor="@color/colorBlack"
-        app:boxCornerRadiusTopStart="@dimen/_5sdp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
         app:boxCornerRadiusBottomStart="@dimen/_5sdp"
         app:boxCornerRadiusTopEnd="@dimen/_5sdp"
-        app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+        app:boxCornerRadiusTopStart="@dimen/_5sdp"
+        app:boxStrokeColor="@color/red"
+        app:boxStrokeErrorColor="@color/red"
         app:boxStrokeWidth="@dimen/_1sdp"
         app:boxStrokeWidthFocused="@dimen/_2sdp"
+        app:errorIconDrawable="@drawable/ic_info"
 
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:errorTextColor="@color/red"
+        app:helperTextTextColor="@color/red"
+        app:hintTextColor="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tieEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_16sdp"
-            android:text=""
-            android:textCursorDrawable="@null"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/colorBlack"
             android:backgroundTint="@android:color/transparent"
-            android:inputType="textEmailAddress" />
+            android:fontFamily="sans-serif-medium"
+            android:inputType="textEmailAddress"
+            android:text=""
+            android:textColor="@color/colorBlack"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/_16sdp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:hint="@string/password_txt"
+        android:textColorHint="@color/grey"
+        app:boxBackgroundColor="@color/colorBlack"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+        app:boxCornerRadiusTopStart="@dimen/_5sdp"
+        app:boxStrokeColor="@color/red"
+        app:boxStrokeErrorColor="@color/red"
+        app:boxStrokeWidth="@dimen/_1sdp"
+        app:boxStrokeWidthFocused="@dimen/_2sdp"
+        app:endIconMode="password_toggle"
+        app:errorIconDrawable="@drawable/ic_info"
+        app:errorTextColor="@color/red"
+        app:helperTextTextColor="@color/red"
+        app:hintTextColor="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tilEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="sans-serif-medium"
+            android:inputType="textPassword"
+            android:text=""
+            android:textColor="@color/colorBlack"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/_16sdp" /> <!-- Set to textPassword initially -->
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.app.vivi.customviews.CustomTextView
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="@dimen/_45sdp"
-        android:text="@string/continue_with_email_txt"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:gravity="center"
+        android:text="@string/log_in_txt"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/_14ssp"
         app:backgroundColor="@color/colorBlack"
         app:cornerRadius="@dimen/_25sdp"
-        android:gravity="center"
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_24sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/_10sdp"/>
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvLoginViaLink"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/email_me_a_link_to_login_in_txt"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+
+    <!-- Left Horizontal Line -->
+    <View
+        android:id="@+id/left_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@+id/tvOr"
+        app:layout_constraintEnd_toStartOf="@+id/tvOr"
+        app:layout_constraintStart_toStartOf="@+id/googleButton"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginViaLink"
+        app:layout_constraintTop_toTopOf="@+id/tvOr" />
+
+    <!-- OR Text -->
+    <TextView
+        android:id="@+id/tvOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:text="@string/or_txt"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/right_line"
+        app:layout_constraintStart_toEndOf="@id/left_line"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginViaLink" />
+
+    <!-- Right Horizontal Line -->
+    <View
+        android:id="@+id/right_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@+id/tvOr"
+        app:layout_constraintEnd_toEndOf="@+id/googleButton"
+        app:layout_constraintStart_toEndOf="@id/tvOr"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginViaLink"
+        app:layout_constraintTop_toTopOf="@+id/tvOr" />
+
+
+    <com.app.vivi.customviews.CustomTextView
+        android:id="@+id/googleButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:drawableStart="@drawable/ic_google"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:text="@string/continue_with_google_txt"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp"
+        app:backgroundColor="@color/colorWhite"
+        app:cornerRadius="@dimen/_25sdp"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@id/tvOr"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp" />
+
+    <!-- Continue with Facebook Button -->
+    <com.app.vivi.customviews.CustomTextView
+        android:id="@+id/facebookButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:drawableStart="@drawable/ic_facebook"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:text="@string/continue_with_facebook_txt"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13ssp"
+        app:backgroundColor="@color/colorWhite"
+        app:cornerRadius="@dimen/_25sdp"
+        app:layout_constraintEnd_toEndOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@id/googleButton"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
