@@ -52,10 +52,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tvRaterUsername" />
 
     <ImageView
-        android:layout_width="@dimen/_12sdp"
-        android:layout_height="@dimen/_12sdp"
+        android:id="@+id/ivLike"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_3sdp"
-        android:src="@drawable/switch_thumb_custom"
+        android:src="@drawable/ic_like"
         app:layout_constraintEnd_toStartOf="@+id/tvLike"
         app:layout_constraintTop_toTopOf="@+id/tvLike"
         app:layout_constraintBottom_toBottomOf="@+id/tvLike"/>
@@ -77,10 +78,11 @@
         android:id="@+id/tvComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_uk_globe"
+        android:drawableStart="@drawable/ic_comment"
         android:drawablePadding="@dimen/_3sdp"
         android:padding="@dimen/_2sdp"
         android:text="45"
+        android:gravity="center_horizontal"
         android:textColor="@color/grey"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"

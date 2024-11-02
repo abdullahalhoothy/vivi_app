@@ -8,11 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductBinding
 import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.extension.collectWhenStarted
+import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.extension.showShortToast
 import com.app.vivi.features.homescreen.home.adapters.PreferenceProductAdapter
 import com.app.vivi.features.homescreen.home.adapters.ProductAdapter
@@ -162,8 +164,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     private fun setupRecyclerViews() {
         with(binding) {
             rvPickForYou.apply {
-                layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = mPickForYouAdapter
             }
 
@@ -201,12 +202,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     private fun navigateToProductDetailFragment(){
         val action =
             HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment()
-
-        val navOptions = NavOptions.Builder()
-            .setLaunchSingleTop(true)
-            .build()
-
-        findNavController().navigate(action, navOptions)
+        findNavController().navigateWithSingleTop(action)
     }
 
     private fun addObservers() {
