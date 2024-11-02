@@ -60,7 +60,7 @@
             android:layout_height="@dimen/_140sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_background"
+            android:src="@drawable/ic_banner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inPickForYou" />
@@ -123,12 +123,13 @@
 
 
             <!-- Horizontal RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
+            <com.app.vivi.customviews.CustomRecyclerView
                 android:id="@+id/rvPickForYou"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:scrollbars="horizontal"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@+id/tvJustForYouDescription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +175,7 @@
 
 
             <!-- Horizontal RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
+            <com.app.vivi.customviews.CustomRecyclerView
                 android:id="@+id/rvFavourite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -183,6 +184,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@+id/tvFavouriteTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -254,12 +256,13 @@
 
 
             <!-- Horizontal RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
+            <com.app.vivi.customviews.CustomRecyclerView
                 android:id="@+id/rvYouMightInterested"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:scrollbars="horizontal"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@+id/tvYouMightInterestedDescription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

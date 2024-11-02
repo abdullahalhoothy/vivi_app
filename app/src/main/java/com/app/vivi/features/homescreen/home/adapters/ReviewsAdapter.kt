@@ -2,11 +2,14 @@ package com.app.vivi.features.homescreen.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.app.vivi.R
 import com.app.vivi.data.remote.model.data.productfragment.Review
 import com.app.vivi.databinding.ReviewsItemBinding
+import com.app.vivi.extension.setDrawableWithSize
 import com.app.vivi.helper.createRatingDescription
 
 class ReviewsAdapter :
@@ -28,6 +31,12 @@ class ReviewsAdapter :
                     ImageGetter(context, R.drawable.ic_star),
                     null
                 )*/
+
+                tvComment.setDrawableWithSize(binding.root.context,
+                    R.drawable.ic_comment,
+                    50, 50,
+                    binding.root.context.resources.getDimensionPixelSize(R.dimen.sdp_10))
+
                 tvRaterUsername.text = review.userName
                 tvTime.text = review.time
             }
