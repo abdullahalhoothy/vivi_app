@@ -9,6 +9,7 @@ import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.data.productfragment.Product
 import com.app.vivi.data.remote.model.data.productfragment.Review
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
+import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
@@ -27,8 +28,8 @@ class ProductViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     // StateFlow to hold the products list
-    private val _productList = MutableStateFlow<List<Product>>(emptyList())
-    val productList: StateFlow<List<Product>> = _productList
+//    private val _productList = MutableStateFlow<List<Product>>(emptyList())
+//    val productList: StateFlow<List<Product>> = _productList
 
     // StateFlow to hold the summary list
     private val _summaryList = MutableStateFlow<List<SummaryData>>(emptyList())
@@ -46,15 +47,19 @@ class ProductViewModel @Inject constructor(
     private val _preferenceProductDetail = MutableStateFlow<PreferenceProductResponse?>(null)
     val preferenceProductDetail: StateFlow<PreferenceProductResponse?> = _preferenceProductDetail
 
+    // StateFlow to hold the products list
+    private val _findYourNewFavoriteProduct = MutableStateFlow<FindYourNewFavoriteProductResponse?>(null)
+    val findYourNewFavoriteProduct: StateFlow<FindYourNewFavoriteProductResponse?> = _findYourNewFavoriteProduct
+
     init {
         // Simulate loading data
-        fetchProductList()
+//        fetchProductList()
         fetchDummySummaryData()
         fetchDummyHelpfulReviewData()
     }
 
 
-    private fun fetchProductList() {
+   /* private fun fetchProductList() {
         viewModelScope.launch {
             // Simulate fetching product list
             val productData = listOf(
@@ -85,7 +90,7 @@ class ProductViewModel @Inject constructor(
             )
             _productList.value = productData
         }
-    }
+    }*/
 
     private fun fetchDummySummaryData() {
         viewModelScope.launch {
@@ -190,6 +195,26 @@ class ProductViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
                     _preferenceProductDetail.value = call.data
+                }
+            }
+        }
+    }
+
+    fun getFindYourNewFavoriteProduct() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getFindYourNewFavoriteProduct()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _findYourNewFavoriteProduct.value = call.data
                 }
             }
         }
