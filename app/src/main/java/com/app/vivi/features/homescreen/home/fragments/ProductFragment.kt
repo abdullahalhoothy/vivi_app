@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.collectLatest
 class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBinding::inflate) {
 
     private val viewModel by viewModels<ProductViewModel>()
-    private lateinit var mProductAdapter: ProductAdapter
+//    private lateinit var mProductAdapter: ProductAdapter
 
     private val mPickForYouAdapter by lazy {
         PreferenceProductAdapter(onItemClick = {
@@ -44,6 +44,10 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         }, onDiscountButtonClick = {
             "Discount Button Clicked".showShortToast(requireContext())
         })
+    }
+
+    private val mProductAdapter by lazy {
+        ProductAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,6 +103,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 if (!isApiCalled) {
                     Log.d("Scrolling: ", " isApiCalled: $isApiCalled")
                     getPreferenceProductDetail()
+                    getFindYourNewFavoriteProduct()
                     isApiCalled = true  // Set flag to prevent further calls
                 }
             }
@@ -157,7 +162,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     }
 
     private fun initAdapters() {
-        mProductAdapter = ProductAdapter()
+//        mProductAdapter = ProductAdapter()
         setupRecyclerViews()
     }
 
@@ -247,8 +252,12 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         }
 
         collectWhenStarted {
-            viewModel.productList.collectLatest { productList ->
-                mProductAdapter.submitList(productList)
+            viewModel.findYourNewFavoriteProduct.collectLatest {
+
+                it?.products?.let { productList ->
+                    mProductAdapter.submitList(productList)
+
+                }
             }
         }
     }
@@ -271,6 +280,10 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
     private fun getPreferenceProductDetail() {
         viewModel.getPreferenceProductDetail()
+    }
+
+    private fun getFindYourNewFavoriteProduct() {
+        viewModel.getFindYourNewFavoriteProduct()
     }
 
     override fun getMyViewModel() = viewModel

@@ -2,6 +2,7 @@ package com.app.vivi.data.remote
 
 import RecommendedProductsResponse
 import com.app.vivi.data.remote.model.request.LoginRequest
+import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.LoginResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
@@ -40,4 +41,8 @@ interface ApiService {
     @GET(ApiNames.PREFERENCE_PRODUCT_DETAIL)
     suspend fun getPreferenceProductDetail(
     ): Response<PreferenceProductResponse>
+
+    @GET(ApiNames.FIND_YOUR_NEW_FAVORITE_PRODUCT)
+    suspend fun getFindYourNewFavoriteProduct(
+    ): Response<FindYourNewFavoriteProductResponse>
 }

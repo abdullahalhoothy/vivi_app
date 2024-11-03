@@ -6,22 +6,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.data.remote.model.data.productfragment.Product
+import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.databinding.ProductItemFavoriteBinding
 
-class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
+class ProductAdapter : ListAdapter<NewFavoriteProduct, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
 
     // ViewHolder class using ViewBinding
     class ProductViewHolder(private val binding: ProductItemFavoriteBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         // Bind product data to views
-        fun bind(product: Product) {
-            binding.tvTitle1.text = product.title1
-            binding.tvDescription1.text = product.description1
-            binding.tvTitle2.text = product.title2
-            binding.tvDescription2.text = product.description2
-            binding.tvTitle3.text = product.title3
-            binding.tvDescription3.text = product.description3
+        fun bind(product: NewFavoriteProduct) {
+            binding.tvTitle1.text = product.name
+            binding.tvDescription1.text = product.searchType
+            binding.tvTitle2.text = product.name
+            binding.tvDescription2.text = product.searchType
+            binding.tvTitle3.text = product.name
+            binding.tvDescription3.text = product.searchType
         }
     }
 
@@ -38,14 +39,14 @@ class ProductAdapter : ListAdapter<Product, ProductAdapter.ProductViewHolder>(Pr
     }
 
     // DiffUtil to efficiently handle list updates
-    class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            // Compare unique properties of Product (assuming 'id' is a unique identifier)
+    class ProductDiffCallback : DiffUtil.ItemCallback<NewFavoriteProduct>() {
+        override fun areItemsTheSame(oldItem: NewFavoriteProduct, newItem: NewFavoriteProduct): Boolean {
+            // Compare unique properties of NewFavoriteProduct (assuming 'id' is a unique identifier)
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            // Compare all the fields of Product
+        override fun areContentsTheSame(oldItem: NewFavoriteProduct, newItem: NewFavoriteProduct): Boolean {
+            // Compare all the fields of NewFavoriteProduct
             return oldItem == newItem
         }
     }
