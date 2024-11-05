@@ -1,39 +1,49 @@
-# Use an Ubuntu base image
-FROM ubuntu:20.04
+# Use the latest Ubuntu base image
+FROM ubuntu:22.04
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    wget \
-    unzip \
-    openjdk-17-jdk \
-    && apt-get clean
+# Install required packages
+RUN apt-get update && \
+    apt-get install -y build-essential devscripts openjdk-17-jdk curl unzip git
 
-# Set the Android SDK version
-ENV ANDROID_SDK_VERSION=commandlinetools-linux-8512546_latest.zip
+# Set Android SDK environment variables
+ENV ANDROID_HOME=/root/android-sdk
+ENV PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools
 
-# Download and install the Android command line tools
-RUN wget https://dl.google.com/android/repository/$ANDROID_SDK_VERSION -O android-sdk.zip && \
-    mkdir -p /android-sdk/cmdline-tools && \
-    unzip android-sdk.zip -d /android-sdk/cmdline-tools && \
-    rm android-sdk.zip
+# Create the Android SDK directory structure
+RUN mkdir -p $ANDROID_HOME/cmdline-tools
 
-# Set the environment variables for Android SDK
-ENV ANDROID_SDK_ROOT=/android-sdk
-ENV PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/bin
+# Download and install Android SDK command-line tools
+RUN curl -L https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip -o sdktools.zip && \
+    unzip sdktools.zip -d $ANDROID_HOME/cmdline-tools && \
+    rm sdktools.zip
 
-# Accept the Android SDK licenses
-RUN yes | sdkmanager --licenses
+# Move the cmdline-tools to `latest` if necessary
+RUN mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
 
-# Install required SDK packages (adjust based on your project's needs)
-RUN sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
+# Accept licenses and install required SDK components
+# Use the absolute path to sdkmanager to avoid PATH issues
+RUN mkdir -p ~/.android && touch ~/.android/repositories.cfg && \
+    yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "build-tools;33.0.0" "platforms;android-33"
 
-# Copy your Android project files into the Docker image
-COPY . /app
-WORKDIR /app
 
-# Build the debug version of your Android application
-RUN ./gradlew assembleDebug --stacktrace --info
+# Set additional environment variables
+ENV CONTAINER=true \
+    ANDROID_SDK_PATH=$ANDROID_HOME \
+    ANDROID_SDK_ROOT=$ANDROID_HOME 
+
+# Set the working directory
+WORKDIR /root/build
+
+# Clone the specific branch from GitHub
+RUN git clone -b main-develop https://github.com/rashid1428/vivi_app.git /root/build
+
+# Set permissions for the Gradle wrapper to make it executable
+RUN chmod +x /root/build/gradlew
+
+
+# Additional setup commands, if any
+RUN /root/build/gradlew assembleDebug --stacktrace
 
 
 # Optionally, you can expose a directory to access the built APKs
-VOLUME /app/app/build/outputs/apk/debug
+VOLUME /root/build/app/build/outputs/apk/debug
