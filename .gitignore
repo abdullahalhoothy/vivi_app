@@ -10,6 +10,7 @@
 *.so
 *.o
 *.obj
+**/*desktop.ini
 
 # Gradle files
 .gradle/
