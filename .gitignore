@@ -5,7 +5,7 @@
 *.apk
 *.ap_
 *.dex
-*.jar
+#*.jar
 *.keystore
 *.so
 *.o
