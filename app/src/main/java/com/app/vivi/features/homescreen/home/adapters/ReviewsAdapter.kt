@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
-import com.app.vivi.data.remote.model.data.productfragment.Review
+import com.app.vivi.data.remote.model.response.Review
 import com.app.vivi.databinding.ReviewsItemBinding
 import com.app.vivi.extension.setDrawableWithSize
 import com.app.vivi.helper.createRatingDescription
@@ -21,23 +21,16 @@ class ReviewsAdapter :
 
         fun bind(review: Review) {
             with(binding) {
-//                val context = root.context
-                val htmlContent = createRatingDescription(binding.root.context, review.reviewText, review.rating.toString())
-//                val htmlContent = ratingDescription(review.reviewText, review.rating.toString())
+                val htmlContent = createRatingDescription(binding.root.context, review.description, review.averageRating.toString())
                 tvRating.text = htmlContent
-                    /*Html.fromHtml(
-                    htmlContent,
-                    Html.FROM_HTML_MODE_LEGACY,
-                    ImageGetter(context, R.drawable.ic_star),
-                    null
-                )*/
+                tvRaterUsername.text = "${review.name} (${review.totalRatings} " +
+                        "${root.context.getString(R.string.rating_txt)})"
 
                 tvComment.setDrawableWithSize(binding.root.context,
                     R.drawable.ic_comment,
                     50, 50,
                     binding.root.context.resources.getDimensionPixelSize(R.dimen.sdp_10))
 
-                tvRaterUsername.text = review.userName
                 tvTime.text = review.time
             }
         }

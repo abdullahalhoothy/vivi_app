@@ -52,6 +52,7 @@ class ProductDetailFragment :
         handleAppBar()
         handleOnScrollChangeListener()
         animateImage()
+        getUserReviewsApi()
     }
 
 
@@ -99,8 +100,8 @@ class ProductDetailFragment :
 
     private fun toggleReviewsView(showReviews: Boolean) {
         binding.inReviewsLayout.apply {
-            if (showReviews) viewModel.fetchDummyHelpfulReviewData()
-            if (!showReviews) viewModel.fetchDummyRecentReviewsData()
+            if (showReviews) getUserReviewsApi()
+            if (!showReviews) getUserReviewsApi()
             updateReviewsSelection(if (showReviews) tvHelpful else tvRecent)
         }
     }
@@ -253,11 +254,23 @@ class ProductDetailFragment :
             }
         }
 
-        collectWhenStarted {
+        /*collectWhenStarted {
             viewModel.reviewsList.collectLatest { reviewList ->
                 reviewsAdapter.submitList(reviewList)
             }
+        }*/
+
+        collectWhenStarted {
+            viewModel.userReviews.collectLatest {
+                it?.reviews.let {reviewList ->
+                    reviewsAdapter.submitList(reviewList)
+                }
+            }
         }
+    }
+
+    private fun getUserReviewsApi(){
+        viewModel.getUserReviewsApi()
     }
 
     override fun getMyViewModel() = viewModel

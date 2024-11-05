@@ -10,6 +10,7 @@ object ApiNames {
     const val RECOMMENDED_PRODUCTS = "${BASE_URL}recommended_products"
     const val PREFERENCE_PRODUCT_DETAIL = "${BASE_URL}preference_product_detail"
     const val FIND_YOUR_NEW_FAVORITE_PRODUCT = "${BASE_URL}find_your_new_favorite_product"
+    const val USER_REVIEWS = "${BASE_URL}user_reviews"
 }
 
 object HeadersNames {

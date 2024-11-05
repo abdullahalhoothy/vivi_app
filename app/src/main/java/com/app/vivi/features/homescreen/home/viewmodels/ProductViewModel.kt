@@ -6,11 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.app.vivi.R
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
-import com.app.vivi.data.remote.model.data.productfragment.Product
-import com.app.vivi.data.remote.model.data.productfragment.Review
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
+import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
 import com.app.vivi.domain.repo.ProductRepo
@@ -36,10 +35,6 @@ class ProductViewModel @Inject constructor(
     val summaryList: StateFlow<List<SummaryData>> = _summaryList
 
     // StateFlow to hold the products list
-    private val _reviewsList = MutableStateFlow<List<Review>>(emptyList())
-    val reviewsList: StateFlow<List<Review>> = _reviewsList
-
-    // StateFlow to hold the products list
     private val _recommendedProducts = MutableStateFlow<RecommendedProductsResponse?>(null)
     val recommendedProducts: StateFlow<RecommendedProductsResponse?> = _recommendedProducts
 
@@ -51,11 +46,14 @@ class ProductViewModel @Inject constructor(
     private val _findYourNewFavoriteProduct = MutableStateFlow<FindYourNewFavoriteProductResponse?>(null)
     val findYourNewFavoriteProduct: StateFlow<FindYourNewFavoriteProductResponse?> = _findYourNewFavoriteProduct
 
+    // StateFlow to hold the products list
+    private val _userReviews = MutableStateFlow<UserReviewsResponse?>(null)
+    val userReviews: StateFlow<UserReviewsResponse?> = _userReviews
+
     init {
         // Simulate loading data
 //        fetchProductList()
         fetchDummySummaryData()
-        fetchDummyHelpfulReviewData()
     }
 
 
@@ -113,47 +111,6 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-    fun fetchDummyHelpfulReviewData() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-            val reviewsData = listOf(
-                Review(
-                    "John Doe",
-                    "Our fourth vivi of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 vivi, I said then I love",
-                    4.5f,
-                    "3 months ago"
-                ),
-                Review("Jane Smith", "Loved it!", 5f, "5 months ago"),
-                Review(
-                    "John Doe",
-                    "Our fourth vivi of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 vivi, I said then I love",
-                    4.5f,
-                    "3 months ago"
-                ),
-                Review("Michael Brown", "Not what I expected.", 3f, "2 months ago"),
-                Review(
-                    "John Doe",
-                    "Our fourth vivi of ous CS Evening was this paso Robles Calif. My First experiencee with this one was a 2018 vivi, I said then I love",
-                    4.5f,
-                    "3 months ago"
-                ),
-                Review("Michael Brown", "Not what I expected.", 3f, "2 months ago")
-            )
-            _reviewsList.value = reviewsData
-        }
-    }
-
-    fun fetchDummyRecentReviewsData() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-            val reviewsData = listOf(
-                Review("Jane Smith", "Recent: Great product!", 4.5f, "3 months ago"),
-                Review("John Doe", "Recent: Loved it!", 5f, "5 months ago"),
-                Review("Michael Brown", "Recent: Not what I expected.", 3f, "2 months ago")
-            )
-            _reviewsList.value = reviewsData
-        }
-    }
 
     fun getRecommendedProducts() {
         viewModelScope.launch {
@@ -215,6 +172,26 @@ class ProductViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
                     _findYourNewFavoriteProduct.value = call.data
+                }
+            }
+        }
+    }
+
+    fun getUserReviewsApi() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getUserReviews()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _userReviews.value = call.data
                 }
             }
         }
