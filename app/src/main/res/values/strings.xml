@@ -50,4 +50,7 @@
     <string name="email_txt">Email</string>
     <string name="email_me_a_link_to_login_in_txt">Email me a link to login in</string>
     <string name="or_txt">or</string>
+    <string name="go_to_notifications_settings_txt">Go to notifications settings</string>
+    <string name="no_notifications_description_txt">We\'ll tell you about special %1$s\noffers, updates on your orders, or\nwhen your friends review a %1$s</string>
+    <string name="no_notifications_yet_txt">No notifications yet</string>
 </resources>

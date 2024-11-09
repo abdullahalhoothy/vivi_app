@@ -131,7 +131,7 @@
             android:backgroundTint="@android:color/transparent"
             android:fontFamily="sans-serif-medium"
             android:inputType="textPassword"
-            android:text=""
+            android:text="sdfsdf"
             android:textColor="@color/colorBlack"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/_16sdp" /> <!-- Set to textPassword initially -->

@@ -7,11 +7,13 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.CustomTabBinding
 import com.app.vivi.databinding.FragmentHomeLatestBinding
+import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.features.homescreen.home.adapters.ViewPagerAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import com.google.android.material.tabs.TabLayout
@@ -52,14 +54,21 @@ class HomeFragmentLatest :
         super.onViewCreated(view, savedInstanceState)
 
         initViewPager()
-
-        /*binding.content.apply {
-        }*/
+        initListeners()
 
         setFragmentResultListener("refresh") { _, bundle ->
             val refresh = bundle.getBoolean("refresh")
             if (refresh) {
 //                viewModel.refreshPatientList()
+            }
+        }
+    }
+
+    private fun initListeners(){
+        binding.apply {
+            centerImageView.setOnClickListener {
+                val action = HomeFragmentLatestDirections.actionLatestHomeFragmentToNotificationsFragment()
+                findNavController().navigateWithSingleTop(action)
             }
         }
     }

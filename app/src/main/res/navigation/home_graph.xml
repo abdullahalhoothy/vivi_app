@@ -19,12 +19,38 @@
             app:popEnterAnim="@anim/expand_in"
             app:popExitAnim="@anim/collapse_out"/>
 
+        <action
+            android:id="@+id/action_latestHomeFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.app.vivi.features.homescreen.home.fragments.ProductDetailFragment"
         tools:layout="@layout/fragment_product"
         android:label="ProductDetailFragment">
+
+        <action
+            android:id="@+id/action_latestHomeFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.app.vivi.features.notification.NotificationsFragment"
+        tools:layout="@layout/fragment_notifications"
+        android:label="NotificationsFragment">
 
     </fragment>
 

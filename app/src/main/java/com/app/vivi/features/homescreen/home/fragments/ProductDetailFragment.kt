@@ -19,6 +19,7 @@ import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.databinding.FragmentProductDetailBinding
 import com.app.vivi.dialog.rating.RatingDialogHelper
 import com.app.vivi.extension.collectWhenStarted
+import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.features.homescreen.home.adapters.ReviewsAdapter
 import com.app.vivi.features.homescreen.home.adapters.SummaryAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
@@ -74,20 +75,28 @@ class ProductDetailFragment :
     }
 
     private fun initListeners() {
+        binding.apply {
+            inAppBar.centerImageView.setOnClickListener {
+                val action = HomeFragmentLatestDirections.actionLatestHomeFragmentToNotificationsFragment()
+                findNavController().navigateWithSingleTop(action)
+            }
 
-        binding.tvRate.setOnClickListener {
-            showRatingDialog()
+            tvRate.setOnClickListener {
+                showRatingDialog()
+            }
+
+            inSummaryLayout.apply {
+                tvHighllights.setOnClickListener { toggleSummaryView(true) }
+                tvFacts.setOnClickListener { toggleSummaryView(false) }
+            }
+
+            inReviewsLayout.apply {
+                tvHelpful.setOnClickListener { toggleReviewsView(true) }
+                tvRecent.setOnClickListener { toggleReviewsView(false) }
+            }
         }
 
-        binding.inSummaryLayout.apply {
-            tvHighllights.setOnClickListener { toggleSummaryView(true) }
-            tvFacts.setOnClickListener { toggleSummaryView(false) }
-        }
 
-        binding.inReviewsLayout.apply {
-            tvHelpful.setOnClickListener { toggleReviewsView(true) }
-            tvRecent.setOnClickListener { toggleReviewsView(false) }
-        }
     }
 
     private fun toggleSummaryView(showSummary: Boolean) {
