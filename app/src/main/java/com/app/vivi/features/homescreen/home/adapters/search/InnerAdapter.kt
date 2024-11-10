@@ -1,22 +1,14 @@
 package com.app.vivi.features.homescreen.home.adapters.search
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.app.vivi.R
-import com.app.vivi.data.remote.model.response.products
-import com.app.vivi.data.remote.model.response.searchfragment.ProductType
 import com.app.vivi.databinding.ItemInnerRecyclerviewBinding
-import com.app.vivi.extension.applyRandomDarkGradient
-import loadImageWithCache
-import roundLeftCorners
 
-class InnerAdapter(private val onItemClick: (item: ProductType) -> Unit) : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
+class InnerAdapter : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
 
-    private var items: List<ProductType> = emptyList()
+    private var items: List<String> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerViewHolder {
         val binding = ItemInnerRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,7 +22,7 @@ class InnerAdapter(private val onItemClick: (item: ProductType) -> Unit) : Recyc
     override fun getItemCount(): Int = items.size
 
     // Update the list with DiffUtil
-    fun submitList(newItems: List<ProductType>) {
+    fun submitList(newItems: List<String>) {
         val diffCallback = InnerDiffCallback(items, newItems)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         items = newItems
@@ -38,23 +30,16 @@ class InnerAdapter(private val onItemClick: (item: ProductType) -> Unit) : Recyc
     }
 
     inner class InnerViewHolder(private val binding: ItemInnerRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item:ProductType) {
-            binding.textView.text = item.type
-            binding.clMain.applyRandomDarkGradient()
-            binding.imageView.roundLeftCorners(20f)
-
-            item?.imageUrl?.let { binding.imageView.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
-
-            binding.root.setOnClickListener {
-                onItemClick(item)
-            }
+        fun bind(item: String) {
+            binding.textView.text = item
+            // Optionally, set imageView's image source based on item
         }
     }
 
     // DiffUtil Callback for calculating item differences
     class InnerDiffCallback(
-        private val oldList: List<ProductType>,
-        private val newList: List<ProductType>
+        private val oldList: List<String>,
+        private val newList: List<String>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size

@@ -1,24 +1,16 @@
 package com.app.vivi.features.homescreen.home.fragments
 
-import ProductMakingCountriesAdapter
-import ShopByRegionAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentSearchBinding
-import com.app.vivi.extension.collectWhenStarted
-import com.app.vivi.extension.navigateWithSingleTop
-import com.app.vivi.extension.setClickListener
-import com.app.vivi.features.filter.FullScreenDialogFragment
 import com.app.vivi.features.homescreen.home.adapters.search.OuterAdapter
-import com.app.vivi.features.homescreen.home.adapters.search.OuterShopByBeanAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class SearchFragment :
@@ -27,180 +19,44 @@ class SearchFragment :
     private val viewModel by viewModels<ProductViewModel>()
 
 
-    private val productMakingCountriesAdapter by lazy {
-        ProductMakingCountriesAdapter(onItemClick = {
-            navigateToProductFilterListFragment()
-        })
-    }
-
-    private val shopByRegionsAdapter by lazy {
-        ShopByRegionAdapter(onItemClick = {
-            navigateToProductFilterListFragment()
-        })
-    }
-
-    private val outerAdapter by lazy {
-        OuterAdapter(onItemClick = {
-            navigateToProductFilterListFragment()
-        })
-    }
-
-    private val outerShopByBeanAdapter by lazy {
-        OuterShopByBeanAdapter(onItemClick = {
-            navigateToProductFilterListFragment()
-        })
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
-        initListeners()
-        initAdapters()
-        addObservers()
-        getShopByTypes()
-        getShopByCoffeeBeanTypes()
-        getShopByCountries()
-        getShopByRegions()
+        initRecyclerview()
 
     }
 
-    private fun initViews() {
+    private fun initViews(){
         binding.apply {
             tvShopByType.text = getString(R.string.shop_by_type_txt, getString(R.string.app_name))
-            tvShopByBeanType.text = getString(R.string.shop_by_bean_txt, getString(R.string.app_name))
-            tvShopByStyles.text = getString(R.string.shop_by_styles_txt, getString(R.string.app_name))
-            tvShopByRegion.text = getString(R.string.shop_by_region_txt, getString(R.string.app_name))
-            tvShopByCountry.text =
-                getString(R.string.shop_by_country_txt, getString(R.string.app_name))
-            searchView.queryHint = getString(R.string.search_any_txt, getString(R.string.app_name))
         }
     }
 
-    private fun initListeners(){
-        with(binding){
+    private fun initRecyclerview(){
+//        val outerRecyclerView: RecyclerView = findViewById(R.id.outerRecyclerView)
 
-            //Extension same clicklistener function for multiple views
-            setClickListener(tvShopByType, icShopByTypeForward){
-                navigateToProductFiltersFragment()
-            }
+        // Example data
+        val data = initializeItems()
 
-            //Extension same clicklistener function for multiple views
-            setClickListener(tvShopByCountry, icShopByCountryForward){
-                navigateToProductFiltersFragment()
-            }
+        val outerAdapter = OuterAdapter()
+        binding.rvOuter.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        binding.rvOuter.adapter = outerAdapter
 
-            //Extension same clicklistener function for multiple views
-            setClickListener(tvShopByBeanType, icShopByBeanTypeForward){
-                navigateToProductFiltersFragment()
-            }
-
-            //Extension same clicklistener function for multiple views
-            setClickListener(tvShopByStyles, icShopByStylesForward){
-                navigateToProductFiltersFragment()
-            }
-
-            //Extension same clicklistener function for multiple views
-            setClickListener(tvShopByRegion, icShopByRegionForward){
-                navigateToProductFiltersFragment()
-            }
-        }
+        outerAdapter.submitList(data)
     }
 
-    private fun initAdapters() {
-        with(binding) {
-            rvCountries.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = productMakingCountriesAdapter
-            }
-
-            rvRegion.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = shopByRegionsAdapter
-            }
-
-            rvOuter.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = outerAdapter
-            }
-
-            rvOuterShopByBeanType.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = outerShopByBeanAdapter
-            }
-
-            rvStyles.apply {
-                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = productMakingCountriesAdapter
-            }
-        }
-
+    private fun initializeItems(): List<List<String>> {
+        return listOf(
+            listOf("Espresso", "Double Espresso", "Ristretto"),
+            listOf("Latte", "Cappuccino", "Flat White"),
+            listOf("Cold Brew", "Iced Coffee", "Nitro Cold Brew"),
+            listOf("Americano", "Long Black", "Red Eye"),
+            listOf("Mocha", "White Mocha", "Dark Mocha"))
     }
 
-    private fun navigateToProductFilterListFragment(){
-        val action =
-            HomeFragmentLatestDirections.actionLatestHomeFragmentToProductFilterListFragment()
-        findNavController().navigateWithSingleTop(action)
-    }
+    private var items: List<List<String>> = initializeItems()
 
-    private fun navigateToProductFiltersFragment(){
-        val dialog = FullScreenDialogFragment()
-        dialog.show(parentFragmentManager, "FullScreenDialog")
-
-        /*val action =
-            HomeFragmentLatestDirections.actionLatestHomeFragmentToProductFiltersFragment()
-        findNavController().navigateWithSingleTop(action)*/
-    }
-
-    private fun addObservers() {
-        collectWhenStarted {
-            viewModel.shopByCoffeeBeanTypes.collectLatest { it ->
-                it?.let { list ->
-                    outerShopByBeanAdapter.submitList(list)
-
-                }
-            }
-        }
-
-        collectWhenStarted {
-            viewModel.shopByCountries.collectLatest { it ->
-                it?.countries?.let { list ->
-                    productMakingCountriesAdapter.submitList(list)
-                }
-            }
-        }
-
-        collectWhenStarted {
-            viewModel.shopByType.collectLatest { list ->
-                list?.let { outerAdapter.submitList(it) }
-            }
-        }
-
-        collectWhenStarted {
-            viewModel.shopByRegion.collectLatest { list ->
-                list?.shopByRegion.let {
-                    shopByRegionsAdapter.submitList(it)
-
-                }
-            }
-        }
-    }
-
-    private fun getShopByTypes(){
-        viewModel.getShopByCoffeeTypes()
-    }
-
-    private fun getShopByCoffeeBeanTypes(){
-        viewModel.getShopByCoffeeBeanTypes()
-    }
-
-    private fun getShopByCountries(){
-        viewModel.getShopByCountries()
-    }
-
-    private fun getShopByRegions(){
-        viewModel.getShopByRegions()
-    }
 
 
     override fun getMyViewModel() = viewModel

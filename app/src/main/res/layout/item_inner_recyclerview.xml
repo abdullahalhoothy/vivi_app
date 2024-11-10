@@ -7,7 +7,7 @@
     android:layout_marginTop="@dimen/_5sdp"
     android:layout_marginEnd="@dimen/_10sdp"
     android:background="@drawable/rectangle_round_black_4dp"
-    android:id="@+id/clMain">
+    android:backgroundTint="@color/color_light_grey">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView"
@@ -17,7 +17,7 @@
         android:background="@drawable/rectangle_left_round_black_stroke_4dp"
         android:clipToOutline="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_bg_coffee"
+        android:src="@drawable/ic_banner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
