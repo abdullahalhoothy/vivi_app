@@ -23,7 +23,7 @@
             android:paddingTop="@dimen/_5sdp"
             android:paddingEnd="@dimen/_15sdp"
             android:paddingBottom="@dimen/_5sdp"
-            android:text="Ship to AB"
+            android:text="@string/ship_to_ab_txt"
             android:textColor="@color/colorWhite"
             app:backgroundColor="@color/colorBlack"
             app:cornerRadius="@dimen/_20sdp"
