@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.databinding.ItemInnerRecyclerviewBinding
+import roundLeftCorners
 
 class InnerAdapter : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
 
@@ -32,6 +33,7 @@ class InnerAdapter : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
     inner class InnerViewHolder(private val binding: ItemInnerRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: String) {
             binding.textView.text = item
+            binding.imageView.roundLeftCorners(20f)
             // Optionally, set imageView's image source based on item
         }
     }
