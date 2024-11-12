@@ -55,4 +55,8 @@
     <string name="no_notifications_yet_txt">No notifications yet</string>
     <string name="ship_to_ab_txt">Ship to AB</string>
     <string name="shop_by_type_txt">Shop %1$s by type</string>
+    <string name="taste_characteristics_txt">Taste Characteristics</string>
+    <string name="edit_txt">Edit</string>
+    <string name="what_people_talk_about_txt">WHAT PEOPLE TALK ABOUT</string>
+    <string name="show_more_txt">Show more</string>
 </resources>

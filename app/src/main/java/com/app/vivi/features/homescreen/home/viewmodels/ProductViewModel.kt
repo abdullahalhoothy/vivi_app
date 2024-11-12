@@ -6,16 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.app.vivi.R
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
-import com.app.vivi.data.remote.model.data.productdetailfragment.ProductMakingCountries
 import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
-import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
-import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
-import com.app.vivi.data.remote.model.response.Product
-import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
@@ -38,14 +33,8 @@ class ProductViewModel @Inject constructor(
     val CharacteristicsDataList: StateFlow<List<CharacteristicsData>> = _characteristicsDataList
 
     // StateFlow to hold the products list
-    private val _productMakingCountriesListList = MutableStateFlow<List<ProductMakingCountries>>(emptyList())
-    val productMakingCountriesList: StateFlow<List<ProductMakingCountries>> = _productMakingCountriesListList
-    // StateFlow to hold the products list
     private val _thoughtsDataList = MutableStateFlow<List<ThoughtsData>>(emptyList())
     val ThoughtsDataList: StateFlow<List<ThoughtsData>> = _thoughtsDataList
-    // StateFlow to hold the products list
-    private val _vintageDataList = MutableStateFlow<List<Vintage>>(emptyList())
-    val vintageDataList: StateFlow<List<Vintage>> = _vintageDataList
 
     // StateFlow to hold the summary list
     private val _summaryList = MutableStateFlow<List<SummaryData>>(emptyList())
@@ -60,12 +49,8 @@ class ProductViewModel @Inject constructor(
     val preferenceProductDetail: StateFlow<PreferenceProductResponse?> = _preferenceProductDetail
 
     // StateFlow to hold the products list
-    private val _bestOfProductDetail = MutableStateFlow<List<Product>?>(null)
-    val bestOfProductDetail: StateFlow<List<Product>?> = _bestOfProductDetail
-
-    // StateFlow to hold the products list
-    private val _findYourNewFavoriteProduct = MutableStateFlow<List<List<NewFavoriteProduct>>?>(null)
-    val findYourNewFavoriteProduct: StateFlow<List<List<NewFavoriteProduct>>?> = _findYourNewFavoriteProduct
+    private val _findYourNewFavoriteProduct = MutableStateFlow<FindYourNewFavoriteProductResponse?>(null)
+    val findYourNewFavoriteProduct: StateFlow<FindYourNewFavoriteProductResponse?> = _findYourNewFavoriteProduct
 
     // StateFlow to hold the products list
     private val _userReviews = MutableStateFlow<UserReviewsResponse?>(null)
@@ -76,9 +61,6 @@ class ProductViewModel @Inject constructor(
         fetchProductList()
         fetchThoughtsList()
         fetchDummySummaryData()
-        generateSampleProducts()
-        fetchRecentList()
-        fetchProductMakingCountriesList()
     }
 
 
@@ -110,61 +92,6 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-
-    fun fetchRecentList() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-             val recentData = listOf(
-                Vintage("2020", "4.0", "344 ratings"),
-                Vintage("2019", "4.1", "886 ratings"),
-                Vintage("2018", "4.1", "1769 ratings"),
-                Vintage("2017", "4.0", "514 ratings"),
-                Vintage("2016", "4.1", "1218 ratings")
-            )
-
-            _vintageDataList.value = recentData
-        }
-    }
-    fun fetchBestPriceList() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-
-            val bestPriceData = listOf(
-                Vintage("2019", "4.3", "786 ratings"),
-                Vintage("2018", "4.2", "1569 ratings")
-            )
-
-            _vintageDataList.value = bestPriceData
-        }
-    }
-    fun fetchTopRatingList() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-
-            val topRatingData = listOf(
-                Vintage("2020", "4.5", "124 ratings"),
-                Vintage("2018", "4.6", "1299 ratings")
-            )
-
-            _vintageDataList.value = topRatingData
-        }
-    }
-
-    fun fetchProductMakingCountriesList() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-            val countriesList = listOf(
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "United States"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "United Kingdom"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "France"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "Italy"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "Germany")
-            )
-
-            _productMakingCountriesListList.value = countriesList
-        }
-    }
-
     private fun fetchDummySummaryData() {
         viewModelScope.launch {
             // Simulate fetching product list
@@ -183,116 +110,6 @@ class ProductViewModel @Inject constructor(
                 )
             )
             _summaryList.value = summaryData
-        }
-    }
-
-
-    fun generateSampleProducts() {
-        viewModelScope.launch {
-            val list = listOf(
-                Product(
-                    id = "1",
-                    name = "Product A",
-                    description = "Description of Product A",
-                    tagline = "Best product A",
-                    producturl = "http://example.com/productA",
-                    imageurl = "http://example.com/imageA.jpg",
-                    ratingtext = "Excellent",
-                    ratingvalue = "4.5",
-                    averagerating = "4.5",
-                    totalratings = "100",
-                    discountedprice = "10.99",
-                    discountpercentage = "20",
-                    originalprice = "13.99",
-                    city = "City A",
-                    country = "Country A",
-                    countryflagurl = "http://example.com/flagA.png",
-                    userrating = UserRating(
-                        rating = "4.5",
-                        review = "Great product!",
-                        username = "User1",
-                        description = "User1 review description",
-                        userimageurl = "http://example.com/user1.png"
-                    )
-                ),
-                Product(
-                    id = "2",
-                    name = "Product B",
-                    description = "Description of Product B",
-                    tagline = "Best product B",
-                    producturl = "http://example.com/productB",
-                    imageurl = "http://example.com/imageB.jpg",
-                    ratingtext = "Very Good",
-                    ratingvalue = "4.2",
-                    averagerating = "4.2",
-                    totalratings = "150",
-                    discountedprice = "15.99",
-                    discountpercentage = "10",
-                    originalprice = "17.99",
-                    city = "City B",
-                    country = "Country B",
-                    countryflagurl = "http://example.com/flagB.png",
-                    userrating = UserRating(
-                        rating = "4.2",
-                        review = "Very good product!",
-                        username = "User2",
-                        description = "User2 review description",
-                        userimageurl = "http://example.com/user2.png"
-                    )
-                ),
-                Product(
-                    id = "1",
-                    name = "Product A",
-                    description = "Description of Product A",
-                    tagline = "Best product A",
-                    producturl = "http://example.com/productA",
-                    imageurl = "http://example.com/imageA.jpg",
-                    ratingtext = "Excellent",
-                    ratingvalue = "4.5",
-                    averagerating = "4.5",
-                    totalratings = "100",
-                    discountedprice = "10.99",
-                    discountpercentage = "20",
-                    originalprice = "13.99",
-                    city = "City A",
-                    country = "Country A",
-                    countryflagurl = "http://example.com/flagA.png",
-                    userrating = UserRating(
-                        rating = "4.5",
-                        review = "Great product!",
-                        username = "User1",
-                        description = "User1 review description",
-                        userimageurl = "http://example.com/user1.png"
-                    )
-                ),
-                Product(
-                    id = "2",
-                    name = "Product B",
-                    description = "Description of Product B",
-                    tagline = "Best product B",
-                    producturl = "http://example.com/productB",
-                    imageurl = "http://example.com/imageB.jpg",
-                    ratingtext = "Very Good",
-                    ratingvalue = "4.2",
-                    averagerating = "4.2",
-                    totalratings = "150",
-                    discountedprice = "15.99",
-                    discountpercentage = "10",
-                    originalprice = "17.99",
-                    city = "City B",
-                    country = "Country B",
-                    countryflagurl = "http://example.com/flagB.png",
-                    userrating = UserRating(
-                        rating = "4.2",
-                        review = "Very good product!",
-                        username = "User2",
-                        description = "User2 review description",
-                        userimageurl = "http://example.com/user2.png"
-                    )
-                )
-            )
-
-            _bestOfProductDetail.value = list
         }
     }
 
@@ -356,9 +173,7 @@ class ProductViewModel @Inject constructor(
 
                 is Resource.Success -> {
                     hideLoader()
-                    val newItems: List<List<NewFavoriteProduct>> = call.data.products?.chunked(3) ?: emptyList()
-
-                    _findYourNewFavoriteProduct.value = newItems
+                    _findYourNewFavoriteProduct.value = call.data
                 }
             }
         }
