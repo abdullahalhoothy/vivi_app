@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.app.vivi.R
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
+import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
+import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
@@ -27,8 +29,12 @@ class ProductViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     // StateFlow to hold the products list
-//    private val _productList = MutableStateFlow<List<Product>>(emptyList())
-//    val productList: StateFlow<List<Product>> = _productList
+    private val _characteristicsDataList = MutableStateFlow<List<CharacteristicsData>>(emptyList())
+    val CharacteristicsDataList: StateFlow<List<CharacteristicsData>> = _characteristicsDataList
+
+    // StateFlow to hold the products list
+    private val _thoughtsDataList = MutableStateFlow<List<ThoughtsData>>(emptyList())
+    val ThoughtsDataList: StateFlow<List<ThoughtsData>> = _thoughtsDataList
 
     // StateFlow to hold the summary list
     private val _summaryList = MutableStateFlow<List<SummaryData>>(emptyList())
@@ -52,43 +58,39 @@ class ProductViewModel @Inject constructor(
 
     init {
         // Simulate loading data
-//        fetchProductList()
+        fetchProductList()
+        fetchThoughtsList()
         fetchDummySummaryData()
     }
 
 
-   /* private fun fetchProductList() {
+    private fun fetchProductList() {
         viewModelScope.launch {
             // Simulate fetching product list
             val productData = listOf(
-                Product(
-                    "Picked for you",
-                    "Description 1",
-                    "Picked for you",
-                    "Description 2",
-                    "Picked for you",
-                    "Description 3"
-                ),
-                Product(
-                    "Product 2",
-                    "Description A",
-                    "Product 2",
-                    "Description B",
-                    "Product 2",
-                    "Description C"
-                ),
-                Product(
-                    "Product 3",
-                    "Description X",
-                    "Product 3",
-                    "Description Y",
-                    "Product 3",
-                    "Description Z"
-                )
+                CharacteristicsData(id = 1, labelLight = "Light", labelBold = "Bold", sliderValue = 50f),
+                CharacteristicsData(id = 2, labelLight = "Small", labelBold = "Large", sliderValue = 30f),
+                CharacteristicsData(id = 3, labelLight = "Dim", labelBold = "Bright", sliderValue = 75f),
+                CharacteristicsData(id = 2, labelLight = "Small", labelBold = "Large", sliderValue = 30f),
             )
-            _productList.value = productData
+            _characteristicsDataList.value = productData
         }
-    }*/
+    }
+
+
+    private fun fetchThoughtsList() {
+        viewModelScope.launch {
+            // Simulate fetching product list
+            val productData = listOf(
+                ThoughtsData("Citrus, lemon, grapefruit", "57 mentions of citrus fruit notes"),
+                ThoughtsData("Peach, apricot, pear", "37 mentions of tree fruit notes"),
+                ThoughtsData("Stone, honey, minerals", "25 mentions of earthy notes"),
+                ThoughtsData("Additional Item 2", "Description for additional item 2"),
+                ThoughtsData("Additional Item 1", "Description for additional item 1")
+            )
+            _thoughtsDataList.value = productData
+        }
+    }
 
     private fun fetchDummySummaryData() {
         viewModelScope.launch {

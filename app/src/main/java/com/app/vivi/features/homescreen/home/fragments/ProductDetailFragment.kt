@@ -22,6 +22,8 @@ import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.features.homescreen.home.adapters.ReviewsAdapter
 import com.app.vivi.features.homescreen.home.adapters.SummaryAdapter
+import com.app.vivi.features.homescreen.home.adapters.productdetail.CharacteristicsAdapter
+import com.app.vivi.features.homescreen.home.adapters.productdetail.ExpandableAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -40,6 +42,14 @@ class ProductDetailFragment :
 
     private val reviewsAdapter by lazy {
         ReviewsAdapter()
+    }
+
+    private val characteristicsAdapter by lazy {
+        CharacteristicsAdapter()
+    }
+
+    private val thoughtsAdapter by lazy {
+        ExpandableAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -64,14 +74,27 @@ class ProductDetailFragment :
     }
 
     private fun setupAdapters() {
-        binding.inSummaryLayout.rvSummary.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = summaryAdapter
+        with(binding){
+            inSummaryLayout.rvSummary.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = summaryAdapter
+            }
+            inReviewsLayout.rvReviews.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = reviewsAdapter
+            }
+
+            inTasteCharacteristicsLayout.rvCharacteristics.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = characteristicsAdapter
+            }
+
+            inTasteCharacteristicsLayout.rvThoughts.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = thoughtsAdapter
+            }
         }
-        binding.inReviewsLayout.rvReviews.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = reviewsAdapter
-        }
+
     }
 
     private fun initListeners() {
@@ -263,11 +286,17 @@ class ProductDetailFragment :
             }
         }
 
-        /*collectWhenStarted {
-            viewModel.reviewsList.collectLatest { reviewList ->
-                reviewsAdapter.submitList(reviewList)
+        collectWhenStarted {
+            viewModel.CharacteristicsDataList.collectLatest { list ->
+                characteristicsAdapter.submitList(list)
             }
-        }*/
+        }
+
+        collectWhenStarted {
+            viewModel.ThoughtsDataList.collectLatest { list ->
+                thoughtsAdapter.submitList(list)
+            }
+        }
 
         collectWhenStarted {
             viewModel.userReviews.collectLatest {

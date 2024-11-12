@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorTransparent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/inReviewsLayout"> <!-- Dark background color -->
+
+    <!-- Text for Light label -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lightLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Light"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
+        android:gravity="end"
+        tools:textColor="@color/colorBlack"
+        app:layout_constraintEnd_toStartOf="@id/slider"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:valueFrom="0"
+        android:valueTo="100"
+        android:stepSize="1"
+        android:value="80"
+        app:trackHeight="@dimen/_7sdp"
+        app:trackColor="@color/grey"
+        app:trackColorActive="@color/grey"
+        app:trackColorInactive="@color/grey"
+        app:haloColor="@color/grey"
+        app:thumbColor="@color/colorPrimary"
+        app:thumbRadius="@dimen/_2sdp"
+        app:thumbHeight="@dimen/_7sdp"
+        app:thumbWidth="@dimen/_25sdp"
+        app:tickVisible="false"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <!-- Text for Bold label -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/boldLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
+        android:gravity="start"
+        tools:text="Bold"
+        tools:textColor="@color/colorBlack"
+        app:layout_constraintStart_toEndOf="@id/slider"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

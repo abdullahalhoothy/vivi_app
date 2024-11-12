@@ -20,5 +20,14 @@
         <item name="android:minHeight">50dp</item>
     </style>
 
+    <style name="CircleImageView" parent="Widget.MaterialComponents.ShapeableImageView">
+        <item name="shapeAppearance">@style/CircularShapeAppearance</item>
+    </style>
+
+    <style name="CircularShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>  <!-- Ensures a circular shape -->
+    </style>
+
 
 </resources>
