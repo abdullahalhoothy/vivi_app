@@ -29,5 +29,11 @@
         <item name="cornerSize">50%</item>  <!-- Ensures a circular shape -->
     </style>
 
+    <style name="SearchViewTextStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/_10ssp</item>
+    </style>
+
 
 </resources>

@@ -1,352 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Scrollable content below the image -->
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/_40sdp"
-    android:background="@color/colorWhite"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black">
+    android:background="@color/black">
 
 
-        <com.app.vivi.customviews.CustomTextView
-            android:id="@+id/tvShipTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:drawableStart="@drawable/ic_uk_globe"
-            android:drawablePadding="@dimen/_5sdp"
-            android:paddingStart="@dimen/_10sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:text="@string/ship_to_ab_txt"
-            android:textColor="@color/colorWhite"
-            app:backgroundColor="@color/colorTransparent"
-            app:cornerRadius="@dimen/_20sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/greyLight"
-            app:strokeWidth="@dimen/_1sdp" />
+    <com.app.vivi.customviews.CustomTextView
+        android:id="@+id/tvShipTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_uk_globe"
+        android:drawablePadding="@dimen/_5sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text="@string/ship_to_ab_txt"
+        android:textColor="@color/colorWhite"
+        app:backgroundColor="@color/colorTransparent"
+        app:cornerRadius="@dimen/_20sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/greyLight"
+        app:strokeWidth="@dimen/_1sdp" />
 
-        <!-- Search Bar -->
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:background="@drawable/search_grey_bg_transparent"
-            android:iconifiedByDefault="false"
-            android:queryHint="@string/search_any_txt"
-            android:textAppearance="@style/SearchViewTextStyle"
-            app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShipTo" />
+    <!-- Search Bar -->
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search_any_txt"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toBottomOf="@+id/tvShipTo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAppearance="@style/SearchViewTextStyle"
+        android:background="@drawable/search_grey_bg_transparent"/>
 
-        <!-- Categories (Shop wines by type) -->
-        <TextView
-            android:id="@+id/tvShopByType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/shop_by_type_txt"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/icShopByTypeForward"
-            app:layout_constraintStart_toStartOf="@+id/searchView"
-            app:layout_constraintTop_toBottomOf="@id/searchView" />
+    <!-- Categories (Shop wines by type) -->
+    <TextView
+        android:id="@+id/tvShopByType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shop_by_type_txt"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        app:layout_constraintStart_toStartOf="@+id/searchView"/>
 
-        <ImageView
-            android:id="@+id/icShopByTypeForward"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:padding="@dimen/_5sdp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/tvShopByType"
-            app:layout_constraintEnd_toEndOf="@+id/searchView"
-            app:layout_constraintTop_toTopOf="@+id/tvShopByType"
-            app:tint="@color/colorWhite" />
+    <ImageView
+        android:id="@+id/icShopByTypeForward"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:contentDescription="Menu"
+        android:src="@drawable/ic_arrow_right"
+        app:tint="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@+id/searchView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvShopByType"
+        app:layout_constraintTop_toTopOf="@+id/tvShopByType" />
 
 
-        <!-- Horizontal RecyclerView -->
-        <com.app.vivi.customviews.CustomRecyclerView
-            android:id="@+id/rvOuter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:nestedScrollingEnabled="false"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShopByType"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_outer" />
-
-        <View
-            android:id="@+id/view1"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@color/grey"
-            app:layout_constraintEnd_toEndOf="@+id/icShopByTypeForward"
-            app:layout_constraintStart_toStartOf="@+id/rvOuter"
-            app:layout_constraintTop_toBottomOf="@+id/rvOuter" />
-
-
-        <ImageView
-            android:id="@+id/ivBanner"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_banner"
-            app:layout_constraintEnd_toEndOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="@+id/view1"
-            app:layout_constraintTop_toBottomOf="@+id/view1" />
-
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/grey"
-            app:layout_constraintEnd_toEndOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="@+id/view1"
-            app:layout_constraintTop_toBottomOf="@+id/ivBanner" />
-
-
-        <!-- Categories (Shop wines by type) -->
-        <TextView
-            android:id="@+id/tvShopByCountry"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/shop_by_country_txt"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/icShopByCountryForward"
-            app:layout_constraintStart_toStartOf="@+id/searchView"
-            app:layout_constraintTop_toBottomOf="@id/view2" />
-
-        <ImageView
-            android:id="@+id/icShopByCountryForward"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:padding="@dimen/_5sdp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/tvShopByCountry"
-            app:layout_constraintEnd_toEndOf="@+id/searchView"
-            app:layout_constraintTop_toTopOf="@+id/tvShopByCountry"
-            app:tint="@color/colorWhite" />
-
-
-        <!-- Horizontal RecyclerView -->
-        <com.app.vivi.customviews.CustomRecyclerView
-            android:id="@+id/rvCountries"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:nestedScrollingEnabled="false"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShopByCountry"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_product_making_countries" />
-
-
-        <View
-            android:id="@+id/view3"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@color/grey"
-            app:layout_constraintEnd_toEndOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="@+id/view1"
-            app:layout_constraintTop_toBottomOf="@+id/rvCountries" />
-
-
-        <!-- Categories (Shop wines by type) -->
-        <TextView
-            android:id="@+id/tvShopByBeanType"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/shop_by_bean_txt"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/icShopByBeanTypeForward"
-            app:layout_constraintStart_toStartOf="@+id/view3"
-            app:layout_constraintTop_toBottomOf="@id/view3" />
-
-        <ImageView
-            android:id="@+id/icShopByBeanTypeForward"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:padding="@dimen/_5sdp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/tvShopByBeanType"
-            app:layout_constraintEnd_toEndOf="@+id/searchView"
-            app:layout_constraintTop_toTopOf="@+id/tvShopByBeanType"
-            app:tint="@color/colorWhite" />
-
-
-        <!-- Horizontal RecyclerView -->
-        <com.app.vivi.customviews.CustomRecyclerView
-            android:id="@+id/rvOuterShopByBeanType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:nestedScrollingEnabled="false"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShopByBeanType"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_outer" />
+    <!-- Horizontal RecyclerView -->
+    <com.app.vivi.customviews.CustomRecyclerView
+        android:id="@+id/rvOuter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopByType"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:itemCount="1"
+        android:visibility="visible"
+        tools:listitem="@layout/item_outer"/>
 
 
 
-        <View
-            android:id="@+id/view4"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/grey"
-            app:layout_constraintEnd_toEndOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="@+id/view1"
-            app:layout_constraintTop_toBottomOf="@+id/rvOuterShopByBeanType" />
-
-
-        <!-- Categories (Shop wines by type) -->
-        <TextView
-            android:id="@+id/tvShopByRegion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/shop_by_region_txt"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/icShopByRegionForward"
-            app:layout_constraintStart_toStartOf="@+id/searchView"
-            app:layout_constraintTop_toBottomOf="@id/view4" />
-
-        <ImageView
-            android:id="@+id/icShopByRegionForward"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:padding="@dimen/_5sdp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/tvShopByRegion"
-            app:layout_constraintEnd_toEndOf="@+id/searchView"
-            app:layout_constraintTop_toTopOf="@+id/tvShopByRegion"
-            app:tint="@color/colorWhite" />
-
-
-        <!-- Horizontal RecyclerView -->
-        <com.app.vivi.customviews.CustomRecyclerView
-            android:id="@+id/rvRegion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:nestedScrollingEnabled="false"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShopByRegion"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_product_making_countries" />
-
-
-
-
-        <View
-            android:id="@+id/view5"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@color/grey"
-            app:layout_constraintEnd_toEndOf="@+id/view1"
-            app:layout_constraintStart_toStartOf="@+id/view1"
-            app:layout_constraintTop_toBottomOf="@+id/rvRegion" />
-
-
-        <!-- Categories (Shop wines by type) -->
-        <TextView
-            android:id="@+id/tvShopByStyles"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/shop_by_styles_txt"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintEnd_toStartOf="@+id/icShopByStylesForward"
-            app:layout_constraintStart_toStartOf="@+id/searchView"
-            app:layout_constraintTop_toBottomOf="@id/view5" />
-
-        <ImageView
-            android:id="@+id/icShopByStylesForward"
-            android:layout_width="@dimen/_35sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:padding="@dimen/_5sdp"
-            android:contentDescription="Menu"
-            android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/tvShopByStyles"
-            app:layout_constraintEnd_toEndOf="@+id/searchView"
-            app:layout_constraintTop_toTopOf="@+id/tvShopByStyles"
-            app:tint="@color/colorWhite" />
-
-
-        <!-- Horizontal RecyclerView -->
-        <com.app.vivi.customviews.CustomRecyclerView
-            android:id="@+id/rvStyles"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:nestedScrollingEnabled="false"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShopByStyles"
-            tools:itemCount="1"
-            tools:listitem="@layout/item_product_making_countries" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
