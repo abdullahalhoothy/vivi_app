@@ -103,6 +103,8 @@
 
     <color name="chipColorEnabled">@color/grey</color>
     <color name="chipColorDisabled">#555555</color>
+    <color name="red_880000">#880000</color>
+    <color name="red_ff0000">#FF0000</color>
 
 
 </resources>

@@ -71,4 +71,5 @@
     <string name="instantly_pair_any_dish_or_wine_you_choose_txt">Instantly pair any dish or\n%1$s you choose</string>
     <string name="join_premium_txt">Join Premium</string>
     <string name="pairs_well_with_txt">Pairs well with</string>
+    <string name="search_any_txt">Search any %1$s</string>
 </resources>

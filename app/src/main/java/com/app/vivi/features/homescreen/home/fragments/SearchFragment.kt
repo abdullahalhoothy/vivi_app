@@ -30,6 +30,7 @@ class SearchFragment :
     private fun initViews(){
         binding.apply {
             tvShopByType.text = getString(R.string.shop_by_type_txt, getString(R.string.app_name))
+            searchView.queryHint = getString(R.string.search_any_txt, getString(R.string.app_name))
         }
     }
 
