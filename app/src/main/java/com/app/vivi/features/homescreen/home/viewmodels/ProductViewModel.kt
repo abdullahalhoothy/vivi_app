@@ -10,6 +10,7 @@ import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
+import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.domain.model.ErrorModel
@@ -49,8 +50,8 @@ class ProductViewModel @Inject constructor(
     val preferenceProductDetail: StateFlow<PreferenceProductResponse?> = _preferenceProductDetail
 
     // StateFlow to hold the products list
-    private val _findYourNewFavoriteProduct = MutableStateFlow<FindYourNewFavoriteProductResponse?>(null)
-    val findYourNewFavoriteProduct: StateFlow<FindYourNewFavoriteProductResponse?> = _findYourNewFavoriteProduct
+    private val _findYourNewFavoriteProduct = MutableStateFlow<List<List<NewFavoriteProduct>>?>(null)
+    val findYourNewFavoriteProduct: StateFlow<List<List<NewFavoriteProduct>>?> = _findYourNewFavoriteProduct
 
     // StateFlow to hold the products list
     private val _userReviews = MutableStateFlow<UserReviewsResponse?>(null)
@@ -173,7 +174,9 @@ class ProductViewModel @Inject constructor(
 
                 is Resource.Success -> {
                     hideLoader()
-                    _findYourNewFavoriteProduct.value = call.data
+                    val newItems: List<List<NewFavoriteProduct>> = call.data.products?.chunked(3) ?: emptyList()
+
+                    _findYourNewFavoriteProduct.value = newItems
                 }
             }
         }
