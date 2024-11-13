@@ -503,113 +503,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/inTasteCharacteristicsLayout" />
 
-
-                <!--<androidx.constraintlayout.widget.ConstraintLayout
+                <include
+                    android:id="@+id/inProductRankingLayout"
+                    layout="@layout/product_ranking_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/greyDark"
+                    android:layout_marginTop="@dimen/_30sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inReviewsLayout">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvCharacteristicsTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/taste_characteristics_txt"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/_14ssp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvCharacteristicsDesc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_2sdp"
-                        android:text="Based on 2563 user reviews"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toStartOf="@id/tvCharacteristicsTitle"
-                        app:layout_constraintTop_toBottomOf="@+id/tvCharacteristicsTitle" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvEdit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/edit_txt"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/_15ssp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvCharacteristicsDesc"
-                        app:layout_constraintEnd_toStartOf="@+id/ivEdit"
-                        app:layout_constraintTop_toTopOf="@+id/tvCharacteristicsDesc" />
-
-                    <ImageView
-                        android:id="@+id/ivEdit"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:padding="@dimen/_5sdp"
-                        android:src="@drawable/edit"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvCharacteristicsDesc"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/tvCharacteristicsDesc"
-                        app:tint="@color/colorPrimary" />
-
-                    &lt;!&ndash; Horizontal RecyclerView &ndash;&gt;
-                    <com.app.vivi.customviews.CustomRecyclerView
-                        android:id="@+id/rvCharacteristics"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        android:visibility="visible"
-                        android:layout_marginEnd="@dimen/_20sdp"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvCharacteristicsDesc"
-                        tools:itemCount="4"
-                        tools:listitem="@layout/item_characteristics" />
-
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/tvWhatPeopleTalkAbout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/_2sdp"
-                        android:text="@string/what_people_talk_about_txt"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toStartOf="@id/tvCharacteristicsTitle"
-                        app:layout_constraintTop_toBottomOf="@+id/rvCharacteristics" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:background="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="@+id/tvWhatPeopleTalkAbout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/tvWhatPeopleTalkAbout"
-                        app:layout_constraintTop_toTopOf="@+id/tvWhatPeopleTalkAbout" />
-
-
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvThoughts"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_thoughts_layout"
-                        app:layout_constraintTop_toBottomOf="@+id/tvWhatPeopleTalkAbout"
-                        app:layout_constraintStart_toStartOf="@id/tvWhatPeopleTalkAbout"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>-->
+                    app:layout_constraintTop_toBottomOf="@+id/inReviewsLayout" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
