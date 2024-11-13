@@ -75,6 +75,8 @@ class ProductDetailFragment :
             inProductRankingLayout.tvTitle.text = getString(R.string.ranking_txt, getString(R.string.app_name))
             inProductRankingLayout.tvWorldRankingTitle.text = getString(R.string.of_in_the_world_txt, getString(R.string.app_name))
             inProductRankingLayout.tvRegionRankingTitle.text = getString(R.string.of_from_txt, getString(R.string.app_name))
+
+            inPremium.tvPremiumTitle.text = getString(R.string.instantly_pair_any_dish_or_wine_you_choose_txt, getString(R.string.app_name))
         }
     }
 

@@ -66,9 +66,6 @@
     <color name="colorBlack60">#99000000</color>
     <color name="colorBlack96">#F5000000</color>
     <color name="colorYellow">#FFBB00</color>
-    <color name="colorLightYellow">#96FFBB00</color>
-    <color name="colorDarkYellow">#E2B849</color>
-    <color name="colorDarkYellow_a27001">#a27001</color>
     <color name="colorGreen">#164A0A</color>
 
     <color name="button_primary_color">#3F51B5</color>
@@ -106,8 +103,6 @@
 
     <color name="chipColorEnabled">@color/grey</color>
     <color name="chipColorDisabled">#555555</color>
-    <color name="red_880000">#880000</color>
-    <color name="red_ff0000">#FF0000</color>
 
 
 </resources>

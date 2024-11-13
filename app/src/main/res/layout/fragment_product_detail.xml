@@ -524,6 +524,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/inProductRankingLayout" />
 
 
+                <include
+                    android:id="@+id/inPremium"
+                    layout="@layout/pairs_well_with_premium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inProductProductionArea" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
