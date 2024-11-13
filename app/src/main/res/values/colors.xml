@@ -101,4 +101,8 @@
 
     <color name="colorCardBackground">#1e1e1e</color>
 
+    <color name="chipColorEnabled">@color/grey</color>
+    <color name="chipColorDisabled">#555555</color>
+
+
 </resources>
