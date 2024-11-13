@@ -59,4 +59,9 @@
     <string name="edit_txt">Edit</string>
     <string name="what_people_talk_about_txt">WHAT PEOPLE TALK ABOUT</string>
     <string name="show_more_txt">Show more</string>
+    <string name="of_in_the_world_txt">of %1$ss in</string>
+    <string name="the_world_txt">The World</string>
+    <string name="napa_valley_txt">Napa Valley</string>
+    <string name="of_from_txt">of %1$ss from</string>
+    <string name="ranking_txt">%1$s Ranking</string>
 </resources>
