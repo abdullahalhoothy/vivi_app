@@ -64,4 +64,8 @@
     <string name="napa_valley_txt">Napa Valley</string>
     <string name="of_from_txt">of %1$ss from</string>
     <string name="ranking_txt">%1$s Ranking</string>
+    <string name="californian_coffee_txt">Californian\nCoffee</string>
+    <string name="your_ratings_txt">Your ratings</string>
+    <string name="rate_every_coffee_you_try_to_build_your_personal_taste_profile_txt">Rate every coffee you try, to build your personal taste profile</string>
+    <string name="product_info_txt">California is known primarily for its Cabernet and Chardonnay, but they are also producing some really lovely Sauvignon Blancs. These wines are typically high in acidity and great with food.\n\nSauvignon Blanc in California is usually a little fruitier than it is in France, and a little lighter in bo...</string>
 </resources>
