@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp"
+    android:background="@color/greyDark">
+
+
+    <!-- Percentage Text -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/californian_coffee_txt"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Custom Circular Progress View -->
+    <com.app.vivi.customviews.CircularProgressView
+        android:id="@+id/cpWorldRanking"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle"/>
+
+
+    <!-- Percentage Text -->
+    <TextView
+        android:id="@+id/percentageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="#FFFFFF"
+        android:text="4.5"
+        app:layout_constraintBottom_toBottomOf="@+id/cpWorldRanking"
+        app:layout_constraintEnd_toEndOf="@+id/cpWorldRanking"
+        app:layout_constraintStart_toStartOf="@+id/cpWorldRanking"
+        app:layout_constraintTop_toTopOf="@+id/cpWorldRanking" />
+    <!-- Percentage Text -->
+
+    <!-- Percentage Text -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvWorldRankingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_ratings_txt"
+        android:textSize="@dimen/_11ssp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="@+id/cpWorldRanking"
+        app:layout_constraintStart_toStartOf="@+id/cpWorldRanking"
+        app:layout_constraintTop_toBottomOf="@+id/cpWorldRanking" />
+
+    <!-- Percentage Text -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvRateDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rate_every_coffee_you_try_to_build_your_personal_taste_profile_txt"
+        android:textSize="@dimen/_8ssp"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:drawableStart="@drawable/ic_info"
+        android:drawablePadding="@dimen/_5sdp"
+        android:drawableTint="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWorldRankingTitle" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/grey"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvRateDesc"
+        app:layout_constraintTop_toBottomOf="@+id/tvRateDesc"/>
+
+
+    <!-- Percentage Text -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_info_txt"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@color/colorWhite"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+</androidx.constraintlayout.widget.ConstraintLayout>
