@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductBinding
@@ -17,7 +15,7 @@ import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.extension.showShortToast
 import com.app.vivi.features.homescreen.home.adapters.PreferenceProductAdapter
-import com.app.vivi.features.homescreen.home.adapters.ProductAdapter
+import com.app.vivi.features.homescreen.home.adapters.ProductOuterFavoriteAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import com.app.vivi.helper.createRatingDescription
 import com.app.vivi.helper.cutOnText
@@ -46,8 +44,8 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         })
     }
 
-    private val mProductAdapter by lazy {
-        ProductAdapter()
+    private val mProductOuterFavoriteAdapter by lazy {
+        ProductOuterFavoriteAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -182,7 +180,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
             rvFavourite.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = mProductAdapter
+                adapter = mProductOuterFavoriteAdapter
             }
         }
     }
@@ -254,8 +252,8 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         collectWhenStarted {
             viewModel.findYourNewFavoriteProduct.collectLatest {
 
-                it?.products?.let { productList ->
-                    mProductAdapter.submitList(productList)
+                it?.let { productList ->
+                    mProductOuterFavoriteAdapter.submitList(productList)
 
                 }
             }
