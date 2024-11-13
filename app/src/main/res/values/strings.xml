@@ -68,4 +68,7 @@
     <string name="your_ratings_txt">Your ratings</string>
     <string name="rate_every_coffee_you_try_to_build_your_personal_taste_profile_txt">Rate every coffee you try, to build your personal taste profile</string>
     <string name="product_info_txt">California is known primarily for its Cabernet and Chardonnay, but they are also producing some really lovely Sauvignon Blancs. These wines are typically high in acidity and great with food.\n\nSauvignon Blanc in California is usually a little fruitier than it is in France, and a little lighter in bo...</string>
+    <string name="instantly_pair_any_dish_or_wine_you_choose_txt">Instantly pair any dish or\n%1$s you choose</string>
+    <string name="join_premium_txt">Join Premium</string>
+    <string name="pairs_well_with_txt">Pairs well with</string>
 </resources>
