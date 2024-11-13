@@ -61,7 +61,6 @@ class ProductDetailFragment :
         addObservers()
         handleBackPress()
         handleAppBar()
-        handleOnScrollChangeListener()
         animateImage()
         getUserReviewsApi()
     }
@@ -71,10 +70,16 @@ class ProductDetailFragment :
         binding.ivPreference.background = CircleDrawable(
             ContextCompat.getColor(requireContext(), R.color.red)
         )
+
+        with(binding){
+            inProductRankingLayout.tvTitle.text = getString(R.string.ranking_txt, getString(R.string.app_name))
+            inProductRankingLayout.tvWorldRankingTitle.text = getString(R.string.of_in_the_world_txt, getString(R.string.app_name))
+            inProductRankingLayout.tvRegionRankingTitle.text = getString(R.string.of_from_txt, getString(R.string.app_name))
+        }
     }
 
     private fun setupAdapters() {
-        with(binding){
+        with(binding) {
             inSummaryLayout.rvSummary.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = summaryAdapter
@@ -98,9 +103,14 @@ class ProductDetailFragment :
     }
 
     private fun initListeners() {
+
+        handleOnScrollChangeListener()
+        handleOnScrollChangeListenerForRankingLayout()
+
         binding.apply {
             inAppBar.centerImageView.setOnClickListener {
-                val action = HomeFragmentLatestDirections.actionLatestHomeFragmentToNotificationsFragment()
+                val action =
+                    HomeFragmentLatestDirections.actionLatestHomeFragmentToNotificationsFragment()
                 findNavController().navigateWithSingleTop(action)
             }
 
@@ -118,8 +128,15 @@ class ProductDetailFragment :
                 tvRecent.setOnClickListener { toggleReviewsView(false) }
             }
         }
+    }
 
+    private fun animateProgress(worldProgress: Float, regionProgress: Float) {
+        binding.inProductRankingLayout.cpWorldRanking.setProgressWithAnimation(worldProgress)
+        binding.inProductRankingLayout.cpRegionRanking.setProgressWithAnimation(worldProgress)
 
+        // Update the percentage text
+        binding.inProductRankingLayout.percentageText.text = "${(regionProgress * 100).toInt()}%"
+        binding.inProductRankingLayout.tvRegionRankingpercentage.text = "${(regionProgress * 100).toInt()}%"
     }
 
     private fun toggleSummaryView(showSummary: Boolean) {
@@ -252,6 +269,25 @@ class ProductDetailFragment :
         }
     }
 
+    private fun handleOnScrollChangeListenerForRankingLayout() {
+        binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            // Get the location of the scrollable Add to Cart button
+            val buttonLocation = IntArray(2)
+//            addToCartButtonScroll.getLocationOnScreen(buttonLocation)
+            binding.inProductRankingLayout.cpWorldRanking.getLocationOnScreen(buttonLocation)
+            animateProgress(0.8f, 0.7f)
+            // Check if the button has moved out of view
+            if (scrollY > oldScrollY && buttonLocation[1] < 0) {
+                // Button is scrolled out of view, show the fixed button
+//                binding.clFixeAddToCart.visibility = View.VISIBLE
+//                animateProgress(1f)
+            } else if (scrollY < oldScrollY && buttonLocation[1] > 0) {
+                // Button is still in view, hide the fixed button
+                animateProgress(0.8f, 0.7f)
+            }
+        }
+    }
+
     private fun updateAppBar(title: String, @ColorRes backgroundColor: Int) {
         binding.inAppBar.textView.text = title
         binding.toolbar.setBackgroundColor(
@@ -300,14 +336,14 @@ class ProductDetailFragment :
 
         collectWhenStarted {
             viewModel.userReviews.collectLatest {
-                it?.reviews.let {reviewList ->
+                it?.reviews.let { reviewList ->
                     reviewsAdapter.submitList(reviewList)
                 }
             }
         }
     }
 
-    private fun getUserReviewsApi(){
+    private fun getUserReviewsApi() {
         viewModel.getUserReviewsApi()
     }
 
