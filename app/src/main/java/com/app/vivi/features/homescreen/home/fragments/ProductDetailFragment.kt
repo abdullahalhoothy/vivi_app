@@ -56,6 +56,7 @@ class ProductDetailFragment :
         super.onViewCreated(view, savedInstanceState)
 
         setupUI()
+        handleOnScrollChangeListener()
         setupAdapters()
         initListeners()
         addObservers()
@@ -77,6 +78,7 @@ class ProductDetailFragment :
             inProductRankingLayout.tvRegionRankingTitle.text = getString(R.string.of_from_txt, getString(R.string.app_name))
 
             inPremium.tvPremiumTitle.text = getString(R.string.instantly_pair_any_dish_or_wine_you_choose_txt, getString(R.string.app_name))
+            inProductLocationDetailLayout.tvProductCount.text = "39 ${getString(R.string.app_name)}s"
         }
     }
 
@@ -105,9 +107,6 @@ class ProductDetailFragment :
     }
 
     private fun initListeners() {
-
-        handleOnScrollChangeListener()
-        handleOnScrollChangeListenerForRankingLayout()
 
         binding.apply {
             inAppBar.centerImageView.setOnClickListener {
@@ -259,7 +258,7 @@ class ProductDetailFragment :
             val buttonLocation = IntArray(2)
 //            addToCartButtonScroll.getLocationOnScreen(buttonLocation)
             binding.tvAddToCart.getLocationOnScreen(buttonLocation)
-
+            animateProgress(0.8f, 0.7f)
             // Check if the button has moved out of view
             if (scrollY > oldScrollY && buttonLocation[1] < 0) {
                 // Button is scrolled out of view, show the fixed button
@@ -281,10 +280,12 @@ class ProductDetailFragment :
             // Check if the button has moved out of view
             if (scrollY > oldScrollY && buttonLocation[1] < 0) {
                 // Button is scrolled out of view, show the fixed button
-//                binding.clFixeAddToCart.visibility = View.VISIBLE
+                binding.clFixeAddToCart.visibility = View.VISIBLE
 //                animateProgress(1f)
             } else if (scrollY < oldScrollY && buttonLocation[1] > 0) {
                 // Button is still in view, hide the fixed button
+
+                binding.clFixeAddToCart.visibility = View.GONE
                 animateProgress(0.8f, 0.7f)
             }
         }
