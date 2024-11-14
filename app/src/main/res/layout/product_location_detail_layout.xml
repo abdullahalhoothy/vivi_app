@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/greyDark"
+    android:padding="@dimen/_10sdp">
+
+    <!-- Title -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Title -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvFlavor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/borgogno_txt"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvProductCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="39 coffees"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_13ssp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toStartOf="@+id/tvRate"
+        app:layout_constraintTop_toTopOf="@+id/tvRate"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRate"/>
+
+    <com.app.vivi.customviews.CustomTextView
+        android:id="@+id/tvRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:drawableStart="@drawable/star_yellow"
+        android:drawableTint="@color/colorDarkYellow"
+        android:drawablePadding="@dimen/_5sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:text="4.5"
+        android:textColor="@color/colorBlack"
+        app:backgroundColor="@color/colorLightYellow"
+        app:cornerRadius="@dimen/_20sdp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFlavor"/>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvRatings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="86944 ratings"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_13ssp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintStart_toEndOf="@+id/tvRate"
+        app:layout_constraintTop_toTopOf="@+id/tvRate"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRate"/>
+
+
+    <com.app.vivi.customviews.CustomTextView
+        android:id="@+id/tvRegion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:drawableStart="@drawable/ic_uk_globe"
+        android:drawablePadding="@dimen/_7sdp"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="Piemonte, Italy"
+        android:textColor="@color/colorWhite"
+        app:backgroundColor="@color/grey"
+        app:cornerRadius="@dimen/_20sdp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRate"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPremiumBanner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_140sdp"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardElevation="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRegion">
+
+
+        <ImageView
+            android:id="@+id/ivBanner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_140sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_map"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inPickForYou" />
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
