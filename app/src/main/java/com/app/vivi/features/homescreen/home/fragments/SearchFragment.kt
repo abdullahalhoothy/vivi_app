@@ -1,5 +1,6 @@
 package com.app.vivi.features.homescreen.home.fragments
 
+import ProductMakingCountriesAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -8,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentSearchBinding
+import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.features.homescreen.home.adapters.search.OuterAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class SearchFragment :
@@ -19,29 +22,57 @@ class SearchFragment :
     private val viewModel by viewModels<ProductViewModel>()
 
 
+    private val productMakingCountriesAdapter by lazy {
+        ProductMakingCountriesAdapter()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        initAdapters()
+        addObservers()
         initRecyclerview()
 
     }
 
-    private fun initViews(){
+    private fun initViews() {
         binding.apply {
             tvShopByType.text = getString(R.string.shop_by_type_txt, getString(R.string.app_name))
+            tvShopByCountry.text =
+                getString(R.string.shop_by_country_txt, getString(R.string.app_name))
             searchView.queryHint = getString(R.string.search_any_txt, getString(R.string.app_name))
+        }
+
+    }
+
+    private fun initAdapters() {
+        with(binding) {
+            rvCountries.apply {
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = productMakingCountriesAdapter
+            }
+        }
+
+    }
+
+    private fun addObservers() {
+        collectWhenStarted {
+            viewModel.productMakingCountriesList.collectLatest { list ->
+                productMakingCountriesAdapter.submitList(list)
+            }
         }
     }
 
-    private fun initRecyclerview(){
+    private fun initRecyclerview() {
 //        val outerRecyclerView: RecyclerView = findViewById(R.id.outerRecyclerView)
 
         // Example data
         val data = initializeItems()
 
         val outerAdapter = OuterAdapter()
-        binding.rvOuter.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        binding.rvOuter.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         binding.rvOuter.adapter = outerAdapter
 
         outerAdapter.submitList(data)
@@ -53,11 +84,11 @@ class SearchFragment :
             listOf("Latte", "Cappuccino", "Flat White"),
             listOf("Cold Brew", "Iced Coffee", "Nitro Cold Brew"),
             listOf("Americano", "Long Black", "Red Eye"),
-            listOf("Mocha", "White Mocha", "Dark Mocha"))
+            listOf("Mocha", "White Mocha", "Dark Mocha")
+        )
     }
 
     private var items: List<List<String>> = initializeItems()
-
 
 
     override fun getMyViewModel() = viewModel

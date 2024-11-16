@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.vivi.R
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
+import com.app.vivi.data.remote.model.data.productdetailfragment.ProductMakingCountries
 import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
@@ -36,6 +37,9 @@ class ProductViewModel @Inject constructor(
     private val _characteristicsDataList = MutableStateFlow<List<CharacteristicsData>>(emptyList())
     val CharacteristicsDataList: StateFlow<List<CharacteristicsData>> = _characteristicsDataList
 
+    // StateFlow to hold the products list
+    private val _productMakingCountriesListList = MutableStateFlow<List<ProductMakingCountries>>(emptyList())
+    val productMakingCountriesList: StateFlow<List<ProductMakingCountries>> = _productMakingCountriesListList
     // StateFlow to hold the products list
     private val _thoughtsDataList = MutableStateFlow<List<ThoughtsData>>(emptyList())
     val ThoughtsDataList: StateFlow<List<ThoughtsData>> = _thoughtsDataList
@@ -74,6 +78,7 @@ class ProductViewModel @Inject constructor(
         fetchDummySummaryData()
         generateSampleProducts()
         fetchRecentList()
+        fetchProductMakingCountriesList()
     }
 
 
@@ -142,6 +147,21 @@ class ProductViewModel @Inject constructor(
             )
 
             _vintageDataList.value = topRatingData
+        }
+    }
+
+    fun fetchProductMakingCountriesList() {
+        viewModelScope.launch {
+            // Simulate fetching product list
+            val countriesList = listOf(
+                ProductMakingCountries(R.drawable.ic_bg_coffee, "United States"),
+                ProductMakingCountries(R.drawable.ic_bg_coffee, "United Kingdom"),
+                ProductMakingCountries(R.drawable.ic_bg_coffee, "France"),
+                ProductMakingCountries(R.drawable.ic_bg_coffee, "Italy"),
+                ProductMakingCountries(R.drawable.ic_bg_coffee, "Germany")
+            )
+
+            _productMakingCountriesListList.value = countriesList
         }
     }
 
