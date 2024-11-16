@@ -3,6 +3,7 @@ package com.app.vivi.features.homescreen.home.fragments
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.Button
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
@@ -26,6 +27,7 @@ import com.app.vivi.features.homescreen.home.adapters.SummaryAdapter
 import com.app.vivi.features.homescreen.home.adapters.productdetail.BestOfProductAdapter
 import com.app.vivi.features.homescreen.home.adapters.productdetail.CharacteristicsAdapter
 import com.app.vivi.features.homescreen.home.adapters.productdetail.ExpandableAdapter
+import com.app.vivi.features.homescreen.home.adapters.productdetail.VintageAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -52,6 +54,10 @@ class ProductDetailFragment :
 
     private val thoughtsAdapter by lazy {
         ExpandableAdapter()
+    }
+
+    private val vintageAdapter by lazy {
+        VintageAdapter()
     }
 
     private val mBestOfProductAdapter by lazy {
@@ -114,6 +120,11 @@ class ProductDetailFragment :
                 adapter = thoughtsAdapter
             }
 
+            inVintageLayout.rvVintage.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = vintageAdapter
+            }
+
             inBestOfProductLayout.rvYouMightInterested.apply {
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -145,7 +156,38 @@ class ProductDetailFragment :
                 tvHelpful.setOnClickListener { toggleReviewsView(true) }
                 tvRecent.setOnClickListener { toggleReviewsView(false) }
             }
+
+            // Button Click Listeners
+            inVintageLayout.btnRecent.setOnClickListener {
+                viewModel.fetchRecentList()
+                highlightButton(binding.inVintageLayout.btnRecent)
+            }
+
+            inVintageLayout.btnBestPrice.setOnClickListener {
+                viewModel.fetchBestPriceList()
+                highlightButton(inVintageLayout.btnBestPrice)
+            }
+
+            inVintageLayout.btnTopRating.setOnClickListener {
+                viewModel.fetchTopRatingList()
+                highlightButton(inVintageLayout.btnTopRating)
+            }
+
+            inVintageLayout.btnShowAllVintages.setOnClickListener {
+                // Implement your action to show all vintages
+            }
         }
+    }
+
+    private fun highlightButton(activeButton: Button) {
+        val buttons = listOf(binding.inVintageLayout.btnRecent, binding.inVintageLayout.btnBestPrice,
+            binding.inVintageLayout.btnTopRating)
+        buttons.forEach { button ->
+//            button.setBackgroundColor(resources.getColor(R.color.colorTransparent, null))
+            button.setTextColor(resources.getColor(R.color.white, null))
+        }
+//        activeButton.setBackgroundColor(resources.getColor(R.color.colorTransparent, null))
+        activeButton.setTextColor(resources.getColor(R.color.red, null))
     }
 
     private fun animateProgress(worldProgress: Float, regionProgress: Float) {
@@ -364,11 +406,16 @@ class ProductDetailFragment :
 
         collectWhenStarted {
             viewModel.bestOfProductDetail.collectLatest {
-
                 it?.let { list ->
-//                    val list = listOf(product)
                     mBestOfProductAdapter.submitList(list)
+                }
+            }
+        }
 
+        collectWhenStarted {
+            viewModel.vintageDataList.collectLatest {
+                it?.let { list ->
+                    vintageAdapter.submitList(list)
                 }
             }
         }

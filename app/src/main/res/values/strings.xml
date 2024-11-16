@@ -74,4 +74,8 @@
     <string name="search_any_txt">Search any %1$s</string>
     <string name="borgogno_txt">Borgogno</string>
     <string name="best_of_txt">Best of %1$s</string>
+    <string name="vintage_comparison_txt">Vintage comparison</string>
+    <string name="best_price_txt">Best price</string>
+    <string name="top_rating_txt">Top rating</string>
+    <string name="show_all_vintages_available_txt">Show all vintages available</string>
 </resources>
