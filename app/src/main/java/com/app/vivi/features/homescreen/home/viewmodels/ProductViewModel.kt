@@ -12,6 +12,8 @@ import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
+import com.app.vivi.data.remote.model.response.Product
+import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
@@ -50,6 +52,10 @@ class ProductViewModel @Inject constructor(
     val preferenceProductDetail: StateFlow<PreferenceProductResponse?> = _preferenceProductDetail
 
     // StateFlow to hold the products list
+    private val _bestOfProductDetail = MutableStateFlow<List<Product>?>(null)
+    val bestOfProductDetail: StateFlow<List<Product>?> = _bestOfProductDetail
+
+    // StateFlow to hold the products list
     private val _findYourNewFavoriteProduct = MutableStateFlow<List<List<NewFavoriteProduct>>?>(null)
     val findYourNewFavoriteProduct: StateFlow<List<List<NewFavoriteProduct>>?> = _findYourNewFavoriteProduct
 
@@ -62,6 +68,7 @@ class ProductViewModel @Inject constructor(
         fetchProductList()
         fetchThoughtsList()
         fetchDummySummaryData()
+        generateSampleProducts()
     }
 
 
@@ -111,6 +118,116 @@ class ProductViewModel @Inject constructor(
                 )
             )
             _summaryList.value = summaryData
+        }
+    }
+
+
+    fun generateSampleProducts() {
+        viewModelScope.launch {
+            val list = listOf(
+                Product(
+                    id = "1",
+                    name = "Product A",
+                    description = "Description of Product A",
+                    tagline = "Best product A",
+                    producturl = "http://example.com/productA",
+                    imageurl = "http://example.com/imageA.jpg",
+                    ratingtext = "Excellent",
+                    ratingvalue = "4.5",
+                    averagerating = "4.5",
+                    totalratings = "100",
+                    discountedprice = "10.99",
+                    discountpercentage = "20",
+                    originalprice = "13.99",
+                    city = "City A",
+                    country = "Country A",
+                    countryflagurl = "http://example.com/flagA.png",
+                    userrating = UserRating(
+                        rating = "4.5",
+                        review = "Great product!",
+                        username = "User1",
+                        description = "User1 review description",
+                        userimageurl = "http://example.com/user1.png"
+                    )
+                ),
+                Product(
+                    id = "2",
+                    name = "Product B",
+                    description = "Description of Product B",
+                    tagline = "Best product B",
+                    producturl = "http://example.com/productB",
+                    imageurl = "http://example.com/imageB.jpg",
+                    ratingtext = "Very Good",
+                    ratingvalue = "4.2",
+                    averagerating = "4.2",
+                    totalratings = "150",
+                    discountedprice = "15.99",
+                    discountpercentage = "10",
+                    originalprice = "17.99",
+                    city = "City B",
+                    country = "Country B",
+                    countryflagurl = "http://example.com/flagB.png",
+                    userrating = UserRating(
+                        rating = "4.2",
+                        review = "Very good product!",
+                        username = "User2",
+                        description = "User2 review description",
+                        userimageurl = "http://example.com/user2.png"
+                    )
+                ),
+                Product(
+                    id = "1",
+                    name = "Product A",
+                    description = "Description of Product A",
+                    tagline = "Best product A",
+                    producturl = "http://example.com/productA",
+                    imageurl = "http://example.com/imageA.jpg",
+                    ratingtext = "Excellent",
+                    ratingvalue = "4.5",
+                    averagerating = "4.5",
+                    totalratings = "100",
+                    discountedprice = "10.99",
+                    discountpercentage = "20",
+                    originalprice = "13.99",
+                    city = "City A",
+                    country = "Country A",
+                    countryflagurl = "http://example.com/flagA.png",
+                    userrating = UserRating(
+                        rating = "4.5",
+                        review = "Great product!",
+                        username = "User1",
+                        description = "User1 review description",
+                        userimageurl = "http://example.com/user1.png"
+                    )
+                ),
+                Product(
+                    id = "2",
+                    name = "Product B",
+                    description = "Description of Product B",
+                    tagline = "Best product B",
+                    producturl = "http://example.com/productB",
+                    imageurl = "http://example.com/imageB.jpg",
+                    ratingtext = "Very Good",
+                    ratingvalue = "4.2",
+                    averagerating = "4.2",
+                    totalratings = "150",
+                    discountedprice = "15.99",
+                    discountpercentage = "10",
+                    originalprice = "17.99",
+                    city = "City B",
+                    country = "Country B",
+                    countryflagurl = "http://example.com/flagB.png",
+                    userrating = UserRating(
+                        rating = "4.2",
+                        review = "Very good product!",
+                        username = "User2",
+                        description = "User2 review description",
+                        userimageurl = "http://example.com/user2.png"
+                    )
+                )
+            )
+
+            _bestOfProductDetail.value = list
         }
     }
 
