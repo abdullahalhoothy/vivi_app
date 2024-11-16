@@ -35,7 +35,8 @@ ENV CONTAINER=true \
 WORKDIR /root/build
 
 # Clone the specific branch from GitHub
-RUN git clone -b main https://github.com/rashid1428/vivi_app.git /root/build
+#RUN git clone -b main https://github.com/rashid1428/vivi_app.git /root/build
+RUN git clone -b main https://github.com/abdullahalhoothy/vivi_app.git /root/build
 
 # Set permissions for the Gradle wrapper to make it executable
 RUN chmod +x /root/build/gradlew
