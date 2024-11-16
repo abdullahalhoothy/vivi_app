@@ -73,4 +73,5 @@
     <string name="pairs_well_with_txt">Pairs well with</string>
     <string name="search_any_txt">Search any %1$s</string>
     <string name="borgogno_txt">Borgogno</string>
+    <string name="best_of_txt">Best of %1$s</string>
 </resources>

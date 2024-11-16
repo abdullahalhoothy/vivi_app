@@ -20,8 +20,10 @@ import com.app.vivi.databinding.FragmentProductDetailBinding
 import com.app.vivi.dialog.rating.RatingDialogHelper
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.navigateWithSingleTop
+import com.app.vivi.extension.showShortToast
 import com.app.vivi.features.homescreen.home.adapters.ReviewsAdapter
 import com.app.vivi.features.homescreen.home.adapters.SummaryAdapter
+import com.app.vivi.features.homescreen.home.adapters.productdetail.BestOfProductAdapter
 import com.app.vivi.features.homescreen.home.adapters.productdetail.CharacteristicsAdapter
 import com.app.vivi.features.homescreen.home.adapters.productdetail.ExpandableAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
@@ -52,6 +54,14 @@ class ProductDetailFragment :
         ExpandableAdapter()
     }
 
+    private val mBestOfProductAdapter by lazy {
+        BestOfProductAdapter(onItemClick = {
+//            navigateToProductDetailFragment()
+        }, onDiscountButtonClick = {
+            "Discount Button Clicked".showShortToast(requireContext())
+        })
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -79,6 +89,7 @@ class ProductDetailFragment :
 
             inPremium.tvPremiumTitle.text = getString(R.string.instantly_pair_any_dish_or_wine_you_choose_txt, getString(R.string.app_name))
             inProductLocationDetailLayout.tvProductCount.text = "39 ${getString(R.string.app_name)}s"
+            inBestOfProductLayout.tvYouMightInterested.text = getString(R.string.best_of_txt, getString(R.string.app_name))
         }
     }
 
@@ -101,6 +112,12 @@ class ProductDetailFragment :
             inTasteCharacteristicsLayout.rvThoughts.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = thoughtsAdapter
+            }
+
+            inBestOfProductLayout.rvYouMightInterested.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = mBestOfProductAdapter
             }
         }
 
@@ -341,6 +358,17 @@ class ProductDetailFragment :
             viewModel.userReviews.collectLatest {
                 it?.reviews.let { reviewList ->
                     reviewsAdapter.submitList(reviewList)
+                }
+            }
+        }
+
+        collectWhenStarted {
+            viewModel.bestOfProductDetail.collectLatest {
+
+                it?.let { list ->
+//                    val list = listOf(product)
+                    mBestOfProductAdapter.submitList(list)
+
                 }
             }
         }
