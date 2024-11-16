@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#121212">
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="@string/vintage_comparison_txt"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_15ssp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Button Group -->
+    <LinearLayout
+        android:id="@+id/btn_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_recent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_txt"
+            android:textAllCaps="false"
+            android:textAlignment="textStart"
+            android:backgroundTint="@color/colorTransparent"
+            android:textColor="@color/red" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_best_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/best_price_txt"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/colorTransparent"
+            android:textColor="@color/colorWhite" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_top_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/top_rating_txt"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/colorTransparent"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvVintage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_vintage"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/btn_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_show_all_vintages"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/show_all_vintages_available_txt"
+        android:backgroundTint="@color/colorTransparent"
+        android:textColor="@color/colorWhite"
+        android:gravity="start|center_vertical"
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/rvVintage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
