@@ -7,6 +7,7 @@ import com.app.vivi.R
 import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
+import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
@@ -38,6 +39,9 @@ class ProductViewModel @Inject constructor(
     // StateFlow to hold the products list
     private val _thoughtsDataList = MutableStateFlow<List<ThoughtsData>>(emptyList())
     val ThoughtsDataList: StateFlow<List<ThoughtsData>> = _thoughtsDataList
+    // StateFlow to hold the products list
+    private val _vintageDataList = MutableStateFlow<List<Vintage>>(emptyList())
+    val vintageDataList: StateFlow<List<Vintage>> = _vintageDataList
 
     // StateFlow to hold the summary list
     private val _summaryList = MutableStateFlow<List<SummaryData>>(emptyList())
@@ -69,6 +73,7 @@ class ProductViewModel @Inject constructor(
         fetchThoughtsList()
         fetchDummySummaryData()
         generateSampleProducts()
+        fetchRecentList()
     }
 
 
@@ -97,6 +102,46 @@ class ProductViewModel @Inject constructor(
                 ThoughtsData("Additional Item 1", "Description for additional item 1")
             )
             _thoughtsDataList.value = productData
+        }
+    }
+
+
+    fun fetchRecentList() {
+        viewModelScope.launch {
+            // Simulate fetching product list
+             val recentData = listOf(
+                Vintage("2020", "4.0", "344 ratings"),
+                Vintage("2019", "4.1", "886 ratings"),
+                Vintage("2018", "4.1", "1769 ratings"),
+                Vintage("2017", "4.0", "514 ratings"),
+                Vintage("2016", "4.1", "1218 ratings")
+            )
+
+            _vintageDataList.value = recentData
+        }
+    }
+    fun fetchBestPriceList() {
+        viewModelScope.launch {
+            // Simulate fetching product list
+
+            val bestPriceData = listOf(
+                Vintage("2019", "4.3", "786 ratings"),
+                Vintage("2018", "4.2", "1569 ratings")
+            )
+
+            _vintageDataList.value = bestPriceData
+        }
+    }
+    fun fetchTopRatingList() {
+        viewModelScope.launch {
+            // Simulate fetching product list
+
+            val topRatingData = listOf(
+                Vintage("2020", "4.5", "124 ratings"),
+                Vintage("2018", "4.6", "1299 ratings")
+            )
+
+            _vintageDataList.value = topRatingData
         }
     }
 
