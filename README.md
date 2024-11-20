@@ -20,11 +20,9 @@ Terminal
 -> docker build -t your-image-name .
 
 Run the Container: First, you can run a temporary container to access the filesystem:
-
 -> docker run --rm -it --name temp-container your-image-name /bin/bash
 
 To get container id
-
 -> hostname
 
 run below command in new terminal to Copy Apk to new location
