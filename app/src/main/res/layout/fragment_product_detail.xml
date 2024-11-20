@@ -159,9 +159,9 @@
             android:id="@+id/card_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
             app:cardCornerRadius="@dimen/_13sdp"
-            app:cardElevation="@dimen/_8sdp"
-            android:background="@color/colorWhite">
+            app:cardElevation="@dimen/_8sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -484,6 +484,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/ivBanner" />
 
                 <include
+                    android:id="@+id/inTasteCharacteristicsLayout"
+                    layout="@layout/taste_characteristics_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inSummaryLayout" />
+
+                <include
                     android:id="@+id/inReviewsLayout"
                     layout="@layout/reviews_layout"
                     android:layout_width="match_parent"
@@ -491,8 +501,70 @@
                     android:layout_marginTop="@dimen/_30sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inSummaryLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/inTasteCharacteristicsLayout" />
+
+                <include
+                    android:id="@+id/inProductRankingLayout"
+                    layout="@layout/product_ranking_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inReviewsLayout" />
+
+                <include
+                    android:id="@+id/inProductProductionArea"
+                    layout="@layout/product_production_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inProductRankingLayout" />
+
+
+                <include
+                    android:id="@+id/inPremium"
+                    layout="@layout/pairs_well_with_premium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inProductProductionArea" />
+
+                <include
+                    android:id="@+id/inProductLocationDetailLayout"
+                    layout="@layout/product_location_detail_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inPremium" />
+
+                <include
+                    android:id="@+id/inBestOfProductLayout"
+                    layout="@layout/best_of_product_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inProductLocationDetailLayout" />
+
+
+                <include
+                    android:id="@+id/inVintageLayout"
+                    layout="@layout/vintage_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/inBestOfProductLayout" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -506,13 +578,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:visibility="gone"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhite"
+        android:visibility="gone">
 
         <com.app.vivi.customviews.CustomTextView
             android:id="@+id/tvAddToCartFixed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:gravity="center"
             android:padding="@dimen/_5sdp"
             android:text="@string/add_to_cart_txt"
@@ -520,28 +596,24 @@
             android:textSize="@dimen/_15ssp"
             app:backgroundColor="@color/colorBlue00845f"
             app:cornerRadius="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivFavorite"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageView
             android:id="@+id/ivFavorite"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/rectangle_round_solid_white_stroke_grey"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/ic_favorite_outline"
-            android:background="@drawable/rectangle_round_solid_white_stroke_grey"
-            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAddToCartFixed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvAddToCartFixed"
-            app:layout_constraintTop_toTopOf="@+id/tvAddToCartFixed"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAddToCartFixed"/>
+            app:layout_constraintTop_toTopOf="@+id/tvAddToCartFixed" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
