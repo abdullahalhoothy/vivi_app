@@ -405,7 +405,7 @@ class ProductDetailFragment :
         }
 
         collectWhenStarted {
-            viewModel.bestOfProductDetail.collectLatest {
+            viewModel.bestOfProductsDetail.collectLatest {
                 it?.let { list ->
                     mBestOfProductAdapter.submitList(list)
                 }
