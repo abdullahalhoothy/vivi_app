@@ -29,5 +29,4 @@ data class UserRating(
     val username: String,
     val description: String,
     val userimageurl: String
-
 )

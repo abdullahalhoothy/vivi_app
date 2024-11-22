@@ -32,11 +32,11 @@ fun ImageView.roundLeftCorners(radius: Float) {
 
 
 // Extension function to load image from URL into ImageView with caching strategy
-fun ImageView.loadImageWithCache(url: String, placeHolder: Int, cacheStrategy: DiskCacheStrategy = DiskCacheStrategy.ALL) {
+fun ImageView.loadImageWithCache(url: String, cacheStrategy: DiskCacheStrategy = DiskCacheStrategy.ALL) {
     Glide.with(this.context)
         .load(url) // URL of the image
         .apply(RequestOptions().diskCacheStrategy(cacheStrategy)) // Apply cache strategy
-        .error(placeHolder) // Set a default image in case of an error
-        .fallback(placeHolder) // Set a placeholder image if the URL is null
+        .error(R.drawable.ic_bottle) // Set a default image in case of an error
+        .fallback(R.drawable.ic_bottle) // Set a placeholder image if the URL is null
         .into(this) // Load into the ImageView
 }

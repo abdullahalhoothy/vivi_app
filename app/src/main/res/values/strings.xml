@@ -79,4 +79,5 @@
     <string name="best_price_txt">Best price</string>
     <string name="top_rating_txt">Top rating</string>
     <string name="show_all_vintages_available_txt">Show all vintages available</string>
+    <string name="save_txt">Save</string>
 </resources>
