@@ -11,10 +11,9 @@ import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
-import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
-import com.app.vivi.data.remote.model.response.Product
+import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.domain.model.ErrorModel
@@ -60,8 +59,8 @@ class ProductViewModel @Inject constructor(
     val preferenceProductDetail: StateFlow<PreferenceProductResponse?> = _preferenceProductDetail
 
     // StateFlow to hold the products list
-    private val _bestOfProductDetail = MutableStateFlow<List<Product>?>(null)
-    val bestOfProductDetail: StateFlow<List<Product>?> = _bestOfProductDetail
+    private val _bestOfProductsDetail = MutableStateFlow<List<products>?>(null)
+    val bestOfProductsDetail: StateFlow<List<products>?> = _bestOfProductsDetail
 
     // StateFlow to hold the products list
     private val _findYourNewFavoriteProduct = MutableStateFlow<List<List<NewFavoriteProduct>>?>(null)
@@ -190,7 +189,7 @@ class ProductViewModel @Inject constructor(
     fun generateSampleProducts() {
         viewModelScope.launch {
             val list = listOf(
-                Product(
+                products(
                     id = "1",
                     name = "Product A",
                     description = "Description of Product A",
@@ -215,7 +214,7 @@ class ProductViewModel @Inject constructor(
                         userimageurl = "http://example.com/user1.png"
                     )
                 ),
-                Product(
+                products(
                     id = "2",
                     name = "Product B",
                     description = "Description of Product B",
@@ -240,7 +239,7 @@ class ProductViewModel @Inject constructor(
                         userimageurl = "http://example.com/user2.png"
                     )
                 ),
-                Product(
+                products(
                     id = "1",
                     name = "Product A",
                     description = "Description of Product A",
@@ -265,7 +264,7 @@ class ProductViewModel @Inject constructor(
                         userimageurl = "http://example.com/user1.png"
                     )
                 ),
-                Product(
+                products(
                     id = "2",
                     name = "Product B",
                     description = "Description of Product B",
@@ -292,7 +291,7 @@ class ProductViewModel @Inject constructor(
                 )
             )
 
-            _bestOfProductDetail.value = list
+            _bestOfProductsDetail.value = list
         }
     }
 
