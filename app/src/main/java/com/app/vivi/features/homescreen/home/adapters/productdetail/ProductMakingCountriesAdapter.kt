@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
-import com.app.vivi.data.remote.model.data.productdetailfragment.ProductMakingCountries
 import com.app.vivi.data.remote.model.response.searchfragment.Country
 import com.app.vivi.databinding.ItemProductMakingCountriesBinding
 
