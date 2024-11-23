@@ -28,10 +28,15 @@ interface ApiService {
         @Body body: JsonObject
     ): Response<JsonObject>
 
+    @POST
+    suspend fun postRequest(
+        @Url url: String,
+        @Body body: JsonObject
+    ): Response<JsonObject>
+
 
     @POST(ApiNames.LOGIN)
     suspend fun login(
-        @Header(HeadersNames.EMAIL) email: String,
         @Body body: LoginRequest
     ): Response<LoginResponse>
 
