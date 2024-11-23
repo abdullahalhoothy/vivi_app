@@ -36,8 +36,9 @@ class SearchFragment :
         initViews()
         initAdapters()
         addObservers()
-//        initRecyclerview()
         getShopByTypes()
+        getShopByCoffeeBeanTypes()
+        getShopByCountries()
 
     }
 
@@ -68,8 +69,19 @@ class SearchFragment :
 
     private fun addObservers() {
         collectWhenStarted {
-            viewModel.productMakingCountriesList.collectLatest { list ->
-                productMakingCountriesAdapter.submitList(list)
+            viewModel.shopByCoffeeBeanTypes.collectLatest { it ->
+                it?.coffeeBeanTypes?.let { list ->
+//                    productMakingCountriesAdapter.submitList(list)
+
+                }
+            }
+        }
+
+        collectWhenStarted {
+            viewModel.shopByCountries.collectLatest { it ->
+                it?.countries?.let { list ->
+                    productMakingCountriesAdapter.submitList(list)
+                }
             }
         }
 
@@ -80,32 +92,16 @@ class SearchFragment :
         }
     }
 
-    private fun initRecyclerview() {
-//        val outerRecyclerView: RecyclerView = findViewById(R.id.outerRecyclerView)
-
-        // Example data
-        val data = initializeItems()
-
-        val outerAdapter = OuterAdapter()
-        binding.rvOuter.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        binding.rvOuter.adapter = outerAdapter
-
-//        outerAdapter.submitList(data)
-    }
-
-    private fun initializeItems(): List<List<String>> {
-        return listOf(
-            listOf("Espresso", "Double Espresso", "Ristretto"),
-            listOf("Latte", "Cappuccino", "Flat White"),
-            listOf("Cold Brew", "Iced Coffee", "Nitro Cold Brew"),
-            listOf("Americano", "Long Black", "Red Eye"),
-            listOf("Mocha", "White Mocha", "Dark Mocha")
-        )
-    }
-
     private fun getShopByTypes(){
         viewModel.getShopByCoffeeTypes()
+    }
+
+    private fun getShopByCoffeeBeanTypes(){
+        viewModel.getShopByCoffeeBeanTypes()
+    }
+
+    private fun getShopByCountries(){
+        viewModel.getShopByCountries()
     }
 
 
