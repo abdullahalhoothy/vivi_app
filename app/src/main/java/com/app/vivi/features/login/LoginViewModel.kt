@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
@@ -84,15 +85,45 @@ class LoginViewModel @Inject constructor(
                 _passwordErrorFlow.emit("Password is required")
                 return@launch
             }
-            _channel.send(NavigationEvents.NavigateToMainScreen())
-            /*showLoader()
+            showLoader()
             when (val call = loginRepo.login(
-                email = email,
-                loginRequest = LoginRequest(password)
+                loginRequest = LoginRequest(email, password)
             )) {
                 is Resource.Error -> {
                     hideLoader()
-                    showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    if (call.code == 401) {
+                        call.message.let { errorBody ->
+                            try {
+                                // Convert ResponseBody to a JSON string
+                                val errorBodyString = errorBody.toString()
+
+                                // Check if the errorBodyString is empty
+                                if (errorBodyString.isNotEmpty()) {
+                                    // Parse the string into a JSONObject
+                                    val json = JSONObject(errorBodyString)
+
+                                    // Extract the "detail" field
+                                    val detailMessage = json.getString("detail")
+                                    showError(
+                                        ErrorModel(
+                                            title = call.title,
+                                            message = detailMessage,
+                                            call.code
+                                        )
+                                    )
+                                } else {
+                                    println("Error body is empty.")
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                println("Failed to parse error body.")
+                            }
+                        } ?: run {
+                            println("Error body is null")
+                        }
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
                 }
 
                 is Resource.Success -> {
@@ -101,7 +132,7 @@ class LoginViewModel @Inject constructor(
                     cacheRepo.saveLoginResponse(call.data)
                     _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
                 }
-            }*/
+            }
         }
     }
 
@@ -122,8 +153,10 @@ class LoginViewModel @Inject constructor(
     }
 
     sealed class NavigationEvents {
-        data class NavigateToMainScreen(val loginResponse: LoginResponse? = null) : NavigationEvents()
+        data class NavigateToMainScreen(val loginResponse: LoginResponse? = null) :
+            NavigationEvents()
     }
+
     sealed class NavigationLoginEmailEvents {
         data class NavigateToLoginScreen(val login: String) : NavigationLoginEmailEvents()
     }
