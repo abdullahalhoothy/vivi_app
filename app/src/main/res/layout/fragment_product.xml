@@ -50,8 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPickedForYou" />
@@ -63,7 +61,6 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:scaleType="fitXY"
             android:visibility="gone"
-            tools:visibility="visible"
             android:src="@drawable/ic_banner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,8 +73,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_15sdp"
-            android:visibility="gone"
-            tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivBanner" />

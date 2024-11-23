@@ -163,8 +163,8 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
             tvRatingDescription.text = htmlContent
             tvRatingUser.text = product?.userrating?.userName
 
-            "https://drive.google.com/uc?export=view&id=11oOuA4j9MlB1XGLN2uKIuZCeklrFzqZO".let { ivBottle.loadImageWithCache(it) }
-//            product?.producturl?.let { ivBottle.loadImageWithCache(it) }
+//            "https://drive.google.com/uc?export=view&id=11oOuA4j9MlB1XGLN2uKIuZCeklrFzqZO".let { ivBottle.loadImageWithCache(it) }
+            product?.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
         }
     }
 
@@ -239,6 +239,11 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                     // For example, you can clear the views or set default values
                     clearViews(binding.inJustForYou)
                 }
+
+                //Loading Banner image
+                product?.bannerImageUrl?.let {
+                    binding.ivBanner.visibility = View.VISIBLE
+                    binding.ivBanner.loadImageWithCache(it, R.drawable.ic_banner) }
             }
         }
 
