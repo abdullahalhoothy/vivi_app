@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.vivi.data.remote.model.response.searchfragment.ProductType
 import com.app.vivi.databinding.ItemOuterBinding
 
 class OuterAdapter : RecyclerView.Adapter<OuterAdapter.OuterViewHolder>() {
 
-    private var items: List<List<String>> = emptyList()
+    private var items: List<List<ProductType>> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OuterViewHolder {
         val binding = ItemOuterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,7 +24,7 @@ class OuterAdapter : RecyclerView.Adapter<OuterAdapter.OuterViewHolder>() {
     override fun getItemCount(): Int = items.size
 
     // Update the list with DiffUtil
-    fun submitList(newItems: List<List<String>>) {
+    fun submitList(newItems: List<List<ProductType>>) {
         val diffCallback = OuterDiffCallback(items, newItems)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         items = newItems
@@ -31,7 +32,7 @@ class OuterAdapter : RecyclerView.Adapter<OuterAdapter.OuterViewHolder>() {
     }
 
     inner class OuterViewHolder(private val binding: ItemOuterBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(innerItems: List<String>) {
+        fun bind(innerItems: List<ProductType>) {
             val innerAdapter = InnerAdapter()
             binding.rvInner.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
             binding.rvInner.adapter = innerAdapter
@@ -42,8 +43,8 @@ class OuterAdapter : RecyclerView.Adapter<OuterAdapter.OuterViewHolder>() {
 
     // DiffUtil Callback for OuterAdapter
     class OuterDiffCallback(
-        private val oldList: List<List<String>>,
-        private val newList: List<List<String>>
+        private val oldList: List<List<ProductType>>,
+        private val newList: List<List<ProductType>>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size

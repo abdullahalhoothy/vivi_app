@@ -7,6 +7,7 @@ import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.data.remote.model.response.LoginResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
+import com.app.vivi.data.remote.model.response.searchfragment.ShopByTypeResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
 import retrofit2.http.Body
@@ -50,4 +51,8 @@ interface ApiService {
     @GET(ApiNames.USER_REVIEWS)
     suspend fun getUserReviews(
     ): Response<UserReviewsResponse>
+
+    @GET(ApiNames.SHOP_BY_COFFEE_TYPES_API)
+    suspend fun getShopByCoffeeTypes(
+    ): Response<ShopByTypeResponse>
 }
