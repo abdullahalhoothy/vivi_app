@@ -7,7 +7,8 @@
     android:layout_marginTop="@dimen/_5sdp"
     android:layout_marginEnd="@dimen/_10sdp"
     android:background="@drawable/rectangle_round_black_4dp"
-    android:backgroundTint="@color/red_880000">
+    android:backgroundTint="@color/red_880000"
+    android:id="@+id/clMain">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView"

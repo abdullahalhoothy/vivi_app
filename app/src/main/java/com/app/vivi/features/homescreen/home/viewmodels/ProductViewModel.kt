@@ -16,6 +16,7 @@ import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
+import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanType
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
@@ -78,8 +79,8 @@ class ProductViewModel @Inject constructor(
     private val _shopByType = MutableStateFlow<List<List<ProductType>>?>(null)
     val shopByType: StateFlow<List<List<ProductType>>?> = _shopByType
     // StateFlow to hold the products list
-    private val _shopByCoffeeBeanTypes = MutableStateFlow<CoffeeBeanTypesResponse?>(null)
-    val shopByCoffeeBeanTypes: StateFlow<CoffeeBeanTypesResponse?> = _shopByCoffeeBeanTypes
+    private val _shopByCoffeeBeanTypes = MutableStateFlow<List<List<CoffeeBeanType>>?>(null)
+    val shopByCoffeeBeanTypes: StateFlow<List<List<CoffeeBeanType>>?> = _shopByCoffeeBeanTypes
     // StateFlow to hold the products list
     private val _shopByCountries = MutableStateFlow<CountriesResponse?>(null)
     val shopByCountries: StateFlow<CountriesResponse?> = _shopByCountries
@@ -435,7 +436,8 @@ class ProductViewModel @Inject constructor(
 
                 is Resource.Success -> {
                     hideLoader()
-                    _shopByCoffeeBeanTypes.value = call.data
+                    val newItems: List<List<CoffeeBeanType>> = call.data.coffeeBeanTypes?.chunked(3) ?: emptyList()
+                    _shopByCoffeeBeanTypes.value = newItems
                 }
             }
         }
