@@ -26,13 +26,18 @@ class SearchFragment :
         ProductMakingCountriesAdapter()
     }
 
+    private val outerAdapter by lazy {
+        OuterAdapter()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
         initAdapters()
         addObservers()
-        initRecyclerview()
+//        initRecyclerview()
+        getShopByTypes()
 
     }
 
@@ -52,6 +57,11 @@ class SearchFragment :
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = productMakingCountriesAdapter
             }
+
+            rvOuter.apply {
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = outerAdapter
+            }
         }
 
     }
@@ -60,6 +70,12 @@ class SearchFragment :
         collectWhenStarted {
             viewModel.productMakingCountriesList.collectLatest { list ->
                 productMakingCountriesAdapter.submitList(list)
+            }
+        }
+
+        collectWhenStarted {
+            viewModel.shopByType.collectLatest { list ->
+                list?.let { outerAdapter.submitList(it) }
             }
         }
     }
@@ -75,7 +91,7 @@ class SearchFragment :
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         binding.rvOuter.adapter = outerAdapter
 
-        outerAdapter.submitList(data)
+//        outerAdapter.submitList(data)
     }
 
     private fun initializeItems(): List<List<String>> {
@@ -88,7 +104,9 @@ class SearchFragment :
         )
     }
 
-    private var items: List<List<String>> = initializeItems()
+    private fun getShopByTypes(){
+        viewModel.getShopByCoffeeTypes()
+    }
 
 
     override fun getMyViewModel() = viewModel

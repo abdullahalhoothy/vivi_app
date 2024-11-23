@@ -6,6 +6,7 @@ import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
+import com.app.vivi.data.remote.model.response.searchfragment.ShopByTypeResponse
 import com.app.vivi.domain.repo.CacheRepo
 import com.app.vivi.domain.repo.ProductRepo
 import javax.inject.Inject
@@ -30,6 +31,10 @@ class ProductRepoImpl @Inject constructor(apiService: ApiService, val cacheRepo:
 
     override suspend fun getUserReviews(): Resource<UserReviewsResponse> {
         return safeApiCall { apiService.getUserReviews() }
+    }
+
+    override suspend fun getShopByCoffeeTypes(): Resource<ShopByTypeResponse> {
+        return safeApiCall { apiService.getShopByCoffeeTypes() }
     }
 
 
