@@ -39,6 +39,7 @@ class SearchFragment :
         getShopByTypes()
         getShopByCoffeeBeanTypes()
         getShopByCountries()
+        getShopByRegions()
 
     }
 
@@ -90,6 +91,12 @@ class SearchFragment :
                 list?.let { outerAdapter.submitList(it) }
             }
         }
+
+        collectWhenStarted {
+            viewModel.shopByRegion.collectLatest { list ->
+
+            }
+        }
     }
 
     private fun getShopByTypes(){
@@ -102,6 +109,10 @@ class SearchFragment :
 
     private fun getShopByCountries(){
         viewModel.getShopByCountries()
+    }
+
+    private fun getShopByRegions(){
+        viewModel.getShopByRegions()
     }
 
 
