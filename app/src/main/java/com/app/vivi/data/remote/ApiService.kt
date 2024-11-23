@@ -9,6 +9,7 @@ import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
+import com.app.vivi.data.remote.model.response.searchfragment.ShopByRegionResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ShopByTypeResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
@@ -65,4 +66,8 @@ interface ApiService {
     @GET(ApiNames.SHOP_BY_COUNTRIES_API)
     suspend fun getShopByCountries(
     ): Response<CountriesResponse>
+
+    @GET(ApiNames.SHOP_BY_REGIONS_API)
+    suspend fun getShopByRegions(
+    ): Response<ShopByRegionResponse>
 }
