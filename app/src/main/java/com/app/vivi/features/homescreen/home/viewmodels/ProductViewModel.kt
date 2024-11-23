@@ -16,6 +16,8 @@ import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
+import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
+import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
 import com.app.vivi.data.remote.model.response.searchfragment.ShopByTypeResponse
 import com.app.vivi.domain.model.ErrorModel
@@ -74,6 +76,12 @@ class ProductViewModel @Inject constructor(
     // StateFlow to hold the products list
     private val _shopByType = MutableStateFlow<List<List<ProductType>>?>(null)
     val shopByType: StateFlow<List<List<ProductType>>?> = _shopByType
+    // StateFlow to hold the products list
+    private val _shopByCoffeeBeanTypes = MutableStateFlow<CoffeeBeanTypesResponse?>(null)
+    val shopByCoffeeBeanTypes: StateFlow<CoffeeBeanTypesResponse?> = _shopByCoffeeBeanTypes
+    // StateFlow to hold the products list
+    private val _shopByCountries = MutableStateFlow<CountriesResponse?>(null)
+    val shopByCountries: StateFlow<CountriesResponse?> = _shopByCountries
 
     init {
         // Simulate loading data
@@ -404,6 +412,46 @@ class ProductViewModel @Inject constructor(
                     hideLoader()
                     val newItems: List<List<ProductType>> = call.data.products?.chunked(3) ?: emptyList()
                     _shopByType.value = newItems
+                }
+            }
+        }
+    }
+
+    fun getShopByCoffeeBeanTypes() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getShopByCoffeeBeanTypes()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _shopByCoffeeBeanTypes.value = call.data
+                }
+            }
+        }
+    }
+
+    fun getShopByCountries() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getShopByCountries()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _shopByCountries.value = call.data
                 }
             }
         }
