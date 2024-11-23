@@ -18,7 +18,6 @@
         android:background="@drawable/rectangle_left_round_black_stroke_4dp"
         android:clipToOutline="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_bg_coffee"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

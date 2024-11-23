@@ -180,6 +180,48 @@
             app:layout_constraintStart_toStartOf="@+id/view1"
             app:layout_constraintTop_toBottomOf="@+id/rvCountries" />
 
+
+        <!-- Categories (Shop wines by type) -->
+        <TextView
+            android:id="@+id/tvShopByBeanType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/shop_by_bean_txt"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
+
+        <ImageView
+            android:id="@+id/icShopByBeanTypeForward"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:contentDescription="Menu"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@+id/tvShopByBeanType"
+            app:layout_constraintEnd_toEndOf="@+id/searchView"
+            app:layout_constraintTop_toTopOf="@+id/tvShopByBeanType"
+            app:tint="@color/colorWhite" />
+
+
+        <!-- Horizontal RecyclerView -->
+        <com.app.vivi.customviews.CustomRecyclerView
+            android:id="@+id/rvOuterShopByBeanType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopByBeanType"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_outer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 
