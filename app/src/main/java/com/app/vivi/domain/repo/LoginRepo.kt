@@ -6,6 +6,6 @@ import com.app.vivi.data.remote.model.response.LoginResponse
 
 interface LoginRepo {
 
-    suspend fun login(email: String, loginRequest: LoginRequest): Resource<LoginResponse>
+    suspend fun login(loginRequest: LoginRequest): Resource<LoginResponse>
 
 }

@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class LoginRepoImpl @Inject constructor(apiService: ApiService) : LoginRepo,
     BaseRepo(apiService) {
-    override suspend fun login(email: String, loginRequest: LoginRequest): Resource<LoginResponse> {
-        return safeApiCall(email, loginRequest, ApiNames.LOGIN)
+    override suspend fun login(loginRequest: LoginRequest): Resource<LoginResponse> {
+        return safeApiCall(loginRequest, ApiNames.LOGIN)
 
         /*val jsonRequest = JsonParser.parseString(loginRequest.toJson()).asJsonObject
 
