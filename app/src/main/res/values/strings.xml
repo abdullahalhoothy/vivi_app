@@ -82,4 +82,6 @@
     <string name="save_txt">Save</string>
     <string name="shop_by_bean_txt">Shop %1$s by bean</string>
     <string name="shop_by_region_txt">Shop %1$s by region</string>
+    <string name="_990_txt">990 coffees</string>
+    <string name="filter_txt">Filter</string>
 </resources>

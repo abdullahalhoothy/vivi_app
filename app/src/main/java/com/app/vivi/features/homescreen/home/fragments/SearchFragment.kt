@@ -5,12 +5,14 @@ import ShopByRegionAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentSearchBinding
 import com.app.vivi.extension.collectWhenStarted
+import com.app.vivi.extension.navigateWithSingleTop
+import com.app.vivi.extension.setClickListener
 import com.app.vivi.features.homescreen.home.adapters.search.OuterAdapter
 import com.app.vivi.features.homescreen.home.adapters.search.OuterShopByBeanAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
@@ -25,25 +27,34 @@ class SearchFragment :
 
 
     private val productMakingCountriesAdapter by lazy {
-        ProductMakingCountriesAdapter()
+        ProductMakingCountriesAdapter(onItemClick = {
+            navigateToProductFilterListFragment()
+        })
     }
 
     private val shopByRegionsAdapter by lazy {
-        ShopByRegionAdapter()
+        ShopByRegionAdapter(onItemClick = {
+            navigateToProductFilterListFragment()
+        })
     }
 
     private val outerAdapter by lazy {
-        OuterAdapter()
+        OuterAdapter(onItemClick = {
+            navigateToProductFilterListFragment()
+        })
     }
 
     private val outerShopByBeanAdapter by lazy {
-        OuterShopByBeanAdapter()
+        OuterShopByBeanAdapter(onItemClick = {
+            navigateToProductFilterListFragment()
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        initListeners()
         initAdapters()
         addObservers()
         getShopByTypes()
@@ -62,7 +73,31 @@ class SearchFragment :
                 getString(R.string.shop_by_country_txt, getString(R.string.app_name))
             searchView.queryHint = getString(R.string.search_any_txt, getString(R.string.app_name))
         }
+    }
 
+    private fun initListeners(){
+        with(binding){
+
+            //Extension same clicklistener function for multiple views
+            setClickListener(tvShopByType, icShopByTypeForward){
+                navigateToProductFiltersFragment()
+            }
+
+            //Extension same clicklistener function for multiple views
+            setClickListener(tvShopByCountry, icShopByCountryForward){
+                navigateToProductFiltersFragment()
+            }
+
+            //Extension same clicklistener function for multiple views
+            setClickListener(tvShopByBeanType, icShopByBeanTypeForward){
+                navigateToProductFiltersFragment()
+            }
+
+            //Extension same clicklistener function for multiple views
+            setClickListener(tvShopByRegion, icShopByRegionForward){
+                navigateToProductFiltersFragment()
+            }
+        }
     }
 
     private fun initAdapters() {
@@ -88,6 +123,18 @@ class SearchFragment :
             }
         }
 
+    }
+
+    private fun navigateToProductFilterListFragment(){
+        val action =
+            HomeFragmentLatestDirections.actionLatestHomeFragmentToProductFilterListFragment()
+        findNavController().navigateWithSingleTop(action)
+    }
+
+    private fun navigateToProductFiltersFragment(){
+        val action =
+            HomeFragmentLatestDirections.actionLatestHomeFragmentToProductFiltersFragment()
+        findNavController().navigateWithSingleTop(action)
     }
 
     private fun addObservers() {

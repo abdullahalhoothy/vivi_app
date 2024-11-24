@@ -51,3 +51,7 @@ fun View.applyRandomDarkGradient(factor: Float = 0.8f, orientation: GradientDraw
 //    ViewCompat.setBackgroundTintList(this, gradientDrawable)
 }
 
+fun setClickListener(vararg views: View, onClick: (View) -> Unit) {
+    views.forEach { it.setOnClickListener(onClick) }
+}
+

@@ -6,20 +6,20 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductFilterListBinding
+import com.app.vivi.databinding.FragmentProductFiltersBinding
 import com.app.vivi.extension.collectWhenStarted
-import com.app.vivi.features.filter.adapters.ProductFilterListAdapter
 import com.app.vivi.features.homescreen.home.adapters.ProductOuterFavoriteAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.filter.ProductFilterListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class ProductFilterListFragment : BaseFragmentVB<FragmentProductFilterListBinding>(FragmentProductFilterListBinding::inflate) {
+class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(FragmentProductFiltersBinding::inflate) {
 
     private val viewModel by viewModels<ProductFilterListViewModel>()
 
-    private val mProductFilterListAdapter by lazy {
-        ProductFilterListAdapter(requireContext())
+    private val mProductOuterFavoriteAdapter by lazy {
+        ProductOuterFavoriteAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,10 +46,10 @@ class ProductFilterListFragment : BaseFragmentVB<FragmentProductFilterListBindin
     private fun setupRecyclerViews() {
         with(binding) {
 
-            rvProductFilterList.apply {
+            rvFavourite.apply {
                 layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                adapter = mProductFilterListAdapter
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = mProductOuterFavoriteAdapter
             }
         }
     }
@@ -65,10 +65,10 @@ class ProductFilterListFragment : BaseFragmentVB<FragmentProductFilterListBindin
 
     private fun addObservers() {
         collectWhenStarted {
-            viewModel.productFilterList.collectLatest {
+            viewModel.findYourNewFavoriteProduct.collectLatest {
 
                 it?.let { productList ->
-                    mProductFilterListAdapter.submitList(productList)
+                    mProductOuterFavoriteAdapter.submitList(productList)
 
                 }
             }

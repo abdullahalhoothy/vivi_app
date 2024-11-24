@@ -12,15 +12,11 @@ import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
-import com.app.vivi.data.remote.model.request.FilteredProductsRequest
 import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
-import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
-import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse.FilteredProduct
-import com.app.vivi.data.remote.model.response.filter.ProductFiltersResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanType
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
@@ -44,14 +40,6 @@ class ProductFilterListViewModel @Inject constructor(
     // StateFlow to hold the products list
     private val _productFilterList = MutableStateFlow<List<ProductFilterData>>(emptyList())
     val productFilterList: StateFlow<List<ProductFilterData>> = _productFilterList
-
-    // StateFlow to hold the products list
-    private val _filteredProductList = MutableStateFlow<List<FilteredProduct>?>(emptyList())
-    val filteredProductList: StateFlow<List<FilteredProduct>?> = _filteredProductList
-
-    // StateFlow to hold the products list
-    private val _productFiltersResponse = MutableStateFlow<ProductFiltersResponse?>(null)
-    val productFiltersResponse: StateFlow<ProductFiltersResponse?> = _productFiltersResponse
 
     private val _findYourNewFavoriteProduct = MutableStateFlow<List<List<NewFavoriteProduct>>?>(null)
     val findYourNewFavoriteProduct: StateFlow<List<List<NewFavoriteProduct>>?> = _findYourNewFavoriteProduct
@@ -114,47 +102,6 @@ class ProductFilterListViewModel @Inject constructor(
             )
             )
             _productFilterList.value = products
-        }
-    }
-
-
-    fun getFilteredProductsApi(request: FilteredProductsRequest) {
-        viewModelScope.launch {
-            showLoader()
-            when (val call = productRepo.getFilteredProductsApi(request)) {
-                is Resource.Error -> {
-                    if (call.code == 401) {
-                        showError(ErrorModel(title = call.title, message = call.message, call.code))
-                    } else {
-                        showError(ErrorModel(title = call.title, message = call.message, call.code))
-                    }
-                }
-
-                is Resource.Success -> {
-                    hideLoader()
-                    _filteredProductList.value = call.data.products
-                }
-            }
-        }
-    }
-
-    fun getProductFiltersApi(request: FilteredProductsRequest) {
-        viewModelScope.launch {
-            showLoader()
-            when (val call = productRepo.getProductFiltersApi(request)) {
-                is Resource.Error -> {
-                    if (call.code == 401) {
-                        showError(ErrorModel(title = call.title, message = call.message, call.code))
-                    } else {
-                        showError(ErrorModel(title = call.title, message = call.message, call.code))
-                    }
-                }
-
-                is Resource.Success -> {
-                    hideLoader()
-                    _productFiltersResponse.value = call.data
-                }
-            }
         }
     }
 }

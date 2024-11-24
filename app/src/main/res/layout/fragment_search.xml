@@ -56,19 +56,22 @@
         <!-- Categories (Shop wines by type) -->
         <TextView
             android:id="@+id/tvShopByType"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/shop_by_type_txt"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@+id/icShopByTypeForward"
             app:layout_constraintStart_toStartOf="@+id/searchView"
             app:layout_constraintTop_toBottomOf="@id/searchView" />
 
         <ImageView
             android:id="@+id/icShopByTypeForward"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_5sdp"
             android:contentDescription="Menu"
             android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@+id/tvShopByType"
@@ -131,19 +134,22 @@
         <!-- Categories (Shop wines by type) -->
         <TextView
             android:id="@+id/tvShopByCountry"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/shop_by_country_txt"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@+id/icShopByCountryForward"
             app:layout_constraintStart_toStartOf="@+id/searchView"
             app:layout_constraintTop_toBottomOf="@id/view2" />
 
         <ImageView
             android:id="@+id/icShopByCountryForward"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_5sdp"
             android:contentDescription="Menu"
             android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@+id/tvShopByCountry"
@@ -184,19 +190,22 @@
         <!-- Categories (Shop wines by type) -->
         <TextView
             android:id="@+id/tvShopByBeanType"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/shop_by_bean_txt"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@+id/icShopByBeanTypeForward"
             app:layout_constraintStart_toStartOf="@+id/view3"
             app:layout_constraintTop_toBottomOf="@id/view3" />
 
         <ImageView
             android:id="@+id/icShopByBeanTypeForward"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_5sdp"
             android:contentDescription="Menu"
             android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@+id/tvShopByBeanType"
@@ -238,19 +247,22 @@
         <!-- Categories (Shop wines by type) -->
         <TextView
             android:id="@+id/tvShopByRegion"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/shop_by_region_txt"
             android:textColor="@color/white"
             android:textSize="18sp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@+id/icShopByRegionForward"
             app:layout_constraintStart_toStartOf="@+id/searchView"
             app:layout_constraintTop_toBottomOf="@id/view4" />
 
         <ImageView
             android:id="@+id/icShopByRegionForward"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_5sdp"
             android:contentDescription="Menu"
             android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@+id/tvShopByRegion"
