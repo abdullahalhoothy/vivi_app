@@ -1,6 +1,7 @@
 package com.app.vivi.features.homescreen.home.fragments
 
 import ProductMakingCountriesAdapter
+import ShopByRegionAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -25,6 +26,10 @@ class SearchFragment :
 
     private val productMakingCountriesAdapter by lazy {
         ProductMakingCountriesAdapter()
+    }
+
+    private val shopByRegionsAdapter by lazy {
+        ShopByRegionAdapter()
     }
 
     private val outerAdapter by lazy {
@@ -52,6 +57,7 @@ class SearchFragment :
         binding.apply {
             tvShopByType.text = getString(R.string.shop_by_type_txt, getString(R.string.app_name))
             tvShopByBeanType.text = getString(R.string.shop_by_bean_txt, getString(R.string.app_name))
+            tvShopByRegion.text = getString(R.string.shop_by_region_txt, getString(R.string.app_name))
             tvShopByCountry.text =
                 getString(R.string.shop_by_country_txt, getString(R.string.app_name))
             searchView.queryHint = getString(R.string.search_any_txt, getString(R.string.app_name))
@@ -64,6 +70,11 @@ class SearchFragment :
             rvCountries.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = productMakingCountriesAdapter
+            }
+
+            rvRegion.apply {
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = shopByRegionsAdapter
             }
 
             rvOuter.apply {
@@ -105,7 +116,10 @@ class SearchFragment :
 
         collectWhenStarted {
             viewModel.shopByRegion.collectLatest { list ->
+                list?.shopByRegion.let {
+                    shopByRegionsAdapter.submitList(it)
 
+                }
             }
         }
     }
