@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clProduct"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_10sdp">
 
         <com.app.vivi.customviews.CurvedImageView
             android:id="@+id/ivProductBackground"
@@ -25,30 +26,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvProductBackgroundTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/just_for_you_txt"
-            android:textSize="@dimen/_15ssp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:textColor="?attr/colorOnSecondary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivBottle"
-            app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/tvProductBackgroundDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="A good match\nfor your taste"
-            android:textStyle="bold"
-            android:textSize="@dimen/_20ssp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:textColor="?attr/colorOnSecondary"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductBackgroundTitle"
-            app:layout_constraintStart_toEndOf="@+id/ivBottle"
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/rectangle_round_solid_white_stroke_grey"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_favorite_outline"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
 
@@ -201,6 +189,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view"/>
 
+
         <ImageView
             android:id="@+id/ivRatingUser"
             android:layout_width="@dimen/_20sdp"
@@ -222,79 +211,6 @@
             app:layout_constraintStart_toEndOf="@+id/ivRatingUser"
             app:layout_constraintTop_toTopOf="@+id/ivRatingUser"
             app:layout_constraintBottom_toBottomOf="@+id/ivRatingUser"/>
-
-
-        <View
-            android:id="@+id/viewBelowRatingUser"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/colorBackground"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRatingUser"/>
-
-
-        <ImageView
-            android:id="@+id/ivRecommendation"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/ic_male_placeholder"
-            app:layout_constraintStart_toStartOf="@+id/viewBelowRatingUser"
-            app:layout_constraintTop_toBottomOf="@+id/viewBelowRatingUser"/>
-
-
-        <TextView
-            android:id="@+id/tvRecommendation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_2sdp"
-            android:text="@string/based_on_your_taste_and_the_magic_of_deep_knowledge_txt"
-            android:textColor="@color/colorWhite"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivRecommendation"
-            app:layout_constraintTop_toTopOf="@+id/ivRecommendation"
-            app:layout_constraintBottom_toBottomOf="@+id/ivRecommendation"/>
-
-
-        <View
-            android:id="@+id/viewBelowRecommendation"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/colorBackground"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvRecommendation"/>
-
-        <TextView
-            android:id="@+id/tvLikeRecommendation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_2sdp"
-            android:text="Like this recommendation"
-            android:textColor="@color/colorWhite"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/viewBelowRatingUser"
-            app:layout_constraintTop_toBottomOf="@+id/viewBelowRecommendation"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-        <ImageView
-            android:id="@+id/ivLikeRecommendation"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:src="@drawable/ic_male_placeholder"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvLikeRecommendation"
-            app:layout_constraintBottom_toBottomOf="@+id/tvLikeRecommendation"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

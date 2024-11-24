@@ -13,7 +13,7 @@ import com.app.vivi.databinding.ItemInnerRecyclerviewBinding
 import com.app.vivi.databinding.ShopByBeanItemInnerRecyclerviewBinding
 import roundLeftCorners
 
-class InnerShopByBeanTypeAdapter : RecyclerView.Adapter<InnerShopByBeanTypeAdapter.InnerViewHolder>() {
+class InnerShopByBeanTypeAdapter(private val onItemClick: (item: CoffeeBeanType) -> Unit) : RecyclerView.Adapter<InnerShopByBeanTypeAdapter.InnerViewHolder>() {
 
     private var items: List<CoffeeBeanType> = emptyList()
 
@@ -50,6 +50,10 @@ class InnerShopByBeanTypeAdapter : RecyclerView.Adapter<InnerShopByBeanTypeAdapt
             binding.imageView.setBackgroundColor(darkerColor)
             binding.imageView.roundLeftCorners(20f)
             // Optionally, set imageView's image source based on item
+
+            binding.root.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 

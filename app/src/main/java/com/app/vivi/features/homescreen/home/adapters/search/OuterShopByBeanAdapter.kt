@@ -9,7 +9,7 @@ import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanType
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
 import com.app.vivi.databinding.ItemOuterBinding
 
-class OuterShopByBeanAdapter : RecyclerView.Adapter<OuterShopByBeanAdapter.OuterViewHolder>() {
+class OuterShopByBeanAdapter(private val onItemClick: (item: CoffeeBeanType) -> Unit) : RecyclerView.Adapter<OuterShopByBeanAdapter.OuterViewHolder>() {
 
     private var items: List<List<CoffeeBeanType>> = emptyList()
 
@@ -34,7 +34,9 @@ class OuterShopByBeanAdapter : RecyclerView.Adapter<OuterShopByBeanAdapter.Outer
 
     inner class OuterViewHolder(private val binding: ItemOuterBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(innerItems: List<CoffeeBeanType>) {
-            val innerAdapter = InnerShopByBeanTypeAdapter()
+            val innerAdapter = InnerShopByBeanTypeAdapter(onItemClick = {
+                onItemClick(it)
+            })
             binding.rvInner.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
             binding.rvInner.adapter = innerAdapter
             binding.rvInner.isNestedScrollingEnabled = false
