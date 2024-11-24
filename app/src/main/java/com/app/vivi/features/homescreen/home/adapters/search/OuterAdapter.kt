@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
 import com.app.vivi.databinding.ItemOuterBinding
 
-class OuterAdapter : RecyclerView.Adapter<OuterAdapter.OuterViewHolder>() {
+class OuterAdapter(private val onItemClick: (item: ProductType) -> Unit) : RecyclerView.Adapter<OuterAdapter.OuterViewHolder>() {
 
     private var items: List<List<ProductType>> = emptyList()
 
@@ -33,7 +33,9 @@ class OuterAdapter : RecyclerView.Adapter<OuterAdapter.OuterViewHolder>() {
 
     inner class OuterViewHolder(private val binding: ItemOuterBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(innerItems: List<ProductType>) {
-            val innerAdapter = InnerAdapter()
+            val innerAdapter = InnerAdapter(onItemClick = {
+                onItemClick(it)
+            })
             binding.rvInner.layoutManager = LinearLayoutManager(binding.root.context, RecyclerView.VERTICAL, false)
             binding.rvInner.adapter = innerAdapter
             binding.rvInner.isNestedScrollingEnabled = false

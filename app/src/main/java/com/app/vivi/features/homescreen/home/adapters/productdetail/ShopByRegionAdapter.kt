@@ -4,12 +4,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
-import com.app.vivi.data.remote.model.response.searchfragment.Country
 import com.app.vivi.data.remote.model.response.searchfragment.Region
 import com.app.vivi.databinding.ItemProductMakingCountriesBinding
 
-class ShopByRegionAdapter :
-    ListAdapter<Region, ShopByRegionAdapter.ShopByRegionAdapterViewHolder>(
+class ShopByRegionAdapter(private val onItemClick: (item: Region) -> Unit) : ListAdapter<Region, ShopByRegionAdapter.ShopByRegionAdapterViewHolder>(
         ShopByRegionAdapterDiffCallback()
     ) {
 
@@ -23,11 +21,15 @@ class ShopByRegionAdapter :
     }
 
     override fun onBindViewHolder(holder: ShopByRegionAdapterViewHolder, position: Int) {
-        val countryItem = getItem(position) // Use ListAdapter's `getItem()`
+        val item = getItem(position) // Use ListAdapter's `getItem()`
         with(holder.binding) {
             // Bind data to views
             imageView.setImageResource(R.drawable.ic_bg_coffee)
-            textView.text = countryItem.name
+            textView.text = item.name
+
+            root.setOnClickListener {
+                onItemClick(item)
+            }
         }
     }
 }
