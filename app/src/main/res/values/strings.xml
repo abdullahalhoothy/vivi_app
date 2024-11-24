@@ -81,4 +81,5 @@
     <string name="show_all_vintages_available_txt">Show all vintages available</string>
     <string name="save_txt">Save</string>
     <string name="shop_by_bean_txt">Shop %1$s by bean</string>
+    <string name="shop_by_region_txt">Shop %1$s by region</string>
 </resources>
