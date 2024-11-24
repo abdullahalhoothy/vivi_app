@@ -1,11 +1,14 @@
 package com.app.vivi.features.homescreen.home.adapters.search
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
 import com.app.vivi.databinding.ItemInnerRecyclerviewBinding
+import com.app.vivi.extension.applyRandomDarkGradient
 import roundLeftCorners
 
 class InnerAdapter : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
@@ -34,8 +37,8 @@ class InnerAdapter : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
     inner class InnerViewHolder(private val binding: ItemInnerRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item:ProductType) {
             binding.textView.text = item.type
+            binding.clMain.applyRandomDarkGradient()
             binding.imageView.roundLeftCorners(20f)
-            // Optionally, set imageView's image source based on item
         }
     }
 

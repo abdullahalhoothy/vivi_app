@@ -43,7 +43,7 @@ class InnerShopByBeanTypeAdapter : RecyclerView.Adapter<InnerShopByBeanTypeAdapt
 // Set the background tint using a hexadecimal color code
             val color = Color.parseColor(item.colorCode)  // Hexadecimal color code
             val originalColor = item.colorCode  // Example hex code
-            val darkerColor = darkenColor(originalColor, 0.2f)
+            val darkerColor = brightenColor(originalColor, 1.5f)
             ViewCompat.setBackgroundTintList(binding.clMain, ColorStateList.valueOf(color))
 //            binding.clMain.setBackgroundTint(Color.parseColor(item.colorCode))
 
@@ -52,6 +52,27 @@ class InnerShopByBeanTypeAdapter : RecyclerView.Adapter<InnerShopByBeanTypeAdapt
             // Optionally, set imageView's image source based on item
         }
     }
+
+    fun brightenColor(color: String?, factor: Float): Int {
+        // Parse the hexadecimal color
+        val parsedColor = Color.parseColor(color)
+
+        // Extract the RGB components
+        val alpha = Color.alpha(parsedColor)
+        val red = Color.red(parsedColor)
+        val green = Color.green(parsedColor)
+        val blue = Color.blue(parsedColor)
+
+        // Apply the factor to brighten the color
+        val brightenedRed = (red * factor).toInt()
+        val brightenedGreen = (green * factor).toInt()
+        val brightenedBlue = (blue * factor).toInt()
+
+        // Ensure the values are within the valid range
+        return Color.argb(alpha, brightenedRed.coerceIn(0, 255), brightenedGreen.coerceIn(0, 255), brightenedBlue.coerceIn(0, 255))
+    }
+
+
     fun darkenColor(color: String?, factor: Float): Int {
         // Parse the hexadecimal color code
         val parsedColor = Color.parseColor(color)
