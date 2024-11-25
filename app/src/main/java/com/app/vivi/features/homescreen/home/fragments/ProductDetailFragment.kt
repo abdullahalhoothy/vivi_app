@@ -45,7 +45,9 @@ class ProductDetailFragment :
     }
 
     private val reviewsAdapter by lazy {
-        ReviewsAdapter()
+        ReviewsAdapter(onCommentClick = {
+            navigateToReviewCommentFragment()
+        })
     }
 
     private val characteristicsAdapter by lazy {
@@ -177,6 +179,11 @@ class ProductDetailFragment :
                 // Implement your action to show all vintages
             }
         }
+    }
+
+    private fun navigateToReviewCommentFragment(){
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt()
+        findNavController().navigateWithSingleTop(action)
     }
 
     private fun highlightButton(activeButton: Button) {

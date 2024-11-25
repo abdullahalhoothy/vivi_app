@@ -12,7 +12,7 @@ import com.app.vivi.databinding.ReviewsItemBinding
 import com.app.vivi.extension.setDrawableWithSize
 import com.app.vivi.helper.createRatingDescription
 
-class ReviewsAdapter :
+class ReviewsAdapter(private val onCommentClick: (Item: Review) -> Unit) :
     ListAdapter<Review, ReviewsAdapter.ReviewViewHolder>(ReviewDiffCallback()) {
 
     // ViewHolder class to bind data
@@ -32,6 +32,10 @@ class ReviewsAdapter :
                     binding.root.context.resources.getDimensionPixelSize(R.dimen.sdp_10))
 
                 tvTime.text = review.time
+
+                tvComment.setOnClickListener {
+                    onCommentClick(review)
+                }
             }
         }
     }
