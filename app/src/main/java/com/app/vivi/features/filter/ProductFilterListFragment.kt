@@ -8,7 +8,6 @@ import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductFilterListBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.features.filter.adapters.ProductFilterListAdapter
-import com.app.vivi.features.homescreen.home.adapters.ProductOuterFavoriteAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.filter.ProductFilterListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

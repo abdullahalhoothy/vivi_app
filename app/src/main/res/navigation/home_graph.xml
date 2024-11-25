@@ -54,8 +54,17 @@
         android:label="ProductDetailFragment">
 
         <action
-            android:id="@+id/action_latestHomeFragment_to_notificationsFragment"
+            android:id="@+id/action_productDetailFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+
+        <action
+            android:id="@+id/action_productDetailFragment_to_productReviewFragmentt"
+            app:destination="@id/productReviewFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@anim/expand_in"
             app:exitAnim="@anim/collapse_out"
@@ -84,6 +93,13 @@
         android:name="com.app.vivi.features.filter.ProductFiltersFragment"
         tools:layout="@layout/fragment_product_filters"
         android:label="ProductFiltersFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/productReviewFragment"
+        android:name="com.app.vivi.features.review.ProductReviewFragment"
+        tools:layout="@layout/fragment_product_review"
+        android:label="ProductReviewFragment">
     </fragment>
 
 <!--    <include app:graph="@navigation/patient_menu_graph" />-->
