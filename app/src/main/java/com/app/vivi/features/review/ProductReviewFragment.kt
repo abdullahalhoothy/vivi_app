@@ -1,19 +1,22 @@
-package com.app.vivi.features.filter
+package com.app.vivi.features.review
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductFilterListBinding
+import com.app.vivi.databinding.FragmentProductReviewBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.features.filter.adapters.ProductFilterListAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.filter.ProductFilterListViewModel
+import com.app.vivi.helper.createRatingDescription
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class ProductFilterListFragment : BaseFragmentVB<FragmentProductFilterListBinding>(FragmentProductFilterListBinding::inflate) {
+class ProductReviewFragment : BaseFragmentVB<FragmentProductReviewBinding>(FragmentProductReviewBinding::inflate) {
 
     private val viewModel by viewModels<ProductFilterListViewModel>()
 
@@ -45,16 +48,16 @@ class ProductFilterListFragment : BaseFragmentVB<FragmentProductFilterListBindin
     private fun setupRecyclerViews() {
         with(binding) {
 
-            rvProductFilterList.apply {
-                layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                adapter = mProductFilterListAdapter
-            }
+            val htmlContent = createRatingDescription(
+                binding.root.context,
+                "Clear deep ruby in color with medium intensity", "3.3"
+            )
+            inReviewLayout.tvRatingDescription.text = htmlContent
         }
     }
 
     private fun initListeners() {
-
+        binding.inAppBar.ivBack.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun navigateToProductDetailFragment(){

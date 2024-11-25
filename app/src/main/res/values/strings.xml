@@ -84,4 +84,7 @@
     <string name="shop_by_region_txt">Shop %1$s by region</string>
     <string name="_990_txt">990 coffees</string>
     <string name="filter_txt">Filter</string>
+    <string name="michael_miller_rated_txt">Michael Miller rated a %1$s</string>
+    <string name="leave_a_comment_txt">Leave a comment</string>
+    <string name="post_txt">Post</string>
 </resources>
