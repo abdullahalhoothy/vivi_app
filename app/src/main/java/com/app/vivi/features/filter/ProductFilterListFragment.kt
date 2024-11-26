@@ -3,6 +3,7 @@ package com.app.vivi.features.filter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductFilterListBinding
@@ -54,7 +55,9 @@ class ProductFilterListFragment : BaseFragmentVB<FragmentProductFilterListBindin
     }
 
     private fun initListeners() {
-
+        with(binding){
+           ivBack.setOnClickListener { findNavController().popBackStack() }
+        }
     }
 
     private fun navigateToProductDetailFragment(){

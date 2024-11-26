@@ -245,15 +245,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_country" />
 
-
-            <View
-                android:id="@+id/view4"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvCountry" />
             <!-- Country Section -->
             <TextView
                 android:id="@+id/tvBean"
@@ -265,7 +256,7 @@
                 android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view4" />
+                app:layout_constraintTop_toBottomOf="@id/rvCountry" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvBean"
@@ -275,17 +266,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvBean" />
-
-
-            <View
-                android:id="@+id/view5"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvBean" />
-
             <!-- Country Section -->
             <TextView
                 android:id="@+id/tvRegion"
@@ -297,7 +277,7 @@
                 android:textSize="@dimen/_16ssp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view5" />
+                app:layout_constraintTop_toBottomOf="@id/rvBean" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRegion"
@@ -307,72 +287,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvRegion" />
-
-
-            <View
-                android:id="@+id/view6"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvRegion" />
-
-
-            <!-- Styles Section -->
-            <TextView
-                android:id="@+id/tvStyles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/styles_txt"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_16ssp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view6" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvStyles"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvStyles" />
-
-
-            <View
-                android:id="@+id/view7"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/grey"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvStyles" />
-
-
-            <!-- Size Section -->
-            <TextView
-                android:id="@+id/tvSizes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/sizes_txt"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_16ssp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view7" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvSizes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSizes" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -417,7 +331,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="#FFFFFF"
-            android:text="101 coffees"
+            android:text="1011 wines"
             android:textColor="@color/colorBlack"
             android:textSize="16sp"
             android:paddingTop="@dimen/_6sdp"

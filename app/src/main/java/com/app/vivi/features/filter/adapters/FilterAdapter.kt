@@ -1,86 +1,51 @@
 package com.app.vivi.features.filter.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
-import com.app.vivi.data.remote.model.data.filter.TagData
-import com.app.vivi.data.remote.model.response.filter.CoffeeType
 import com.app.vivi.databinding.ItemFilterTagBinding
-import com.app.vivi.extension.setDrawableWithSize
 
 class FilterAdapter(
-    private val onItemClicked: (CoffeeType) -> Unit
-) : ListAdapter<CoffeeType, FilterAdapter.FilterViewHolder>(FilterTagDiffCallback()) {
+    private val items: List<String>,
+    private val onItemClicked: (String) -> Unit
+) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
 
-    // Method to unselect all items
-    fun unselectAll() {
-        val updatedList = currentList.map { it.copy(isSelected = false) }
-        submitList(updatedList)
-    }
+    private var selectedItem: Int? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
         val binding = ItemFilterTagBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return FilterViewHolder(parent.context, binding)
+        return FilterViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FilterViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(items[position], position)
     }
 
-    inner class FilterViewHolder(
-        private val context: Context,
-        private val binding: ItemFilterTagBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    override fun getItemCount(): Int = items.size
 
-        fun bind(tag: CoffeeType) {
-            binding.tvFilter.text = tag.name
-            binding.tvFilter.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
-                )
-            )
+    inner class FilterViewHolder(private val binding: ItemFilterTagBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-            if (tag.isSelected) {
-                binding.flMain.isSelected = true
-                binding.flMain.setBackgroundResource(R.drawable.unselected_tag_background)
+        fun bind(item: String, position: Int) {
+            binding.tvFilter.text = item
+
+            // Update UI based on selection
+            if (position == selectedItem) {
+                binding.root.isSelected = true
+                binding.root.setBackgroundResource(R.drawable.unselected_tag_background) // Define in res/drawable
             } else {
-                binding.flMain.isSelected = false
-                binding.flMain.setBackgroundResource(R.drawable.selected_tag_background)
+                binding.root.isSelected = false
+                binding.root.setBackgroundResource(R.drawable.selected_tag_background) // Define in res/drawable
             }
-
-            val tintColor = ContextCompat.getColor(
-                context,
-                if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
-            )
-//            binding.tvFilter.setDrawableW ithSize(context, tag.icon, 50, 50, 5, tintColor)
 
             binding.root.setOnClickListener {
-                val updatedItem = tag.copy(isSelected = !tag.isSelected)
-                val updatedList = currentList.toMutableList()
-                updatedList[adapterPosition] = updatedItem
-                submitList(updatedList)
-                onItemClicked(updatedItem)
+                selectedItem = position
+                notifyDataSetChanged()
+                onItemClicked(item)
             }
         }
-    }
-}
-
-class FilterTagDiffCallback : DiffUtil.ItemCallback<CoffeeType>() {
-    override fun areItemsTheSame(oldItem: CoffeeType, newItem: CoffeeType): Boolean {
-        // Compare unique identifiers
-        return oldItem == newItem
-    }
-
-    override fun areContentsTheSame(oldItem: CoffeeType, newItem: CoffeeType): Boolean {
-        // Compare all fields to detect content changes
-        return oldItem == newItem
     }
 }
