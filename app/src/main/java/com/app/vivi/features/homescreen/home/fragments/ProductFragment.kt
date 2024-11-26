@@ -147,7 +147,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
             ratingText.text = product?.averagerating
             ratingBar.rating = product?.averagerating?.toFloatOrNull()
                 ?: 0f // Safely convert to float, defaulting to 0
-            ratingsCount.text = product?.totalratings.plus(" ${getString(R.string.rating_txt)}")
+            ratingsCount.text = product?.totalratings.plus(" ${getString(R.string.ratings_txt)}")
             val discountedPrice = product?.discountedprice?.toDouble()?.roundToTwoDecimalPlaces()
             tvDiscount.text = "CA$${discountedPrice}"
 

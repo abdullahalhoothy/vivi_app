@@ -21,7 +21,7 @@
     <string name="max_sheets_txt">Max Sheets</string>
     <string name="go_to_your_taste_profile_txt">Go to your taste profile</string>
     <string name="rate_txt">Rate</string>
-    <string name="rating_txt">ratings</string>
+    <string name="ratings_txt">ratings</string>
     <string name="actions_txt">Actions</string>
     <string name="add_to_cart_txt">Add to cart</string>
     <string name="highlights_txt">Highlights</string>
@@ -87,4 +87,10 @@
     <string name="michael_miller_rated_txt">Michael Miller rated a %1$s</string>
     <string name="leave_a_comment_txt">Leave a comment</string>
     <string name="post_txt">Post</string>
+    <string name="bean_txt">Bean</string>
+    <string name="region_txt">Region</string>
+    <string name="type_txt">Type</string>
+    <string name="rating_txt">Rating</string>
+    <string name="price_txt">Price</string>
+    <string name="country_txt">Country</string>
 </resources>

@@ -113,14 +113,16 @@
 
             <TextView
                 android:id="@+id/tvProductAddress"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/_1sdp"
                 android:text="Napa Valley, United States"
                 android:textColor="@color/colorWhite"
                 android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:drawablePadding="@dimen/_5sdp"
                 android:drawableStart="@drawable/ic_uk_globe"
+                app:layout_constraintEnd_toStartOf="@+id/tvAverageRating"
                 app:layout_constraintStart_toStartOf="@+id/tvProductDetails"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -136,6 +138,7 @@
                 android:drawableTint="@color/colorWhite"
                 android:layout_marginEnd="@dimen/_5sdp"
                 app:layout_constraintEnd_toStartOf="@+id/tvPrice"
+                app:layout_constraintTop_toTopOf="@+id/tvProductAddress"
                 app:layout_constraintBottom_toBottomOf="@+id/tvProductAddress"/>
 
             <TextView

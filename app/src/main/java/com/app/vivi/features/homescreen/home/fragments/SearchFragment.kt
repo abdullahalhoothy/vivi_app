@@ -13,6 +13,7 @@ import com.app.vivi.databinding.FragmentSearchBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.extension.setClickListener
+import com.app.vivi.features.filter.FullScreenDialogFragment
 import com.app.vivi.features.homescreen.home.adapters.search.OuterAdapter
 import com.app.vivi.features.homescreen.home.adapters.search.OuterShopByBeanAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
@@ -132,9 +133,12 @@ class SearchFragment :
     }
 
     private fun navigateToProductFiltersFragment(){
-        val action =
+        val dialog = FullScreenDialogFragment()
+        dialog.show(parentFragmentManager, "FullScreenDialog")
+
+        /*val action =
             HomeFragmentLatestDirections.actionLatestHomeFragmentToProductFiltersFragment()
-        findNavController().navigateWithSingleTop(action)
+        findNavController().navigateWithSingleTop(action)*/
     }
 
     private fun addObservers() {
