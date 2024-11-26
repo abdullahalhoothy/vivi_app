@@ -11,10 +11,10 @@ import com.app.vivi.databinding.ItemFilterTagBinding
 import com.app.vivi.extension.setCompoundDrawablesTint
 import com.app.vivi.extension.setDrawableWithSize
 
-class FilterAdapter(
+class CountryFilterAdapter(
     private val items: List<TagData>,
     private val onItemClicked: (TagData) -> Unit
-) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
+) : RecyclerView.Adapter<CountryFilterAdapter.FilterViewHolder>() {
 
     // Method to unselect all items
     fun unselectAll() {
@@ -54,12 +54,12 @@ class FilterAdapter(
                 binding.flMain.setBackgroundResource(R.drawable.selected_tag_background) // Define in res/drawable
             }
 
-            val tintColor = ContextCompat.getColor(
+           /* val tintColor = ContextCompat.getColor(
                 context,
                 if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
             )
             binding.tvFilter.setDrawableWithSize(context, tag.icon, 50, 50, 5, tintColor) // Set the icon
-
+*/
 
             binding.root.setOnClickListener {
                 tag.isSelected = !tag.isSelected  // Toggle the selection state

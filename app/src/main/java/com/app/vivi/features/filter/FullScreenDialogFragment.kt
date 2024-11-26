@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.vivi.R
+import com.app.vivi.data.remote.model.data.filter.TagData
 import com.app.vivi.databinding.DialogFullscreenBinding
+import com.app.vivi.features.filter.adapters.CountryFilterAdapter
 import com.app.vivi.features.filter.adapters.FilterAdapter
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -57,8 +60,23 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
     private fun setupDynamicFilters() {
         // Example: Populate RecyclerView with dynamic filters
         // For now, let's set up a static example
-        val filterItems = listOf("Red", "White", "Sparkling", "Rosé", "Dessert", "Natural")
-        val filterAdapter = FilterAdapter(filterItems) { selectedItem ->
+
+        val coffeeItems = listOf(
+            TagData("Espresso", R.drawable.ic_coffee_cup_1), // Icon for Espresso
+            TagData("Americano", R.drawable.ic_coffee_cup_1), // Icon for Americano
+            TagData("Latte", R.drawable.ic_coffee_cup_1), // Icon for Latte
+            TagData("Cappuccino", R.drawable.ic_coffee_cup_1), // Icon for Cappuccino
+            TagData("Mocha", R.drawable.ic_coffee_cup_1), // Icon for Mocha
+            TagData("Flat White", R.drawable.ic_coffee_cup), // Icon for Flat White
+            TagData("Macchiato", R.drawable.ic_coffee_cup), // Icon for Macchiato
+            TagData("Macchiato", R.drawable.ic_coffee_cup), // Icon for Macchiato
+            TagData("Cold Brew", R.drawable.ic_coffee_cup), // Icon for Cold Brew
+            TagData("Iced Coffee", R.drawable.ic_coffee_cup) // Icon for Iced Coffee
+        )
+
+
+//        val filterItems = listOf("Red", "c", "Sparkling", "Rosé", "Dessert", "Natural")
+        val filterAdapter = FilterAdapter(coffeeItems) { selectedItem ->
             // Handle item click
             println("Selected item: $selectedItem")
         }
@@ -74,8 +92,17 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
     private fun setupCountryFilters() {
         // Example: Populate RecyclerView with dynamic filters
         // For now, let's set up a static example
-        val filterItems = listOf("United States", "Italy", "France", "Spain", "Argentina", "Show all")
-        val filterAdapter = FilterAdapter(filterItems) { selectedItem ->
+//        val filterItems = listOf("United States", "Italy", "France", "Spain", "Argentina", "Show all")
+        val countryItems = listOf(
+            TagData("Brazil", R.drawable.ic_uk_globe),  // Icon for Brazil
+            TagData("Colombia", R.drawable.ic_uk_globe), // Icon for Colombia
+            TagData("Vietnam", R.drawable.ic_uk_globe), // Icon for Vietnam
+            TagData("Ethiopia", R.drawable.ic_uk_globe), // Icon for Ethiopia
+            TagData("Indonesia", R.drawable.ic_uk_globe), // Icon for Indonesia
+            TagData("Mexico", R.drawable.ic_uk_globe), // Icon for Mexico
+        )
+
+        val filterAdapter = CountryFilterAdapter(countryItems) { selectedItem ->
             // Handle item click
             println("Selected item: $selectedItem")
         }
@@ -91,16 +118,20 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
     private fun setupBeanFilters() {
         // Example: Populate RecyclerView with dynamic filters
         // For now, let's set up a static example
-        val coffeeBeans = listOf(
-            "Arabica",
-            "Robusta",
-            "Liberica",
-            "Excelsa",
-            "Geisha",
-            "Blue Mountain",
-            "Show all"
+        val coffeeBeansItems = listOf(
+            TagData("Arabica", R.drawable.ic_uk_globe),  // Icon for Arabica
+            TagData("Robusta", R.drawable.ic_uk_globe), // Icon for Robusta
+            TagData("Liberica", R.drawable.ic_uk_globe), // Icon for Liberica
+            TagData("Excelsa", R.drawable.ic_uk_globe), // Icon for Excelsa
+            TagData("Bourbon", R.drawable.ic_uk_globe), // Icon for Bourbon
+            TagData("Caturra", R.drawable.ic_uk_globe), // Icon for Caturra
+            TagData("Gesha", R.drawable.ic_uk_globe), // Icon for Gesha
+            TagData("Pacamara", R.drawable.ic_uk_globe), // Icon for Pacamara
+            TagData("SL28", R.drawable.ic_uk_globe), // Icon for SL28
+            TagData("TYPICA", R.drawable.ic_uk_globe) // Icon for TYPICA
         )
-        val filterAdapter = FilterAdapter(coffeeBeans) { selectedItem ->
+
+        val filterAdapter = CountryFilterAdapter(coffeeBeansItems) { selectedItem ->
             // Handle item click
             println("Selected item: $selectedItem")
         }
@@ -114,17 +145,17 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupRegionFilters() {
-        val coffeeRegions = listOf(
-            "South America",
-            "Central America",
-            "Africa",
-            "Asia-Pacific",
-            "Middle East",
-            "Caribbean",
-            "Show all"
+        val regionItems = listOf(
+            TagData("Central America", R.drawable.ic_uk_globe),  // Icon for Central America
+            TagData("South America", R.drawable.ic_uk_globe), // Icon for South America
+            TagData("East Africa", R.drawable.ic_uk_globe), // Icon for East Africa
+            TagData("Southeast Asia", R.drawable.ic_uk_globe), // Icon for Southeast Asia
+            TagData("Caribbean", R.drawable.ic_uk_globe), // Icon for Caribbean
+            TagData("Pacific Islands", R.drawable.ic_uk_globe), // Icon for Pacific Islands
         )
 
-        val filterAdapter = FilterAdapter(coffeeRegions) { selectedItem ->
+
+        val filterAdapter = CountryFilterAdapter(regionItems) { selectedItem ->
             // Handle item click
             println("Selected item: $selectedItem")
         }
