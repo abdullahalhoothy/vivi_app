@@ -57,7 +57,9 @@ class ProductReviewFragment : BaseFragmentVB<FragmentProductReviewBinding>(Fragm
     }
 
     private fun initListeners() {
-        binding.inAppBar.ivBack.setOnClickListener { findNavController().popBackStack() }
+        with(binding){
+            inAppBar.ivBack.setOnClickListener { findNavController().popBackStack() }
+        }
     }
 
     private fun navigateToProductDetailFragment(){
