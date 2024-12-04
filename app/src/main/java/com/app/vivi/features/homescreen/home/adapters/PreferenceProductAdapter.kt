@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.app.vivi.R
 import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.databinding.PreferenceProductListItemBinding
+import loadImageWithCache
 
 class PreferenceProductAdapter(
     private val onItemClick: (item: products) -> Unit,
@@ -22,12 +24,12 @@ class PreferenceProductAdapter(
             with(binding) {
                 tvProductName.text = data.name
                 tvProductDetails.text = data.description
-                tvRatingText.text = data.ratingvalue.toString()
+                tvRatingText.text = data.averagerating.toString()
                 ratingsCount.text = data.totalratings
                 tvDiscount.text = "${data.discountedprice}"
 
                 tvRatingDescription.text = data.userrating?.description
-
+                data?.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
                 tvDiscount.setOnClickListener {
                     onDiscountButtonClick(data)
                 }

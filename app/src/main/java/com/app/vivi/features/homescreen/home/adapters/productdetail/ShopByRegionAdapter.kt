@@ -24,9 +24,9 @@ class ShopByRegionAdapter(private val onItemClick: (item: Region) -> Unit) : Lis
         val item = getItem(position) // Use ListAdapter's `getItem()`
         with(holder.binding) {
             // Bind data to views
-            imageView.setImageResource(R.drawable.ic_bg_coffee)
+//            imageView.setImageResource(R.drawable.ic_bg_coffee)
             textView.text = item.name
-
+            item?.imageUrl?.let { imageView.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
             root.setOnClickListener {
                 onItemClick(item)
             }

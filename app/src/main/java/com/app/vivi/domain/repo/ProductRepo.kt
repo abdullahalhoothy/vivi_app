@@ -2,9 +2,11 @@ package com.app.vivi.domain.repo
 
 import RecommendedProductsResponse
 import com.app.vivi.data.remote.Resource
+import com.app.vivi.data.remote.model.request.FilteredProductsRequest
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
+import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ShopByRegionResponse
@@ -27,5 +29,7 @@ interface ProductRepo {
     suspend fun getShopByCountries(): Resource<CountriesResponse>
 
     suspend fun getShopByRegions(): Resource<ShopByRegionResponse>
+
+    suspend fun getFilteredProductsApi(request: FilteredProductsRequest): Resource<FilteredProductsResponse>
 
 }
