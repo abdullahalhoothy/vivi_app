@@ -81,4 +81,8 @@ interface ApiService {
     @POST(ApiNames.FILTERED_PRODUCTS_API)
     suspend fun getFilteredProductsApi(@Body request: FilteredProductsRequest
     ): Response<FilteredProductsResponse>
+
+    @POST(ApiNames.PRODUCT_FILTERS_API)
+    suspend fun getProductFiltersApi(@Body request: FilteredProductsRequest
+    ): Response<FilteredProductsResponse>
 }

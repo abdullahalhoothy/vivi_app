@@ -32,4 +32,6 @@ interface ProductRepo {
 
     suspend fun getFilteredProductsApi(request: FilteredProductsRequest): Resource<FilteredProductsResponse>
 
+    suspend fun getProductFiltersApi(request: FilteredProductsRequest): Resource<FilteredProductsResponse>
+
 }

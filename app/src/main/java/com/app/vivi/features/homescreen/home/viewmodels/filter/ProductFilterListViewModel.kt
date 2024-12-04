@@ -132,4 +132,24 @@ class ProductFilterListViewModel @Inject constructor(
             }
         }
     }
+
+    fun getProductFiltersApi(request: FilteredProductsRequest) {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getProductFiltersApi(request)) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _filteredProductList.value = call.data.products
+                }
+            }
+        }
+    }
 }
