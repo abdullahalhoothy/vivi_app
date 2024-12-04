@@ -1,12 +1,14 @@
 package com.app.vivi.data.remote
 
 import RecommendedProductsResponse
+import com.app.vivi.data.remote.model.request.FilteredProductsRequest
 import com.app.vivi.data.remote.model.request.LoginRequest
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.data.remote.model.response.LoginResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
+import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ShopByRegionResponse
@@ -75,4 +77,8 @@ interface ApiService {
     @GET(ApiNames.SHOP_BY_REGIONS_API)
     suspend fun getShopByRegions(
     ): Response<ShopByRegionResponse>
+
+    @POST(ApiNames.FILTERED_PRODUCTS_API)
+    suspend fun getFilteredProductsApi(@Body request: FilteredProductsRequest
+    ): Response<FilteredProductsResponse>
 }

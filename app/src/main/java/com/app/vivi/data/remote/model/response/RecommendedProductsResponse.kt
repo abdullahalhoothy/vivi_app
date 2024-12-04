@@ -11,6 +11,7 @@ data class RecommendedProductData(
     val description: String?,
     val tagline: String?,
     val producturl: String?,
+    val imageurl: String?,
     val averagerating: String?,
     val totalratings: String?,
     val discountedprice: String?,

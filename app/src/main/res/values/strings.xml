@@ -93,4 +93,6 @@
     <string name="rating_txt">Rating</string>
     <string name="price_txt">Price</string>
     <string name="country_txt">Country</string>
+    <string name="reviews_by_stars_txt">Reviews by stars</string>
+    <string name="all_reviews_txt">All Reviews</string>
 </resources>

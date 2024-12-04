@@ -103,7 +103,7 @@
 
 
         <com.app.vivi.customviews.CustomTextView
-            android:id="@+id/tvActions"
+            android:id="@+id/tvShowAllReviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_10sdp"

@@ -27,13 +27,17 @@ class SplashActivity : AppCompatActivity() {
         // Keep the splash screen visible until the API response is ready
         splashScreen.setKeepOnScreenCondition { keepSplashOnScreen }
         addObservers()
+    }
+
+    override fun onStart() {
+        super.onStart()
         getConfigurations()
     }
 
     private fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this@SplashActivity, MainActivity::class.java)
         startActivity(intent)
-        finish()
+//        finish()
     }
 
     private fun addObservers() {
@@ -44,7 +48,9 @@ class SplashActivity : AppCompatActivity() {
                     is SplashViewModel.NavigationEvents.NavigateToMainScreen ->{
                         // Navigate to next screen based on API response
                         navigateToMainActivity()
-                    }
+                    } else -> {
+                    keepSplashOnScreen = true
+                }
                 }
             }
         }
@@ -52,7 +58,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun getConfigurations() {
         // Trigger API call
-        splashViewModel.getConfigurations()
+        splashViewModel.getConfigurations(true)
     }
 
     private fun showErrorDialog(message: String?) {

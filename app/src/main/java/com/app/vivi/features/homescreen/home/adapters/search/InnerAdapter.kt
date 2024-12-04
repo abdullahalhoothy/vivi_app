@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.app.vivi.R
 import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
 import com.app.vivi.databinding.ItemInnerRecyclerviewBinding
 import com.app.vivi.extension.applyRandomDarkGradient
+import loadImageWithCache
 import roundLeftCorners
 
 class InnerAdapter(private val onItemClick: (item: ProductType) -> Unit) : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
@@ -40,6 +42,8 @@ class InnerAdapter(private val onItemClick: (item: ProductType) -> Unit) : Recyc
             binding.textView.text = item.type
             binding.clMain.applyRandomDarkGradient()
             binding.imageView.roundLeftCorners(20f)
+
+            item?.imageUrl?.let { binding.imageView.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
 
             binding.root.setOnClickListener {
                 onItemClick(item)

@@ -89,7 +89,7 @@
             android:backgroundTint="@android:color/transparent"
             android:fontFamily="sans-serif-medium"
             android:inputType="textEmailAddress"
-            android:text="test@gmail.com"
+            tools:text="test@gmail.com"
             android:textColor="@color/colorBlack"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/_16sdp" />
@@ -131,7 +131,7 @@
             android:backgroundTint="@android:color/transparent"
             android:fontFamily="sans-serif-medium"
             android:inputType="textPassword"
-            android:text="sdfsdf"
+            tools:text="sdfsdf"
             android:textColor="@color/colorBlack"
             android:textCursorDrawable="@null"
             android:textSize="@dimen/_16sdp" /> <!-- Set to textPassword initially -->

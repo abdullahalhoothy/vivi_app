@@ -3,12 +3,18 @@ package com.app.vivi.features.filter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentProductFilterListBinding
 import com.app.vivi.databinding.FragmentProductFiltersBinding
 import com.app.vivi.extension.collectWhenStarted
+import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.features.homescreen.home.adapters.ProductOuterFavoriteAdapter
+import com.app.vivi.features.homescreen.home.adapters.ReviewsAdapter
+import com.app.vivi.features.homescreen.home.fragments.ProductDetailFragmentDirections
+import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import com.app.vivi.features.homescreen.home.viewmodels.filter.ProductFilterListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -16,10 +22,12 @@ import kotlinx.coroutines.flow.collectLatest
 @AndroidEntryPoint
 class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(FragmentProductFiltersBinding::inflate) {
 
-    private val viewModel by viewModels<ProductFilterListViewModel>()
+    private val viewModel by viewModels<ProductViewModel>()
 
-    private val mProductOuterFavoriteAdapter by lazy {
-        ProductOuterFavoriteAdapter()
+    private val reviewsAdapter by lazy {
+        ReviewsAdapter(onCommentClick = {
+            navigateToReviewCommentFragment()
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,12 +37,13 @@ class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(Fra
         initAdapters()
         initListeners()
         addObservers()
+        getUserReviewsApi()
     }
 
 
     private fun initViews() {
         binding.apply {
-
+            inAppBar.textView.text = getString(R.string.all_reviews_txt)
         }
 
     }
@@ -46,10 +55,9 @@ class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(Fra
     private fun setupRecyclerViews() {
         with(binding) {
 
-            rvFavourite.apply {
-                layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                adapter = mProductOuterFavoriteAdapter
+            rvReviews.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = reviewsAdapter
             }
         }
     }
@@ -58,21 +66,23 @@ class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(Fra
 
     }
 
-    private fun navigateToProductDetailFragment(){
-//        val action = HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment()
-//        findNavController().navigateWithSingleTop(action)
+    private fun navigateToReviewCommentFragment(){
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt()
+        findNavController().navigateWithSingleTop(action)
     }
 
     private fun addObservers() {
         collectWhenStarted {
-            viewModel.findYourNewFavoriteProduct.collectLatest {
-
-                it?.let { productList ->
-                    mProductOuterFavoriteAdapter.submitList(productList)
-
+            viewModel.userReviews.collectLatest {
+                it?.reviews.let { reviewList ->
+                    reviewsAdapter.submitList(reviewList)
                 }
             }
         }
+    }
+
+    private fun getUserReviewsApi() {
+        viewModel.getUserReviewsApi()
     }
 
     override fun getMyViewModel() = viewModel
