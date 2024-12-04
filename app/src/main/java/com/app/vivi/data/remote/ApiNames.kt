@@ -18,6 +18,7 @@ object ApiNames {
     const val SHOP_BY_REGIONS_API = "${BASE_URL}regions"
 
     const val FILTERED_PRODUCTS_API = "${BASE_URL}filtered-products"
+    const val PRODUCT_FILTERS_API = "${BASE_URL}product-filters"
 }
 
 object HeadersNames {
