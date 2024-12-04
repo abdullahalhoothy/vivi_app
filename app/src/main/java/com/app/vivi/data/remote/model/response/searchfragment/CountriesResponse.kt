@@ -6,5 +6,6 @@ data class CountriesResponse(
 
 data class Country(
     val id: Int? = null,
-    val name: String? = null
+    val name: String? = null,
+    val imageUrl: String? = null
 )

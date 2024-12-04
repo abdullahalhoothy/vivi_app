@@ -37,14 +37,6 @@
             app:popEnterAnim="@anim/expand_in"
             app:popExitAnim="@anim/collapse_out"/>
 
-        <action
-            android:id="@+id/action_latestHomeFragment_to_productFiltersFragment"
-            app:destination="@id/productFiltersFragment"
-            app:popUpToInclusive="true"
-            app:enterAnim="@anim/expand_in"
-            app:exitAnim="@anim/collapse_out"
-            app:popEnterAnim="@anim/expand_in"
-            app:popExitAnim="@anim/collapse_out"/>
 
     </fragment>
     <fragment
@@ -71,6 +63,16 @@
             app:popEnterAnim="@anim/expand_in"
             app:popExitAnim="@anim/collapse_out"/>
 
+
+        <action
+            android:id="@+id/action_productDetailFragment_to_productFiltersFragment"
+            app:destination="@id/productFiltersFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+
     </fragment>
 
     <fragment
@@ -86,6 +88,16 @@
         android:name="com.app.vivi.features.filter.ProductFilterListFragment"
         tools:layout="@layout/fragment_product_filter_list"
         android:label="ProductFilterListFragment">
+
+
+       <!-- <action
+            android:id="@+id/action_productFilterListFragment_to_productFiltersFragment"
+            app:destination="@id/productFiltersFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>-->
     </fragment>
 
     <fragment

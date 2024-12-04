@@ -59,6 +59,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         initListeners()
         addObservers()
         getRecommendedProducts()
+        getPreferenceProductDetail()
     }
 
 
@@ -102,7 +103,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 // Only call the API once when scrolling up and view becomes visible
                 if (!isApiCalled) {
                     Log.d("Scrolling: ", " isApiCalled: $isApiCalled")
-                    getPreferenceProductDetail()
+//                    getPreferenceProductDetail()
                     getFindYourNewFavoriteProduct()
                     isApiCalled = true  // Set flag to prevent further calls
                 }
@@ -141,6 +142,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     ) {
 
         with(item) {
+            item.root.visibility = View.VISIBLE
             tvProductName.text = product?.name
             tvProductDetails.text = product?.description
             tvProductAddress.text = product?.city.plus(", ${product?.country}")
@@ -164,7 +166,9 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
             tvRatingUser.text = product?.userrating?.userName
 
 //            "https://drive.google.com/uc?export=view&id=11oOuA4j9MlB1XGLN2uKIuZCeklrFzqZO".let { ivBottle.loadImageWithCache(it) }
+//            "https://drive.google.com/uc?id=11oOuA4j9MlB1XGLN2uKIuZCeklrFzqZO".let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
             product?.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
+            product?.imageurl?.let { ivProductBackground.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
         }
     }
 

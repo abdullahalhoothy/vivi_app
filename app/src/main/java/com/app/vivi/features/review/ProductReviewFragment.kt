@@ -72,7 +72,7 @@ class ProductReviewFragment : BaseFragmentVB<FragmentProductReviewBinding>(Fragm
             viewModel.productFilterList.collectLatest {
 
                 it?.let { productList ->
-                    mProductFilterListAdapter.submitList(productList)
+//                    mProductFilterListAdapter.submitList(productList)
 
                 }
             }

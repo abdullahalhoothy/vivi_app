@@ -20,7 +20,7 @@ class CacheRepoIml @Inject constructor(private val dataStoreHelper: DataStoreHel
     }
 
     override suspend fun saveLoginResponse(response: LoginResponse) {
-        saveDoctorEmail(response.data.email)
+        saveDoctorEmail(response.email)
         dataStoreHelper.setValue(PrefKeys.LOGIN_RESPONSE, response.toJson())
     }
 
@@ -38,6 +38,10 @@ class CacheRepoIml @Inject constructor(private val dataStoreHelper: DataStoreHel
     override suspend fun getConfigurationData(): Flow<AppConfigResponse?> {
         return dataStoreHelper.getValueOrNull(PrefKeys.CONFIGURATION_DATA)
             .map { it?.fromJson(AppConfigResponse::class.java) }
+    }
+
+    override suspend fun clearConfigurationData() {
+        dataStoreHelper.clearData(PrefKeys.CONFIGURATION_DATA)
     }
 
     override suspend fun saveDoctorEmail(email: String) {

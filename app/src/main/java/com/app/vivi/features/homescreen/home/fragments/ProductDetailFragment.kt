@@ -157,6 +157,7 @@ class ProductDetailFragment :
             inReviewsLayout.apply {
                 tvHelpful.setOnClickListener { toggleReviewsView(true) }
                 tvRecent.setOnClickListener { toggleReviewsView(false) }
+                tvShowAllReviews.setOnClickListener { navigateToReviewsFragment() }
             }
 
             // Button Click Listeners
@@ -183,6 +184,11 @@ class ProductDetailFragment :
 
     private fun navigateToReviewCommentFragment(){
         val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt()
+        findNavController().navigateWithSingleTop(action)
+    }
+
+    private fun navigateToReviewsFragment(){
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductFiltersFragment()
         findNavController().navigateWithSingleTop(action)
     }
 

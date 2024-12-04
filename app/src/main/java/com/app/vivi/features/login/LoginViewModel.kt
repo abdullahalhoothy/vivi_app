@@ -85,8 +85,8 @@ class LoginViewModel @Inject constructor(
                 _passwordErrorFlow.emit("Password is required")
                 return@launch
             }
-            _channel.send(NavigationEvents.NavigateToMainScreen())
-//            showLoader()
+//            _channel.send(NavigationEvents.NavigateToMainScreen())
+            showLoader()
             when (val call = loginRepo.login(
                 loginRequest = LoginRequest(email, password)
             )) {

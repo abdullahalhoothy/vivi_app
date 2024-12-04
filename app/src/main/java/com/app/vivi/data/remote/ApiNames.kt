@@ -16,6 +16,8 @@ object ApiNames {
     const val SHOP_BY_COFFEE_BEAN_TYPES_API = "${BASE_URL}coffee-bean-types"
     const val SHOP_BY_COUNTRIES_API = "${BASE_URL}countries"
     const val SHOP_BY_REGIONS_API = "${BASE_URL}regions"
+
+    const val FILTERED_PRODUCTS_API = "${BASE_URL}filtered-products"
 }
 
 object HeadersNames {
