@@ -3,10 +3,12 @@ package com.app.vivi.domain.repo
 import RecommendedProductsResponse
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.request.FilteredProductsRequest
+import com.app.vivi.data.remote.model.request.ReviewsRequest
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
+import com.app.vivi.data.remote.model.response.filter.ProductFiltersResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ShopByRegionResponse
@@ -20,7 +22,7 @@ interface ProductRepo {
 
     suspend fun getFindYourNewFavoriteProduct(): Resource<FindYourNewFavoriteProductResponse>
 
-    suspend fun getUserReviews(): Resource<UserReviewsResponse>
+    suspend fun getUserReviews(request: ReviewsRequest): Resource<UserReviewsResponse>
 
     suspend fun getShopByCoffeeTypes(): Resource<ShopByTypeResponse>
 
@@ -32,6 +34,6 @@ interface ProductRepo {
 
     suspend fun getFilteredProductsApi(request: FilteredProductsRequest): Resource<FilteredProductsResponse>
 
-    suspend fun getProductFiltersApi(request: FilteredProductsRequest): Resource<FilteredProductsResponse>
+    suspend fun getProductFiltersApi(request: FilteredProductsRequest): Resource<ProductFiltersResponse>
 
 }

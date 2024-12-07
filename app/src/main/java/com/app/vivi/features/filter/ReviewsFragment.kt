@@ -2,7 +2,6 @@ package com.app.vivi.features.filter
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +23,7 @@ class ReviewsFragment : BaseFragmentVB<FragmentReviewsBinding>(FragmentReviewsBi
 
     private val reviewsAdapter by lazy {
         ReviewsAdapter(onCommentClick = {
-            it.review_id?.let { it1 -> navigateToReviewCommentFragment(it1) }
+            navigateToReviewCommentFragment()
         })
     }
 
@@ -46,19 +45,6 @@ class ReviewsFragment : BaseFragmentVB<FragmentReviewsBinding>(FragmentReviewsBi
 
     }
 
-    private fun handleBackPress() {
-        binding.inAppBar.ivBack.setOnClickListener { findNavController().popBackStack() }
-
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().popBackStack()
-                }
-            }
-        )
-    }
-
     private fun initAdapters() {
         setupRecyclerViews()
     }
@@ -74,12 +60,12 @@ class ReviewsFragment : BaseFragmentVB<FragmentReviewsBinding>(FragmentReviewsBi
     }
 
     private fun initListeners() {
-        handleBackPress()
+
     }
 
-    private fun navigateToReviewCommentFragment(reviewId: Int){
-        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt(reviewId)
-        findNavController().navigate(action)
+    private fun navigateToReviewCommentFragment(){
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt()
+        findNavController().navigateWithSingleTop(action)
     }
 
     private fun addObservers() {

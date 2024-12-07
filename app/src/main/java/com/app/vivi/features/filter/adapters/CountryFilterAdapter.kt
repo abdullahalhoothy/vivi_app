@@ -4,22 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
 import com.app.vivi.data.remote.model.data.filter.TagData
+import com.app.vivi.data.remote.model.response.filter.Country
 import com.app.vivi.databinding.ItemFilterTagBinding
-import com.app.vivi.extension.setCompoundDrawablesTint
-import com.app.vivi.extension.setDrawableWithSize
 
 class CountryFilterAdapter(
-    private val items: List<TagData>,
-    private val onItemClicked: (TagData) -> Unit
-) : RecyclerView.Adapter<CountryFilterAdapter.FilterViewHolder>() {
+    private val onItemClicked: (Country) -> Unit
+) : ListAdapter<Country, CountryFilterAdapter.FilterViewHolder>(TagDiffCallback()) {
 
-    // Method to unselect all items
     fun unselectAll() {
-        items.forEach { it.isSelected = false }
-        notifyDataSetChanged()
+        val updatedList = currentList.map { it.copy(isSelected = false) }
+        submitList(updatedList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
@@ -30,42 +29,50 @@ class CountryFilterAdapter(
     }
 
     override fun onBindViewHolder(holder: FilterViewHolder, position: Int) {
-        holder.bind(items[position], position)
+        holder.bind(getItem(position), position)
     }
 
-    override fun getItemCount(): Int = items.size
+    inner class FilterViewHolder(
+        private val context: Context,
+        private val binding: ItemFilterTagBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-    inner class FilterViewHolder(private val context: Context, private val binding: ItemFilterTagBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(tag: TagData, position: Int) {
+        fun bind(tag: Country, position: Int) {
             binding.tvFilter.text = tag.name
-            binding.tvFilter.setTextColor( ContextCompat.getColor(
-                binding.root.context,
-                if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
-            ))
-
+            binding.tvFilter.setTextColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
+                )
+            )
 
             if (tag.isSelected) {
                 binding.flMain.isSelected = true
-                binding.flMain.setBackgroundResource(R.drawable.unselected_tag_background) // Define this in res/drawable
+                binding.flMain.setBackgroundResource(R.drawable.unselected_tag_background)
             } else {
                 binding.flMain.isSelected = false
-                binding.flMain.setBackgroundResource(R.drawable.selected_tag_background) // Define in res/drawable
+                binding.flMain.setBackgroundResource(R.drawable.selected_tag_background)
             }
-
-           /* val tintColor = ContextCompat.getColor(
-                context,
-                if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
-            )
-            binding.tvFilter.setDrawableWithSize(context, tag.icon, 50, 50, 5, tintColor) // Set the icon
-*/
 
             binding.root.setOnClickListener {
-                tag.isSelected = !tag.isSelected  // Toggle the selection state
-                notifyItemChanged(position) // Update the clicked item
-                onItemClicked(tag) // Callback to notify about the click
+                val updatedItem = tag.copy(isSelected = !tag.isSelected)
+                val updatedList = currentList.toMutableList()
+                updatedList[position] = updatedItem
+                submitList(updatedList)
+                onItemClicked(updatedItem)
             }
         }
+    }
+}
+
+class TagDiffCallback : DiffUtil.ItemCallback<Country>() {
+    override fun areItemsTheSame(oldItem: Country, newItem: Country): Boolean {
+        // Compare unique identifiers (e.g., names or IDs)
+        return oldItem.name == newItem.name
+    }
+
+    override fun areContentsTheSame(oldItem: Country, newItem: Country): Boolean {
+        // Compare all fields to detect content changes
+        return oldItem == newItem
     }
 }

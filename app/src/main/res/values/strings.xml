@@ -95,7 +95,7 @@
     <string name="country_txt">Country</string>
     <string name="reviews_by_stars_txt">Reviews by stars</string>
     <string name="all_reviews_txt">All Reviews</string>
-    <string name="reset_password_txt">Reset Password</string>
+    <string name="reset_password_txt">Reset password</string>
     <string name="success_txt">Success</string>
     <string name="a_password_reset_email_has_been_sent_to_your_registered_email_address_txt">A password reset email has been sent to your registered email address</string>
 </resources>

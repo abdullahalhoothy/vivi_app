@@ -102,8 +102,8 @@
 
     <fragment
         android:id="@+id/productFiltersFragment"
-        android:name="com.app.vivi.features.filter.ProductFiltersFragment"
-        tools:layout="@layout/fragment_product_filters"
+        android:name="com.app.vivi.features.filter.ReviewsFragment"
+        tools:layout="@layout/fragment_reviews"
         android:label="ProductFiltersFragment">
     </fragment>
 

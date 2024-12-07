@@ -20,6 +20,7 @@ import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse.FilteredProduct
+import com.app.vivi.data.remote.model.response.filter.ProductFiltersResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanType
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ProductType
@@ -47,6 +48,10 @@ class ProductFilterListViewModel @Inject constructor(
     // StateFlow to hold the products list
     private val _filteredProductList = MutableStateFlow<List<FilteredProduct>?>(emptyList())
     val filteredProductList: StateFlow<List<FilteredProduct>?> = _filteredProductList
+
+    // StateFlow to hold the products list
+    private val _productFiltersResponse = MutableStateFlow<ProductFiltersResponse?>(null)
+    val productFiltersResponse: StateFlow<ProductFiltersResponse?> = _productFiltersResponse
 
     private val _findYourNewFavoriteProduct = MutableStateFlow<List<List<NewFavoriteProduct>>?>(null)
     val findYourNewFavoriteProduct: StateFlow<List<List<NewFavoriteProduct>>?> = _findYourNewFavoriteProduct
@@ -147,7 +152,7 @@ class ProductFilterListViewModel @Inject constructor(
 
                 is Resource.Success -> {
                     hideLoader()
-                    _filteredProductList.value = call.data.products
+                    _productFiltersResponse.value = call.data
                 }
             }
         }

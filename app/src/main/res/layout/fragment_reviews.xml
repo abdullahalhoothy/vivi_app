@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@color/colorBlack"
     android:id="@+id/scrollView"> <!-- Add your image or gif-like background here -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
             android:text="@string/reviews_by_stars_txt"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorOnBackground"
             android:textSize="@dimen/_25ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
