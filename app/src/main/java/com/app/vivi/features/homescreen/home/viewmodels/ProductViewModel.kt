@@ -11,6 +11,7 @@ import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
+import com.app.vivi.data.remote.model.request.ReviewsRequest
 import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.products
@@ -381,10 +382,10 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-    fun getUserReviewsApi() {
+    fun getUserReviewsApi(type: String) {
         viewModelScope.launch {
             showLoader()
-            when (val call = productRepo.getUserReviews()) {
+            when (val call = productRepo.getUserReviews(ReviewsRequest(type))) {
                 is Resource.Error -> {
                     if (call.code == 401) {
                         showError(ErrorModel(title = call.title, message = call.message, call.code))

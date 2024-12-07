@@ -45,7 +45,7 @@ class SplashViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
 
-                    cacheRepo.saveConfigurationData(call.data)
+//                    cacheRepo.saveConfigurationData(call.data)
 //                    _channel.trySend()
                     _channel.trySend(NavigationEvents.NavigateToMainScreen(call.data))
                     /*if (call.data.responseCode == 200) {

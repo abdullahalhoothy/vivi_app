@@ -4,10 +4,12 @@ import RecommendedProductsResponse
 import com.app.vivi.data.remote.ApiService
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.request.FilteredProductsRequest
+import com.app.vivi.data.remote.model.request.ReviewsRequest
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
+import com.app.vivi.data.remote.model.response.filter.ProductFiltersResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ShopByRegionResponse
@@ -34,7 +36,7 @@ class ProductRepoImpl @Inject constructor(apiService: ApiService, val cacheRepo:
         return safeApiCall { apiService.getFindYourNewFavoriteProduct() }
     }
 
-    override suspend fun getUserReviews(): Resource<UserReviewsResponse> {
+    override suspend fun getUserReviews(reviews: ReviewsRequest): Resource<UserReviewsResponse> {
         return safeApiCall { apiService.getUserReviews() }
     }
 
@@ -58,7 +60,7 @@ class ProductRepoImpl @Inject constructor(apiService: ApiService, val cacheRepo:
         return safeApiCall { apiService.getFilteredProductsApi(request) }
     }
 
-    override suspend fun getProductFiltersApi(request: FilteredProductsRequest): Resource<FilteredProductsResponse> {
+    override suspend fun getProductFiltersApi(request: FilteredProductsRequest): Resource<ProductFiltersResponse> {
         return safeApiCall { apiService.getProductFiltersApi(request) }
     }
 
