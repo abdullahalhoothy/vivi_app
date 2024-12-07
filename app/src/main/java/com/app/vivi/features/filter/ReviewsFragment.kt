@@ -7,20 +7,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
-import com.app.vivi.databinding.FragmentProductFilterListBinding
-import com.app.vivi.databinding.FragmentProductFiltersBinding
+import com.app.vivi.databinding.FragmentReviewsBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.navigateWithSingleTop
-import com.app.vivi.features.homescreen.home.adapters.ProductOuterFavoriteAdapter
 import com.app.vivi.features.homescreen.home.adapters.ReviewsAdapter
 import com.app.vivi.features.homescreen.home.fragments.ProductDetailFragmentDirections
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
-import com.app.vivi.features.homescreen.home.viewmodels.filter.ProductFilterListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(FragmentProductFiltersBinding::inflate) {
+class ReviewsFragment : BaseFragmentVB<FragmentReviewsBinding>(FragmentReviewsBinding::inflate) {
 
     private val viewModel by viewModels<ProductViewModel>()
 
@@ -37,7 +34,7 @@ class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(Fra
         initAdapters()
         initListeners()
         addObservers()
-        getUserReviewsApi()
+        getUserReviewsApi("All")
     }
 
 
@@ -81,8 +78,8 @@ class ProductFiltersFragment : BaseFragmentVB<FragmentProductFiltersBinding>(Fra
         }
     }
 
-    private fun getUserReviewsApi() {
-        viewModel.getUserReviewsApi()
+    private fun getUserReviewsApi(type: String) {
+        viewModel.getUserReviewsApi(type)
     }
 
     override fun getMyViewModel() = viewModel

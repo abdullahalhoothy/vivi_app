@@ -10,6 +10,7 @@ import com.app.vivi.R
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
 import com.app.vivi.databinding.ProductFilterListItemBinding
 import com.app.vivi.extension.roundToTwoDecimalPlaces
+import com.app.vivi.helper.createRatingDescription
 import com.app.vivi.helper.cutOnText
 import loadImageWithCache
 
@@ -34,13 +35,18 @@ class ProductFilterListAdapter(private val context: Context) :
                 // Bind data to views
                 product.imageurl?.let { ivProductBackground.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
                 product.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
-//                tvDiscount.text = product.discountedprice
                 val discountedPrice = product?.discountedprice?.toDouble()?.roundToTwoDecimalPlaces()
                 tvDiscount.text = "CA$${discountedPrice}"
                 tvOrginalPrice.text =
                     cutOnText(context, "CA$${product?.originalprice}")
                 tvProductName.text = product.name
                 tvProductDetails.text = product.description
+                val htmlContent = createRatingDescription(
+                    binding.root.context,
+                    product?.userrating?.description, product?.userrating?.rating
+                )
+                tvRatingDescription.text = htmlContent
+
                 tvProductAddress.text = product.city.plus(" ${product.country}")
                 ratingText.text = product.averagerating.toString()
                 product.averagerating?.let {
@@ -48,7 +54,6 @@ class ProductFilterListAdapter(private val context: Context) :
                 }
                 ratingsCount.text = product.totalratings
                 product.userrating?.userimageurl?.let { ivRatingUser.loadImageWithCache(it, R.drawable.ic_male_placeholder) }
-//                ivRatingUser.setImageResource(product.userImage)
                 tvRatingUser.text = product.userrating?.username
             }
         }

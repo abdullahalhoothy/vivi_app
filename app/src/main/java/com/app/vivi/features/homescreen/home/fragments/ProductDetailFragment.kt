@@ -81,7 +81,7 @@ class ProductDetailFragment :
         handleBackPress()
         handleAppBar()
         animateImage()
-        getUserReviewsApi()
+        getUserReviewsApi("Helpful")
     }
 
 
@@ -222,8 +222,8 @@ class ProductDetailFragment :
 
     private fun toggleReviewsView(showReviews: Boolean) {
         binding.inReviewsLayout.apply {
-            if (showReviews) getUserReviewsApi()
-            if (!showReviews) getUserReviewsApi()
+            if (showReviews) getUserReviewsApi("Helpful")
+            if (!showReviews) getUserReviewsApi("Recent")
             updateReviewsSelection(if (showReviews) tvHelpful else tvRecent)
         }
     }
@@ -434,8 +434,8 @@ class ProductDetailFragment :
         }
     }
 
-    private fun getUserReviewsApi() {
-        viewModel.getUserReviewsApi()
+    private fun getUserReviewsApi(type: String) {
+        viewModel.getUserReviewsApi(type)
     }
 
     override fun getMyViewModel() = viewModel

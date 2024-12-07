@@ -10,34 +10,35 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
 import com.app.vivi.data.remote.model.data.filter.TagData
 import com.app.vivi.data.remote.model.response.filter.Country
+import com.app.vivi.data.remote.model.response.filter.Region
 import com.app.vivi.databinding.ItemFilterTagBinding
 
-class CountryFilterAdapter(
-    private val onItemClicked: (Country) -> Unit
-) : ListAdapter<Country, CountryFilterAdapter.FilterViewHolder>(TagDiffCallback()) {
+class RegionFilterAdapter(
+    private val onItemClicked: (Region) -> Unit
+) : ListAdapter<Region, RegionFilterAdapter.ViewHolder>(RegionDiffCallback()) {
 
     fun unselectAll() {
         val updatedList = currentList.map { it.copy(isSelected = false) }
         submitList(updatedList)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemFilterTagBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return FilterViewHolder(parent.context, binding)
+        return ViewHolder(parent.context, binding)
     }
 
-    override fun onBindViewHolder(holder: FilterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), position)
     }
 
-    inner class FilterViewHolder(
+    inner class ViewHolder(
         private val context: Context,
         private val binding: ItemFilterTagBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(tag: Country, position: Int) {
+        fun bind(tag: Region, position: Int) {
             binding.tvFilter.text = tag.name
             binding.tvFilter.setTextColor(
                 ContextCompat.getColor(
@@ -65,13 +66,13 @@ class CountryFilterAdapter(
     }
 }
 
-class TagDiffCallback : DiffUtil.ItemCallback<Country>() {
-    override fun areItemsTheSame(oldItem: Country, newItem: Country): Boolean {
+class RegionDiffCallback : DiffUtil.ItemCallback<Region>() {
+    override fun areItemsTheSame(oldItem: Region, newItem: Region): Boolean {
         // Compare unique identifiers (e.g., names or IDs)
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: Country, newItem: Country): Boolean {
+    override fun areContentsTheSame(oldItem: Region, newItem: Region): Boolean {
         // Compare all fields to detect content changes
         return oldItem == newItem
     }
