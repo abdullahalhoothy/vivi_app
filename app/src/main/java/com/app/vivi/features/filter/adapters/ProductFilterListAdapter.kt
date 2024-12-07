@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
 import com.app.vivi.databinding.ProductFilterListItemBinding
+import com.app.vivi.extension.roundToTwoDecimalPlaces
 import com.app.vivi.helper.cutOnText
 import loadImageWithCache
 
@@ -33,7 +34,9 @@ class ProductFilterListAdapter(private val context: Context) :
                 // Bind data to views
                 product.imageurl?.let { ivProductBackground.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
                 product.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
-                tvDiscount.text = product.discountedprice
+//                tvDiscount.text = product.discountedprice
+                val discountedPrice = product?.discountedprice?.toDouble()?.roundToTwoDecimalPlaces()
+                tvDiscount.text = "CA$${discountedPrice}"
                 tvOrginalPrice.text =
                     cutOnText(context, "CA$${product?.originalprice}")
                 tvProductName.text = product.name
