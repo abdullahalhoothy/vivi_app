@@ -25,19 +25,25 @@ class SplashActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
 
         // Keep the splash screen visible until the API response is ready
-        splashScreen.setKeepOnScreenCondition { keepSplashOnScreen }
-        addObservers()
+//        splashScreen.setKeepOnScreenCondition { keepSplashOnScreen }
+
+//        addObservers()
     }
 
     override fun onStart() {
         super.onStart()
-        getConfigurations()
+//        getConfigurations()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navigateToMainActivity()
     }
 
     private fun navigateToMainActivity() {
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
         startActivity(intent)
-//        finish()
+        finish()
     }
 
     private fun addObservers() {

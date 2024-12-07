@@ -3,6 +3,7 @@ package com.app.vivi.data.remote
 import RecommendedProductsResponse
 import com.app.vivi.data.remote.model.request.FilteredProductsRequest
 import com.app.vivi.data.remote.model.request.LoginRequest
+import com.app.vivi.data.remote.model.request.ResetPasswordRequest
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.data.remote.model.response.LoginResponse
@@ -84,5 +85,9 @@ interface ApiService {
 
     @POST(ApiNames.PRODUCT_FILTERS_API)
     suspend fun getProductFiltersApi(@Body request: FilteredProductsRequest
+    ): Response<FilteredProductsResponse>
+
+    @POST(ApiNames.RESET_PASSWORD_API)
+    suspend fun getResetPasswordApi(@Body request: ResetPasswordRequest
     ): Response<FilteredProductsResponse>
 }

@@ -159,7 +159,7 @@
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvLoginViaLink"
+        android:id="@+id/tvResetPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_24sdp"
@@ -167,9 +167,10 @@
         android:layout_marginEnd="@dimen/_24sdp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="@string/email_me_a_link_to_login_in_txt"
+        android:text="@string/reset_password_txt"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/_13ssp"
+        android:padding="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
@@ -184,7 +185,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvOr"
         app:layout_constraintEnd_toStartOf="@+id/tvOr"
         app:layout_constraintStart_toStartOf="@+id/googleButton"
-        app:layout_constraintTop_toBottomOf="@+id/tvLoginViaLink"
+        app:layout_constraintTop_toBottomOf="@+id/tvResetPassword"
         app:layout_constraintTop_toTopOf="@+id/tvOr" />
 
     <!-- OR Text -->
@@ -200,7 +201,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/right_line"
         app:layout_constraintStart_toEndOf="@id/left_line"
-        app:layout_constraintTop_toBottomOf="@+id/tvLoginViaLink" />
+        app:layout_constraintTop_toBottomOf="@+id/tvResetPassword" />
 
     <!-- Right Horizontal Line -->
     <View
@@ -211,7 +212,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvOr"
         app:layout_constraintEnd_toEndOf="@+id/googleButton"
         app:layout_constraintStart_toEndOf="@id/tvOr"
-        app:layout_constraintTop_toBottomOf="@+id/tvLoginViaLink"
+        app:layout_constraintTop_toBottomOf="@+id/tvResetPassword"
         app:layout_constraintTop_toTopOf="@+id/tvOr" />
 
 

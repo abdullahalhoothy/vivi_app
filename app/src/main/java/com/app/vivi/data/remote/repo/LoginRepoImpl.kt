@@ -4,7 +4,10 @@ import com.app.vivi.data.remote.ApiNames
 import com.app.vivi.data.remote.ApiService
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.request.LoginRequest
+import com.app.vivi.data.remote.model.request.ResetPasswordRequest
 import com.app.vivi.data.remote.model.response.LoginResponse
+import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
+import com.app.vivi.data.remote.model.response.login.ResetPasswordResponse
 import com.app.vivi.domain.repo.LoginRepo
 import javax.inject.Inject
 
@@ -31,6 +34,10 @@ class LoginRepoImpl @Inject constructor(apiService: ApiService) : LoginRepo,
         /*return safeApiCall(
             call = { apiService.login(email, loginRequest) }
         )*/
+    }
+
+    override suspend fun getResetPasswordApi(request: ResetPasswordRequest): Resource<ResetPasswordResponse> {
+        return safeApiCall (request, ApiNames.RESET_PASSWORD_API)
     }
 
 }

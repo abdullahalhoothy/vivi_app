@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_16sdp"
-            android:text="test@gmail.com"
+            tools:text="test@gmail.com"
             android:textCursorDrawable="@null"
             android:fontFamily="sans-serif-medium"
             android:textColor="@color/colorBlack"
