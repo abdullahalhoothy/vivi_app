@@ -65,7 +65,7 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
 //            animationDrawable.start()
 
             emailButton.setOnClickListener {
-                val action = LoginMainFragmentDirections.actionLoginMainFragmentToLoginFragment()
+                val action = LoginMainFragmentDirections.actionLoginEmailFragmentToLoginFragment()
                 findNavController().navigateWithSingleTop(action)
             }
 
@@ -84,12 +84,6 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
     override fun getMyViewModel() = viewModel
 
     private fun addObservers() {
-        collectWhenStarted {
-            viewModel.emailErrorFlow.collectLatest {
-//                binding.tilEmail.error = it
-            }
-        }
-
         collectWhenStarted {
             viewModel.passwordErrorFlow.collectLatest {
 //                binding.tilPassword.error = it

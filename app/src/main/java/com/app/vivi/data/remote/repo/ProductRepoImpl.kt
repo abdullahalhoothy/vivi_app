@@ -59,7 +59,7 @@ class ProductRepoImpl @Inject constructor(apiService: ApiService, val cacheRepo:
     }
 
     override suspend fun getProductFiltersApi(request: FilteredProductsRequest): Resource<FilteredProductsResponse> {
-        return safeApiCall { apiService.getFilteredProductsApi(request) }
+        return safeApiCall { apiService.getProductFiltersApi(request) }
     }
 
 
