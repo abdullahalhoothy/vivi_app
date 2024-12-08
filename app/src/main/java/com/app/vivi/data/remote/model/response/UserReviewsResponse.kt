@@ -5,7 +5,7 @@ data class UserReviewsResponse(
 )
 
 data class Review(
-    val id: Int?,
+    val review_id: Int?,
     val name: String?,
     val userProfileImageUrl: String?,
     val description: String?,

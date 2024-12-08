@@ -69,6 +69,7 @@ class SearchFragment :
         binding.apply {
             tvShopByType.text = getString(R.string.shop_by_type_txt, getString(R.string.app_name))
             tvShopByBeanType.text = getString(R.string.shop_by_bean_txt, getString(R.string.app_name))
+            tvShopByStyles.text = getString(R.string.shop_by_styles_txt, getString(R.string.app_name))
             tvShopByRegion.text = getString(R.string.shop_by_region_txt, getString(R.string.app_name))
             tvShopByCountry.text =
                 getString(R.string.shop_by_country_txt, getString(R.string.app_name))
@@ -91,6 +92,11 @@ class SearchFragment :
 
             //Extension same clicklistener function for multiple views
             setClickListener(tvShopByBeanType, icShopByBeanTypeForward){
+                navigateToProductFiltersFragment()
+            }
+
+            //Extension same clicklistener function for multiple views
+            setClickListener(tvShopByStyles, icShopByStylesForward){
                 navigateToProductFiltersFragment()
             }
 
@@ -121,6 +127,11 @@ class SearchFragment :
             rvOuterShopByBeanType.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 adapter = outerShopByBeanAdapter
+            }
+
+            rvStyles.apply {
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = productMakingCountriesAdapter
             }
         }
 

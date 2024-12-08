@@ -148,9 +148,6 @@
                 android:padding="@dimen/_2sdp"
                 android:text="CA$58.99"
                 android:textColor="@color/colorWhite"
-                android:drawablePadding="@dimen/_5sdp"
-                android:drawableStart="@drawable/star_yellow"
-                android:drawableTint="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvProductAddress"
                 app:layout_constraintBottom_toBottomOf="@+id/tvProductAddress"/>

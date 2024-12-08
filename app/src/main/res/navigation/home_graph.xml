@@ -61,7 +61,13 @@
             app:enterAnim="@anim/expand_in"
             app:exitAnim="@anim/collapse_out"
             app:popEnterAnim="@anim/expand_in"
-            app:popExitAnim="@anim/collapse_out"/>
+            app:popExitAnim="@anim/collapse_out">
+
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+
+        </action>
 
 
         <action
