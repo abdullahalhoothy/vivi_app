@@ -4,6 +4,8 @@ import RecommendedProductsResponse
 import com.app.vivi.data.remote.model.request.FilteredProductsRequest
 import com.app.vivi.data.remote.model.request.LoginRequest
 import com.app.vivi.data.remote.model.request.ResetPasswordRequest
+import com.app.vivi.data.remote.model.request.ReviewRequest
+import com.app.vivi.data.remote.model.request.ReviewsRequest
 import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
 import com.app.vivi.data.remote.model.response.LoginResponse
@@ -11,6 +13,7 @@ import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.configuration.AppConfigResponse
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
 import com.app.vivi.data.remote.model.response.filter.ProductFiltersResponse
+import com.app.vivi.data.remote.model.response.review.UserReviewResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.ShopByRegionResponse
@@ -60,9 +63,13 @@ interface ApiService {
     suspend fun getFindYourNewFavoriteProduct(
     ): Response<FindYourNewFavoriteProductResponse>
 
-    @GET(ApiNames.USER_REVIEWS)
-    suspend fun getUserReviews(
+    @POST(ApiNames.USER_REVIEWS)
+    suspend fun getUserReviews(@Body request: ReviewsRequest
     ): Response<UserReviewsResponse>
+
+    @POST(ApiNames.USER_REVIEW)
+    suspend fun getUserReview(@Body request: ReviewRequest
+    ): Response<UserReviewResponse>
 
     @GET(ApiNames.SHOP_BY_COFFEE_TYPES_API)
     suspend fun getShopByCoffeeTypes(

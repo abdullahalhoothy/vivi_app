@@ -12,6 +12,7 @@ object ApiNames {
     const val PREFERENCE_PRODUCT_DETAIL = "${BASE_URL}preference_product_detail"
     const val FIND_YOUR_NEW_FAVORITE_PRODUCT = "${BASE_URL}find_your_new_favorite_product"
     const val USER_REVIEWS = "${BASE_URL}user_reviews"
+    const val USER_REVIEW = "${BASE_URL}user-review"
 
     const val SHOP_BY_COFFEE_TYPES_API = "${BASE_URL}coffee-types"
     const val SHOP_BY_COFFEE_BEAN_TYPES_API = "${BASE_URL}coffee-bean-types"
