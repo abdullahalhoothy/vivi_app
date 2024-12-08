@@ -98,4 +98,6 @@
     <string name="reset_password_txt">Reset password</string>
     <string name="success_txt">Success</string>
     <string name="a_password_reset_email_has_been_sent_to_your_registered_email_address_txt">A password reset email has been sent to your registered email address</string>
+    <string name="styles_txt">Styles</string>
+    <string name="sizes_txt">Sizes</string>
 </resources>

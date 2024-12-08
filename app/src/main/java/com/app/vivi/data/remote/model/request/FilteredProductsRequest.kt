@@ -1,13 +1,13 @@
 package com.app.vivi.data.remote.model.request
 
 data class FilteredProductsRequest(
-    val typeIds: List<Int> = emptyList(),
+    var typeIds: List<Int> = emptyList(),
     val minRatingValue: String? = "",
     val minPrice: String? = "",
     val maxPrice: String? = "",
-    val countryNames: List<String> = emptyList(),
-    val regionIds: List<Int> = emptyList(),
-    val rawMaterialIds: List<Int> = emptyList(),
-    val styleIds: List<Int> = emptyList(),
-    val sizeIds: List<Int> = emptyList()
+    var countryNames: List<String> = emptyList(),
+    var regionIds: List<Int> = emptyList(),
+    var rawMaterialIds: List<Int> = emptyList(),
+    var styleIds: List<Int> = emptyList(),
+    var sizeIds: List<Int> = emptyList()
 )
