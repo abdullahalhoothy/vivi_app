@@ -79,9 +79,15 @@ class ProductDetailFragment :
         initListeners()
         addObservers()
         handleBackPress()
+//        handleAppBar()
+//        animateImage()
+        getUserReviewsApi("Helpful")
+    }
+
+    override fun onResume() {
+        super.onResume()
         handleAppBar()
         animateImage()
-        getUserReviewsApi("Helpful")
     }
 
 
@@ -141,8 +147,8 @@ class ProductDetailFragment :
         binding.apply {
             inAppBar.centerImageView.setOnClickListener {
                 val action =
-                    HomeFragmentLatestDirections.actionLatestHomeFragmentToNotificationsFragment()
-                findNavController().navigateWithSingleTop(action)
+                    ProductDetailFragmentDirections.actionProductDetailFragmentToNotificationsFragment()
+                findNavController().navigate(action)
             }
 
             tvRate.setOnClickListener {
