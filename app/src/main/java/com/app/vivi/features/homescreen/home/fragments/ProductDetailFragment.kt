@@ -246,8 +246,8 @@ class ProductDetailFragment :
                 it.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
             }
             selectedTextView.apply {
-                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
             }
         }
     }
@@ -264,8 +264,8 @@ class ProductDetailFragment :
                 it.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
             }
             selectedTextView.apply {
-                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
             }
         }
     }
