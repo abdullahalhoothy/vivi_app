@@ -16,6 +16,7 @@ import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.roundToTwoDecimalPlaces
 import com.app.vivi.features.filter.adapters.ProductFilterListAdapter
+import com.app.vivi.features.homescreen.home.fragments.ProductDetailFragmentDirections
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
 import com.app.vivi.features.homescreen.home.viewmodels.filter.ProductFilterListViewModel
 import com.app.vivi.helper.createRatingDescription
@@ -48,7 +49,6 @@ class ProductReviewFragment : BaseFragmentVB<FragmentProductReviewBinding>(Fragm
 
     private fun initViews() {
         binding.apply {
-
         }
 
     }
@@ -58,6 +58,9 @@ class ProductReviewFragment : BaseFragmentVB<FragmentProductReviewBinding>(Fragm
         item: FragmentProductReviewBinding,
         product: UserReviewResponse?
     ) {
+
+
+        item.inAppBar.textView.text = product?.userrating?.username
 
         with(item.inReviewLayout) {
             item.root.visibility = View.VISIBLE
@@ -82,7 +85,7 @@ class ProductReviewFragment : BaseFragmentVB<FragmentProductReviewBinding>(Fragm
                 product?.userrating?.description, product?.userrating?.rating
             )
             tvRatingDescription.text = htmlContent
-            tvRatingUser.text = product?.userrating?.username
+            tvRatingUser.text = "${product?.userrating?.username} rated a ${getString(R.string.app_name)}"
 //            tvTime.text = product?.userrating?.
 
             product?.imageurl?.let { ivProductBackground.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
@@ -107,6 +110,12 @@ class ProductReviewFragment : BaseFragmentVB<FragmentProductReviewBinding>(Fragm
     private fun initListeners() {
         with(binding){
             inAppBar.ivBack.setOnClickListener { findNavController().popBackStack() }
+
+            inAppBar.centerImageView.setOnClickListener {
+                val action =
+                    ProductReviewFragmentDirections.actionProductReviewFragmentToNotificationsFragment()
+                findNavController().navigate(action)
+            }
 
             inReviewLayout.tvComment.setOnClickListener {
                 val editText = etComment
