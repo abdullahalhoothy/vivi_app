@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
-import com.app.vivi.data.remote.model.data.filter.TagData
-import com.app.vivi.data.remote.model.response.filter.Country
 import com.app.vivi.data.remote.model.response.filter.CoffeeBeanType
 import com.app.vivi.databinding.ItemFilterTagBinding
 
