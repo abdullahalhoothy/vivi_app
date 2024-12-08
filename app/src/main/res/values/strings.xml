@@ -56,6 +56,7 @@
     <string name="ship_to_ab_txt">Ship to AB</string>
     <string name="shop_by_type_txt">Shop %1$s by type</string>
     <string name="shop_by_country_txt">%1$smaking countries</string>
+    <string name="shop_by_styles_txt">Shop %1$s by styles</string>
     <string name="taste_characteristics_txt">Taste Characteristics</string>
     <string name="edit_txt">Edit</string>
     <string name="what_people_talk_about_txt">WHAT PEOPLE TALK ABOUT</string>

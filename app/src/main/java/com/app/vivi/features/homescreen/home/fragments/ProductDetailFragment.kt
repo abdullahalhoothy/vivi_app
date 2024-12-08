@@ -46,7 +46,7 @@ class ProductDetailFragment :
 
     private val reviewsAdapter by lazy {
         ReviewsAdapter(onCommentClick = {
-            navigateToReviewCommentFragment()
+            it.review_id?.let { it1 -> navigateToReviewCommentFragment(it1) }
         })
     }
 
@@ -182,9 +182,9 @@ class ProductDetailFragment :
         }
     }
 
-    private fun navigateToReviewCommentFragment(){
-        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt()
-        findNavController().navigateWithSingleTop(action)
+    private fun navigateToReviewCommentFragment(reviewId: Int){
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt(reviewId)
+        findNavController().navigate(action)
     }
 
     private fun navigateToReviewsFragment(){

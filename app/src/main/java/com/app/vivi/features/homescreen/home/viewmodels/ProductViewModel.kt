@@ -11,12 +11,14 @@ import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
+import com.app.vivi.data.remote.model.request.ReviewRequest
 import com.app.vivi.data.remote.model.request.ReviewsRequest
 import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
 import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
+import com.app.vivi.data.remote.model.response.review.UserReviewResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanType
 import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
 import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
@@ -29,6 +31,7 @@ import com.app.vivi.domain.repo.ProductRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -38,6 +41,10 @@ class ProductViewModel @Inject constructor(
     private val cacheRepo: CacheRepo,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
+
+
+    private val _reviewIdFlow = MutableStateFlow<Int?>(null)
+    val reviewIdFlow = _reviewIdFlow.asStateFlow()
 
     // StateFlow to hold the products list
     private val _characteristicsDataList = MutableStateFlow<List<CharacteristicsData>>(emptyList())
@@ -76,6 +83,10 @@ class ProductViewModel @Inject constructor(
     // StateFlow to hold the products list
     private val _userReviews = MutableStateFlow<UserReviewsResponse?>(null)
     val userReviews: StateFlow<UserReviewsResponse?> = _userReviews
+
+    // StateFlow to hold the products list
+    private val _userReview = MutableStateFlow<UserReviewResponse?>(null)
+    val userReview: StateFlow<UserReviewResponse?> = _userReview
     // StateFlow to hold the products list
     private val _shopByType = MutableStateFlow<List<List<ProductType>>?>(null)
     val shopByType: StateFlow<List<List<ProductType>>?> = _shopByType
@@ -96,9 +107,14 @@ class ProductViewModel @Inject constructor(
         fetchDummySummaryData()
         generateSampleProducts()
         fetchRecentList()
-        fetchProductMakingCountriesList()
     }
 
+
+    fun sendReviewId(reviewId: Int?) {
+        viewModelScope.launch {
+            _reviewIdFlow.value = reviewId
+        }
+    }
 
     private fun fetchProductList() {
         viewModelScope.launch {
@@ -165,21 +181,6 @@ class ProductViewModel @Inject constructor(
             )
 
             _vintageDataList.value = topRatingData
-        }
-    }
-
-    fun fetchProductMakingCountriesList() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-            val countriesList = listOf(
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "United States"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "United Kingdom"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "France"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "Italy"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "Germany")
-            )
-
-            _productMakingCountriesListList.value = countriesList
         }
     }
 
@@ -397,6 +398,26 @@ class ProductViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
                     _userReviews.value = call.data
+                }
+            }
+        }
+    }
+
+    fun getUserReviewApi(reviewId: Int) {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getUserReview(ReviewRequest(reviewId))) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _userReview.value = call.data
                 }
             }
         }

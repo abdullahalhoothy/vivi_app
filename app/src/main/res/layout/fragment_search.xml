@@ -289,6 +289,64 @@
             tools:listitem="@layout/item_product_making_countries" />
 
 
+
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/grey"
+            app:layout_constraintEnd_toEndOf="@+id/view1"
+            app:layout_constraintStart_toStartOf="@+id/view1"
+            app:layout_constraintTop_toBottomOf="@+id/rvRegion" />
+
+
+        <!-- Categories (Shop wines by type) -->
+        <TextView
+            android:id="@+id/tvShopByStyles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/shop_by_styles_txt"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@+id/icShopByStylesForward"
+            app:layout_constraintStart_toStartOf="@+id/searchView"
+            app:layout_constraintTop_toBottomOf="@id/view5" />
+
+        <ImageView
+            android:id="@+id/icShopByStylesForward"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:padding="@dimen/_5sdp"
+            android:contentDescription="Menu"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="@+id/tvShopByStyles"
+            app:layout_constraintEnd_toEndOf="@+id/searchView"
+            app:layout_constraintTop_toTopOf="@+id/tvShopByStyles"
+            app:tint="@color/colorWhite" />
+
+
+        <!-- Horizontal RecyclerView -->
+        <com.app.vivi.customviews.CustomRecyclerView
+            android:id="@+id/rvStyles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:nestedScrollingEnabled="false"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopByStyles"
+            tools:itemCount="1"
+            tools:listitem="@layout/item_product_making_countries" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 
