@@ -1,6 +1,5 @@
 package com.app.vivi.features.filter.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -8,12 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
-import com.app.vivi.data.remote.model.response.filter.CoffeeBeanType
+import com.app.vivi.data.remote.model.response.filter.Size
 import com.app.vivi.databinding.ItemFilterTagBinding
 
-class BeanTypeFilterAdapter(
-    private val onItemClicked: (CoffeeBeanType) -> Unit
-) : ListAdapter<CoffeeBeanType, BeanTypeFilterAdapter.ViewHolder>(CoffeeBeanTypeDiffCallback()) {
+class SizesFilterAdapter(
+    private val onItemClicked: (Size) -> Unit
+) : ListAdapter<Size, SizesFilterAdapter.ViewHolder>(SizeDiffCallback()) {
 
     fun unselectAll() {
         val updatedList = currentList.map { it.copy(isSelected = false) }
@@ -24,7 +23,7 @@ class BeanTypeFilterAdapter(
         val binding = ItemFilterTagBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return ViewHolder(parent.context, binding)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,12 +31,11 @@ class BeanTypeFilterAdapter(
     }
 
     inner class ViewHolder(
-        private val context: Context,
         private val binding: ItemFilterTagBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(tag: CoffeeBeanType, position: Int) {
-            binding.tvFilter.text = tag.name
+        fun bind(tag: Size, position: Int) {
+            binding.tvFilter.text = tag.sizeValue.toString()
             binding.tvFilter.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
@@ -64,13 +62,13 @@ class BeanTypeFilterAdapter(
     }
 }
 
-class CoffeeBeanTypeDiffCallback : DiffUtil.ItemCallback<CoffeeBeanType>() {
-    override fun areItemsTheSame(oldItem: CoffeeBeanType, newItem: CoffeeBeanType): Boolean {
+class SizeDiffCallback : DiffUtil.ItemCallback<Size>() {
+    override fun areItemsTheSame(oldItem: Size, newItem: Size): Boolean {
         // Compare unique identifiers (e.g., names or IDs)
-        return oldItem.name == newItem.name
+        return oldItem.sizeValue == newItem.sizeValue
     }
 
-    override fun areContentsTheSame(oldItem: CoffeeBeanType, newItem: CoffeeBeanType): Boolean {
+    override fun areContentsTheSame(oldItem: Size, newItem: Size): Boolean {
         // Compare all fields to detect content changes
         return oldItem == newItem
     }

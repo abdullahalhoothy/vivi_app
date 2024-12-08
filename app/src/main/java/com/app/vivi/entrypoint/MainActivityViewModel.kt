@@ -41,7 +41,7 @@ class MainActivityViewModel @Inject constructor(private val cacheRepo: CacheRepo
             )
         }*/
 
-        viewModelScope.launch {
+        /*viewModelScope.launch {
             keepSplashScreen = true
             if (isUserLoggedIn()) {
                 cacheRepo.getLoginResponse().firstOrNull()?.let { loginResponse ->
@@ -52,7 +52,7 @@ class MainActivityViewModel @Inject constructor(private val cacheRepo: CacheRepo
                 }
             }
             keepSplashScreen = false
-        }
+        }*/
     }
 
     private suspend fun isUserLoggedIn(): Boolean {

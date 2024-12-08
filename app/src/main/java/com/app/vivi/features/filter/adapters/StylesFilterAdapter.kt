@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
-import com.app.vivi.data.remote.model.response.filter.CoffeeBeanType
+import com.app.vivi.data.remote.model.data.filter.TagData
+import com.app.vivi.data.remote.model.response.filter.Country
+import com.app.vivi.data.remote.model.response.filter.CoffeeStyle
 import com.app.vivi.databinding.ItemFilterTagBinding
 
-class BeanTypeFilterAdapter(
-    private val onItemClicked: (CoffeeBeanType) -> Unit
-) : ListAdapter<CoffeeBeanType, BeanTypeFilterAdapter.ViewHolder>(CoffeeBeanTypeDiffCallback()) {
+class StylesFilterAdapter(
+    private val onItemClicked: (CoffeeStyle) -> Unit
+) : ListAdapter<CoffeeStyle, StylesFilterAdapter.ViewHolder>(StyleDiffCallback()) {
 
     fun unselectAll() {
         val updatedList = currentList.map { it.copy(isSelected = false) }
@@ -24,7 +26,7 @@ class BeanTypeFilterAdapter(
         val binding = ItemFilterTagBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return ViewHolder(parent.context, binding)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -32,11 +34,10 @@ class BeanTypeFilterAdapter(
     }
 
     inner class ViewHolder(
-        private val context: Context,
         private val binding: ItemFilterTagBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(tag: CoffeeBeanType, position: Int) {
+        fun bind(tag: CoffeeStyle, position: Int) {
             binding.tvFilter.text = tag.name
             binding.tvFilter.setTextColor(
                 ContextCompat.getColor(
@@ -64,13 +65,13 @@ class BeanTypeFilterAdapter(
     }
 }
 
-class CoffeeBeanTypeDiffCallback : DiffUtil.ItemCallback<CoffeeBeanType>() {
-    override fun areItemsTheSame(oldItem: CoffeeBeanType, newItem: CoffeeBeanType): Boolean {
+class StyleDiffCallback : DiffUtil.ItemCallback<CoffeeStyle>() {
+    override fun areItemsTheSame(oldItem: CoffeeStyle, newItem: CoffeeStyle): Boolean {
         // Compare unique identifiers (e.g., names or IDs)
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: CoffeeBeanType, newItem: CoffeeBeanType): Boolean {
+    override fun areContentsTheSame(oldItem: CoffeeStyle, newItem: CoffeeStyle): Boolean {
         // Compare all fields to detect content changes
         return oldItem == newItem
     }
