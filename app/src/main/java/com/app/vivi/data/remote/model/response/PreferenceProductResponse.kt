@@ -1,9 +1,9 @@
 package com.app.vivi.data.remote.model.response
 data class PreferenceProductResponse(
-    val product: Product? = null
+    val products: List<products>? = null
 )
 
-data class Product(
+data class products(
     val id: String? = null,
     val name: String? = null,
     val description: String? = null,
@@ -24,9 +24,10 @@ data class Product(
 )
 
 data class UserRating(
-    val rating: String? = null,
-    val review: String? = null,
-    val username: String? = null,
-    val description: String? = null,
-    val userimageurl: String? = null
+    val rating: String,
+    val review: String,
+    val username: String,
+    val description: String,
+    val userimageurl: String
+
 )

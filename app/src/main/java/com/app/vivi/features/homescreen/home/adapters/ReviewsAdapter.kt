@@ -2,7 +2,6 @@ package com.app.vivi.features.homescreen.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +11,7 @@ import com.app.vivi.databinding.ReviewsItemBinding
 import com.app.vivi.extension.setDrawableWithSize
 import com.app.vivi.helper.createRatingDescription
 
-class ReviewsAdapter :
+class ReviewsAdapter(private val onCommentClick: (Item: Review) -> Unit) :
     ListAdapter<Review, ReviewsAdapter.ReviewViewHolder>(ReviewDiffCallback()) {
 
     // ViewHolder class to bind data
@@ -24,7 +23,7 @@ class ReviewsAdapter :
                 val htmlContent = createRatingDescription(binding.root.context, review.description, review.averageRating.toString())
                 tvRating.text = htmlContent
                 tvRaterUsername.text = "${review.name} (${review.totalRatings} " +
-                        "${root.context.getString(R.string.rating_txt)})"
+                        "${root.context.getString(R.string.ratings_txt)})"
 
                 tvComment.setDrawableWithSize(binding.root.context,
                     R.drawable.ic_comment,
@@ -32,6 +31,10 @@ class ReviewsAdapter :
                     binding.root.context.resources.getDimensionPixelSize(R.dimen.sdp_10))
 
                 tvTime.text = review.time
+
+                tvComment.setOnClickListener {
+                    onCommentClick(review)
+                }
             }
         }
     }

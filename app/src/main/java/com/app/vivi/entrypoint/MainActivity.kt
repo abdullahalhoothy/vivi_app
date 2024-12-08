@@ -36,9 +36,9 @@ class MainActivity : AppCompatActivity() {
 //        WindowCompat.setDecorFitsSystemWindows(window, false)
 
 
-        installSplashScreen().apply {
+        /*installSplashScreen().apply {
             setKeepOnScreenCondition { viewModel.keepSplashScreen }
-        }
+        }*/
 
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 //        window.statusBarColor = ContextCompat.getColor(this, R.color.white)

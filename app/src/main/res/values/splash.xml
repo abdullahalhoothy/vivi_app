@@ -5,7 +5,7 @@
 
         <item name="windowSplashScreenBackground">#040101</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash</item>
-        <item name="postSplashScreenTheme">@style/Theme.Eprescription</item>
+        <item name="postSplashScreenTheme">@style/Theme.App</item>
 
     </style>
 

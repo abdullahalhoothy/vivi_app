@@ -28,6 +28,16 @@
             app:popEnterAnim="@anim/expand_in"
             app:popExitAnim="@anim/collapse_out"/>
 
+        <action
+            android:id="@+id/action_latestHomeFragment_to_productFilterListFragment"
+            app:destination="@id/productFilterListFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+
+
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
@@ -36,8 +46,33 @@
         android:label="ProductDetailFragment">
 
         <action
-            android:id="@+id/action_latestHomeFragment_to_notificationsFragment"
+            android:id="@+id/action_productDetailFragment_to_notificationsFragment"
             app:destination="@id/notificationsFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+
+        <action
+            android:id="@+id/action_productDetailFragment_to_productReviewFragmentt"
+            app:destination="@id/productReviewFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out">
+
+            <argument
+                android:name="reviewId"
+                app:argType="integer" />
+
+        </action>
+
+
+        <action
+            android:id="@+id/action_productDetailFragment_to_productFiltersFragment"
+            app:destination="@id/productFiltersFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@anim/expand_in"
             app:exitAnim="@anim/collapse_out"
@@ -52,6 +87,47 @@
         tools:layout="@layout/fragment_notifications"
         android:label="NotificationsFragment">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/productFilterListFragment"
+        android:name="com.app.vivi.features.filter.ProductFilterListFragment"
+        tools:layout="@layout/fragment_product_filter_list"
+        android:label="ProductFilterListFragment">
+
+
+       <!-- <action
+            android:id="@+id/action_productFilterListFragment_to_productFiltersFragment"
+            app:destination="@id/productFiltersFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>-->
+    </fragment>
+
+    <fragment
+        android:id="@+id/productFiltersFragment"
+        android:name="com.app.vivi.features.filter.ReviewsFragment"
+        tools:layout="@layout/fragment_reviews"
+        android:label="ProductFiltersFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/productReviewFragment"
+        android:name="com.app.vivi.features.review.ProductReviewFragment"
+        tools:layout="@layout/fragment_product_review"
+        android:label="ProductReviewFragment">
+
+
+        <action
+            android:id="@+id/action_productReviewFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
     </fragment>
 
 <!--    <include app:graph="@navigation/patient_menu_graph" />-->

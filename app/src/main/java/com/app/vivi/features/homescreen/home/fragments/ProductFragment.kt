@@ -13,6 +13,7 @@ import com.app.vivi.databinding.FragmentProductBinding
 import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.navigateWithSingleTop
+import com.app.vivi.extension.roundToTwoDecimalPlaces
 import com.app.vivi.extension.showShortToast
 import com.app.vivi.features.homescreen.home.adapters.PreferenceProductAdapter
 import com.app.vivi.features.homescreen.home.adapters.ProductOuterFavoriteAdapter
@@ -21,6 +22,7 @@ import com.app.vivi.helper.createRatingDescription
 import com.app.vivi.helper.cutOnText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import loadImageWithCache
 
 @AndroidEntryPoint
 class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBinding::inflate) {
@@ -57,6 +59,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         initListeners()
         addObservers()
         getRecommendedProducts()
+        getPreferenceProductDetail()
     }
 
 
@@ -100,7 +103,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 // Only call the API once when scrolling up and view becomes visible
                 if (!isApiCalled) {
                     Log.d("Scrolling: ", " isApiCalled: $isApiCalled")
-                    getPreferenceProductDetail()
+//                    getPreferenceProductDetail()
                     getFindYourNewFavoriteProduct()
                     isApiCalled = true  // Set flag to prevent further calls
                 }
@@ -139,14 +142,19 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
     ) {
 
         with(item) {
+            item.root.visibility = View.VISIBLE
             tvProductName.text = product?.name
             tvProductDetails.text = product?.description
             tvProductAddress.text = product?.city.plus(", ${product?.country}")
             ratingText.text = product?.averagerating
             ratingBar.rating = product?.averagerating?.toFloatOrNull()
                 ?: 0f // Safely convert to float, defaulting to 0
-            ratingsCount.text = product?.totalratings.plus(" ${getString(R.string.rating_txt)}")
-            tvDiscount.text = "CA$${product?.discountedprice}"
+            ratingsCount.text = product?.totalratings.plus(" ${getString(R.string.ratings_txt)}")
+            val discountedPrice = product?.discountedprice?.toDouble()?.roundToTwoDecimalPlaces()
+            tvDiscount.text = "CA$${discountedPrice}"
+
+            inSaveLayout.labelText.text = "${getString(R.string.save_txt)} ${product?.discountpercentage}"
+
             tvOrginalPrice.text =
                 cutOnText(requireContext().applicationContext, "CA$${product?.originalprice}")
 
@@ -156,11 +164,15 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
             )
             tvRatingDescription.text = htmlContent
             tvRatingUser.text = product?.userrating?.userName
+
+//            "https://drive.google.com/uc?export=view&id=11oOuA4j9MlB1XGLN2uKIuZCeklrFzqZO".let { ivBottle.loadImageWithCache(it) }
+//            "https://drive.google.com/uc?id=11oOuA4j9MlB1XGLN2uKIuZCeklrFzqZO".let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
+            product?.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
+            product?.imageurl?.let { ivProductBackground.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
         }
     }
 
     private fun initAdapters() {
-//        mProductAdapter = ProductAdapter()
         setupRecyclerViews()
     }
 
@@ -231,20 +243,22 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                     // For example, you can clear the views or set default values
                     clearViews(binding.inJustForYou)
                 }
+
+                //Loading Banner image
+                product?.bannerImageUrl?.let {
+                    binding.ivBanner.visibility = View.VISIBLE
+                    binding.ivBanner.loadImageWithCache(it, R.drawable.ic_banner) }
             }
         }
 
         collectWhenStarted {
             viewModel.preferenceProductDetail.collectLatest {
 
-                it?.product?.let { product ->
-                    val list = listOf(product)
+                it?.products?.let { list ->
+//                    val list = listOf(product)
                     mPickForYouAdapter.submitList(list)
                     mYouMightInterestedAdapter.submitList(list)
 
-                    product?.userrating?.let {
-
-                    }
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.app.vivi.data.remote.repo
 
+import android.util.Log
 import com.app.vivi.data.remote.ApiService
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.extension.fromJsonSafe
@@ -57,6 +58,48 @@ abstract class BaseRepo(val apiService: ApiService) {
         } catch (ex: Exception) {
             ex.printStackTrace()
             Resource.Error("Error in network Request")
+        }
+
+    }
+
+    suspend inline fun <reified Res : Any, Req : Any> safeApiCall(
+        request: Req,
+        apiUrl: String
+    ): Resource<Res> {
+        val response: Response<JsonObject>
+        return try {
+            val jsonRequest = try {
+                JsonParser.parseString(request.toJson()).asJsonObject
+            } catch (ex: Exception) {
+                JsonObject()
+            }
+            response = apiService.postRequest(apiUrl, jsonRequest)
+            if (response.isSuccessful && response.body() != null) {
+                val jsonObject = response.body()!!.toString()
+                val obj = Gson().fromJsonSafe(jsonObject, Res::class.java)
+
+                if (obj != null) {
+                    Resource.Success(obj)
+                } else {
+                    Log.e("====Error---sucess", response.code().toString())
+                    Resource.Error("Error","Error in network Request", response.code())
+                }
+            } else {
+                Log.e("====Error---", response.code().toString())
+
+                try {
+                    Resource.Error("Error",response.errorBody()?.string()!!, response.code())
+                }catch (ex: Exception){
+                    ex.printStackTrace()
+                    Resource.Error("Error","Error in network Request", response.code())
+                }
+//                Resource.Error("Error in network Request")
+            }
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            Log.e("====Error---exception", "dsfjllksdjfjdsf")
+//            Resource.Error("Error in network Request")
+            Resource.Error(title = "Error", message = "Error in network Request")
         }
 
     }

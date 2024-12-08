@@ -64,4 +64,8 @@ class DataStoreHelper(private val prefDataStore: DataStore<Preferences>) {
         }
         return this@catchAndHandleError
     }
+
+    suspend fun <T> clearData(key: Preferences.Key<T>) {
+        prefDataStore.edit { pref -> pref.remove(key)}
+    }
 }

@@ -30,8 +30,12 @@ class SplashViewModel @Inject constructor(
         // Simulate loading data
     }
 
-    fun getConfigurations() {
+    fun getConfigurations(forceRefresh: Boolean = false) {
         viewModelScope.launch {
+            if (forceRefresh) {
+                cacheRepo.clearConfigurationData()
+            }
+
             showLoader()
             when (val call = splashRepo.getConfigurations()) {
                 is Resource.Error -> {
@@ -41,8 +45,9 @@ class SplashViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
 
-                    cacheRepo.saveConfigurationData(call.data)
-                    _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
+//                    cacheRepo.saveConfigurationData(call.data)
+//                    _channel.trySend()
+                    _channel.trySend(NavigationEvents.NavigateToMainScreen(call.data))
                     /*if (call.data.responseCode == 200) {
                         cacheRepo.saveConfigurationData(call.data.data)
                         _channel.send(NavigationEvents.NavigateToMainScreen(call.data))

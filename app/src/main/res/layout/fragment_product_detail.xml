@@ -18,8 +18,8 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_340sdp"
-            android:background="?attr/colorOnSecondary"
-            app:contentScrim="?attr/colorOnSecondary"
+            android:background="@color/colorBlack"
+            app:contentScrim="@color/colorBlack"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
@@ -152,21 +152,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_40sdp"
-        android:background="@color/colorWhite"
+        android:background="@color/colorBlack"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:background="@color/colorBlack"
             app:cardCornerRadius="@dimen/_13sdp"
             app:cardElevation="@dimen/_8sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
+                android:background="@color/colorBlack">
 
 
                 <androidx.constraintlayout.widget.Guideline
@@ -578,7 +578,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/colorWhite"
+        android:background="@color/colorBlack"
         android:visibility="gone">
 
         <com.app.vivi.customviews.CustomTextView

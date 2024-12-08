@@ -21,4 +21,7 @@ interface CacheRepo {
     suspend fun saveConfigurationData(response: AppConfigResponse?)
 
     suspend fun getConfigurationData(): Flow<AppConfigResponse?>
+
+    // Add this method to clear configuration data from the cache
+    suspend fun clearConfigurationData()
 }

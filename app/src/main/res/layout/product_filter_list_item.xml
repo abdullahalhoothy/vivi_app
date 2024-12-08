@@ -1,0 +1,217 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_product"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorCardBackground"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:cardElevation="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_20sdp">
+
+
+    <!-- Image and Discount Label -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+        <com.app.vivi.customviews.CurvedImageView
+            android:id="@+id/ivProductBackground"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_170sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_bg_coffee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/rectangle_round_solid_white_stroke_grey"
+            android:padding="@dimen/_5sdp"
+            android:src="@drawable/ic_favorite_outline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/ivBottle"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_220sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_bottle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <include
+            android:id="@+id/inSaveLayout"
+            layout="@layout/custom_label"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            app:layout_constraintStart_toStartOf="@id/ivBottle"
+            app:layout_constraintTop_toTopOf="@id/ivBottle" />
+
+        <TextView
+            android:id="@+id/ratingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.1"
+            android:textSize="@dimen/_30ssp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@+id/rating_bar"
+            app:layout_constraintTop_toTopOf="@+id/rating_bar"
+            app:layout_constraintBottom_toBottomOf="@+id/ratingsCount"/>
+
+        <!-- RatingBar with 5 stars -->
+        <RatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_15sdp"
+            android:numStars="5"
+            android:stepSize="1"
+            android:rating="3.5"
+            android:isIndicator="true"
+            android:progressDrawable="@drawable/doctor_rating_bar_selector"
+            android:progressTint="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivBottle"
+            app:layout_constraintTop_toBottomOf="@+id/ivProductBackground"/>
+
+        <!-- Number of ratings (e.g., 356 ratings) -->
+        <TextView
+            android:id="@+id/ratingsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="356 ratings"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintStart_toStartOf="@+id/rating_bar"
+            app:layout_constraintTop_toBottomOf="@+id/rating_bar"
+            app:layout_constraintEnd_toEndOf="@+id/rating_bar"/>
+
+        <com.app.vivi.customviews.CustomTextView
+            android:id="@+id/tvDiscount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:text="CA$44.99"
+            android:textColor="#ffffff"
+            app:backgroundColor="@color/teal_200"
+            app:cornerRadius="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingsCount" />
+
+
+        <TextView
+            android:id="@+id/tvOrginalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CA$59.99"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="@+id/tvDiscount"
+            app:layout_constraintTop_toBottomOf="@+id/tvDiscount"
+            app:layout_constraintEnd_toEndOf="@+id/tvDiscount"/>
+
+
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Beaulieu Vineyard (BV)"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrginalPrice"/>
+
+        <TextView
+            android:id="@+id/tvProductDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Napa Valley Cabernet Sauvignon 2020"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvProductName"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductName"/>
+
+        <TextView
+            android:id="@+id/tvProductAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Napa Valley, United States"
+            android:textColor="@color/colorWhite"
+            android:drawablePadding="@dimen/_5sdp"
+            android:drawableStart="@drawable/ic_uk_globe"
+            app:layout_constraintStart_toStartOf="@+id/tvProductDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductDetails"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/colorBackground"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductAddress"/>
+
+
+        <TextView
+            android:id="@+id/tvRatingDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States Napa Valley, United States "
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"/>
+
+
+        <ImageView
+            android:id="@+id/ivRatingUser"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:src="@drawable/ic_male_placeholder"
+            app:layout_constraintStart_toStartOf="@+id/tvRatingDescription"
+            app:layout_constraintTop_toBottomOf="@+id/tvRatingDescription"/>
+
+
+        <TextView
+            android:id="@+id/tvRatingUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_2sdp"
+            android:text="Michael Miller (328 ratings)"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@+id/ivRatingUser"
+            app:layout_constraintTop_toTopOf="@+id/ivRatingUser"
+            app:layout_constraintBottom_toBottomOf="@+id/ivRatingUser"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

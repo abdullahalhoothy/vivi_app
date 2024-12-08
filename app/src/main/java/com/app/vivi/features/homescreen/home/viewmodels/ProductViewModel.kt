@@ -11,18 +11,27 @@ import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
-import com.app.vivi.data.remote.model.response.FindYourNewFavoriteProductResponse
+import com.app.vivi.data.remote.model.request.ReviewRequest
+import com.app.vivi.data.remote.model.request.ReviewsRequest
 import com.app.vivi.data.remote.model.response.NewFavoriteProduct
 import com.app.vivi.data.remote.model.response.PreferenceProductResponse
-import com.app.vivi.data.remote.model.response.Product
+import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.data.remote.model.response.UserRating
 import com.app.vivi.data.remote.model.response.UserReviewsResponse
+import com.app.vivi.data.remote.model.response.review.UserReviewResponse
+import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanType
+import com.app.vivi.data.remote.model.response.searchfragment.CoffeeBeanTypesResponse
+import com.app.vivi.data.remote.model.response.searchfragment.CountriesResponse
+import com.app.vivi.data.remote.model.response.searchfragment.ProductType
+import com.app.vivi.data.remote.model.response.searchfragment.ShopByRegionResponse
+import com.app.vivi.data.remote.model.response.searchfragment.ShopByTypeResponse
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.domain.repo.CacheRepo
 import com.app.vivi.domain.repo.ProductRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,6 +41,10 @@ class ProductViewModel @Inject constructor(
     private val cacheRepo: CacheRepo,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
+
+
+    private val _reviewIdFlow = MutableStateFlow<Int?>(null)
+    val reviewIdFlow = _reviewIdFlow.asStateFlow()
 
     // StateFlow to hold the products list
     private val _characteristicsDataList = MutableStateFlow<List<CharacteristicsData>>(emptyList())
@@ -60,8 +73,8 @@ class ProductViewModel @Inject constructor(
     val preferenceProductDetail: StateFlow<PreferenceProductResponse?> = _preferenceProductDetail
 
     // StateFlow to hold the products list
-    private val _bestOfProductDetail = MutableStateFlow<List<Product>?>(null)
-    val bestOfProductDetail: StateFlow<List<Product>?> = _bestOfProductDetail
+    private val _bestOfProductsDetail = MutableStateFlow<List<products>?>(null)
+    val bestOfProductsDetail: StateFlow<List<products>?> = _bestOfProductsDetail
 
     // StateFlow to hold the products list
     private val _findYourNewFavoriteProduct = MutableStateFlow<List<List<NewFavoriteProduct>>?>(null)
@@ -71,6 +84,22 @@ class ProductViewModel @Inject constructor(
     private val _userReviews = MutableStateFlow<UserReviewsResponse?>(null)
     val userReviews: StateFlow<UserReviewsResponse?> = _userReviews
 
+    // StateFlow to hold the products list
+    private val _userReview = MutableStateFlow<UserReviewResponse?>(null)
+    val userReview: StateFlow<UserReviewResponse?> = _userReview
+    // StateFlow to hold the products list
+    private val _shopByType = MutableStateFlow<List<List<ProductType>>?>(null)
+    val shopByType: StateFlow<List<List<ProductType>>?> = _shopByType
+    // StateFlow to hold the products list
+    private val _shopByCoffeeBeanTypes = MutableStateFlow<List<List<CoffeeBeanType>>?>(null)
+    val shopByCoffeeBeanTypes: StateFlow<List<List<CoffeeBeanType>>?> = _shopByCoffeeBeanTypes
+    // StateFlow to hold the products list
+    private val _shopByCountries = MutableStateFlow<CountriesResponse?>(null)
+    val shopByCountries: StateFlow<CountriesResponse?> = _shopByCountries
+    // StateFlow to hold the products list
+    private val _shopByRegion = MutableStateFlow<ShopByRegionResponse?>(null)
+    val shopByRegion: StateFlow<ShopByRegionResponse?> = _shopByRegion
+
     init {
         // Simulate loading data
         fetchProductList()
@@ -78,9 +107,14 @@ class ProductViewModel @Inject constructor(
         fetchDummySummaryData()
         generateSampleProducts()
         fetchRecentList()
-        fetchProductMakingCountriesList()
     }
 
+
+    fun sendReviewId(reviewId: Int?) {
+        viewModelScope.launch {
+            _reviewIdFlow.value = reviewId
+        }
+    }
 
     private fun fetchProductList() {
         viewModelScope.launch {
@@ -150,21 +184,6 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-    fun fetchProductMakingCountriesList() {
-        viewModelScope.launch {
-            // Simulate fetching product list
-            val countriesList = listOf(
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "United States"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "United Kingdom"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "France"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "Italy"),
-                ProductMakingCountries(R.drawable.ic_bg_coffee, "Germany")
-            )
-
-            _productMakingCountriesListList.value = countriesList
-        }
-    }
-
     private fun fetchDummySummaryData() {
         viewModelScope.launch {
             // Simulate fetching product list
@@ -190,7 +209,7 @@ class ProductViewModel @Inject constructor(
     fun generateSampleProducts() {
         viewModelScope.launch {
             val list = listOf(
-                Product(
+                products(
                     id = "1",
                     name = "Product A",
                     description = "Description of Product A",
@@ -215,7 +234,7 @@ class ProductViewModel @Inject constructor(
                         userimageurl = "http://example.com/user1.png"
                     )
                 ),
-                Product(
+                products(
                     id = "2",
                     name = "Product B",
                     description = "Description of Product B",
@@ -240,7 +259,7 @@ class ProductViewModel @Inject constructor(
                         userimageurl = "http://example.com/user2.png"
                     )
                 ),
-                Product(
+                products(
                     id = "1",
                     name = "Product A",
                     description = "Description of Product A",
@@ -265,7 +284,7 @@ class ProductViewModel @Inject constructor(
                         userimageurl = "http://example.com/user1.png"
                     )
                 ),
-                Product(
+                products(
                     id = "2",
                     name = "Product B",
                     description = "Description of Product B",
@@ -292,7 +311,7 @@ class ProductViewModel @Inject constructor(
                 )
             )
 
-            _bestOfProductDetail.value = list
+            _bestOfProductsDetail.value = list
         }
     }
 
@@ -364,10 +383,10 @@ class ProductViewModel @Inject constructor(
         }
     }
 
-    fun getUserReviewsApi() {
+    fun getUserReviewsApi(type: String) {
         viewModelScope.launch {
             showLoader()
-            when (val call = productRepo.getUserReviews()) {
+            when (val call = productRepo.getUserReviews(ReviewsRequest(type))) {
                 is Resource.Error -> {
                     if (call.code == 401) {
                         showError(ErrorModel(title = call.title, message = call.message, call.code))
@@ -379,6 +398,108 @@ class ProductViewModel @Inject constructor(
                 is Resource.Success -> {
                     hideLoader()
                     _userReviews.value = call.data
+                }
+            }
+        }
+    }
+
+    fun getUserReviewApi(reviewId: Int) {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getUserReview(ReviewRequest(reviewId))) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _userReview.value = call.data
+                }
+            }
+        }
+    }
+
+    fun getShopByCoffeeTypes() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getShopByCoffeeTypes()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    val newItems: List<List<ProductType>> = call.data.products?.chunked(3) ?: emptyList()
+                    _shopByType.value = newItems
+                }
+            }
+        }
+    }
+
+    fun getShopByCoffeeBeanTypes() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getShopByCoffeeBeanTypes()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    val newItems: List<List<CoffeeBeanType>> = call.data.coffeeBeanTypes?.chunked(3) ?: emptyList()
+                    _shopByCoffeeBeanTypes.value = newItems
+                }
+            }
+        }
+    }
+
+    fun getShopByCountries() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getShopByCountries()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _shopByCountries.value = call.data
+                }
+            }
+        }
+    }
+
+    fun getShopByRegions() {
+        viewModelScope.launch {
+            showLoader()
+            when (val call = productRepo.getShopByRegions()) {
+                is Resource.Error -> {
+                    if (call.code == 401) {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    _shopByRegion.value = call.data
                 }
             }
         }

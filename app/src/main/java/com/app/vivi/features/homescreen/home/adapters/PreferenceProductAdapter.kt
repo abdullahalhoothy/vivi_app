@@ -5,29 +5,31 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.app.vivi.data.remote.model.response.Product
+import com.app.vivi.R
+import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.databinding.PreferenceProductListItemBinding
+import loadImageWithCache
 
 class PreferenceProductAdapter(
-    private val onItemClick: (item: Product) -> Unit,
-    private val onDiscountButtonClick: (item: Product) -> Unit
+    private val onItemClick: (item: products) -> Unit,
+    private val onDiscountButtonClick: (item: products) -> Unit
 ) :
-    ListAdapter<Product, PreferenceProductAdapter.PreferenceProductViewHolder>(
+    ListAdapter<products, PreferenceProductAdapter.PreferenceProductViewHolder>(
         PreferenceProductDiffCallback()
     ) {
 
     inner class PreferenceProductViewHolder(val binding: PreferenceProductListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: Product) {
+        fun bind(data: products) {
             with(binding) {
                 tvProductName.text = data.name
                 tvProductDetails.text = data.description
-                tvRatingText.text = data.ratingvalue.toString()
+                tvRatingText.text = data.averagerating.toString()
                 ratingsCount.text = data.totalratings
-                tvRatingDescription.text = data.ratingtext
                 tvDiscount.text = "${data.discountedprice}"
 
-
+                tvRatingDescription.text = data.userrating?.description
+                data?.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
                 tvDiscount.setOnClickListener {
                     onDiscountButtonClick(data)
                 }
@@ -54,13 +56,13 @@ class PreferenceProductAdapter(
         holder.bind(getItem(position))
     }
 
-    class PreferenceProductDiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
+    class PreferenceProductDiffCallback : DiffUtil.ItemCallback<products>() {
+        override fun areItemsTheSame(oldItem: products, newItem: products): Boolean {
             // Compare the unique ID or some unique property of the item
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
+        override fun areContentsTheSame(oldItem: products, newItem: products): Boolean {
             // Compare all the data inside the item
             return oldItem == newItem
         }

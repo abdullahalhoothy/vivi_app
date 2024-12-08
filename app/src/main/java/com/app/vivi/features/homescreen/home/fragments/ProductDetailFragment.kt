@@ -45,7 +45,9 @@ class ProductDetailFragment :
     }
 
     private val reviewsAdapter by lazy {
-        ReviewsAdapter()
+        ReviewsAdapter(onCommentClick = {
+            it.review_id?.let { it1 -> navigateToReviewCommentFragment(it1) }
+        })
     }
 
     private val characteristicsAdapter by lazy {
@@ -77,9 +79,15 @@ class ProductDetailFragment :
         initListeners()
         addObservers()
         handleBackPress()
+//        handleAppBar()
+//        animateImage()
+        getUserReviewsApi("Helpful")
+    }
+
+    override fun onResume() {
+        super.onResume()
         handleAppBar()
         animateImage()
-        getUserReviewsApi()
     }
 
 
@@ -139,8 +147,8 @@ class ProductDetailFragment :
         binding.apply {
             inAppBar.centerImageView.setOnClickListener {
                 val action =
-                    HomeFragmentLatestDirections.actionLatestHomeFragmentToNotificationsFragment()
-                findNavController().navigateWithSingleTop(action)
+                    ProductDetailFragmentDirections.actionProductDetailFragmentToNotificationsFragment()
+                findNavController().navigate(action)
             }
 
             tvRate.setOnClickListener {
@@ -155,6 +163,7 @@ class ProductDetailFragment :
             inReviewsLayout.apply {
                 tvHelpful.setOnClickListener { toggleReviewsView(true) }
                 tvRecent.setOnClickListener { toggleReviewsView(false) }
+                tvShowAllReviews.setOnClickListener { navigateToReviewsFragment() }
             }
 
             // Button Click Listeners
@@ -177,6 +186,16 @@ class ProductDetailFragment :
                 // Implement your action to show all vintages
             }
         }
+    }
+
+    private fun navigateToReviewCommentFragment(reviewId: Int){
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductReviewFragmentt(reviewId)
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToReviewsFragment(){
+        val action = ProductDetailFragmentDirections.actionProductDetailFragmentToProductFiltersFragment()
+        findNavController().navigateWithSingleTop(action)
     }
 
     private fun highlightButton(activeButton: Button) {
@@ -209,8 +228,8 @@ class ProductDetailFragment :
 
     private fun toggleReviewsView(showReviews: Boolean) {
         binding.inReviewsLayout.apply {
-            if (showReviews) getUserReviewsApi()
-            if (!showReviews) getUserReviewsApi()
+            if (showReviews) getUserReviewsApi("Helpful")
+            if (!showReviews) getUserReviewsApi("Recent")
             updateReviewsSelection(if (showReviews) tvHelpful else tvRecent)
         }
     }
@@ -227,8 +246,8 @@ class ProductDetailFragment :
                 it.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
             }
             selectedTextView.apply {
-                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
             }
         }
     }
@@ -245,8 +264,8 @@ class ProductDetailFragment :
                 it.setTextColor(ContextCompat.getColor(requireContext(), R.color.grey))
             }
             selectedTextView.apply {
-                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
-                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                updateBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
             }
         }
     }
@@ -405,7 +424,7 @@ class ProductDetailFragment :
         }
 
         collectWhenStarted {
-            viewModel.bestOfProductDetail.collectLatest {
+            viewModel.bestOfProductsDetail.collectLatest {
                 it?.let { list ->
                     mBestOfProductAdapter.submitList(list)
                 }
@@ -421,8 +440,8 @@ class ProductDetailFragment :
         }
     }
 
-    private fun getUserReviewsApi() {
-        viewModel.getUserReviewsApi()
+    private fun getUserReviewsApi(type: String) {
+        viewModel.getUserReviewsApi(type)
     }
 
     override fun getMyViewModel() = viewModel

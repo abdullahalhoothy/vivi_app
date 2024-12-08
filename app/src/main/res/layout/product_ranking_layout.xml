@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_10sdp"
-    android:background="@color/greyDark">
+    android:background="@color/greyDark"
+    android:padding="@dimen/_10sdp">
 
 
     <!-- Percentage Text -->
@@ -13,71 +13,123 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ranking_txt"
-        android:textSize="@dimen/_12ssp"
-        android:textColor="@color/colorWhite"
         android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/ranking_txt"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Custom Circular Progress View -->
-    <com.app.vivi.customviews.CircularProgressView
-        android:id="@+id/cpWorldRanking"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
+    <FrameLayout
+        android:id="@+id/flWorldRanking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_20sdp"
-        app:layout_constraintEnd_toStartOf="@+id/cpRegionRanking"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/flRegionRanking"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
-    <!-- Custom Circular Progress View -->
-    <com.app.vivi.customviews.CircularProgressView
-        android:id="@+id/cpRegionRanking"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
-        android:padding="@dimen/_10sdp"
-        app:layout_constraintStart_toEndOf="@+id/cpWorldRanking"
-        app:layout_constraintBottom_toBottomOf="@+id/cpWorldRanking"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_30sdp">
+
+            <com.app.vivi.customviews.CircularProgressView
+                android:id="@+id/cpWorldRanking"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!-- Percentage Text -->
+            <TextView
+                android:id="@+id/percentageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/cpWorldRanking"
+                app:layout_constraintEnd_toEndOf="@+id/cpWorldRanking"
+                app:layout_constraintStart_toStartOf="@+id/cpWorldRanking"
+                app:layout_constraintTop_toTopOf="@+id/cpWorldRanking" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <include
+            layout="@layout/level_label"
+            android:layout_width="@dimen/_43sdp"
+            android:layout_height="@dimen/_43sdp"
+            android:layout_gravity="end|top"/>
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/flRegionRanking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/flWorldRanking"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cpWorldRanking"/>
+        app:layout_constraintStart_toEndOf="@+id/flWorldRanking"
+        app:layout_constraintTop_toTopOf="@id/flWorldRanking">
 
-    <!-- Percentage Text -->
-    <TextView
-        android:id="@+id/percentageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_13ssp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/cpWorldRanking"
-        app:layout_constraintEnd_toEndOf="@+id/cpWorldRanking"
-        app:layout_constraintStart_toStartOf="@+id/cpWorldRanking"
-        app:layout_constraintTop_toTopOf="@+id/cpWorldRanking" />
-    <!-- Percentage Text -->
-    <TextView
-        android:id="@+id/tvRegionRankingpercentage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_13ssp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/cpRegionRanking"
-        app:layout_constraintEnd_toEndOf="@+id/cpRegionRanking"
-        app:layout_constraintStart_toStartOf="@+id/cpRegionRanking"
-        app:layout_constraintTop_toTopOf="@+id/cpRegionRanking" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_30sdp">
+
+            <!-- Custom Circular Progress View -->
+            <com.app.vivi.customviews.CircularProgressView
+                android:id="@+id/cpRegionRanking"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!-- Percentage Text -->
+            <TextView
+                android:id="@+id/tvRegionRankingpercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/cpRegionRanking"
+                app:layout_constraintEnd_toEndOf="@+id/cpRegionRanking"
+                app:layout_constraintStart_toStartOf="@+id/cpRegionRanking"
+                app:layout_constraintTop_toTopOf="@+id/cpRegionRanking" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            layout="@layout/level_label"
+            android:layout_width="@dimen/_43sdp"
+            android:layout_height="@dimen/_43sdp"
+            android:layout_gravity="end|top"/>
+
+    </FrameLayout>
+
 
     <!-- Percentage Text -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvWorldRankingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/of_in_the_world_txt"
-        android:textSize="@dimen/_12ssp"
-        android:textColor="@color/colorWhite"
         android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="@+id/cpWorldRanking"
-        app:layout_constraintStart_toStartOf="@+id/cpWorldRanking"
-        app:layout_constraintTop_toBottomOf="@+id/cpWorldRanking" />
+        android:text="@string/of_in_the_world_txt"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="@+id/flWorldRanking"
+        app:layout_constraintStart_toStartOf="@+id/flWorldRanking"
+        app:layout_constraintTop_toBottomOf="@+id/flWorldRanking" />
 
     <!-- Percentage Text -->
     <com.google.android.material.textview.MaterialTextView
@@ -85,25 +137,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/the_world_txt"
-        android:textSize="@dimen/_12ssp"
         android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvWorldRankingTitle"
         app:layout_constraintStart_toStartOf="@+id/tvWorldRankingTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvWorldRankingTitle" />
+
 
     <!-- Percentage Text -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvRegionRankingTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/of_from_txt"
-        android:textSize="@dimen/_12ssp"
-        android:textColor="@color/colorWhite"
         android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="@+id/cpRegionRanking"
-        app:layout_constraintStart_toStartOf="@+id/cpRegionRanking"
-        app:layout_constraintTop_toBottomOf="@+id/cpRegionRanking" />
+        android:text="@string/of_from_txt"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="@+id/flRegionRanking"
+        app:layout_constraintStart_toStartOf="@+id/flRegionRanking"
+        app:layout_constraintTop_toBottomOf="@+id/flRegionRanking" />
 
 
     <!-- Percentage Text -->
@@ -112,8 +165,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/napa_valley_txt"
-        android:textSize="@dimen/_12ssp"
         android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvRegionRankingTitle"
         app:layout_constraintStart_toStartOf="@+id/tvRegionRankingTitle"

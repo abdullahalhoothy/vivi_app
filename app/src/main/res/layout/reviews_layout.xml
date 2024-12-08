@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/_10sdp"
+    app:cardBackgroundColor="@color/colorBlack"
     android:layout_marginBottom="@dimen/_20sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_10sdp"
-        android:background="@color/colorWhite">
+        android:background="@color/colorBlack">
 
 
         <TextView
@@ -21,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
             android:text="@string/reviews_txt"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/_20ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
             android:text="@string/add_a_new_review_txt"
-            android:textColor="@color/greyDark"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,9 +63,9 @@
             android:paddingEnd="@dimen/_10sdp"
             android:paddingBottom="@dimen/_5sdp"
             android:text="@string/helpful_txt"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorBlack"
             android:textSize="@dimen/_12ssp"
-            app:backgroundColor="@color/colorBlack"
+            app:backgroundColor="@color/colorWhite"
             app:cornerRadius="@dimen/_25sdp"
             app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/tvReviewsTitle2" />
@@ -103,7 +104,7 @@
 
 
         <com.app.vivi.customviews.CustomTextView
-            android:id="@+id/tvActions"
+            android:id="@+id/tvShowAllReviews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_10sdp"

@@ -31,6 +31,12 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
                     tiePassword.text.toString()
                 )
             }
+            tvResetPassword.setOnClickListener {
+                findNavController().navigate(
+                    LoginFragmentDirections.actionLoginFragmentToLoginEmailFragment(
+                    )
+                )
+            }
 
             tieEmail.doOnTextChanged { text, start, before, count ->
                 viewModel.onEmailTextChanged(text.toString())
