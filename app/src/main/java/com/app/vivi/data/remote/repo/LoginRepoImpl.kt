@@ -5,6 +5,7 @@ import com.app.vivi.data.remote.ApiService
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.request.LoginRequest
 import com.app.vivi.data.remote.model.request.ResetPasswordRequest
+import com.app.vivi.data.remote.model.request.SignupRequest
 import com.app.vivi.data.remote.model.response.LoginResponse
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse
 import com.app.vivi.data.remote.model.response.login.ResetPasswordResponse
@@ -15,6 +16,29 @@ class LoginRepoImpl @Inject constructor(apiService: ApiService) : LoginRepo,
     BaseRepo(apiService) {
     override suspend fun login(loginRequest: LoginRequest): Resource<LoginResponse> {
         return safeApiCall(loginRequest, ApiNames.LOGIN)
+
+        /*val jsonRequest = JsonParser.parseString(loginRequest.toJson()).asJsonObject
+
+        val call = apiService.postRequest(ApiNames.LOGIN, email, jsonRequest)
+
+        try {
+            if (call.isSuccessful && call.body() != null) {
+                Log.e("LoginRepoImpl", call.body().toString())
+            } else {
+
+            }
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
+        return Resource.Error("Just testing")*/
+        /*return safeApiCall(
+            call = { apiService.login(email, loginRequest) }
+        )*/
+    }
+
+    override suspend fun signup(request: SignupRequest): Resource<LoginResponse> {
+        return safeApiCall(request, ApiNames.SIGN_UP)
 
         /*val jsonRequest = JsonParser.parseString(loginRequest.toJson()).asJsonObject
 

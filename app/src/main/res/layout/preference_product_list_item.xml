@@ -2,11 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/_400sdp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/_5sdp"
+    android:layout_marginStart="@dimen/_15sdp">
 
     <FrameLayout
         android:id="@+id/flImageRating"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_200sdp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -14,8 +16,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clRating"
-            android:layout_width="@dimen/_115sdp"
-            android:layout_height="@dimen/_115sdp"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_110sdp"
             android:layout_gravity="bottom|end"
             android:layout_marginStart="@dimen/_70sdp"
             android:background="@drawable/circular_white_background"
@@ -81,7 +83,7 @@
         <!-- Wine Bottle Image -->
         <ImageView
             android:id="@+id/ivBottle"
-            android:layout_width="@dimen/_120sdp"
+            android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_180sdp"
             android:layout_gravity="bottom|start"
             android:scaleType="centerCrop"

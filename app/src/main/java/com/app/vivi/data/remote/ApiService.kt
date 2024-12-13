@@ -47,6 +47,11 @@ interface ApiService {
         @Body body: LoginRequest
     ): Response<LoginResponse>
 
+    @POST(ApiNames.SIGN_UP)
+    suspend fun signup(
+        @Body body: LoginRequest
+    ): Response<LoginResponse>
+
     @GET(ApiNames.CONFIGURATION)
     suspend fun configuration(
     ): Response<AppConfigResponse>

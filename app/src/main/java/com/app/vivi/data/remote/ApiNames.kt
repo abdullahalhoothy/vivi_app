@@ -4,6 +4,7 @@ object ApiNames {
 //    const val BASE_URL = "https://testing.com:8443/online/"
     const val BASE_URL = "http://37.27.201.200:8000/"
     const val LOGIN = "${BASE_URL}login"
+    const val SIGN_UP = "${BASE_URL}create_firebase_stripe_user"
     const val RESET_PASSWORD_API = "${BASE_URL}reset_password"
 
     //api

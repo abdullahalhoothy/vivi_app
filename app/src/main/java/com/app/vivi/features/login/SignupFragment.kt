@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.databinding.FragmentLoginBinding
+import com.app.vivi.databinding.FragmentSignupBinding
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.setDrawableWithSize
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.collectLatest
 import java.util.*
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+class SignupFragment : BaseFragmentVB<FragmentSignupBinding>(FragmentSignupBinding::inflate) {
 
     private val viewModel by viewModels<LoginViewModel>()
 
@@ -26,22 +27,10 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
         binding.apply {
             tvTitle.text = getString(R.string.welcome_back_log_in_to_your_account_txt, getString(R.string.app_name))
             btnLogin.setOnClickListener {
-                viewModel.onLoginClicked(
+                viewModel.onSignupClicked(
+                    tieUserName.text.toString(),
                     tieEmail.text.toString(),
                     tiePassword.text.toString()
-                )
-            }
-            tvSignup.setOnClickListener {
-                findNavController().navigate(
-                    LoginFragmentDirections.actionLoginFragmentToSignupFragment(
-                    )
-                )
-            }
-
-            tvResetPassword.setOnClickListener {
-                findNavController().navigate(
-                    LoginFragmentDirections.actionLoginFragmentToLoginEmailFragment(
-                    )
                 )
             }
 
@@ -78,6 +67,11 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
     override fun getMyViewModel() = viewModel
 
     private fun addObservers() {
+        collectWhenStarted {
+            viewModel.usernameErrorFlow.collectLatest {
+                binding.tilUserName.error = it
+            }
+        }
         collectWhenStarted {
             viewModel.emailErrorFlow.collectLatest {
                 binding.tilEmail.error = it

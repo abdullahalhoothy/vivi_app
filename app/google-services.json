@@ -1,0 +1,183 @@
+{
+  "project_info": {
+    "project_number": "668720850922",
+    "firebase_url": "https://taxi-app-327710-default-rtdb.firebaseio.com",
+    "project_id": "taxi-app-327710",
+    "storage_bucket": "taxi-app-327710.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668720850922:android:52975dfdb7cea8df79f493",
+        "android_client_info": {
+          "package_name": "com.app.fourmovingonlineuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668720850922-5iaj0kfauasktvdf132ulslqeos0tfde.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.fourmovingonlineuser",
+            "certificate_hash": "efe2efe92e7b03dc6c689ca353b268b6c63e6256"
+          }
+        },
+        {
+          "client_id": "668720850922-lfljar9gle52n24juubadfci1b6e4ieq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.fourmovingonlineuser",
+            "certificate_hash": "a615f8403b826616d0016651c06da6f9ad0956f5"
+          }
+        },
+        {
+          "client_id": "668720850922-llci0ic30gaj7v0rnk4ei197ur2bhirb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.fourmovingonlineuser",
+            "certificate_hash": "73648c2e6815b4703c5460ec4c849b496a8ff3a1"
+          }
+        },
+        {
+          "client_id": "668720850922-rj38sk7v9g15lbue0dhrh6r36jnmscsq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.fourmovingonlineuser",
+            "certificate_hash": "13c2e335813da91865e16b98caae5040a7e3b2a9"
+          }
+        },
+        {
+          "client_id": "668720850922-l4gn0ektcbr3clp276f6d00r4tn7ahoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9X3opK0WUcGDmGlgLopswa7Qr8ienWQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668720850922-27rr5v7r1bg5482af36j2d5e56lj55du.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "668720850922-fbes9iopqkn2i25oh3tbh7fu4fnu3djh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.4movingdriver.online"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668720850922:android:689d932d627a8e8579f493",
+        "android_client_info": {
+          "package_name": "com.app.vivi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668720850922-l4gn0ektcbr3clp276f6d00r4tn7ahoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9X3opK0WUcGDmGlgLopswa7Qr8ienWQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668720850922-27rr5v7r1bg5482af36j2d5e56lj55du.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "668720850922-fbes9iopqkn2i25oh3tbh7fu4fnu3djh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.4movingdriver.online"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668720850922:android:ca70c7c22157d77479f493",
+        "android_client_info": {
+          "package_name": "com.driver.fourmovingonlinedriver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668720850922-3fker3neqoj5jir3d2kcvr6193ek3gf0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.driver.fourmovingonlinedriver",
+            "certificate_hash": "a615f8403b826616d0016651c06da6f9ad0956f5"
+          }
+        },
+        {
+          "client_id": "668720850922-ef4qos5ae2f4lm2bk0948dtbn2aufedo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.driver.fourmovingonlinedriver",
+            "certificate_hash": "8dcf54875857bd88d55a9de4215750d81993ec88"
+          }
+        },
+        {
+          "client_id": "668720850922-gne61bj29v7i4043dpr1v4tbqb4berdh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.driver.fourmovingonlinedriver",
+            "certificate_hash": "171ef0b1602c7e5681f4cdb7eff6d9df3c987eff"
+          }
+        },
+        {
+          "client_id": "668720850922-p3mgb2j39809dppkgjgt2hmu8b93c8eh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.driver.fourmovingonlinedriver",
+            "certificate_hash": "13c2e335813da91865e16b98caae5040a7e3b2a9"
+          }
+        },
+        {
+          "client_id": "668720850922-l4gn0ektcbr3clp276f6d00r4tn7ahoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9X3opK0WUcGDmGlgLopswa7Qr8ienWQI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668720850922-27rr5v7r1bg5482af36j2d5e56lj55du.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "668720850922-fbes9iopqkn2i25oh3tbh7fu4fnu3djh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.4movingdriver.online"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
