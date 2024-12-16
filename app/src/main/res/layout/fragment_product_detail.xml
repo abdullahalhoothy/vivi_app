@@ -57,6 +57,7 @@
 
 
                 <include
+                    android:id="@+id/inSaveLayout"
                     layout="@layout/custom_label"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_50sdp"
@@ -68,8 +69,8 @@
                 <include
                     android:id="@+id/inRatingLayout"
                     layout="@layout/rating_layout"
-                    android:layout_width="@dimen/_115sdp"
-                    android:layout_height="@dimen/_115sdp"
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_110sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/ivBottle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivBottle"
@@ -80,6 +81,7 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_logo_new"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="@+id/inRatingLayout"
                     app:layout_constraintStart_toStartOf="@+id/inRatingLayout"
                     app:layout_constraintTop_toBottomOf="@+id/inRatingLayout" />
@@ -286,7 +288,7 @@
 
 
                 <TextView
-                    android:id="@+id/tvDiscover"
+                    android:id="@+id/tvRatingUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
@@ -317,7 +319,7 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@color/colorBackground"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDiscover" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvRatingUser" />
 
 
                 <TextView

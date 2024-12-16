@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
+import com.app.vivi.data.remote.model.data.productfragment.ProductDetailsData
 import com.app.vivi.databinding.FragmentProductBinding
 import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.extension.collectWhenStarted
@@ -28,11 +29,16 @@ import loadImageWithCache
 class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBinding::inflate) {
 
     private val viewModel by viewModels<ProductViewModel>()
-//    private lateinit var mProductAdapter: ProductAdapter
+    private var productData: RecommendedProductData? = null
 
     private val mPickForYouAdapter by lazy {
         PreferenceProductAdapter(onItemClick = {
-            navigateToProductDetailFragment()
+            with(it){
+                navigateToProductDetailFragment(ProductDetailsData(id, name, description, producturl, imageurl, averagerating,
+                    totalratings, discountedprice, discountpercentage, originalprice, city, country, countryflagurl,
+                    ProductDetailsData.UserRating(userrating?.rating, userrating?.review, userrating?.username,
+                        userrating?.description, userrating?.userimageurl)))
+            }
         }, onDiscountButtonClick = {
             "Discount Button Clicked".showShortToast(requireContext())
         })
@@ -40,7 +46,12 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
     private val mYouMightInterestedAdapter by lazy {
         PreferenceProductAdapter(onItemClick = {
-            navigateToProductDetailFragment()
+            with(it){
+                navigateToProductDetailFragment(ProductDetailsData(id, name, description, producturl, imageurl, averagerating,
+                    totalratings, discountedprice, discountpercentage, originalprice, city, country, countryflagurl,
+                    ProductDetailsData.UserRating(userrating?.rating, userrating?.review, userrating?.username,
+                        userrating?.description, userrating?.userimageurl)))
+            }
         }, onDiscountButtonClick = {
             "Discount Button Clicked".showShortToast(requireContext())
         })
@@ -199,10 +210,21 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
     private fun initListeners() {
         binding.inPickForYou.clProduct.setOnClickListener {
-            navigateToProductDetailFragment()
+            productData?.run{
+                navigateToProductDetailFragment(ProductDetailsData(id, name, description, producturl, imageurl, averagerating,
+                    totalratings, discountedprice, discountpercentage, originalprice, city, country, countryflagurl,
+                    ProductDetailsData.UserRating(userrating?.rating, userrating?.review, userrating?.userName,
+                        userrating?.description, userrating?.userProfileImageUrl)))
+            }
+//            navigateToProductDetailFragment()
         }
         binding.inJustForYou.clProduct.setOnClickListener {
-            navigateToProductDetailFragment()
+            productData?.run{
+                navigateToProductDetailFragment(ProductDetailsData(id, name, description, producturl, imageurl, averagerating,
+                    totalratings, discountedprice, discountpercentage, originalprice, city, country, countryflagurl,
+                    ProductDetailsData.UserRating(userrating?.rating, userrating?.review, userrating?.userName,
+                        userrating?.description, userrating?.userProfileImageUrl)))
+            }
         }
 
         binding.inJustForYou.tvDiscount.setOnClickListener {
@@ -214,9 +236,9 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
         }
     }
 
-    private fun navigateToProductDetailFragment(){
+    private fun navigateToProductDetailFragment(details: ProductDetailsData){
         val action =
-            HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment()
+            HomeFragmentLatestDirections.actionLatestHomeFragmentToProductDetailFragment(details)
         findNavController().navigateWithSingleTop(action)
     }
 
@@ -226,6 +248,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
                 product?.bestPick?.let { bestPick ->
                     binding.inPickForYou.apply {
                         // Set the text values directly using safe calls and let
+                        productData = bestPick
                         setupProductDetailsView(this, bestPick)
                     }
                 } ?: run {
@@ -236,6 +259,7 @@ class ProductFragment : BaseFragmentVB<FragmentProductBinding>(FragmentProductBi
 
                 product?.justForYou?.let { justForYou ->
                     binding.inJustForYou.apply {
+                        productData = justForYou
                         setupProductDetailsView(this, justForYou)
                     }
                 } ?: run {

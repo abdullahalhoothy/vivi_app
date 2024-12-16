@@ -45,7 +45,7 @@ class SignupFragment : BaseFragmentVB<FragmentSignupBinding>(FragmentSignupBindi
 
             handleBackPress()
 
-            googleButton.setDrawableWithSize(requireContext(),
+            /*googleButton.setDrawableWithSize(requireContext(),
                 R.drawable.ic_google,
                 70, 70,
                 resources.getDimensionPixelSize(R.dimen.sdp_10))
@@ -53,7 +53,7 @@ class SignupFragment : BaseFragmentVB<FragmentSignupBinding>(FragmentSignupBindi
             facebookButton.setDrawableWithSize(requireContext(),
                 R.drawable.ic_facebook,
                 70, 70,
-                resources.getDimensionPixelSize(R.dimen.sdp_10))
+                resources.getDimensionPixelSize(R.dimen.sdp_10))*/
         }
 
         addObservers()

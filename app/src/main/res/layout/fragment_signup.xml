@@ -219,7 +219,7 @@
 
 
     <!-- Left Horizontal Line -->
-    <View
+<!--    <View
         android:id="@+id/left_line"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -230,7 +230,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintTop_toTopOf="@+id/tvOr" />
 
-    <!-- OR Text -->
+    &lt;!&ndash; OR Text &ndash;&gt;
     <TextView
         android:id="@+id/tvOr"
         android:layout_width="wrap_content"
@@ -245,7 +245,7 @@
         app:layout_constraintStart_toEndOf="@id/left_line"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-    <!-- Right Horizontal Line -->
+    &lt;!&ndash; Right Horizontal Line &ndash;&gt;
     <View
         android:id="@+id/right_line"
         android:layout_width="0dp"
@@ -279,7 +279,7 @@
         app:strokeColor="@color/black"
         app:strokeWidth="@dimen/_1sdp" />
 
-    <!-- Continue with Facebook Button -->
+    &lt;!&ndash; Continue with Facebook Button &ndash;&gt;
     <com.app.vivi.customviews.CustomTextView
         android:id="@+id/facebookButton"
         android:layout_width="0dp"
@@ -299,6 +299,6 @@
         app:layout_constraintStart_toStartOf="@+id/btnLogin"
         app:layout_constraintTop_toBottomOf="@id/googleButton"
         app:strokeColor="@color/black"
-        app:strokeWidth="@dimen/_1sdp" />
+        app:strokeWidth="@dimen/_1sdp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

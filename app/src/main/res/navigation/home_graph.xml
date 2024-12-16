@@ -17,7 +17,11 @@
             app:enterAnim="@anim/expand_in"
             app:exitAnim="@anim/collapse_out"
             app:popEnterAnim="@anim/expand_in"
-            app:popExitAnim="@anim/collapse_out"/>
+            app:popExitAnim="@anim/collapse_out">
+
+            <argument android:name="ProductDetails"
+                app:argType="com.app.vivi.data.remote.model.data.productfragment.ProductDetailsData"/>
+        </action>
 
         <action
             android:id="@+id/action_latestHomeFragment_to_notificationsFragment"

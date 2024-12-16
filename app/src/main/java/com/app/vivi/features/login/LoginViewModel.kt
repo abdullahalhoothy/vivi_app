@@ -252,6 +252,12 @@ class LoginViewModel @Inject constructor(
 
     }
 
+    fun setLoginStatus(isLoggedIn: Boolean){
+        viewModelScope.launch {
+            cacheRepo.setLoggedIn(isLoggedIn)
+        }
+    }
+
     sealed class NavigationEvents {
         data class NavigateToMainScreen(val loginResponse: LoginResponse? = null) :
             NavigationEvents()

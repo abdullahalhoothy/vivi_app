@@ -36,9 +36,9 @@ class MainActivity : AppCompatActivity() {
 //        WindowCompat.setDecorFitsSystemWindows(window, false)
 
 
-        /*installSplashScreen().apply {
+        installSplashScreen().apply {
             setKeepOnScreenCondition { viewModel.keepSplashScreen }
-        }*/
+        }
 
 //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 //        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
@@ -60,8 +60,12 @@ class MainActivity : AppCompatActivity() {
 
 //        setUpDrawerList()
 //        addDrawerListener()
-//        addObservers()
+        addObservers()
+        checkNotificationSelfPermission()
 
+    }
+
+    private fun checkNotificationSelfPermission(){
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.POST_NOTIFICATIONS,
@@ -89,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.channel.collectLatest { event ->
                 when (event) {
                     is MainActivityViewModel.NavigationEvents.NavigateToMainScreen -> {
+                        navigateToHomeScreen()
                        /* navController.navigate(
                             LoginFragmentDirections.actionLoginFragmentToHomeFragment(event.loginResponse)
                         )*/
@@ -96,5 +101,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun navigateToHomeScreen(){
+
+        val navGraph = navController.navInflater.inflate(R.navigation.login_graph)
+        navGraph.setStartDestination(R.id.home_graph)
+        navController.graph = navGraph
     }
 }

@@ -22,6 +22,7 @@ import com.app.vivi.extension.setDrawableWithSize
 import com.app.vivi.extension.successDialog
 import com.app.vivi.extension.toJson
 import com.facebook.CallbackManager
+import com.facebook.FacebookActivity
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
@@ -50,6 +51,7 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
         super.onCreate(savedInstanceState)
         configureGoogleLoginApi()
         initFacebookCallbackManager()
+//        performFacebookLogin()
         configureListener()
     }
 
@@ -98,7 +100,8 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
                 }
             }
             facebookButton.setOnClickListener {
-                performFacebookLogin()
+                launchFacebookLoginActivity()
+//                performFacebookLogin()
             }
         }
 
@@ -174,6 +177,7 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
                     val user = auth.currentUser
                     user.toJson()
                     Log.d("GoogleSignIn", "Sign-in successful: ${user?.displayName} ${user.toJson()}")
+                    viewModel.setLoginStatus(true)
                     navigateToHomeScreensGraph()
                 } else {
                     showErrorDialog(getString(R.string.sign_in_failed_plz_try_again_txt))
@@ -185,21 +189,26 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
 
     //===============  Facebook login ==============
 
+//    private lateinit var callbackManager: CallbackManager
+//    private lateinit var facebookLoginLauncher: ActivityResultLauncher<Intent>
+
+    // Initialize CallbackManager
     private fun initFacebookCallbackManager(){
         callbackManager = CallbackManager.Factory.create()
     }
 
-
+    // Facebook login process
     private fun performFacebookLogin() {
         // Start the Facebook Login process when the custom button is clicked
         LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+
         // Register a callback for the login result
         LoginManager.getInstance().registerCallback(callbackManager, object :
             FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
                 // Handle successful login
-                val accessToken = result?.accessToken
-                Log.d("FacebookLogin", "Access Token: ${accessToken?.token}")
+                val accessToken = result.accessToken
+                Log.d("FacebookLogin", "Access Token: ${accessToken.token}")
                 navigateToHomeScreensGraph()
                 // You can perform additional actions after successful login
             }
@@ -211,19 +220,72 @@ class LoginMainFragment : BaseFragmentVB<FragmentLoginMainBinding>(FragmentLogin
 
             override fun onError(error: FacebookException) {
                 // Handle error during login
-
-                showErrorDialog(error?.message.toString())
-                Log.e("FacebookLogin", "Error: ${error?.message}")
+                showErrorDialog(error.message.toString())
+                Log.e("FacebookLogin", "Error: ${error.message}")
             }
         })
     }
 
+    // Configure the ActivityResultLauncher
     private fun configureListener(){
-        facebookLoginLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
-            ActivityResultCallback { result ->
-                callbackManager.onActivityResult(result.resultCode, result.resultCode, result.data)
-            })
+        facebookLoginLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            // This is where we forward the result to the callback manager
+            callbackManager.onActivityResult(result.resultCode, result.resultCode, result.data)
+        }
     }
+
+    // Call this when Facebook login activity is launched
+    private fun launchFacebookLoginActivity() {
+
+        LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+        val loginIntent = Intent(requireContext(), FacebookActivity::class.java)
+
+        // Start the Facebook login flow
+        facebookLoginLauncher.launch(loginIntent)
+//        val loginIntent = LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+//        facebookLoginLauncher.launch(loginIntent)
+    }
+
+
+    /* private fun initFacebookCallbackManager(){
+         callbackManager = CallbackManager.Factory.create()
+     }
+
+
+     private fun performFacebookLogin() {
+         // Start the Facebook Login process when the custom button is clicked
+         LoginManager.getInstance().logInWithReadPermissions(this, listOf("email", "public_profile"))
+         // Register a callback for the login result
+         LoginManager.getInstance().registerCallback(callbackManager, object :
+             FacebookCallback<LoginResult> {
+             override fun onSuccess(result: LoginResult) {
+                 // Handle successful login
+                 val accessToken = result?.accessToken
+                 Log.d("FacebookLogin", "Access Token: ${accessToken?.token}")
+                 navigateToHomeScreensGraph()
+                 // You can perform additional actions after successful login
+             }
+
+             override fun onCancel() {
+                 // Handle login cancellation
+                 Log.d("FacebookLogin", "Login Cancelled")
+             }
+
+             override fun onError(error: FacebookException) {
+                 // Handle error during login
+
+                 showErrorDialog(error?.message.toString())
+                 Log.e("FacebookLogin", "Error: ${error?.message}")
+             }
+         })
+     }
+
+     private fun configureListener(){
+         facebookLoginLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),
+             ActivityResultCallback { result ->
+                 callbackManager.onActivityResult(result.resultCode, result.resultCode, result.data)
+             })
+     }*/
 
     // =========== Facebook login End ===================
 
