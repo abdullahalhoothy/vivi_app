@@ -70,6 +70,11 @@ class HomeFragmentLatest :
                 val action = HomeFragmentLatestDirections.actionLatestHomeFragmentToNotificationsFragment()
                 findNavController().navigateWithSingleTop(action)
             }
+
+            fabCamera.setOnClickListener {
+                val action = HomeFragmentLatestDirections.actionLatestHomeFragmentToScannerFragment()
+                findNavController().navigate(action)
+            }
         }
     }
 

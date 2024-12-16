@@ -111,4 +111,6 @@
     <string name="signup_txt">Signup</string>
     <string name="username_txt">Username</string>
     <string name="sign_in_failed_plz_try_again_txt">Sign-in failed, Plz try again</string>
+    <string name="take_a_photo_of_wine_labels_then_tap_any_to_see_the_wine_information_txt">Take a photo of %1$s labels,\nthen tap any to see the %1$s\ninformation</string>
+    <string name="position_the_label_within_the_frame_txt">Position the %1$s LABEL \nwithin the frame</string>
 </resources>
