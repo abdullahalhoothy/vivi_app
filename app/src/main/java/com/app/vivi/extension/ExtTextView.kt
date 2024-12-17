@@ -2,6 +2,7 @@ package com.app.vivi.extension
 
 import android.content.Context
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 
 fun TextView.setDrawableWithSize(
@@ -20,7 +21,7 @@ fun TextView.setDrawableWithSize(
 
 fun TextView.setDrawableWithSize(
     context: Context,
-    drawableResId: Int,
+    @DrawableRes drawableResId: Int,
     width: Int,
     height: Int,
     padding: Int,
@@ -29,7 +30,12 @@ fun TextView.setDrawableWithSize(
     val drawable = ContextCompat.getDrawable(context, drawableResId)?.apply {
         setBounds(0, 0, width, height)
         mutate() // Ensure the drawable is mutable
-        tintColor?.let { setTint(it) } // Apply tint if a color is provided
+        if (tintColor != null) {
+            setTint(tintColor)
+        } else {
+            clearColorFilter() // Remove any previous tint if not specified
+        }
+//        tintColor?.let { setTint(it) } // Apply tint if a color is provided
     }
     this.setCompoundDrawables(drawable, null, null, null)
     this.compoundDrawablePadding = padding

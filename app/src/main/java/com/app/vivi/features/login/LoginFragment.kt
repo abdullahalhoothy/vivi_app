@@ -16,6 +16,7 @@ import com.app.vivi.databinding.FragmentLoginBinding
 import com.app.vivi.domain.model.ErrorModel
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.errorDialog
+import com.app.vivi.extension.navigateWithSingleTop
 import com.app.vivi.extension.setDrawableWithSize
 import com.app.vivi.extension.toJson
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -34,6 +35,11 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
     private val viewModel by viewModels<LoginViewModel>()
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        configureGoogleLoginApi()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -181,8 +187,8 @@ class LoginFragment : BaseFragmentVB<FragmentLoginBinding>(FragmentLoginBinding:
     //===============  Google login End==============
 
     private fun navigateToHomeScreensGraph(){
-        findNavController().navigate(
-            LoginMainFragmentDirections.actionLoginMainFragmentToHomeGraph(
+        findNavController().navigateWithSingleTop(
+            LoginFragmentDirections.actionLoginFragmentToHomeGraph(
             )
         )
     }

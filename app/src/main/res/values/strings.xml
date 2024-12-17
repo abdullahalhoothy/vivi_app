@@ -111,6 +111,8 @@
     <string name="signup_txt">Signup</string>
     <string name="username_txt">Username</string>
     <string name="sign_in_failed_plz_try_again_txt">Sign-in failed, Plz try again</string>
-    <string name="take_a_photo_of_wine_labels_then_tap_any_to_see_the_wine_information_txt">Take a photo of %1$s labels,\nthen tap any to see the %1$s\ninformation</string>
+    <string name="take_a_photo_of_wine_labels_then_tap_any_to_see_the_wine_information_txt">Take a photo of %1$s labels, then tap any to see the %1$s information</string>
     <string name="position_the_label_within_the_frame_txt">Position the %1$s LABEL \nwithin the frame</string>
+    <string name="oops_there_was_an_error_txt">Oops! There was an error</string>
+    <string name="something_went_wrong_while_we_nwere_trying_to_match_the_txt">Something went wrong while we were trying to match the %1$s</string>
 </resources>

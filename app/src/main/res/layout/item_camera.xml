@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorTransparent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clMain">
 
@@ -12,6 +13,7 @@
         android:layout_height="@dimen/_80sdp"
         android:background="@drawable/rectangle_round_solid_darkgrey_stroke_grey"
         android:layout_margin="@dimen/_2sdp"
+        android:padding="@dimen/_2sdp"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,7 @@
             android:id="@+id/imageView"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/_5sdp"
             android:background="@drawable/rectangle_left_round_black_stroke_4dp"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
@@ -35,10 +37,12 @@
             android:id="@+id/tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            tools:text="type"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_5sdp"
+            tools:text="@string/oops_there_was_an_error_txt"
+            android:text="@string/oops_there_was_an_error_txt"
+            android:textColor="@color/colorWineText"
+            tools:textColor="@color/colorWineText"
+            android:textSize="@dimen/_9ssp"
             android:textStyle="bold"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
@@ -58,10 +62,12 @@
             android:id="@+id/tvDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            tools:text="type"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_5sdp"
+            tools:text="@string/something_went_wrong_while_we_nwere_trying_to_match_the_txt"
+            android:text="@string/something_went_wrong_while_we_nwere_trying_to_match_the_txt"
+            android:textColor="@color/colorWhite"
+            tools:textColor="@color/greyDark"
+            android:textSize="@dimen/_9ssp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintEnd_toStartOf="@+id/ivDelete"
@@ -117,17 +123,13 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:text="@string/take_a_photo_of_wine_labels_then_tap_any_to_see_the_wine_information_txt"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_10ssp"
             android:textStyle="bold"
             android:layout_marginEnd="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivMain"/>
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -35,7 +35,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             navigateToMainActivity()
-        }, 5000) // Delay of 3 seconds
+        }, 1000) // Delay of 3 seconds
         addObservers()
     }
 
