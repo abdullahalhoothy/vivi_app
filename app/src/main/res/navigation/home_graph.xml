@@ -17,7 +17,11 @@
             app:enterAnim="@anim/expand_in"
             app:exitAnim="@anim/collapse_out"
             app:popEnterAnim="@anim/expand_in"
-            app:popExitAnim="@anim/collapse_out"/>
+            app:popExitAnim="@anim/collapse_out">
+
+            <argument android:name="ProductDetails"
+                app:argType="com.app.vivi.data.remote.model.data.productfragment.ProductDetailsData"/>
+        </action>
 
         <action
             android:id="@+id/action_latestHomeFragment_to_notificationsFragment"
@@ -31,6 +35,15 @@
         <action
             android:id="@+id/action_latestHomeFragment_to_productFilterListFragment"
             app:destination="@id/productFilterListFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/expand_in"
+            app:exitAnim="@anim/collapse_out"
+            app:popEnterAnim="@anim/expand_in"
+            app:popExitAnim="@anim/collapse_out"/>
+
+        <action
+            android:id="@+id/action_latestHomeFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment"
             app:popUpToInclusive="true"
             app:enterAnim="@anim/expand_in"
             app:exitAnim="@anim/collapse_out"
@@ -111,6 +124,13 @@
         android:name="com.app.vivi.features.filter.ReviewsFragment"
         tools:layout="@layout/fragment_reviews"
         android:label="ProductFiltersFragment">
+    </fragment>
+
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.app.vivi.features.scanner.ScannerFragment"
+        tools:layout="@layout/fragment_scanner"
+        android:label="ScannerFragment">
     </fragment>
 
     <fragment

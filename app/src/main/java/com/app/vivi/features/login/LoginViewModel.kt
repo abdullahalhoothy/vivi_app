@@ -6,6 +6,7 @@ import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.Resource
 import com.app.vivi.data.remote.model.request.LoginRequest
 import com.app.vivi.data.remote.model.request.ResetPasswordRequest
+import com.app.vivi.data.remote.model.request.SignupRequest
 import com.app.vivi.data.remote.model.response.LoginResponse
 import com.app.vivi.data.remote.model.response.filter.FilteredProductsResponse.FilteredProduct
 import com.app.vivi.data.remote.model.response.login.ResetPasswordResponse
@@ -31,6 +32,9 @@ class LoginViewModel @Inject constructor(
     private val emailValidationUseCase: EmailValidationUseCase,
     private val passwordValidationUseCase: PasswordValidationUseCase
 ) : BaseViewModel() {
+
+    private val _usernameErrorFlow = MutableStateFlow("")
+    val usernameErrorFlow = _usernameErrorFlow.asStateFlow()
 
     private val _emailErrorFlow = MutableStateFlow("")
     val emailErrorFlow = _emailErrorFlow.asStateFlow()
@@ -153,6 +157,79 @@ class LoginViewModel @Inject constructor(
         }
     }
 
+    fun onSignupClicked(username: String, email: String, password: String) {
+        viewModelScope.launch {
+            if (emailValidationUseCase.isUsernameValid(username)) {
+                _usernameErrorFlow.emit("")
+            } else {
+                _usernameErrorFlow.emit("Username is required")
+                return@launch
+            }
+
+            if (emailValidationUseCase.isValid(email)) {
+                _emailErrorFlow.emit("")
+            } else {
+                _emailErrorFlow.emit("Valid Email is required")
+                return@launch
+            }
+
+            if (passwordValidationUseCase.isValid(password)) {
+                _passwordErrorFlow.emit("")
+            } else {
+                _passwordErrorFlow.emit("Password is required")
+                return@launch
+            }
+            showLoader()
+            when (val call = loginRepo.signup(
+                request = SignupRequest(username, email, password)
+            )) {
+                is Resource.Error -> {
+                    hideLoader()
+                    if (call.code == 401) {
+                        call.message.let { errorBody ->
+                            try {
+                                // Convert ResponseBody to a JSON string
+                                val errorBodyString = errorBody.toString()
+
+                                // Check if the errorBodyString is empty
+                                if (errorBodyString.isNotEmpty()) {
+                                    // Parse the string into a JSONObject
+                                    val json = JSONObject(errorBodyString)
+
+                                    // Extract the "detail" field
+                                    val detailMessage = json.getString("detail")
+                                    showError(
+                                        ErrorModel(
+                                            title = call.title,
+                                            message = detailMessage,
+                                            call.code
+                                        )
+                                    )
+                                } else {
+                                    println("Error body is empty.")
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                                println("Failed to parse error body.")
+                            }
+                        } ?: run {
+                            println("Error body is null")
+                        }
+                    } else {
+                        showError(ErrorModel(title = call.title, message = call.message, call.code))
+                    }
+                }
+
+                is Resource.Success -> {
+                    hideLoader()
+                    cacheRepo.setLoggedIn(true)
+                    cacheRepo.saveLoginResponse(call.data)
+                    _channel.send(NavigationEvents.NavigateToMainScreen(call.data))
+                }
+            }
+        }
+    }
+
     fun onEmailTextChanged(text: String) {
         viewModelScope.launch {
             if (emailValidationUseCase.isValid(text)) {
@@ -173,6 +250,12 @@ class LoginViewModel @Inject constructor(
 
     fun getResetPasswordApi(email: String) {
 
+    }
+
+    fun setLoginStatus(isLoggedIn: Boolean){
+        viewModelScope.launch {
+            cacheRepo.setLoggedIn(isLoggedIn)
+        }
     }
 
     sealed class NavigationEvents {

@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/_3sdp"
-    android:background="@drawable/selected_tag_background"
     android:id="@+id/flMain">
 
     <com.google.android.material.textview.MaterialTextView
@@ -13,8 +12,8 @@
         android:layout_height="wrap_content"
         android:text="Filter"
         android:textSize="@dimen/_10ssp"
-        android:paddingStart="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_8sdp"
+        android:paddingStart="@dimen/_9sdp"
+        android:paddingEnd="@dimen/_9sdp"
         android:paddingTop="@dimen/_5sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:drawablePadding="@dimen/_5sdp"

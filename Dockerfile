@@ -26,7 +26,7 @@ RUN mkdir -p ~/.android && touch ~/.android/repositories.cfg && \
     yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "build-tools;33.0.0" "platforms;android-33"
 
 
-# Set additional environment variables
+# Set addit`ional environment variables
 ENV CONTAINER=true \
     ANDROID_SDK_PATH=$ANDROID_HOME \
     ANDROID_SDK_ROOT=$ANDROID_HOME 

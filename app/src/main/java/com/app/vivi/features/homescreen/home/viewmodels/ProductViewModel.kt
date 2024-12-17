@@ -10,6 +10,7 @@ import com.app.vivi.data.remote.model.data.productdetailfragment.ProductMakingCo
 import com.app.vivi.data.remote.model.data.productdetailfragment.ThoughtsData
 import com.app.vivi.data.remote.model.data.productdetailfragment.Vintage
 import com.app.vivi.data.remote.model.data.productfragment.CharacteristicsData
+import com.app.vivi.data.remote.model.data.productfragment.ProductDetailsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.data.remote.model.request.ReviewRequest
 import com.app.vivi.data.remote.model.request.ReviewsRequest
@@ -42,6 +43,9 @@ class ProductViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
+
+    private val _productDetailsDataFlow = MutableStateFlow<ProductDetailsData?>(null)
+    val productDetailsDataFlow = _productDetailsDataFlow.asStateFlow()
 
     private val _reviewIdFlow = MutableStateFlow<Int?>(null)
     val reviewIdFlow = _reviewIdFlow.asStateFlow()
@@ -109,6 +113,12 @@ class ProductViewModel @Inject constructor(
         fetchRecentList()
     }
 
+
+    fun sendProductDetailsData(data: ProductDetailsData?) {
+        viewModelScope.launch {
+            _productDetailsDataFlow.value = data
+        }
+    }
 
     fun sendReviewId(reviewId: Int?) {
         viewModelScope.launch {

@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/log_in_txt"
+        android:text="@string/signup_txt"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="@+id/ivBack"
@@ -47,12 +47,54 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_24sdp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/welcome_back_log_in_to_your_account_txt"
+        android:text="@string/welcome_back_sign_up_txt"
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivBack" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:hint="@string/username_txt"
+        android:textColorHint="@color/grey"
+        app:boxBackgroundColor="@color/colorBlack"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_5sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_5sdp"
+        app:boxCornerRadiusTopStart="@dimen/_5sdp"
+        app:boxStrokeColor="@color/red"
+        app:boxStrokeErrorColor="@color/red"
+        app:boxStrokeWidth="@dimen/_1sdp"
+        app:boxStrokeWidthFocused="@dimen/_2sdp"
+        app:errorIconDrawable="@drawable/ic_info"
+
+        app:errorTextColor="@color/red"
+        app:helperTextTextColor="@color/red"
+        app:hintTextColor="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tieUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:fontFamily="sans-serif-medium"
+            android:inputType="text"
+            tools:text="username"
+            android:textColor="@color/colorBlack"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/_16sdp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
@@ -80,7 +122,7 @@
         app:hintTextColor="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+        app:layout_constraintTop_toBottomOf="@id/tilUserName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tieEmail"
@@ -148,7 +190,7 @@
         android:layout_marginEnd="@dimen/_24sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:gravity="center"
-        android:text="@string/log_in_txt"
+        android:text="@string/signup_txt"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/_14ssp"
         app:backgroundColor="@color/colorBlack"
@@ -158,25 +200,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvSignup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_24sdp"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:text="@string/don_t_have_accout_signup_txt"
-        android:textColor="@color/colorBlack"
-        android:textSize="@dimen/_13ssp"
-        android:padding="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvResetPassword"
+    <!--<com.google.android.material.textview.MaterialTextView
+        android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_24sdp"
@@ -190,11 +215,11 @@
         android:padding="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSignup" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />-->
 
 
     <!-- Left Horizontal Line -->
-    <View
+<!--    <View
         android:id="@+id/left_line"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -202,10 +227,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvOr"
         app:layout_constraintEnd_toStartOf="@+id/tvOr"
         app:layout_constraintStart_toStartOf="@+id/googleButton"
-        app:layout_constraintTop_toBottomOf="@+id/tvResetPassword"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintTop_toTopOf="@+id/tvOr" />
 
-    <!-- OR Text -->
+    &lt;!&ndash; OR Text &ndash;&gt;
     <TextView
         android:id="@+id/tvOr"
         android:layout_width="wrap_content"
@@ -218,9 +243,9 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/right_line"
         app:layout_constraintStart_toEndOf="@id/left_line"
-        app:layout_constraintTop_toBottomOf="@+id/tvResetPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-    <!-- Right Horizontal Line -->
+    &lt;!&ndash; Right Horizontal Line &ndash;&gt;
     <View
         android:id="@+id/right_line"
         android:layout_width="0dp"
@@ -229,7 +254,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvOr"
         app:layout_constraintEnd_toEndOf="@+id/googleButton"
         app:layout_constraintStart_toEndOf="@id/tvOr"
-        app:layout_constraintTop_toBottomOf="@+id/tvResetPassword"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintTop_toTopOf="@+id/tvOr" />
 
 
@@ -254,7 +279,7 @@
         app:strokeColor="@color/black"
         app:strokeWidth="@dimen/_1sdp" />
 
-    <!-- Continue with Facebook Button -->
+    &lt;!&ndash; Continue with Facebook Button &ndash;&gt;
     <com.app.vivi.customviews.CustomTextView
         android:id="@+id/facebookButton"
         android:layout_width="0dp"
@@ -274,6 +299,6 @@
         app:layout_constraintStart_toStartOf="@+id/btnLogin"
         app:layout_constraintTop_toBottomOf="@id/googleButton"
         app:strokeColor="@color/black"
-        app:strokeWidth="@dimen/_1sdp" />
+        app:strokeWidth="@dimen/_1sdp" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

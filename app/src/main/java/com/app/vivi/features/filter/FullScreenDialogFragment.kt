@@ -2,15 +2,16 @@ package com.app.vivi.features.filter
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.app.vivi.basefragment.BaseDialogFragmentFullscreen
+import com.app.vivi.baseviewmodel.BaseViewModel
 import com.app.vivi.data.remote.model.request.FilteredProductsRequest
 import com.app.vivi.databinding.DialogFullscreenBinding
-import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.features.filter.adapters.BeanTypeFilterAdapter
 import com.app.vivi.features.filter.adapters.CountryFilterAdapter
 import com.app.vivi.features.filter.adapters.FilterAdapter
@@ -19,16 +20,23 @@ import com.app.vivi.features.filter.adapters.SizesFilterAdapter
 import com.app.vivi.features.filter.adapters.StylesFilterAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.filter.ProductFilterListViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FullScreenDialogFragment : BottomSheetDialogFragment() {
+class FullScreenDialogFragment : BaseDialogFragmentFullscreen<DialogFullscreenBinding>(
+    DialogFullscreenBinding::inflate
+) {
 
     private val viewModel by viewModels<ProductFilterListViewModel>()
-    private var _binding: DialogFullscreenBinding? = null
-    private val binding get() = _binding!! // Safe access to binding
+    override fun getMyViewModel(): BaseViewModel {
+        return viewModel
+    }
+
+    private var debounceJob: Job? = null // Track the debounce job
 
     private var request: FilteredProductsRequest = FilteredProductsRequest()
     val typeIds: MutableList<Int> = mutableListOf()
@@ -37,7 +45,6 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
     val regionIds: MutableList<Int> = mutableListOf()
     val stylesIds: MutableList<Int> = mutableListOf()
     val sizesIds: MutableList<Int> = mutableListOf()
-
 
     // Adapters initialized lazily
     private val typeFilterAdapter by lazy {
@@ -132,26 +139,19 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
     }
 
 
-    override fun onCreateView(
+    /*override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout using ViewBinding
-        _binding = DialogFullscreenBinding.inflate(inflater, container, false)
+//        _binding = DialogFullscreenBinding.inflate(inflater, container, false)
         return binding.root
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Set up dynamic filters or other views
-        setupTypeFilterAdapter()
-        setupCountryFilters()
-        setupBeanFilters()
-        setupRegionFilters()
-        setupStylesFilters()
-        setupSizesFilters()
+        setupAdapters()
         seekbar()
         rangeSliderSetup()
         getProductFiltersApi(request)
@@ -173,59 +173,37 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
         behavior.isFitToContents = true // Makes it fit the content
     }
 
-    private fun setupTypeFilterAdapter() {
+    private fun setupAdapters() {
         binding.rvType.apply {
             layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = typeFilterAdapter
         }
-
-        binding.rvType.adapter = typeFilterAdapter
-    }
-
-    private fun setupCountryFilters() {
 
         binding.rvCountry.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = countryFilterAdapter
         }
 
-        binding.rvCountry.adapter = countryFilterAdapter
-    }
-
-    private fun setupBeanFilters() {
         binding.rvBean.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = beanFilterAdapter
         }
 
-        binding.rvBean.adapter = beanFilterAdapter
-    }
-
-    private fun setupRegionFilters() {
         binding.rvRegion.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = regionFilterAdapter
         }
 
-        binding.rvRegion.adapter = regionFilterAdapter
-    }
-
-    private fun setupStylesFilters() {
         binding.rvStyles.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = stylesFilterAdapter
         }
 
-        binding.rvStyles.adapter = stylesFilterAdapter
-    }
-
-    private fun setupSizesFilters() {
         binding.rvSizes.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = sizesFilterAdapter
         }
 
-        binding.rvSizes.adapter = sizesFilterAdapter
     }
 
     private fun seekbar() {
@@ -234,6 +212,16 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
                 // Convert progress to a rating value (e.g., min 3.0, max 5.0)
                 val minRating = 0.0 + (progress / 100.0) * 5.0
                 binding.tvMinRating.text = "Min. ★%.1f".format(minRating)
+
+                // Cancel the previous job if user continues to slide
+                debounceJob?.cancel()
+
+                // Start a new coroutine with delay for debouncing
+                debounceJob = lifecycleScope.launch {
+                    delay(500) // Wait for 500ms after the user stops
+                    request.minRatingValue = "%.1f".format(minRating)
+                    getProductFiltersApi(request)
+                }
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -256,16 +244,26 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
             val thumb1Value = slider.values[0]
             val thumb2Value = slider.values[1]
             binding.tvRangeMinPrice.text = "CA$${thumb1Value} - CA${thumb2Value}"
-            Log.d("RangeSlider", "Thumb 1: $thumb1Value, Thumb 2: $thumb2Value")
+
+            // Cancel the previous job if user continues to slide
+            debounceJob?.cancel()
+
+            // Start a new coroutine with delay for debouncing
+            debounceJob = lifecycleScope.launch {
+                delay(500) // Wait for 500ms after the user stops
+                request.minPrice = thumb1Value.toString()
+                request.maxPrice = thumb2Value.toString()
+                getProductFiltersApi(request)
+                Log.d("RangeSlider", "API called: Min: $thumb1Value, Max: $thumb2Value")
+            }
         }
     }
 
 
     private fun addObservers() {
 
-        collectWhenStarted {
+        lifecycleScope.launch {
             viewModel.productFiltersResponse.collectLatest {
-
                 it?.let { productList ->
                     typeFilterAdapter.submitList(productList.coffeeData.coffeeTypes)
                     beanFilterAdapter.submitList(productList.coffeeData.coffeeBeanTypes)
@@ -274,6 +272,7 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
                     stylesFilterAdapter.submitList(productList.coffeeData.coffeeStyles)
                     sizesFilterAdapter.submitList(productList.coffeeData.sizes)
 
+                } ?: run {
                 }
             }
         }
@@ -283,8 +282,4 @@ class FullScreenDialogFragment : BottomSheetDialogFragment() {
         viewModel.getProductFiltersApi(request)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null // Avoid memory leaks
-    }
 }

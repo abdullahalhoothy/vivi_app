@@ -33,15 +33,15 @@ class SplashActivity : AppCompatActivity() {
         // Keep the splash screen visible until the API response is ready
         splashScreen.setKeepOnScreenCondition { keepSplashOnScreen }
 
-        /*Handler(Looper.getMainLooper()).postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             navigateToMainActivity()
-        }, 5000) // Delay of 3 seconds*/
+        }, 1000) // Delay of 3 seconds
         addObservers()
     }
 
     override fun onStart() {
         super.onStart()
-        getConfigurations()
+//        getConfigurations()
     }
 
     override fun onResume() {

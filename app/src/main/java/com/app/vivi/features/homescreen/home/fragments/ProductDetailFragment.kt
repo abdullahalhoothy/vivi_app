@@ -1,5 +1,6 @@
 package com.app.vivi.features.homescreen.home.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
@@ -16,11 +17,14 @@ import com.app.vivi.R
 import com.app.vivi.basefragment.BaseFragmentVB
 import com.app.vivi.customviews.CircleDrawable
 import com.app.vivi.customviews.CustomTextView
+import com.app.vivi.data.remote.model.data.productfragment.ProductDetailsData
 import com.app.vivi.data.remote.model.data.productfragment.SummaryData
 import com.app.vivi.databinding.FragmentProductDetailBinding
+import com.app.vivi.databinding.ProductItemBinding
 import com.app.vivi.dialog.rating.RatingDialogHelper
 import com.app.vivi.extension.collectWhenStarted
 import com.app.vivi.extension.navigateWithSingleTop
+import com.app.vivi.extension.roundToTwoDecimalPlaces
 import com.app.vivi.extension.showShortToast
 import com.app.vivi.features.homescreen.home.adapters.ReviewsAdapter
 import com.app.vivi.features.homescreen.home.adapters.SummaryAdapter
@@ -29,8 +33,11 @@ import com.app.vivi.features.homescreen.home.adapters.productdetail.Characterist
 import com.app.vivi.features.homescreen.home.adapters.productdetail.ExpandableAdapter
 import com.app.vivi.features.homescreen.home.adapters.productdetail.VintageAdapter
 import com.app.vivi.features.homescreen.home.viewmodels.ProductViewModel
+import com.app.vivi.helper.createRatingDescription
+import com.app.vivi.helper.cutOnText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import loadImageWithCache
 
 @AndroidEntryPoint
 class ProductDetailFragment :
@@ -70,6 +77,11 @@ class ProductDetailFragment :
         })
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getDataFromBundle()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -88,6 +100,51 @@ class ProductDetailFragment :
         super.onResume()
         handleAppBar()
         animateImage()
+    }
+
+    private fun getDataFromBundle(){
+        arguments?.let {
+            val productData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                it.getParcelable("ProductDetails", ProductDetailsData::class.java)
+            } else {
+                it.getParcelable("ProductDetails")
+            }
+            viewModel.sendProductDetailsData(productData)
+        }
+    }
+
+    private fun setupProductDetailsView(
+        item: FragmentProductDetailBinding,
+        product: ProductDetailsData?
+    ) {
+
+        with(item) {
+            item.root.visibility = View.VISIBLE
+            tvProductName.text = product?.name
+            tvProductDetails.text = product?.description
+            tvProductAddress.text = product?.city.plus(", ${product?.country}")
+            inRatingLayout.tvRatingText.text = product?.averagerating
+            inRatingLayout.ratingBar.rating = product?.averagerating?.toFloatOrNull()
+                ?: 0f // Safely convert to float, defaulting to 0
+            inRatingLayout.ratingsCount.text = product?.totalratings.plus(" ${getString(R.string.ratings_txt)}")
+            val discountedPrice = product?.discountedprice?.toDouble()?.roundToTwoDecimalPlaces()
+            tvAveragePrice.text = "CA$${discountedPrice}"
+
+            inSaveLayout.labelText.text = "${getString(R.string.save_txt)} ${product?.discountpercentage}"
+
+            tvOrginalPrice.text =
+                cutOnText(requireContext().applicationContext, "CA$${product?.originalprice}")
+
+            val htmlContent = createRatingDescription(
+                binding.root.context,
+                product?.userrating?.description, product?.userrating?.rating
+            )
+//            tvRatingDescription.text = htmlContent
+            tvRatingUser.text = product?.userrating?.userName
+
+            product?.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }
+            product?.imageurl?.let { ivProductBackground.loadImageWithCache(it, R.drawable.ic_bg_coffee) }
+        }
     }
 
 
@@ -397,6 +454,12 @@ class ProductDetailFragment :
 
 
     private fun addObservers() {
+        collectWhenStarted {
+            viewModel.productDetailsDataFlow.collectLatest { data ->
+                setupProductDetailsView(binding, data)
+            }
+        }
+
         collectWhenStarted {
             viewModel.summaryList.collectLatest { summaryList ->
                 summaryAdapter.submitList(summaryList)

@@ -41,18 +41,20 @@ class MainActivityViewModel @Inject constructor(private val cacheRepo: CacheRepo
             )
         }*/
 
-        /*viewModelScope.launch {
+        viewModelScope.launch {
             keepSplashScreen = true
             if (isUserLoggedIn()) {
+
+                _channel.send(NavigationEvents.NavigateToMainScreen(null))
                 cacheRepo.getLoginResponse().firstOrNull()?.let { loginResponse ->
                     cacheRepo.saveDoctorEmail(loginResponse.email.orEmpty())
-                    _channel.send(NavigationEvents.NavigateToMainScreen(loginResponse))
+//                    _channel.send(NavigationEvents.NavigateToMainScreen(loginResponse))
                     //this delay is placed to prevent a flicker of login screen if user is already logged in
                     delay(500)
                 }
             }
             keepSplashScreen = false
-        }*/
+        }
     }
 
     private suspend fun isUserLoggedIn(): Boolean {
@@ -60,7 +62,7 @@ class MainActivityViewModel @Inject constructor(private val cacheRepo: CacheRepo
     }
 
     sealed class NavigationEvents {
-        data class NavigateToMainScreen(val loginResponse: LoginResponse) : NavigationEvents()
+        data class NavigateToMainScreen(val loginResponse: LoginResponse?) : NavigationEvents()
     }
 
 }

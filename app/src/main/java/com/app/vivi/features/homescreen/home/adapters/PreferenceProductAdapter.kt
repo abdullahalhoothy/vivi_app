@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.vivi.R
 import com.app.vivi.data.remote.model.response.products
 import com.app.vivi.databinding.PreferenceProductListItemBinding
+import com.app.vivi.extension.roundToTwoDecimalPlaces
 import loadImageWithCache
 
 class PreferenceProductAdapter(
@@ -26,7 +27,7 @@ class PreferenceProductAdapter(
                 tvProductDetails.text = data.description
                 tvRatingText.text = data.averagerating.toString()
                 ratingsCount.text = data.totalratings
-                tvDiscount.text = "${data.discountedprice}"
+                tvDiscount.text = "CA$${data.discountedprice?.toDouble()?.roundToTwoDecimalPlaces()}"
 
                 tvRatingDescription.text = data.userrating?.description
                 data?.producturl?.let { ivBottle.loadImageWithCache(it, R.drawable.ic_bottle) }

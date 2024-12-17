@@ -2,6 +2,11 @@
 <resources>
     <string name="app_name">Coffee</string>
 
+    <string name="default_web_client_id">AIzaSyC9X3opK0WUcGDmGlgLopswa7Qr8ienWQI</string>
+    <string name="facebook_app_id">945459344114168</string>
+    <string name="facebook_app_secret">f6c83c8ac6c7ea27a0f4f386de2e53e3</string>
+
+
     <string name="cancel_txt">CANCEL</string>
     <string name="done_txt">DONE</string>
     <string name="next">Next</string>
@@ -46,6 +51,7 @@
     <string name="continue_txt">Continue</string>
     <string name="log_in_txt">Log in</string>
     <string name="welcome_back_log_in_to_your_account_txt">Welcome back! Log in to\nyour %1$s account</string>
+    <string name="welcome_back_sign_up_txt">Welcome back! Sign up to\ncreate %1$s account</string>
     <string name="password_txt">Password</string>
     <string name="email_txt">Email</string>
     <string name="email_me_a_link_to_login_in_txt">Email me a link to login in</string>
@@ -101,4 +107,12 @@
     <string name="a_password_reset_email_has_been_sent_to_your_registered_email_address_txt">A password reset email has been sent to your registered email address</string>
     <string name="styles_txt">Styles</string>
     <string name="sizes_txt">Sizes</string>
+    <string name="don_t_have_accout_signup_txt">Don\'t have accout? Signup</string>
+    <string name="signup_txt">Signup</string>
+    <string name="username_txt">Username</string>
+    <string name="sign_in_failed_plz_try_again_txt">Sign-in failed, Plz try again</string>
+    <string name="take_a_photo_of_wine_labels_then_tap_any_to_see_the_wine_information_txt">Take a photo of %1$s labels, then tap any to see the %1$s information</string>
+    <string name="position_the_label_within_the_frame_txt">Position the %1$s LABEL \nwithin the frame</string>
+    <string name="oops_there_was_an_error_txt">Oops! There was an error</string>
+    <string name="something_went_wrong_while_we_nwere_trying_to_match_the_txt">Something went wrong while we were trying to match the %1$s</string>
 </resources>

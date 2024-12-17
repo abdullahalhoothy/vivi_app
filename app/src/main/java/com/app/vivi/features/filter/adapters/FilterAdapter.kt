@@ -40,7 +40,30 @@ class FilterAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(tag: CoffeeType) {
+
+            binding.flMain.setBackgroundResource(
+                if (tag.isSelected) R.drawable.unselected_tag_background
+                else R.drawable.selected_tag_background
+            )
+
             binding.tvFilter.text = tag.name
+            val tintColor = ContextCompat.getColor(
+                context,
+                if (tag.isSelected) R.color.colorWhite else R.color.colorWhite
+            )
+
+           /* val iconDrawableId =
+                if (tag.isSelected) R.drawable.ic_coffee_cup else R.drawable.ic_coffee_black
+
+
+            binding.tvFilter.setDrawableWithSize(
+                context,
+                iconDrawableId,
+                50,
+                50,
+                5
+            )*/
+
             binding.tvFilter.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
@@ -48,24 +71,29 @@ class FilterAdapter(
                 )
             )
 
-            if (tag.isSelected) {
-                binding.flMain.isSelected = true
-                binding.flMain.setBackgroundResource(R.drawable.unselected_tag_background)
-            } else {
-                binding.flMain.isSelected = false
-                binding.flMain.setBackgroundResource(R.drawable.selected_tag_background)
-            }
+// Ensure the TextView is refreshed after selection state changes
+            binding.tvFilter.invalidate()
 
-            val tintColor = ContextCompat.getColor(
-                context,
-                if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
-            )
-//            binding.tvFilter.setDrawableW ithSize(context, tag.icon, 50, 50, 5, tintColor)
+
+            /* binding.tvFilter.setTextColor(
+                 ContextCompat.getColor(
+                     binding.root.context,
+                     if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
+                 )
+             )
+
+             val tintColor = ContextCompat.getColor(
+                 context,
+                 if (tag.isSelected) R.color.colorWhite else R.color.colorBlack
+             )
+             binding.tvFilter.setDrawableWithSize(context, R.drawable.ic_coffee_cup, 50, 50, 5, tintColor)
+ */
+
 
             binding.root.setOnClickListener {
                 val updatedItem = tag.copy(isSelected = !tag.isSelected)
                 val updatedList = currentList.toMutableList()
-                updatedList[adapterPosition] = updatedItem
+                updatedList[layoutPosition] = updatedItem
                 submitList(updatedList)
                 onItemClicked(updatedItem)
             }
